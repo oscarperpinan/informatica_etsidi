@@ -53,7 +53,7 @@ dkms.conf
 
 # Emacs
 *~
-.tex
+*.tex
 .projectile
 diapos/auto/
 ejercicios/auto/

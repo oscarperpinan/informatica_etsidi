@@ -1,0 +1,356 @@
+#+TITLE: Ejercicios del Tema 4
+#+SUBTITLE: Estructuras
+#+AUTHOR: 
+#+DATE: 2017-2018
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema4_estructuras.pdf
+
+* Distancia entre dos instantes temporales
+
+Escribe un programa que calcule la distancia temporal entre dos instantes. Este programa debe emplear la estructura =tiempo= (horas, minutos, segundos) para almacenar la información de cada instante. Asimismo debe emplear la función =dTiempo= que admite como argumentos dos estructuras =tiempo= y devuelve una estructura =tiempo=. Por ejemplo, si la estructura =t1= representa el instante =3:45:15= y la estructura =t2= representa el instante =9:44:03=, la función =dTiempo= debe devolver la estructura =5:58:48=. Es importante tener en cuenta la posibilidad de que entre =t1= y =t2= se encuentre la medianoche.
+
+#+BEGIN_SRC C :exports code
+tiempo dTiempo(tiempo t1, tiempo t2);
+#+END_SRC
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+typedef struct
+{
+  int hour, min, sec;
+} tiempo;
+
+tiempo dTiempo(tiempo t1, tiempo t2);
+
+void printTiempo(tiempo t);
+
+int main()
+{
+  tiempo t1, t2, dt;
+  // En esta version se definen los tiempos dentro del codigo.
+  // Se puede mejorar el programa pidiendo los valores al usuario
+  t1 = (tiempo) {3, 45, 15};
+  t2 = (tiempo) {9, 44, 3};
+
+  dt = dTiempo(t1, t2);
+
+  printTiempo(dt);
+
+  return 0;
+}
+
+tiempo dTiempo(tiempo t1, tiempo t2)
+{
+  tiempo dt;
+
+  //Restamos segundos, teniendo en cuenta restas negativas
+  if (t1.sec > t2.sec)
+    {
+      --t2.min;
+      t2.sec += 60;
+    }
+
+  dt.sec = t2.sec - t1.sec;
+
+  //Idem para minutos
+  if (t1.min > t2.min)
+    {
+      --t2.hour;
+      t2.min += 60;
+    }
+  dt.min = t2.min - t1.min;
+
+  //Idem para horas, siendo que ahora t2 puede corresponder al dia
+  //siguiente
+  if (t1.hour > t2.hour)
+    {
+      t2.hour += 24;
+    }
+    dt.hour = t2.hour - t1.hour;
+ //Entregamos resultado
+  return dt;
+}
+
+void printTiempo(tiempo t)
+{
+  printf("%d:%d:%d",
+	 t.hour, t.min, t.sec);
+}
+#+END_SRC
+
+#+RESULTS:
+: 5:58:48
+
+
+\clearpage
+
+* Dos puntos
+Escribe un programa que calcule la distancia entre dos puntos introducidos por el usuario, y que decida el cuadrante en el que está localizado cada punto. Este programa debe emplear la estructura =punto= capaz de almacenar dos coordenadas =x= e =y= de tipo =float=, y debe utilizar dos funciones, =cuadrante= y =distancia=. La función =cuadrante= devuelve un número entero indicando el cuadrante del punto, y la función =distancia= devuelve un número real con la distancia entre dos puntos.
+
+#+BEGIN_SRC C :exports code
+int cuadrante(punto p);
+float distancia(punto p1, punto p2);
+#+END_SRC
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+typedef struct
+{
+  float x;
+  float y;
+} punto;
+
+int cuadrante(punto p);
+float distancia(punto p1, punto p2);
+
+int main()
+{
+  punto a, b;
+  float d;
+
+  printf("Escribe las coordenadas del punto 1:\n");
+  scanf("%f %f", &a.x, &a.y);
+
+  printf("Escribe las coordenadas del punto 2:\n");
+  scanf("%f %f", &b.x, &b.y);
+
+  printf("El punto 1 está en el cuadrante %i.\n",
+	 cuadrante(a));
+
+  printf("El punto 2 está en el cuadrante %i.\n",
+	 cuadrante(b));
+
+  d = distancia(a, b);
+
+  printf("La distancia entre los puntos es %f.\n", d);
+
+}
+
+int cuadrante(punto p)
+{
+  if (p.x >= 0 && p.y >= 0)
+    return 1;
+  else if (p.x < 0 && p.y > 0)
+    return 2;
+  else if (p.x < 0 && p.y < 0)
+    return 3;
+  else 
+    return 4;
+}
+
+float distancia(punto p1, punto p2)
+{
+  return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
+}
+#+END_SRC
+
+\clearpage 
+
+* Vector de puntos
+
+Realiza un programa que pida al usuario un número =n= de puntos indicando sus coordenadas (estructura =punto= definida en el ejercicio anterior) y los introduzca en un vector. El programa debe indicar el total de puntos que hay en cada uno de los cuadrantes.
+
+Ejemplo de funcionamiento:
+
+#+BEGIN_EXAMPLE
+Indique el numero de puntos a introducir:
+3
+Introduzca x1, y1:
+3 8
+Introduzca x2, y2:
+-1 8
+Introduzca x3, y3:
+-3 3
+El total de puntos por cuadrante es:
+   Cuadrante 1 = 1
+   Cuadrante 2 = 2
+   Cuadrante 3 = 0
+   Cuadrante 4 = 0
+#+END_EXAMPLE
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+typedef struct
+{
+  float x;
+  float y;
+} punto;
+
+int cuadrante(punto p);
+
+int main()
+{
+  int i, n;
+  int iCuad; // indice auxiliar para cuadrantes
+  int vCuad[4] = {0, 0, 0, 0}; // Vector contador de puntos por cuadrante
+  punto puntos[100]; //Vector suficientemente grande. Es un vector de
+		     //estructuras, cuyos componentes son de tipo
+		     //punto.
+
+
+  printf("Dime el número de puntos (< 100).\t");
+  scanf("%i", n);
+  // Pido datos al usuario
+  for (i = 0; i < n; i++)
+    {
+      printf("Punto %d:\n", i + 1);
+      // Relleno el vector de puntos
+      scanf("%f %f", &puntos[i].x, &puntos[i].y);      
+    }
+
+  // Recorro el vector 
+  for (i = 0; i < n; i++)
+    {
+      // Con la funcion determino el cuadrante del punto
+      iCuad = cuadrante(puntos[i]);
+      // y actualizo el vector contador
+      ++vCuad[iCuad - 1];
+    }
+
+  // Finalmente muestro los resultados
+  printf("Puntos por cuadrante:\n");
+  for (i = 0; i < 4; i++)
+      printf("\t Cuadrante %d: %d \n",
+	     i + 1, vCuad[i]);
+  };
+  
+
+int cuadrante(punto p)
+{
+  if (p.x >= 0 && p.y >= 0)
+    return 1;
+  else if (p.x < 0 && p.y > 0)
+    return 2;
+  else if (p.x < 0 && p.y < 0)
+    return 3;
+  else 
+    return 4;
+}
+
+
+#+END_SRC
+
+
+\clearpage
+
+* Contacto
+
+Define la estructura =contacto= con los campos nombre, primer apellido, segundo apellido, y fecha de nacimiento. Esta estructura emplea internamente la estructura =fecha= para almacenar la fecha de nacimiento (día, mes y año).
+
+Escribe un programa que lea los datos de dos contactos, y los almacene en un vector de estructuras. A continuación debe imprimir los datos del que sea más mayor, o ambos si tienen la misma edad.
+
+El programa debe estar construido en base a dos funciones: =printContacto= debe imprimir el contenido de una estructura =contacto=; =compFecha= compara dos estructuras =fecha= y devuelve 1 cuando la primera es mayor, -1 cuando es menor, 0 cuando son iguales.
+
+#+BEGIN_SRC C :exports code
+void printContacto(contacto persona);
+int compFecha(fecha f1, fecha f2);
+#+END_SRC
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#define N 2
+
+typedef struct
+{
+  int d, m, a;
+} fecha;
+
+typedef struct
+{
+  char nombre[50];
+  char apellido1[50];
+  char apellido2[50];
+  fecha fechaNac;
+} contacto;
+
+void printContacto(contacto persona);
+int compFecha(fecha f1, fecha f2);
+
+int main()
+{
+  int i, iComp;
+  // Se puede usar un vector de ejemplo para probar rapidamente el
+  // programa:
+  /* contacto contactos[2] = { */
+  /*   {"N1", "A1", "B1", {10, 2, 2010}}, */
+  /*   {"N2", "A2", "B2", {11, 2, 2010}} */
+  /* }; */
+  contacto contactos[N]; // Vector que almacena los contactos
+
+  //  Recorremos el vector rellenando los datos de cada contacto
+  for (i = 0; i < N; i++)
+    {
+      printf("Datos del contacto %d:\n", i + 1);
+      printf("Nombre: \t");
+      scanf("%s", &contactos[i].nombre);
+      printf("Primer apellido: \t");
+      scanf("%s", &contactos[i].apellido1);
+      printf("Segundo apellido: \t");
+      scanf("%s", &contactos[i].apellido2);
+      printf("Fecha de nacimiento (dia/mes/año): \t");
+      scanf("%i/%i/%i",
+  	    &contactos[i].fechaNac.d,
+  	    &contactos[i].fechaNac.m,
+  	    &contactos[i].fechaNac.a);
+    }
+
+  // Comparamos las fechas de los contactos
+  iComp = compFecha(contactos[0].fechaNac,
+		    contactos[1].fechaNac);
+  // Dependiendo del resultado imprimimos el que corresponda
+  switch(iComp)
+    {
+    case -1:
+      printContacto(contactos[0]);
+      break;
+    case 1:
+      printContacto(contactos[1]);
+      break;
+    case 0:
+      printContacto(contactos[0]);
+      printContacto(contactos[1]);
+      break;
+    }
+}
+
+void printContacto(contacto persona)
+{
+  printf("%s %s %s\t",
+	 persona.nombre,
+	 persona.apellido1,
+	 persona.apellido2);
+  printf("(%i/%i/%i) \n",
+	 persona.fechaNac.d,
+	 persona.fechaNac.m,
+	 persona.fechaNac.a);
+}
+
+int compFecha(fecha f1, fecha f2)
+{
+  if (f1.a < f2.a)
+       return -1;
+  else if (f1.a > f2.a)
+       return 1;
+  else 
+    {
+      if (f1.m < f2.m)
+              return -1;
+         else if (f1.m > f2.m)
+	   return 1;
+	 else
+	   {
+	     if (f1.d < f2.d)
+	       return -1;
+	     else if (f1.d > f2.d)
+	       return 1;
+	     else
+	       return 0;
+	   }
+    }
+}
+#+END_SRC

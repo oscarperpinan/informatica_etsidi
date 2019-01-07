@@ -1,0 +1,326 @@
+#+TITLE: Tema 7: Ficheros
+#+DATE:
+#+STARTUP: beamer
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :tangle code/07-Ficheros.c :comments org
+#+OPTIONS: H:2
+
+
+* Introducción
+
+** Introducción
+
+- Hasta ahora:
+  - Introducción de datos desde el teclado.
+  - Presentación de datos en pantalla.
+  - Los datos se pierden cuando finaliza el programa.
+- Ahora vamos a ver:
+  - Almacenamiento de datos en ficheros que pueden ser leídos por el programa.
+  - Operaciones con ficheros: apertura, lectura y/o escritura, y cierre.
+  - Funciones de la biblioteca estándar de entrada/salida, =stdio.h=, que permiten manejar ficheros.
+
+** Tipo =FILE=
+
+En C se emplea la estructura de datos de tipo =FILE= (declarada en =stdio.h=):
+
+#+BEGIN_SRC C
+#include <stdio.h>
+void main ()
+{
+  FILE *pf;
+}
+#+END_SRC
+
+** stdin, stdout, and stderr
+- Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo =FILE=):
+
+  - =stdin=: entrada estándar del programa (habitualmente el teclado).
+
+  - =stdout=: salida estándar del programa (habitualmente la pantalla).
+
+  - =stderr=: fichero estándar de error.
+
+* Apertura y cierre de ficheros
+** Abrir un fichero: =fopen=
+
+#+BEGIN_SRC C
+FILE *fopen (const char *nombre, const char *modo);
+#+END_SRC
+
+- Abre un fichero para para leer y/o escribir en él.
+
+  - =nombre= es el nombre del fichero (/debe respetar las normas del sistema operativo en el que se ejecute el programa/).
+  - =modo= indica cómo se va a abrir el fichero (lectura =r=, escritura =w=, añadir =a=).
+
+- La función devuelve un puntero a una estructura de tipo =FILE= o un puntero nulo =NULL= si se ha producido un error.
+
+** Ejemplo de =fopen=
+
+#+BEGIN_SRC C
+#include <stdio.h>
+int main ()
+{
+  FILE *pf;
+  pf = fopen("c:\ejemplos\fichero.txt", "r");
+  if (pf == NULL)
+    {
+      printf("Error al abrir el fichero.\n");
+      return -1;
+    }
+  else
+    {
+      printf("Fichero abierto correctamente.\n");
+      return 0;
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+
+
+** Marca de final de fichero =EOF=
+
+- Cuando se crea un fichero nuevo con =fopen= se añade automáticamente al final la marca de fin de fichero =EOF= (/end of file/).
+- Es una marca escrita al final de un fichero que indica que no hay más datos.
+- Cuando se realizan operaciones de lectura o escritura es necesario comprobar si se ha alcanzado esta marca.
+
+
+** Cerrar un fichero: =fclose=
+#+BEGIN_SRC C
+int fclose (FILE *pf);
+#+END_SRC
+
+- Cierra un fichero.
+- El argumento es el puntero de tipo =FILE= que apunta al fichero.
+- La función devuelve 0 si el fichero se cierra correctamente o =EOF= si se ha producido un error.
+
+* Escritura de ficheros
+** Escritura de ficheros: =fprintf=
+
+#+BEGIN_SRC C
+int fprintf(FILE *stream, const char *format, ...)
+#+END_SRC
+
+- Escribe en un fichero con el formato especificado (igual que =printf=)
+
+- Devuelve el número de caracteres escritos o un valor negativo si ocurre un error.
+
+
+** Ejemplo
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main(){
+  FILE *pf;
+  int vals[3] = {1, 2, 3};
+  // Abrimos fichero para escritura
+  pf = fopen("datos.txt", "w");
+  if (pf == NULL) 
+    {// Si el resultado es NULL mensaje de error 
+      printf("Error al abrir el fichero.\n");
+      return -1;
+    }
+  else
+    {// Si ha funcionado, comienza escritura
+      fprintf(pf, "%i, %i, %i",
+	      vals[0], vals[1], vals[2]);
+      fclose(pf); // Cerramos fichero
+      return 0;
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+
+
+** =stdout=
+Salida estándar del programa (habitualmente la pantalla).
+#+BEGIN_SRC C
+ printf("hello there.\n");
+ fprintf(stdout, "hello there.\n");
+#+END_SRC
+
+
+* Lectura de ficheros
+** =fscanf=
+
+#+BEGIN_SRC C
+int fscanf(FILE *stream, const char *format, ...)
+#+END_SRC
+
+- Lee desde un fichero con el formato especificado (igual que =scanf=)
+
+- Devuelve el número de argumentos que han sido leídos y asignados o =EOF= si se detecta el final del fichero.
+
+
+** Ejemplo
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int i, vals[3];
+  FILE *pf;
+  // Abrimos fichero para lectura
+  pf = fopen("datos.txt", "r");
+  // Leemos datos separados por comas
+  fscanf(pf, "%i, %i, %i",
+	 &vals[0], &vals[1], &vals[2]);
+  fclose(pf);
+  // Mostramos en pantalla lo leído
+  for (i = 0; i < 3; i++)
+    printf("%i\t", vals[i]);
+
+  return(0);
+}
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 |
+
+** =stdin=
+Entrada estándar del programa (habitualmente el teclado).
+#+BEGIN_SRC C
+ scanf("%i", &i);
+ fscanf(stdin, "%i", &i);
+#+END_SRC
+
+
+** =fgetc= y =fgets=
+- La función =fgetc= lee un carácter del fichero y lo *devuelve como =int=*:
+  #+BEGIN_SRC C
+  int fgetc (FILE *pf);
+  #+END_SRC
+
+- La función =fgets= lee una cadena de caracteres del fichero:
+  #+BEGIN_SRC C
+  char *fgets (char *cadena, int n, FILE *pf);
+  #+END_SRC
+
+** Ejemplo
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int i;
+  char texto[27];
+  FILE *pf;
+  // Abrimos fichero para lectura
+  pf = fopen("lorem_ipsum.txt", "r");
+  // Leemos los 26 primeros caracteres
+  for (i = 0; i < 26; i++)
+    texto[i] = fgetc(pf);
+  // Añadimos caracter nulo
+  texto[26] = '\0';
+  // Mostramos resultado
+  printf("%s", texto);
+  fclose(pf);
+  return(0);
+}
+#+END_SRC
+
+#+RESULTS:
+
+** Especificador de formato =[^]=
+
+- =[^;]=
+- =[^\n]=
+
+
+*** Ejemplo ¡COMPROBAR!
+Fichero:
+#+BEGIN_QUOTE
+Jorge Rodríguez; Profesor; 35; 84.4
+
+Mercedes Pérez; Estudiante; 21; 56.2
+#+END_QUOTE
+
+Lectura:
+#+BEGIN_SRC C
+fscanf(pf, "%[^;];%[^;];%d;%f\n",
+       nombre, tipo, &edad, &peso);
+#+END_SRC
+
+** Número de líneas de un fichero
+*** Ejemplo ¡COMPROBAR!
+Fichero:
+#+BEGIN_QUOTE
+Jorge Rodríguez; Profesor; 35; 84.4
+
+Mercedes Pérez; Estudiante; 21; 56.2
+#+END_QUOTE
+
+
+#+BEGIN_SRC C
+// linea es una variable auxiliar, que sobreescribimos en cada pasada
+// de fscanf. No nos importa el contenido del fichero, sólo encontrar
+// los saltos de línea.
+while (fscanf(pf, "%[^n]\n", linea) != EOF)
+  ++nLineas;
+#+END_SRC
+
+* Utilidades
+** Comprobación de =EOF=
+- =feof= detecta el final del fichero: devuelve un valor distinto de cero después de la primera operación que intente leer después de la marca final del fichero. 
+
+#+BEGIN_SRC C
+while (feof(pf) == 0)
+{
+// Operaciones de L/E
+}
+#+END_SRC
+
+- =fscanf= y =fprintf= devuelven =EOF= cuando alcanzan la marca. Se puede emplear directamente este resultado (sin necesidad de =feof=)
+#+BEGIN_SRC C
+while(fscanf(...) !=EOF )
+{
+// Sentencias
+}
+#+END_SRC
+
+** =fseek=
+
+#+BEGIN_SRC C
+int fseek(FILE *stream, long int offset, int whence)
+#+END_SRC
+
+- Desplaza a una posición en un fichero
+- =offset= (long): valor (en bytes) a ir desde =whence=
+- =whence=:
+  - =SEEK_SET= Comienzo del fichero
+  - =SEEK_CUR= Posición actual
+  - =SEEK_END= Final del fichero
+
+** =ftell=
+#+BEGIN_SRC C
+long int ftell(FILE *stream)
+#+END_SRC
+
+- Devuelve la posición actual a partir del inicio del fichero.
+- Las unidades suelen ser bytes.
+- Es una función de tipo =long=
+
+** Ejemplo: longitud (bytes) de un fichero
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  long int fsize; // tamaño del fichero
+  FILE *pf;
+  pf = fopen("datos.txt", "r");
+  // Desplaza al final
+  fseek(pf, 0, SEEK_END);
+  //Almacena la posición
+  fsize = ftell(pf);
+  printf("El fichero tiene %li elementos.\n",
+	 fsize);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: El fichero tiene 7 bytes.

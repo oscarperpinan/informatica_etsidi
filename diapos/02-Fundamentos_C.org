@@ -1,0 +1,861 @@
+#+TITLE: Tema 2: Fundamentos de C
+#+DATE:
+#+STARTUP: beamer
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :tangle code/02-fundamentos.c :comments org
+#+OPTIONS: H:3
+
+* Primeros pasos
+*** Hello World!
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void main()
+{
+  printf("Hello World!\n");
+}
+#+END_SRC
+
+*** Hello World! (2)
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void main()
+{
+  printf("Hello World!\n");
+  printf("¡Hola Mundo!\n");
+  printf("Bonjour le Monde!\n");
+  printf("Hallo Welt!\n");
+}
+#+END_SRC
+
+#+RESULTS:
+
+*** Hello World! (y 3)
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+// void implica que main *no* devuelve nada
+void main()
+{
+  printf("Hello World!\n");
+}
+#+END_SRC
+#+BEGIN_SRC C 
+#include <stdio.h>
+// Definimos la salida de main: int = entero
+int main()
+{
+  printf("Hello World!\n");
+  // Resultado de main
+  return 0;
+}
+#+END_SRC
+
+*** Comentarios
+
+#+BEGIN_SRC C
+/** Este simple programa sirve para 
+   mostrar un mensaje en pantalla */
+#include <stdio.h>
+
+// Todo programa necesita una función main.
+// Su contenido está delimitado entre llaves
+void main()
+{
+  //La función printf muestra el mensaje en pantalla
+  // Atención: el mensaje debe ir entre comillas
+  printf("Hello World!\n");
+} // Aquí acaba main y por tanto el programa
+#+END_SRC
+
+
+* Datos en C
+** Introducción
+*** Constantes y Variables
+- Constantes :: datos cuyo valor no se puede modificar durante la ejecución del programa
+- Variables :: datos cuyo valor se puede modificar mediante el operador /asignación/ (=)
+*** Constantes y Variables
+#+BEGIN_SRC C
+void main()
+{
+  // declara una variable con el identificador v1
+  int v1;
+  // declara una constante simbólica
+  // con el identificador c1
+  const int c1 = 4;
+  // declara una variable v2,
+  // y le asigna el valor 2 (una constante literal)
+  int v2 = 2;
+  // asigna el valor de la
+  // constante c1 a la variable v1
+  v1 = c1;
+  // ídem con v2 (cambia su valor previo)
+  v2 = c1;
+  // error: c1 es una constante
+  c1 = 3;
+}
+#+END_SRC
+*** Nombres de constantes y variables
+
+  - Primer carácter: letra o carácter de subrayado (_) (*nunca un número*).
+  - Una o más letras (A-Z, a-z, /ñ excluida/), dígitos (0-9) o caracteres de subrayado.
+  - Tienen que ser distintos de las palabras clave.
+  - Las mayúsculas y las minúsculas son diferentes para el compilador.
+  - Es aconsejable que los nombres sean representativos
+
+*** Palabras clave o reservadas
+
+| auto     | double | int      | struct   |
+| break    | else   | long     | switch   |
+| case     | enum   | register | typedef  |
+| char     | extern | return   | union    |
+| const    | float  | short    | unsigned |
+| continue | for    | signed   | void     |
+| default  | goto   | sizeof   | volatile |
+| do       | if     | static   | while    |
+
+*** Tipos de datos 
+- =int= :: números enteros
+#+BEGIN_EXAMPLE
+100 -41 0 12345
+#+END_EXAMPLE
+
+- =float= y =double= :: números reales
+#+BEGIN_EXAMPLE
+3.0 101.2345 -0.0001 2.25e-3
+#+END_EXAMPLE
+- =char= :: caracteres
+#+BEGIN_EXAMPLE
+'s' '4' ';'
+#+END_EXAMPLE
+- =_Bool= ::  /booleanos/, 0 y 1
+
+** Números enteros
+
+*** Uso de =printf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void main()
+{
+  // Usamos %i para números enteros
+  printf("Hoy es día %i\n", 6);
+  // Y también %d
+  printf("Hoy es día %d\n", 6);
+}
+#+END_SRC
+
+*** Definición con =int=
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // int designa variable de números enteros
+  int dia;
+  // Asignamos un valor a la variable dia
+  dia = 6;
+  printf("Hoy es día %i\n", dia);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Hoy es día 6
+
+*** Definición y asignación
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // Hacemos la asignación junto con la definición
+  int dia = 6;
+  printf("Hoy es día %i\n", dia);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Hoy es día 6
+
+*** Lectura de números enteros con =scanf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int num;
+
+  printf("Escribe un número\n");
+
+  //Atención: con scanf el nombre de la 
+  //variable debe ir precedido de &
+  scanf("%i", &num);
+
+  printf("Has escrito el número %i\n", num);
+
+  return 0;
+}
+#+END_SRC
+
+*** Errores comunes con =scanf=
+- Escribir dentro de la cadena de control mensajes y secuencias de escape (p.ej. =\n=).
+- Olvidar poner el operador *&* delante de los argumentos cuando son variables de los tipos básicos (=int=, =float=, =double=, =char=)
+- Poner un especificador de formato no compatible con el tipo del argumento.
+
+** Números reales
+
+*** Uso de =printf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  double num = 102.30;
+  // Usamos %f para números reales
+  printf("Esto es un número real %f\n", num);
+  // Indicamos número de decimales explicitamente
+  printf("escrito con dos decimales %.2f\n", num);
+
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Esto | es      | un  | número | real      | 102.3 |
+| ...  | escrito | con | dos    | decimales | 102.3 |
+
+*** Distintos formatos
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  double num = 103.56e10;
+  printf("Esto es un número real %f\n", num);
+  printf("... en notación científica %e\n", num);
+  printf("... y de forma automática %g\n", num);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Esto | es | un       | número     | real         | 1035600000000.0 |
+| ...  | en | notación | científica | 1.035600e+12 |                 |
+| ...  | y  | de       | forma      | automática   |      1.0356e+12 |
+
+*** Lectura de números reales con =scanf=
+**** Identificador de Formato
+  - =float= :: =%f=
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float peso, altura;
+
+  printf("Indica tu peso (kg) y altura (m)\n");
+  scanf("%f %f", &peso, &altura);
+
+  printf("Pesas %f kg, y mides %f m.\n",
+	 peso, altura);
+  return 0;
+}
+#+END_SRC
+
+
+*** Lectura de números reales con =scanf=
+**** Identificador de Formato
+  - =double= :: =%lf=
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  double peso, altura;
+
+  printf("Indica tu peso (kg) y altura (m)\n");
+  scanf("%lf %lf", &peso, &altura); 
+  // Sin embargo, con printf siempre %f
+  printf("Pesas %f kg, y mides %f m.\n",
+	 peso, altura); 
+  return 0;
+}
+#+END_SRC
+
+
+** Caracteres
+
+*** Uso de =printf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // Usamos %c para caracteres
+  // Atención: para delimitar caracteres usamos '
+  printf("La última letra del alfabeto es la %c\n", 
+	 'z');
+  //Usamos %i para enteros
+  printf("Su valor en la tabla ASCII es %i\n", 
+	 'z');
+  //Y si usamos %c para un número?
+  printf("El número %i es la letra %c\n", 
+	 122, 122);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| La | última | letra | del | alfabeto | es    | la |   z |
+| Su | valor  | en    | la  | tabla    | ASCII | es | 122 |
+| El | número | 122   | es  | la       | letra | z  |     |
+
+*** Definición y asignación
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // Usamos char para asignar caracteres
+  char letra = 'z';
+  printf("La última letra es la %c\n", letra);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: La última letra es la z
+
+*** Asignación de números a =char= 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // Y char con un número?
+  char letra = 122;
+  printf("La última letra es la %c\n", letra);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: La última letra es la z
+
+*** Lectura de caracteres con =scanf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  char letra;
+  printf("Escribe una letra\n");
+  scanf("%c", &letra);
+  printf("Has escrito letra %c\n", letra);
+  return 0;
+}
+#+END_SRC
+
+** Cadenas de caracteres
+
+*** Uso de =printf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void main()
+{ // Usamos %s para cadenas de caracteres
+  // y ", a diferencia de los caracteres
+  printf("Estamos en %s\n", "febrero");
+}
+#+END_SRC
+
+*** Definición y asignación
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int dia = 6;
+  int anho = 2017;
+  // char define una variable de caracteres.  
+  // Para una cadena hay que indicar
+  // la longitud entre corchetes
+  char mes[10] = "febrero";
+
+  printf("Hoy es día %i de %s de %i\n",
+	 dia, mes, anho);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Hoy es día 6 de noviembre2 de 2017
+
+
+*** Definición y asignación
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  // Las variables del mismo tipo
+  // se pueden definir en una misma línea
+  int dia = 6, anho = 2017;
+  char mes[10] = "febrero";
+
+  printf("Hoy es día %i de %s de %i\n",
+	 dia, mes, anho);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: Hoy es día 6 de febrero de 20172
+
+*** Lectura de cadena de caracteres con =scanf=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  char nombre[100];
+
+  printf("Escribe tu nombre\n");
+
+  // Atención: Con cadenas de caracteres 
+  // *no* hay que usar &
+  scanf("%s", nombre);
+
+  printf("Te llamas %s\n", nombre);
+
+  return 0;
+}
+#+END_SRC
+
+** Rango de las variables
+*** Números enteros
+| Tipo               | Bytes | Intervalo                      |
+|--------------------+-------+--------------------------------|
+| int                |     4 | -2,147,483,648 a 2,147,483,647 |
+| unsigned int       |     4 | 0 a 4,294,967,295              |
+| long int           |     4 | -2,147,483,648 a 2,147,483,647 |
+| unsigned long int  |     4 | 0 a 4,294,967,295              | 
+| short int          |     2 | -32,768 a 32,767               |
+| unsigned short int |     2 | 0 a 65,535                     |
+
+*** Números reales
+- Datos en coma flotante.
+
+**** =float= (32 bits)
+- Formato (IEEE 754):
+  - Signo: 1 bit
+  - Exponente: 8 bits
+  - Mantisa: 23 bits
+- Precisión aproximada: 7 dígitos decimales
+**** =double= (64 bits)
+- Formato (IEEE 754):
+  - Signo: 1 bit
+  - Exponente: 11 bits
+  - Mantisa: 52 bits
+- Precisión aproximada: 16 dígitos decimales.
+*Por defecto, las constantes reales son de tipo double.*
+
+*** Números reales
+| Tipo        | Bytes | Intervalo                   |
+|-------------+-------+-----------------------------|
+| float       |     4 | +/-3.4E+/-38 (7 dígitos)    |
+| double      |     8 | +/-1.7E+/-308 (15 dígitos)  |
+| long double |    10 | +/-1.2E+/-4932 (19 dígitos) |
+
+
+*** Caracteres
+| Tipo           | Bytes | Intervalo                     |
+|----------------+-------+-------------------------------|
+| char           |     1 | -128 a 127                    |
+| unsigned char  |     1 | 0 a 255                       |
+
+
+* Operadores
+** Tipos
+*** Aritméticos
+#+BEGIN_SRC C :tangle no
+x + y
+x - y
+x / y
+x * y
+x % y //módulo o resto de división de enteros
+#+END_SRC
+*** Relacionales
+#+BEGIN_SRC C :tangle no
+x == y
+x != y
+x > y
+x >= y
+x < y
+x <= y
+#+END_SRC
+
+*** Lógicos
+- AND, OR, NOT
+#+BEGIN_SRC C :tangle no
+x && y //AND
+x || y //OR
+!x //NOT, operador unario
+#+END_SRC
+
+- Operador condicional ? (ternario) 
+#+BEGIN_SRC C :tangle no
+// expresión boleana ? valor si cierto : valor si falso
+x > y ? "cierto" : "falso"
+x == y ? "true" : "false"
+#+END_SRC
+
+*** Asignación
+#+BEGIN_SRC C :tangle no
+x = y
+x += y // x = x + y
+x -= y // x = x - y
+x *= y // x = x * y
+x /= y // x = x / y
+x %= y // x = x % y
+#+END_SRC
+
+#+BEGIN_SRC C :tangle no
+// ERROR: en el lado izquierdo no puede ir una expresión
+x + y = 1
+#+END_SRC
+
+*** =sizeof=
+
+Proporciona el tamaño de su operando en bytes.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int i1;
+  float f1;
+  double d1;
+  char c1;
+
+  printf("Un entero ocupa %d bytes\n", sizeof i1);
+  printf("Un float ocupa %d bytes\n", sizeof f1);
+  printf("Un double ocupa %d bytes\n", sizeof d1);
+  printf("Un caracter ocupa %d bytes\n", sizeof c1);
+
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Un | entero   | ocupa  |     4 | bytes |       |
+| Un | real     | ocupa  |     4 | bytes |       |
+| Un | real     | double | ocupa | 8     | bytes |
+| Un | caracter | ocupa  |     1 | bytes |       |
+
+*** Bits
+#+BEGIN_SRC C :tangle no
+x & y // Bits AND
+x | y // Bits OR
+x ^ y // Bits XOR
+x ~ y // Bits NOT (complemento)
+x << 1 // Desplazamiento de bits
+x >> 1
+#+END_SRC
+
+** Operaciones con variables
+*** Aritméticos con enteros
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int x, y, sum;
+  x = 10;
+  y = 15;
+  sum = x + y;
+
+  printf("La suma de %i con %i es %i\n",
+	 x, y, sum);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: La suma de 10 con 15 es 25
+
+
+*** Aritméticos con caracteres
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  char letra, Letra;
+  letra = 'z';
+  Letra = letra - 32;
+
+  printf("La letra %c en mayúscula es %c\n",
+	 letra, Letra);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+: La letra z en mayúscula es Z
+
+*** Aritméticos con números reales
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float peso, altura, imc;
+
+  printf("Indica tu peso (kg) y altura (m)\n");
+  scanf("%f %f", &peso, &altura);
+
+  imc = peso / (altura * altura);
+  printf("Tu índice de masa corporal es %f\n", imc);
+
+  return 0;
+}
+#+END_SRC
+*** Operaciones de asignación
+
+#+BEGIN_SRC C
+#include <stdio.h>
+void main() 
+{ 
+     int a, b = 3; 
+
+     a = 5; 
+     printf("a = %d\n", a); 
+
+     a *= 4; // a = a * 4
+     printf("a = %d\n", a); 
+
+     a += b; // a = a + b
+     printf("a = %d\n", a); 
+
+     a /= (b + 1); // a = a / (b+1)
+     printf("a = %d\n", a); 
+
+     a = b = 1; 
+     printf("a = %d, b = %d\n", a, b);
+} 
+#+END_SRC
+
+*** Operaciones de incremento
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main() 
+{ 
+     int b = 2, r; 
+     //Preincremento
+     r = ++b; 
+     printf("b = %d, r = %d\n", b, r); 
+     //Postincremento
+     r = b++; 
+     printf("b = %d, r = %d\n", b, r); 
+     
+     return 0; 
+}
+#+END_SRC
+
+*** Operaciones de incremento
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void main() 
+{ 
+     int a = 0;
+     printf("a = %d\n", ++a); 
+     printf("a = %d\n", a++);
+     printf("a = %d\n", a);
+     printf("a = %d\n", --a); 
+     printf("a = %d\n", a--);     
+     printf("a = %d\n", a);     
+}
+#+END_SRC
+
+*** Precedencia y asociatividad
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void main() 
+{ 
+     double a = 4, b = 7, c = 3, g = 9;
+     double result; 
+ 
+     result = a + b * c; 
+     printf( "resultado = %f\n", result); 
+
+     result = (a + b) * c; 
+     printf( "resultado = %f\n", result); 
+
+     result = a * b / c * g; 
+     printf("resultado = %f\n", result); 
+
+     result = (a * b) / (c * g); 
+     printf("resultado = %f\n", result); 
+     
+} 
+#+END_SRC
+
+*** Operaciones relacionales
+#+BEGIN_SRC C
+#include <stdio.h>
+int main() 
+{ 
+     int x = 10, y = 3; 
+     
+     printf("x igual a y = %d\n", 
+	    (x == y)); 
+     printf("x distinto a y = %d\n",
+	    (x != y));     
+     printf("x mayor que y = %d\n",
+	    (x > y)); 
+     printf("x menor o igual a y = %d\n",
+	    (x <= y)); 
+     printf("x mayor o igual que y = %d\n",
+	    (x >= y)); 
+     return 0;   
+}
+#+END_SRC
+
+*** Operaciones lógicas
+#+BEGIN_SRC C
+#include <stdio.h>
+void main() 
+{ 
+     int a = 3, b = 2, c = 4, d = 5; 
+      
+     printf("resultado = %d\n",
+	    (a > b) && (c < d)); 
+
+     printf("resultado = %d\n",
+	    (a < 10) || (d != 5)); 
+
+     printf("resultado = %d\n",
+	    (a != b) && (2 * d < 8)); 
+} 
+#+END_SRC
+*** Operaciones lógicas
+#+BEGIN_SRC C
+#include <stdio.h>
+void main() 
+{ 
+  int x, resto;
+
+  printf("Escribe un número entero: ");
+
+  scanf("%d", &x);
+
+  // Calcula el resto de dividir por 2
+  resto = x % 2;
+
+  // Si el resto es 0, x es par.
+  printf("Es un número %s\n",
+	 (resto == 0) ? "par" : "impar");
+} 
+#+END_SRC
+
+** Conversión de tipos de datos
+
+*** Conversión implícita
+- Asignaciones :: el valor de la derecha se convierte al tipo de la variable de la izquierda (posible aviso o error).
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float f1 = 3.7, f2;
+  int i1 = 2, i2;
+  // Real a entero: pierde decimales
+  i2 = f1;
+  printf("Un real %f convertido a entero %d\n", 
+	 f1, i2);
+  // Entero a real: no cambia valor
+  f2 = i1;
+  printf("Un entero %d convertido a real %f\n",
+	 i1, f2);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Un | real   | 3.7 | convertido | a | entero |   3 |
+| Un | entero |   2 | convertido | a | real   | 2.0 |
+
+
+
+*** Conversión explícita
+- Conversión explícita o forzada :: =(tipo) expresión=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float f1 = 3.7, f2;
+  int i1 = 2, i2;
+
+  f2 = (float) i1;
+  printf("Un entero %d convertido a real %f\n",
+	 i1, f2);
+
+  i2 = (int) f1;
+  printf("Un real %f convertido a entero %d\n",
+	 f1, i2);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Un | entero |   2 | convertido | a | real   | 2.0 |
+| Un | real   | 3.7 | convertido | a | entero |   3 |
+
+*** Conversión en expresiones
+- Expresiones :: los valores de los operandos se convierten al tipo del operando que tenga la precisión más alta.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  double f1 = 100;
+  int i1 = 150, i2 = 100;
+  printf("Un entero, %d, dividido por un real, %f,",
+	 i1, f1);
+  printf(" produce un real, %f\n",
+	 i1 / f1);
+  printf("Un entero, %d, por un entero, %d: %d\n",
+	 i1, i2, i1 / i2);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| Un entero | 150 | dividido por un real |  100.0 | produce un real | 1.5 |
+| Un entero | 150 | por un entero        | 100: 1 |                 |     |
+
+
+* ...
+# Local Variables:
+# ispell-local-dictionary: "spanish"
+# End:
+

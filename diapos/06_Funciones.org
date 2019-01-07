@@ -1,0 +1,315 @@
+#+TITLE: Tema 6: Funciones
+#+DATE:
+#+STARTUP: beamer
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :tangle code/06-funciones.c :comments org
+#+OPTIONS: H:2
+
+* Definición de función
+** ¿Qué es una función?
+*** 
+Una función es un bloque de código que realiza una tarea determinada a partir de unos datos.
+*** Ventajas
+ - Permiten *programación estructurada y abstracta*, sin necesidad de conocer
+   el detalle de la implementación de una tarea concreta.
+ - Mejoran la *legibilidad* del código.
+ - Facilitan el *mantenimiento* del programa.
+ - Permiten *reutilizar código* de manera eficiente (*DRY!*).
+
+** ¿Cómo se declara una función?
+*** Prototipo de una función:
+  1. Tipo de valor que devuelve (=int=, =void=, ...)
+  2. Nombre de la función (debe ser un identificador válido y *útil*).
+  3. Lista de argumentos que emplea, por tipo y nombre (puede estar vacía).
+
+#+BEGIN_SRC C
+tipo nombre_funcion(tipo1 arg1, tipo2 arg2, ...);
+#+END_SRC
+*** Ejemplos
+#+BEGIN_SRC C
+void printHello(int veces);
+
+float areaTriangulo(float b, float h);
+#+END_SRC
+** ¿Cómo se define una función?
+#+BEGIN_SRC C
+// Definicion de la funcion printHello
+
+// No devuelve nada (void)
+
+// Necesita un argumento llamado veces,
+// un entero (int), para funcionar.
+
+void printHello(int veces)
+{
+  int i;
+  for (i = 1; i <= veces; i++)
+    printf("Hello World!\n");
+}
+#+END_SRC
+** ¿Cómo se define una función?
+#+BEGIN_SRC C
+// Definicion de la funcion areaTriangulo
+
+// Devuelve un real (float)
+
+// Necesita dos argumentos, b y h, reales.
+
+float areaTriangulo(float b, float h)
+{
+  float area;
+
+  area = b * h / 2.0;
+
+  return area;
+}
+#+END_SRC
+
+* Estructura de un programa
+
+** Estructura de un programa
+- /Puede/ incluir directivas de inclusión (=include=).
+- /Puede/ incluir directivas de sustitución (=define=).
+- Declaración de funciones (prototipo).
+- Todos los programas tienen al menos una función: =main=.
+- Definición de las funciones.
+
+
+** Directivas de inclusión =include=
+Permiten incluir cabeceras (definiciones) procedentes de otros archivos
+
+#+BEGIN_SRC C
+//Librerias del sistema
+#include <stdio.h>
+#include <math.h>
+//Librerias propias del desarrollador
+#include "myHeader.h"
+#+END_SRC
+
+
+** Directivas de sustitución =define=
+- =define= permite definir símbolos que serán sustituidos por su valor.
+#+BEGIN_SRC C
+#include <stdio.h>
+//Habitualmente con mayúsculas
+//Atención: SIN signo igual NI punto y coma
+#define PI 3.141592
+
+int main()
+{
+  float r = 2.0;
+  printf("Una circunferencia de radio %f", r);
+  printf(" tiene un area de %f", PI * r * r);
+  return 0;
+}
+#+END_SRC 
+
+- =undef= elimina la definición del símbolo.
+#+BEGIN_SRC C
+#undef PI
+#+END_SRC
+
+
+** Declaración y definición de funciones
+#+BEGIN_SRC C
+#include <stdio.h>
+
+// Prototipo de la función (termina en ;)
+void printHello(int n);
+
+// Función main
+void main()
+{
+  //Uso de la función en main
+  printHello(3);
+}
+
+// Definición de la función
+void printHello(int n)
+{
+  int i;
+  for (i = 1; i <= n; i++)
+    printf("Hello World!\n");
+}
+#+END_SRC
+
+
+** Declaración y definición de funciones
+#+BEGIN_SRC C
+#include <stdio.h>
+
+// Prototipo de la función (termina en ;)
+float areaTriangulo(float b, float h);
+
+// Función main
+void main()
+{
+  float at;
+  //Uso de la función en main
+  at = areaTriangulo(1, 2);
+  printf("%f", at);
+}
+// Definición de la función
+float areaTriangulo(float b, float h)
+{
+  float area;
+  area = b * h / 2.0;
+  return area;
+}
+#+END_SRC
+
+* Ámbito de una variable
+
+** Variables globales
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int gVar = 3; //Variable global
+
+void foo(void);
+
+void main(){
+  printf("main (1):\t gVar es %d.\n", gVar);
+
+  foo();
+
+  gVar *= 2;
+  printf("main (2):\t gVar es %d.\n", gVar);
+}
+
+void foo(void)
+{
+  gVar = gVar + 1;
+  printf("foo:\t gVar es %d.\n", gVar);
+}
+#+END_SRC
+
+** Variables locales
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void foo(void);
+
+void main()
+{
+  int x = 1; // variable local en main
+  printf("main (1):\t x es %d.\n", x);
+
+  foo();
+  
+  printf("main (2):\t x es %d.\n", x);
+}
+
+void foo(void)
+{
+  int x = 2; // variable local en foo
+  printf("foo:\t x es %d.\n", x);
+}
+#+END_SRC
+
+* Funciones que llaman a otras funciones
+
+** Ejemplo
+#+BEGIN_SRC C
+#include <stdio.h>
+#define PI 3.141592
+
+float eleva3(float x);
+float volEsfera(float r);
+
+void main(){
+  float radio, vol;
+  scanf("%f", &radio);
+  vol = volEsfera(radio);
+  printf("El volumen es %f", vol);
+}
+
+float volEsfera(float r){ //Usa eleva3
+  return 4.0/3.0 * PI * eleva3(r);
+}
+
+float eleva3(float x){
+  return x * x * x;
+}
+#+END_SRC
+** Funciones recursivas
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int fact(int n);
+
+void main(){
+  int x;
+  printf("Indica un número:\n");
+  scanf("%d", &x);
+  printf("El factorial de %d es %d\n", x, fact(x));
+}
+
+int fact(int n){
+  int res;
+  if (n > 1) // Incluye llamada a si misma
+    res = n * fact(n - 1);
+  else
+    res = 1;
+  return res;
+}
+#+END_SRC
+
+* Funciones en ficheros
+** Motivación y uso
+*** Motivación
+Para poder reutilizar las funciones definidas es conveniente alojarlas
+en un fichero (o colección de ficheros) que puedan ser incluidos en
+otros proyectos.
+
+*** Uso
+- Debe existir un (o varios) fichero(s) =.h= (cabecera) y un fichero =.c= (código fuente, implementación de las funciones).
+- Se debe usar =#include "nombre_lib.h"= al comienzo del programa.
+- Hay que compilar conjuntamente (/en un proyecto/).
+
+** Ejemplo (1)
+
+*** Fichero =myLib.h= (cabecera)
+#+BEGIN_SRC C
+#define PI 3.141592
+
+float eleva3(float x);
+float volEsfera(float r);
+#+END_SRC
+
+*** Fichero =myLib.c= (código fuente)
+#+BEGIN_SRC C
+#include "myLib.h"
+
+float volEsfera(float r){
+  return 4.0/3.0 * PI * eleva3(r);
+}
+
+float eleva3(float x){
+  return x * x * x;
+}
+#+END_SRC
+
+** Ejemplo (2)
+
+*** Programa principal
+#+BEGIN_SRC C
+#include <stdio.h>
+// Directiva para incluir la librería local
+#include "myLib.h" 
+
+void main()
+{
+  float radio, vol;
+  scanf("%f", &radio);
+  vol = volEsfera(radio);
+  printf("El volumen es %f", vol);
+}
+#+END_SRC
+
+* ...
+# Local Variables:
+# ispell-local-dictionary: "spanish"
+# End:
+

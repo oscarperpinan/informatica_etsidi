@@ -1,0 +1,153 @@
+#+TITLE: Ejercicios del Tema 4
+#+SUBTITLE: Cadenas de caracteres
+#+AUTHOR: 
+#+DATE: 2017-2018
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :exports code
+#+EXPORT_FILE_NAME: ejercicios_tema4_cadenas_soluciones.pdf
+
+* Palabra al revés
+
+Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: =casa= se convierte en =asac=).
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <string.h>
+
+int main ()
+{
+  char palabra[11];
+  int len, i;
+  // Pide la palabra al usuario
+  printf("Escribe una palabra (máximo 10 letras):\n");
+  scanf("%10s", palabra);
+  // Calcula la longitud
+  len = strlen(palabra);
+  // Empezamos por el último caracter (len - 1) y retrocedemos hasta
+  // el primero (0)
+  for(i = len - 1; i >= 0; i--)
+    printf("%c", palabra[i]);
+
+  printf("\n");  
+
+  return 0;
+}
+#+END_SRC
+
+* Espacios por guiones
+
+Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{//Asignamos el texto a una variable char, sin definir la dimension
+  char texto[] = //Usamos \ para escribir varias lineas
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
+ orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
+ lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
+ pharetra vel erat et ornare. Duis eu lorem non leo dictum\
+ egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie\
+ risus. Vivamus sagittis commodo risus vel finibus. Vestibulum\
+ vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam\
+ orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa\
+ tortor, fermentum pretium lobortis sed, luctus vitae\
+ tortor. Suspendisse sagittis augue sit amet risus molestie, sed\
+ dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget\
+ imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit\
+ interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla\
+ facilisis mi nisi, vel pulvinar odio auctor posuere.";
+
+  int i = 0;
+  //Recorremos el texto hasta el final
+  while(texto[i] != '\0')
+    {
+      if(texto[i] == ' ') //Si encuentra un espacio
+	texto[i] = '_'; //lo sustituye por un guion bajo
+      i++;
+    }
+  printf("%s\n", texto); //Imprime el resultado
+
+  return 0;    
+}
+#+END_SRC
+
+#+RESULTS:
+| Lorem_ipsum_dolor_sit_amet | _consectetur_adipiscing_elit._Cras_euismod_orci_ac_porttitor_finibus._Curabitur_sed_tincidunt_est | _nec_mollis_lorem._Vestibulum_facilisis_dolor_sit_amet_faucibus_ultrices._Sed_pharetra_vel_erat_et_ornare._Duis_eu_lorem_non_leo_dictum_egestas._Integer_diam_arcu | _volutpat_ut_elit_vitae | _finibus_molestie_risus._Vivamus_sagittis_commodo_risus_vel_finibus._Vestibulum_vehicula_tortor_ut_ante_tincidunt | _non_tincidunt_turpis_sodales._Nam_orci_diam | _pulvinar_in_ante_a | _dignissim_pulvinar_magna._Mauris_massa_tortor | _fermentum_pretium_lobortis_sed | _luctus_vitae_tortor._Suspendisse_sagittis_augue_sit_amet_risus_molestie | _sed_dapibus_enim_vulputate._Sed_tempus_risus_vel_dolor_ornare | _eget_imperdiet_ligula_aliquam._Mauris_ac_auctor_lacus._Quisque_suscipit_interdum_rutrum._Sed_placerat_sit_amet_urna_in_vulputate._Nulla_facilisis_mi_nisi | _vel_pulvinar_odio_auctor_posuere. |
+
+* Cuenta letras
+
+Escribe un programa que analice la frase del ejercicio anterior representando el número de vocales que contiene mediante líneas de asteriscos. Este programa debe estar construido en base a dos funciones, =cuentaLetra= y =pintaAsteriscos=. 
+
+La función =cuentaLetra= tiene un argumento que define la letra a buscar, y devuelve un número entero indicando el número de veces que se ha repetido la letra pasado por el argumento dentro de un texto. El texto está definido como una variable global (fuera de =main=). 
+
+La función =pintaAsteriscos= recibe un número entero, y escribe tantos asteriscos como se indique en ese número. 
+
+Los prototipos son:
+
+#+BEGIN_SRC C :exports code
+int cuentaLetra(char x);
+
+void pintaAsteriscos(int n);
+#+END_SRC
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+char frase[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed pharetra vel erat et ornare. Duis eu lorem non leo dictum egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie risus. Vivamus sagittis commodo risus vel finibus. Vestibulum vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa tortor, fermentum pretium lobortis sed, luctus vitae tortor. Suspendisse sagittis augue sit amet risus molestie, sed dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla facilisis mi nisi, vel pulvinar odio auctor posuere.";
+
+int cuentaLetra(char x);
+
+void pintaAsteriscos(int n);
+
+int main()
+{
+  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
+  int i, nLetra[5]; //Vector de resultados
+
+  // Cuenta las apariciones de cada letra, y almacena resultados en un
+  // vector
+  for (i = 0; i < 5; i++)
+      nLetra[i] = cuentaLetra(vocales[i]);
+  for (i = 0; i < 5; i++)
+    { // Recorre el vector de resultados, y pinta asteriscos
+      // correspondientes a cada letra
+      printf("%c: ", vocales[i]);
+      pintaAsteriscos(nLetra[i]);
+      printf("\n");
+    }
+
+  return 0;
+}
+
+int cuentaLetra(char x)
+{
+  int i, n = 0;
+
+  i = 0;
+  while (frase[i] != '\0')
+    {
+      if (frase[i] == x)
+	n++; // Contador de apariciones 
+      i++;
+    }
+  return n;
+}
+
+void pintaAsteriscos(int n)
+{
+  int i;
+  if (n > 0)
+    for (i = 1; i <= n; i++)
+      printf("*");
+}
+
+#+END_SRC
+
+#+RESULTS:
+| a: | ********************************************************                             |
+| e: | *******************************************************************                  |
+| i: | ************************************************************************************ |
+| o: | *****************************************                                            |
+| u: | ****************************************************************                     |
