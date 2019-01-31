@@ -8,11 +8,7 @@
 #+BEGIN_CENTER
 [[file:figs/steve-jobs-quote.jpg]]
 
-[[https://www.youtube.com/watch?v=nKIu9yen5nc][What most schools don't teach]]
-
-[[https://www.youtube.com/watch?v=HrBh2165KjE][¿Por qué todos tienen que aprender a programar?]]
-
-[[https://www.youtube.com/watch?v=dU1xS07N-FA][Code Stars]]
+VIDEO: [[https://www.youtube.com/watch?v=nKIu9yen5nc][What most schools don't teach]]
 #+END_CENTER
 
 * ¿Qué hay dentro de un ordenador?
@@ -41,11 +37,11 @@
 | \LARGE       H | \LARGE       o | \LARGE l | \LARGE a |
 
 * Lenguaje máquina: bits
-- Lenguaje máquina: los ordenadores utilizan el sistema de numeración binario (dos dígitos, 0 y 1) para almacenar información.
+- *Lenguaje máquina*: los ordenadores utilizan el sistema de numeración binario (dos dígitos, 0 y 1) para almacenar información.
 
-- Un dígito binario (0 ó 1) se denomina /bit/ (/binary digit/).
+- Un *dígito binario* (0 ó 1) se denomina /bit/ (/binary digit/).
 
-- Con N bits pueden representarse 2^N símbolos o 2^N números
+- Con *N bits* pueden representarse *2^N símbolos o 2^N números*
 
   - Ejemplo: con N = 8 bits se pueden representar los números positivos desde el 0 al 255 (2^8 - 1).
 
@@ -186,17 +182,27 @@ https://es.wikipedia.org/wiki/Anexo:Ejemplos_de_implementaci%C3%B3n_del_%C2%ABHo
 * Desarrollo de programas en C
 #+BEGIN_SRC plantuml :file figs/programaC.png
 scale 2
-:Editor;
 repeat 
-       :Programa fuente (.c);
-       :Preprocesador\n//archivos de cabecera (.h)//;
-       :Programa modificado;
+       :Editor;
+note right
+Programa fuente (.c)
+end note
+       :Preprocesador;
+note right 
+Cabeceras #include
+end note
        :Compilador;
 repeatwhile (¿Errores?) is (Si) not (No)
 :Programa objeto (.obj/.o);
-:Montador o enlazador\n//librerías (.lib)//;
+:Enlazador;
+note right
+Librerías
+end note
 :Programa ejecutable (.exe);
-:Depurador;
+note right
+Depurador
+end note
+end;
 #+END_SRC
 
 #+ATTR_LATEX: :height 0.9\textheight
