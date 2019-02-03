@@ -182,6 +182,21 @@ int main()
 #+RESULTS:
 : Hoy es día 6
 
+*** Rango de variables =int=
+- Con signo
+| Tipo               | Bytes | Intervalo                      |
+|--------------------+-------+--------------------------------|
+| int                |     4 | \num{-2147483648} a \num{2147483647}       |
+| long int           |     4 | \num{-2147483648} a \num{2147483647}     |
+| short int          |     2 | \num{-32768} a \num{32767}         |
+
+- Sin signo
+| Tipo               | Bytes | Intervalo                      |
+|--------------------+-------+--------------------------------|
+| unsigned int       |     4 | 0 a \num{4294967295}             |
+| unsigned long int  |     4 | 0 a \num{4294967295}             | 
+| unsigned short int |     2 | 0 a \num{65535}                  |
+
 *** Lectura de números enteros con =scanf=
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -247,6 +262,25 @@ int main()
 | Esto | es | un       | número     | real         | 1035600000000.0 |
 | ...  | en | notación | científica | 1.035600e+12 |                 |
 | ...  | y  | de       | forma      | automática   |      1.0356e+12 |
+
+*** Rango de números reales
+**** =float= (32 bits, 4 bytes)
+- Precisión aproximada: 7 dígitos decimales
+- Rango: $1.2\cdot 10^{-38} \dots 3.4\cdot 10^{38}$
+- Formato (IEEE 754):
+  - Signo: 1 bit
+  - Exponente: 8 bits
+  - Mantisa: 23 bit
+
+*** Rango de números reales
+**** =double= (64 bits, 8 bytes)
+- Precisión aproximada: 16 dígitos decimales.
+- Rango: $2.3\cdot 10^{-308} \dots 1.7 \cdot 10^{308}$
+- Formato (IEEE 754):
+  - Signo: 1 bit
+  - Exponente: 11 bits
+  - Mantisa: 52 bits
+*Por defecto, las constantes reales son de tipo double.*
 
 *** Lectura de números reales con =scanf=
 **** Identificador de Formato
@@ -441,48 +475,6 @@ int main()
   return 0;
 }
 #+END_SRC
-
-** Rango de las variables
-*** Números enteros
-| Tipo               | Bytes | Intervalo                      |
-|--------------------+-------+--------------------------------|
-| int                |     4 | -2,147,483,648 a 2,147,483,647 |
-| unsigned int       |     4 | 0 a 4,294,967,295              |
-| long int           |     4 | -2,147,483,648 a 2,147,483,647 |
-| unsigned long int  |     4 | 0 a 4,294,967,295              | 
-| short int          |     2 | -32,768 a 32,767               |
-| unsigned short int |     2 | 0 a 65,535                     |
-
-*** Números reales
-- Datos en coma flotante.
-
-**** =float= (32 bits)
-- Formato (IEEE 754):
-  - Signo: 1 bit
-  - Exponente: 8 bits
-  - Mantisa: 23 bits
-- Precisión aproximada: 7 dígitos decimales
-**** =double= (64 bits)
-- Formato (IEEE 754):
-  - Signo: 1 bit
-  - Exponente: 11 bits
-  - Mantisa: 52 bits
-- Precisión aproximada: 16 dígitos decimales.
-*Por defecto, las constantes reales son de tipo double.*
-
-*** Números reales
-| Tipo        | Bytes | Intervalo                   |
-|-------------+-------+-----------------------------|
-| float       |     4 | +/-3.4E+/-38 (7 dígitos)    |
-| double      |     8 | +/-1.7E+/-308 (15 dígitos)  |
-| long double |    10 | +/-1.2E+/-4932 (19 dígitos) |
-
-
-*** Caracteres
-| Tipo           | Bytes | Intervalo                     |
-|----------------+-------+-------------------------------|
-| char           |     1 | -128 a 127                    |
-| unsigned char  |     1 | 0 a 255                       |
 
 
 * Operadores
