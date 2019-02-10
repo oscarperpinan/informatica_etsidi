@@ -3,8 +3,8 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports code
-#+EXPORT_FILE_NAME: ejercicios_tema3_bucles_soluciones.pdf
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema3_bucles.pdf
 
 * Mitades sucesivas
 Realiza un programa que pida un número real, y presente por pantalla ese número y sus mitades sucesivas hasta que el valor sea menor que 1.
