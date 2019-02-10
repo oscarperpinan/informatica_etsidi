@@ -49,11 +49,11 @@ int main()
 int main()
 {
   int letra, Letra;
+  const int conv = 'A' - 'a'; // Diferencia entre mayuscula y minuscula
   printf("Escriba una letra minuscula:\n");
   scanf("%c", &letra);
-  //En la tabla ASCII hay una distancia de 32 entre minusculas y
-  //mayusculas
-  Letra = letra - 32;
+  // Paso a mayuscula mediante la constante conv
+  Letra = letra + conv;
   printf("En mayuscula es %c\n", Letra);
   return 0;
 }
@@ -106,10 +106,13 @@ Escriba un programa para convertir una cantidad de pesetas introducidas por el u
 int main()
 {
   float pts, euros, dolar;
+  // Constantes de conversion
+  const float p2e = 1/166.386; //Pesetas a euros
+  const float e2d = 1.06105; //Euros a dolares
   printf ("Introduce una cantidad en pesetas: \n");
   scanf ("%f", &pts);
-  euros = pts / 166.386;
-  dolar = euros  * 1.06105;
+  euros = pts * p2e;
+  dolar = euros  * e2d;
   printf ("%.2f pesetas son %.2f euros y %.2f dolares\n",
 	  pts, euros, dolar);
   return 0;
@@ -141,13 +144,15 @@ int main()
 
 int main()
 {
-  float r, area;
+  // La funcion pow de math devuelve el resultado como double. Por
+  // tanto, debemos usar variables de este tipo.
+  double r, area;
   printf("Introduce el radio de la esfera \n");
-  scanf("%f", &r);
+  scanf("%lf", &r);
   // La libreria math define el valor de pi en M_PI.  Ademas, incluye
   // la funcion pow para calcular la potencia de un numero.
   area = 4.0 / 3.0 * M_PI * pow(r, 3);
-  printf("El volumen de la esfera es %f \n", area);
+  printf("El volumen de la esfera es %g \n", area);
   return 0;
 }
 #+END_SRC
@@ -163,7 +168,7 @@ Escriba un programa que pida al usuario las coordenadas de 2 puntos bidimensiona
 int main()
 {
   float x1, x2, y1, y2;
-  float dx2, dy2, d;
+  double dx2, dy2, d;
         
   printf("Primer punto\n");
   scanf("%f %f", &x1, &y1);
