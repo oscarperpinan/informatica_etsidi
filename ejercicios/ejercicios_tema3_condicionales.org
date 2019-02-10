@@ -1,7 +1,7 @@
 #+TITLE: Ejercicios del Tema 3
 #+SUBTITLE: Sentencias Condicionales
 #+AUTHOR: 
-#+DATE: 2017-2018
+#+DATE: 
 #+SETUPFILE: config.org
 #+PROPERTY: header-args :exports code
 #+EXPORT_FILE_NAME: ejercicios_tema3_condicionales_soluciones.pdf

@@ -1,7 +1,7 @@
 #+TITLE: Ejercicios del Tema 6
 #+SUBTITLE: Funciones
 #+AUTHOR: 
-#+DATE: 2017-2018
+#+DATE: 
 #+SETUPFILE: config.org
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema6.pdf

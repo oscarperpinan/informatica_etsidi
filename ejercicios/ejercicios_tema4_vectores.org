@@ -1,7 +1,7 @@
 #+TITLE: Ejercicios del Tema 4
 #+SUBTITLE: Vectores y Matrices
 #+AUTHOR: 
-#+DATE: 2017-2018
+#+DATE: 
 #+SETUPFILE: config.org
 #+PROPERTY: header-args :exports code
 #+EXPORT_FILE_NAME: ejercicios_tema4_vectores_soluciones.pdf
