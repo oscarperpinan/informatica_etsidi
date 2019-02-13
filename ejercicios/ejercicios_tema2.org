@@ -190,7 +190,7 @@ int main()
 * Años bisiestos 
 /Un año es bisiesto si es divisible por 4 pero no por 100, o si es divisible por 400./
 - Escriba un programa que indique si un número es bisiesto a partir de un número introducido por el usuario. 
-#+BEGIN_SRC C :exports none
+#+BEGIN_SRC C
 #include <stdio.h>
 int main() 
 { 
@@ -209,7 +209,7 @@ int main()
 
 - Escriba un programa que muestre en pantalla el número de días del mes de febrero a partir del año introducido por el usuario.
 
-#+BEGIN_SRC C :exports none
+#+BEGIN_SRC C
 #include <stdio.h>
 int main() 
 { 
@@ -228,7 +228,7 @@ int main()
 * Cifras de un número entero
 Escriba un programa que, a partir de un número entero introducido por el usuario, muestre en pantalla las centenas, decenas y unidades (en este orden).
 
-#+BEGIN_SRC C :exports none
+#+BEGIN_SRC C
 #include <stdio.h>
 int main() 
 { 
