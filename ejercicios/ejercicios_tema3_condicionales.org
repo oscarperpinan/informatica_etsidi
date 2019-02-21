@@ -197,7 +197,7 @@ int main()
 * Ecuación de segundo  grado
 Escribe un programa que pida los coeficientes de una ecuación de segundo grado ($a \cdot x^2 + b \cdot x + c = 0$) y escriba la solución. Recuerda que una ecuación de segundo grado puede tener dos soluciones reales diferentes, una única solución real, o dos soluciones complejas conjugadas.
 
-#+BEGIN_SRC C :exports none
+#+BEGIN_SRC C
 #include<stdio.h>
 #include<math.h>
  
