@@ -153,8 +153,7 @@ void main ()
 /* Uso de llaves con =switch= */
 
 #include <stdio.h>
-void main ()
-{
+void main (){
   float v1, v2;
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
@@ -202,7 +201,9 @@ int main()
 int main()
 {
   int i, n = 20;
-  long int fact;
+  // El factorial alcanza valores grandes
+  // y siempre es positivo.
+  unsigned long int fact;
   // La expresión de inicio puede ser múltiple,
   // separando por comas.
   // Aquí asigno valor inicial a fact
@@ -210,7 +211,7 @@ int main()
     {
       fact *= i;
     }
-  printf("El factorial de %d es %ld", 
+  printf("El factorial de %d es %lu", 
 	 n, fact);
   return 0;
 }
