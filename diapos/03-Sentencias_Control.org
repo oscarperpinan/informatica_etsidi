@@ -18,7 +18,7 @@
 * Sentencias Condicionales
 ** =if - else=
 *** =if=
-#+BEGIN_SRC plantuml :file figs/if.png :tangle no
+#+BEGIN_SRC plantuml :file figs/if.pdf :tangle no
 scale 2
 start
 
@@ -113,7 +113,7 @@ int main ()
 
 
 *** =if - else=
-#+BEGIN_SRC plantuml :file figs/ifelse.png :tangle no
+#+BEGIN_SRC plantuml :file figs/ifelse.pdf :tangle no
 scale 2
 start
 
@@ -207,7 +207,7 @@ int main ()
 
 
 *** =if - else - if=
-#+BEGIN_SRC plantuml :file figs/ifelseif.png :tangle no
+#+BEGIN_SRC plantuml :file figs/ifelseif.pdf :tangle no
 scale 2
 start
 
@@ -287,7 +287,7 @@ void main()
 
 *** =switch-case=
 - Permite tomar una decisión múltiple dependiendo del valor *entero* de una expresión.
-#+BEGIN_SRC plantuml :file figs/switch.png :tangle no
+#+BEGIN_SRC plantuml :file figs/switch.pdf :tangle no
 scale 2
 start
 if (val1) then ( )
@@ -402,7 +402,7 @@ void main (){
 *** =for=: Flujo 
 Ejecuta una sentencia (simple o compuesta) un número determinado de veces hasta que el resultado de una expresión sea falso.
 
-#+BEGIN_SRC plantuml :tangle no :file figs/for.png
+#+BEGIN_SRC plantuml :tangle no :file figs/for.pdf
 start
 
 :expr_inicio;
@@ -533,7 +533,7 @@ int main()
 *** =while=: Flujo
 Ejecuta una sentencia (simple o compuesta) *cero o más veces* dependiendo del resultado booleano de una expresión.
 
-#+BEGIN_SRC plantuml :tangle no :file figs/while.png
+#+BEGIN_SRC plantuml :tangle no :file figs/while.pdf
 start
 
 while (expresion) is (1)
@@ -594,7 +594,7 @@ int main()
 *** =do-while=: Flujo
 Ejecuta una sentencia (simple o compuesta) *una o más veces* dependiendo del resultado de una expresión.
 
-#+BEGIN_SRC plantuml :tangle no :file figs/do_while.png
+#+BEGIN_SRC plantuml :tangle no :file figs/do_while.pdf
 start
 
 repeat
