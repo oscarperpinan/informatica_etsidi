@@ -3,7 +3,7 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports none
+#+PROPERTY: header-args :exports code
 #+EXPORT_FILE_NAME: ejercicios_tema3_condicionales.pdf
 
 * Años bisiestos
@@ -54,7 +54,7 @@ int main()
 }
 #+END_SRC
 
-* Vocales y consonantes
+* Letras y números
 Elabora un programa que solicite al usuario que apriete una tecla y determine si es una letra, un número, o un carácter especial.
 
 #+BEGIN_SRC C

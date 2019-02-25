@@ -428,10 +428,8 @@ Ejecuta una sentencia (simple o compuesta) un número determinado de veces hasta
 for (expr_inicio; expr_final; expr_avance)
   {
       sentencia_1;
-      sentencia_2;
       ...
   }
-
 #+END_SRC
 
 - =expr_inicio= :: Expresión de inicialización (se ejecuta una sola vez). Sirve para iniciar las variables de control del bucle.
