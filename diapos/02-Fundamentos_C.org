@@ -5,6 +5,7 @@
 #+PROPERTY: header-args :tangle code/02-fundamentos.c :comments org
 #+OPTIONS: H:3
 
+
 * Primeros pasos
 *** Hello World!
 #+BEGIN_SRC C
@@ -182,20 +183,49 @@ int main()
 #+RESULTS:
 : Hoy es día 6
 
-*** Rango de variables =int=
-- Con signo
-| Tipo               | Bytes | Intervalo                      |
-|--------------------+-------+--------------------------------|
-| int                |     4 | \num{-2147483648} a \num{2147483647}       |
-| long int           |     4 | \num{-2147483648} a \num{2147483647}     |
-| short int          |     2 | \num{-32768} a \num{32767}         |
+*** Rango de variables =int= con signo
+#+begin_src C
+#include <stdio.h>
+#include <limits.h>
 
-- Sin signo
-| Tipo               | Bytes | Intervalo                      |
-|--------------------+-------+--------------------------------|
-| unsigned int       |     4 | 0 a \num{4294967295}             |
-| unsigned long int  |     4 | 0 a \num{4294967295}             | 
-| unsigned short int |     2 | 0 a \num{65535}                  |
+void main() {
+  printf("Un int ocupa %d bytes",
+	 sizeof(int));
+  printf(" y abarca desde %d hasta %d.\n",
+	 INT_MIN, INT_MAX);
+
+  printf("Un long int ocupa %d bytes",
+	 sizeof(long int));
+  printf(" y abarca desde %ld hasta %ld.\n",
+	  LONG_MIN, LONG_MAX);
+
+  printf("Un long long int ocupa %d bytes",
+	 sizeof(long long int));
+  printf(" y abarca desde %lld hasta %lld.\n",
+	 LLONG_MIN, LLONG_MAX);
+}
+#+end_src
+
+
+*** Rango de variables =int= sin signo
+
+#+begin_src C
+#include <stdio.h>
+#include <limits.h>
+
+void main() {
+
+   printf("Un unsigned int ocupa %d bytes",
+	  sizeof(unsigned int));
+   printf(" y abarca desde 0 hasta %u.\n",
+	  UINT_MAX);
+
+   printf("Un unsigned long int ocupa %d bytes",
+	  sizeof(unsigned long int));
+   printf(" y abarca desde 0 hasta %lu.\n",
+	  ULONG_MAX);
+}
+#+end_src
 
 *** Lectura de números enteros con =scanf=
 #+BEGIN_SRC C
@@ -264,23 +294,26 @@ int main()
 | ...  | y  | de       | forma      | automática   |      1.0356e+12 |
 
 *** Rango de números reales
-**** =float= (32 bits, 4 bytes)
-- Precisión aproximada: 7 dígitos decimales
-- Rango: $1.2\cdot 10^{-38} \dots 3.4\cdot 10^{38}$
-- Formato (IEEE 754):
-  - Signo: 1 bit
-  - Exponente: 8 bits
-  - Mantisa: 23 bit
+#+begin_src C
+#include <stdio.h>
+#include <float.h>
 
-*** Rango de números reales
-**** =double= (64 bits, 8 bytes)
-- Precisión aproximada: 16 dígitos decimales.
-- Rango: $2.3\cdot 10^{-308} \dots 1.7 \cdot 10^{308}$
-- Formato (IEEE 754):
-  - Signo: 1 bit
-  - Exponente: 11 bits
-  - Mantisa: 52 bits
-*Por defecto, las constantes reales son de tipo double.*
+int main() {
+
+   printf("Un float ocupa %d bytes"
+	  sizeof(float));
+   printf(" y abarca desde %e hasta %e.\n",
+	  FLT_MIN, FLT_MAX);
+
+   printf("Un double ocupa %d bytes",
+	  sizeof(double));
+   printf(" y abarca desde %e hasta %e.\n",
+	  DBL_MIN, DBL_MAX);
+
+   return(0);
+}
+#+end_src
+
 
 *** Lectura de números reales con =scanf=
 **** Identificador de Formato
