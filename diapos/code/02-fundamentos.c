@@ -115,6 +115,51 @@ int main()
   return 0;
 }
 
+/* Rango de variables =int= con signo */
+
+#include <stdio.h>
+#include <limits.h>
+
+void main() {
+  printf("Un int ocupa %d bytes",
+	 sizeof(int));
+  printf(" y abarca desde %d hasta %d.\n",
+	 INT_MIN, INT_MAX);
+
+  printf("Un long int ocupa %d bytes",
+	 sizeof(long int));
+  printf(" y abarca desde %ld hasta %ld.\n",
+	  LONG_MIN, LONG_MAX);
+
+  printf("Un long long int ocupa %d bytes",
+	 sizeof(long long int));
+  printf(" y abarca desde %lld hasta %lld.\n",
+	 LLONG_MIN, LLONG_MAX);
+}
+
+/* Rango de variables =int= sin signo */
+
+
+#include <stdio.h>
+#include <limits.h>
+
+void main() {
+   printf("Un unsigned int ocupa %d bytes",
+	  sizeof(unsigned int));
+   printf(" y abarca desde 0 hasta %u.\n",
+	  UINT_MAX);
+
+   printf("Un unsigned long int ocupa %d bytes",
+	  sizeof(unsigned long int));
+   printf(" y abarca desde 0 hasta %lu.\n",
+	  ULONG_MAX);
+
+   printf("Un unsigned long long int ocupa %d bytes",
+	  sizeof(unsigned long long int));
+   printf(" y abarca desde 0 hasta %llu.\n",
+	  ULLONG_MAX);
+}
+
 /* Lectura de números enteros con =scanf= */
 
 #include <stdio.h>
@@ -160,6 +205,26 @@ int main()
   printf("... en notación científica %e\n", num);
   printf("... y de forma automática %g\n", num);
   return 0;
+}
+
+/* Rango de números reales */
+
+#include <stdio.h>
+#include <float.h>
+
+int main() {
+
+   printf("Un float ocupa %d bytes"
+	  sizeof(float));
+   printf(" y abarca desde %e hasta %e.\n",
+	  FLT_MIN, FLT_MAX);
+
+   printf("Un double ocupa %d bytes",
+	  sizeof(double));
+   printf(" y abarca desde %e hasta %e.\n",
+	  DBL_MIN, DBL_MAX);
+
+   return(0);
 }
 
 /* Identificador de Formato */
@@ -253,70 +318,6 @@ int main()
   printf("Escribe una letra\n");
   scanf("%c", &letra);
   printf("Has escrito letra %c\n", letra);
-  return 0;
-}
-
-/* Uso de =printf= */
-
-#include <stdio.h>
-
-void main()
-{ // Usamos %s para cadenas de caracteres
-  // y ", a diferencia de los caracteres
-  printf("Estamos en %s\n", "febrero");
-}
-
-/* Definición y asignación */
-
-
-#include <stdio.h>
-
-int main()
-{
-  int dia = 6;
-  int anho = 2017;
-  // char define una variable de caracteres.  
-  // Para una cadena hay que indicar
-  // la longitud entre corchetes
-  char mes[10] = "febrero";
-
-  printf("Hoy es día %i de %s de %i\n",
-	 dia, mes, anho);
-  return 0;
-}
-
-/* Definición y asignación */
-
-#include <stdio.h>
-
-int main()
-{
-  // Las variables del mismo tipo
-  // se pueden definir en una misma línea
-  int dia = 6, anho = 2017;
-  char mes[10] = "febrero";
-
-  printf("Hoy es día %i de %s de %i\n",
-	 dia, mes, anho);
-  return 0;
-}
-
-/* Lectura de cadena de caracteres con =scanf= */
-
-#include <stdio.h>
-
-int main()
-{
-  char nombre[100];
-
-  printf("Escribe tu nombre\n");
-
-  // Atención: Con cadenas de caracteres 
-  // *no* hay que usar &
-  scanf("%s", nombre);
-
-  printf("Te llamas %s\n", nombre);
-
   return 0;
 }
 

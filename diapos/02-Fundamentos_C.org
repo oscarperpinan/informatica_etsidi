@@ -214,7 +214,6 @@ void main() {
 #include <limits.h>
 
 void main() {
-
    printf("Un unsigned int ocupa %d bytes",
 	  sizeof(unsigned int));
    printf(" y abarca desde 0 hasta %u.\n",
@@ -224,6 +223,11 @@ void main() {
 	  sizeof(unsigned long int));
    printf(" y abarca desde 0 hasta %lu.\n",
 	  ULONG_MAX);
+
+   printf("Un unsigned long long int ocupa %d bytes",
+	  sizeof(unsigned long long int));
+   printf(" y abarca desde 0 hasta %llu.\n",
+	  ULLONG_MAX);
 }
 #+end_src
 
