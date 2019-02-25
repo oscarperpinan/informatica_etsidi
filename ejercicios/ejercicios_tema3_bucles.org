@@ -9,7 +9,7 @@
 * Mitades sucesivas
 Realiza un programa que pida un número real, y presente por pantalla ese número y sus mitades sucesivas hasta que el valor sea menor que 1.
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 
 int main()
@@ -31,7 +31,7 @@ int main()
 
 Realiza un programa que muestre por pantalla los números enteros comprendidos entre 1 y 100 contando de =n= en =n=. El valor de =n= será introducido por el usuario desde el teclado. Si el usuario introduce un valor menor que 1 el programa se lo volverá a pedir de forma reiterada hasta que el usuario introduzca un número mayor o igual que 1.
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 
 int main()
@@ -65,7 +65,7 @@ Realiza un programa que calcule una aproximación al número \pi mediante el sum
  \]
 #+END_EXPORT
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 #include <math.h>
 
