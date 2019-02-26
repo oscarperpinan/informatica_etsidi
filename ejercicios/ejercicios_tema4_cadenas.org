@@ -3,8 +3,8 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports code
-#+EXPORT_FILE_NAME: ejercicios_tema4_cadenas_soluciones.pdf
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema4_cadenas.pdf
 
 * Palabra al revés
 
