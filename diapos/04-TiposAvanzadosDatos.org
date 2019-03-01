@@ -297,183 +297,6 @@ void fAbs(int vector[], int n){
 }
 #+END_SRC
 
-* Matrices
-** Matrices
-*** 
-Una matriz es un conjunto de valores del mismo tipo (=int=, =char=, =float=, etc.), de dos o más dimensiones
-#+BEGIN_SRC C
-tipo identificador[dimension_1][dimension_2] ... [dimension_n];
-#+END_SRC
-
-- tipo :: Tipo de los elementos de la matriz.
-- identificador :: Nombre de la matriz.
-- dimensión_n :: Dimensión n-ésima de la matriz.
-
-*** Ejemplo
-
-#+BEGIN_SRC C
-// Crea una matriz de datos enteros, llamada
-// tabla, de dos dimensiones y 9 elementos.
-int tabla[3][3];
-#+END_SRC
-
-** Elementos de una matriz
-- Se referencian con el nombre de la matriz seguido de tantos subíndices, entre corchetes, como dimensiones tenga la matriz.
-#+BEGIN_SRC C
-#include <stdio.h>
-void main (){
-  int matriz[2][2]; // Matriz 2 x 2
-  int fila, columna;
-  // Inicializacion de elementos
-  matriz[0][0] = 1;
-  matriz[0][1] = 2;
-  matriz[1][0] = 3;
-  matriz[1][1] = 4;
-  // Recorre matriz con un bucle for anidado
-  for(fila = 0; fila < 2; fila++) {
-      for(columna = 0; columna < 2; columna++)
-	printf("%d\t", matriz[fila][columna]);
-      printf("\n\n");
-    }
-}
-#+END_SRC
-
-
-** Inicialización de una matriz
-- Los elementos de una matriz pueden iniciarse en el momento de la declaración.
-#+BEGIN_SRC C
-#include <stdio.h>
-void main()
-{
-  int matriz[2][3] = // Matriz 2 x 3
-    {
-      {10, 20, 30}, // 1a fila
-      {40, 50, 60}  // 2a fila
-    };
-  int fil, col;
-  // Recorremos con bucle anidado
-  for(fil = 0; fil < 2; fil++){
-      for(col = 0; col < 3; col++)
-	printf("%d\t",matriz[fil][col]);
-      printf("\n\n");
-    }
-}
-#+END_SRC
-
-
-** Inicialización de una matriz
-- Los elementos de una matriz pueden iniciarse en el momento de la declaración.
-#+BEGIN_SRC C
-#include <stdio.h>
-int main()
-{
-  // Matriz de dos filas, tres columnas
-  int matriz[2][3] = {10, 20, 30, 40, 50, 60};
-  int fil, col;
-  // Recorremos con bucle anidado
-  for(fil = 0; fil < 2; fil++)
-    {
-      for(col = 0; col < 3; col++)
-	printf("%d\t",matriz[fil][col]);
-      printf("\n\n");
-    }
-return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-| 1 | 2 | 3 |
-|   |   |   |
-| 4 | 5 | 6 |
-
-
-** Operaciones con matrices: suma
-#+BEGIN_SRC C
-#include <stdio.h>
-int main()
-{
-  int i,j;
-  int m1[2][3] = {1, 2, 3, 4, 5, 6};
-  int m2[2][3] = {4, 5, 12, 23, -5, 6};
-  int m3[2][3]; // Matriz resultado
-  // Realiza la suma con bucle anidado
-  for(i = 0; i < 2; i++) // Filas
-    for(j = 0; j < 3; j++) // Columnas
-      m3[i][j] = m1[i][j] + m2[i][j];
-  // Imprime resultado con bucle anidado
-  for(i = 0; i < 2; i++) // Filas
-    {
-      for(j = 0; j < 3; j++) // Columnas
-	  printf("%d\t",m3[i][j]);
-      printf("\n");
-    }
-  return 0;
-}
-#+END_SRC
-
-** Funciones con matrices
-
-- Una matriz siempre se pasa por referencia: no se pasa la matriz completa sino la dirección del primer elemento.
-#+BEGIN_SRC C
-void funcion (int matriz[3][3], int nFil, int nCol);
-#+END_SRC
-
-- Se puede omitir el número de filas pero *no* el número de columnas. 
-#+BEGIN_SRC C
-void funcion (int matriz[][3], int nFil, int nCol);
-#+END_SRC
-
-#+BEGIN_SRC C
-//Error de sintaxis
-void funcion (int matriz[][], int nFil, int nCol);
-#+END_SRC
-
-** Ejemplo de función con matrices
-#+BEGIN_SRC C
-#include <stdio.h>
-void imprime_matriz(int M[][2], int f, int c);
-
-void main()
-{
-  int tabla[2][2] = {{1,2}, {3,4}};
-  imprime_matriz(tabla, 2, 2);
-}
-
-void imprime_matriz(int M[][2], int f, int c)
-{
-  int i, j;
-  for(i = 0; i < f; i++) {
-      for(j = 0; j < c; j++)
-	printf("%d ", M[i][j]);
-      printf("\n");
-    }
-}
-#+END_SRC
-
-** Ejemplo de función con matrices (2)
-#+BEGIN_SRC C
-#include <stdio.h>
-void absMatriz(int M[][2], int f, int c);
-
-void main()
-{
-  int tabla[2][2] = {{-1,2}, {-3,4}};
-  printf("Antes: %d\n", tabla[0][0]);
-  absMatriz(tabla, 2, 2); // ¡Sin asignacion!
-  printf("Después: %d\n", tabla[0][0]);
-}
-
-void absMatriz(int M[][2], int f, int c)
-{
-  int i, j;
-  for(i = 0; i < f; i++) 
-      for(j = 0; j < c; j++)
-	if (M[i][j] < 0)
-	  M[i][j] = -M[i][j];
-}
-#+END_SRC
-
-
 * Cadenas de caracteres
 ** Cadenas de caracteres en C
 *** Definición
@@ -806,6 +629,183 @@ void main()
   printf("¡Correcto!\n");
 }
 #+END_SRC
+
+* Matrices
+** Matrices
+*** 
+Una matriz es un conjunto de valores del mismo tipo (=int=, =char=, =float=, etc.), de dos o más dimensiones
+#+BEGIN_SRC C
+tipo identificador[dimension_1][dimension_2] ... [dimension_n];
+#+END_SRC
+
+- tipo :: Tipo de los elementos de la matriz.
+- identificador :: Nombre de la matriz.
+- dimensión_n :: Dimensión n-ésima de la matriz.
+
+*** Ejemplo
+
+#+BEGIN_SRC C
+// Crea una matriz de datos enteros, llamada
+// tabla, de dos dimensiones y 9 elementos.
+int tabla[3][3];
+#+END_SRC
+
+** Elementos de una matriz
+- Se referencian con el nombre de la matriz seguido de tantos subíndices, entre corchetes, como dimensiones tenga la matriz.
+#+BEGIN_SRC C
+#include <stdio.h>
+void main (){
+  int matriz[2][2]; // Matriz 2 x 2
+  int fila, columna;
+  // Inicializacion de elementos
+  matriz[0][0] = 1;
+  matriz[0][1] = 2;
+  matriz[1][0] = 3;
+  matriz[1][1] = 4;
+  // Recorre matriz con un bucle for anidado
+  for(fila = 0; fila < 2; fila++) {
+      for(columna = 0; columna < 2; columna++)
+	printf("%d\t", matriz[fila][columna]);
+      printf("\n\n");
+    }
+}
+#+END_SRC
+
+
+** Inicialización de una matriz
+- Los elementos de una matriz pueden iniciarse en el momento de la declaración.
+#+BEGIN_SRC C
+#include <stdio.h>
+void main()
+{
+  int matriz[2][3] = // Matriz 2 x 3
+    {
+      {10, 20, 30}, // 1a fila
+      {40, 50, 60}  // 2a fila
+    };
+  int fil, col;
+  // Recorremos con bucle anidado
+  for(fil = 0; fil < 2; fil++){
+      for(col = 0; col < 3; col++)
+	printf("%d\t",matriz[fil][col]);
+      printf("\n\n");
+    }
+}
+#+END_SRC
+
+
+** Inicialización de una matriz
+- Los elementos de una matriz pueden iniciarse en el momento de la declaración.
+#+BEGIN_SRC C
+#include <stdio.h>
+int main()
+{
+  // Matriz de dos filas, tres columnas
+  int matriz[2][3] = {10, 20, 30, 40, 50, 60};
+  int fil, col;
+  // Recorremos con bucle anidado
+  for(fil = 0; fil < 2; fil++)
+    {
+      for(col = 0; col < 3; col++)
+	printf("%d\t",matriz[fil][col]);
+      printf("\n\n");
+    }
+return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+| 1 | 2 | 3 |
+|   |   |   |
+| 4 | 5 | 6 |
+
+
+** Operaciones con matrices: suma
+#+BEGIN_SRC C
+#include <stdio.h>
+int main()
+{
+  int i,j;
+  int m1[2][3] = {1, 2, 3, 4, 5, 6};
+  int m2[2][3] = {4, 5, 12, 23, -5, 6};
+  int m3[2][3]; // Matriz resultado
+  // Realiza la suma con bucle anidado
+  for(i = 0; i < 2; i++) // Filas
+    for(j = 0; j < 3; j++) // Columnas
+      m3[i][j] = m1[i][j] + m2[i][j];
+  // Imprime resultado con bucle anidado
+  for(i = 0; i < 2; i++) // Filas
+    {
+      for(j = 0; j < 3; j++) // Columnas
+	  printf("%d\t",m3[i][j]);
+      printf("\n");
+    }
+  return 0;
+}
+#+END_SRC
+
+** Funciones con matrices
+
+- Una matriz siempre se pasa por referencia: no se pasa la matriz completa sino la dirección del primer elemento.
+#+BEGIN_SRC C
+void funcion (int matriz[3][3], int nFil, int nCol);
+#+END_SRC
+
+- Se puede omitir el número de filas pero *no* el número de columnas. 
+#+BEGIN_SRC C
+void funcion (int matriz[][3], int nFil, int nCol);
+#+END_SRC
+
+#+BEGIN_SRC C
+//Error de sintaxis
+void funcion (int matriz[][], int nFil, int nCol);
+#+END_SRC
+
+** Ejemplo de función con matrices
+#+BEGIN_SRC C
+#include <stdio.h>
+void imprime_matriz(int M[][2], int f, int c);
+
+void main()
+{
+  int tabla[2][2] = {{1,2}, {3,4}};
+  imprime_matriz(tabla, 2, 2);
+}
+
+void imprime_matriz(int M[][2], int f, int c)
+{
+  int i, j;
+  for(i = 0; i < f; i++) {
+      for(j = 0; j < c; j++)
+	printf("%d ", M[i][j]);
+      printf("\n");
+    }
+}
+#+END_SRC
+
+** Ejemplo de función con matrices (2)
+#+BEGIN_SRC C
+#include <stdio.h>
+void absMatriz(int M[][2], int f, int c);
+
+void main()
+{
+  int tabla[2][2] = {{-1,2}, {-3,4}};
+  printf("Antes: %d\n", tabla[0][0]);
+  absMatriz(tabla, 2, 2); // ¡Sin asignacion!
+  printf("Después: %d\n", tabla[0][0]);
+}
+
+void absMatriz(int M[][2], int f, int c)
+{
+  int i, j;
+  for(i = 0; i < f; i++) 
+      for(j = 0; j < c; j++)
+	if (M[i][j] < 0)
+	  M[i][j] = -M[i][j];
+}
+#+END_SRC
+
 
 * Estructuras
 ** Estructuras en C
@@ -1153,6 +1153,7 @@ int main()
 #+RESULTS:
 | 1 |
 | 2 |
+
 
 # Local Variables:
 # ispell-local-dictionary: "spanish"
