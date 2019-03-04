@@ -246,6 +246,335 @@ void fAbs(int vector[], int n){
 	vector[i] = -vector[i];
 }
 
+/* Código */
+
+int main() {
+ char identificador[dimensión];
+return 0;
+}
+
+/* Definición e Inicialización de cadenas */
+
+int main() {
+// Declara una cadena de 10 caracteres 
+//(+1 para el cierre)
+char cadena[11];
+
+// Declara y asigna contenido
+char cadena[5] = "Hola"; // 4 + 1
+
+// Asigna por valores individuales
+char cadena[5] = {'H', 'o', 'l', 'a', '\0'}; // 4 + 1
+
+// Asigna por codigo ASCII
+char cadena[5] = {72, 111, 108, 97, 0}; 
+
+return 0;
+}
+
+/* Definición e Inicialización de cadenas */
+
+
+int main() {
+// Declara una cadena, *no* define dimension 
+// y asigna contenido 
+char cadena[] = "Hola"; 
+
+// Asigna por elementos individuales
+char cadena[] = {'H', 'o', 'l', 'a', '\0'}; // 4 + 1; 
+
+// Asigna mediante codigo ASCII
+char cadena[] = {72, 111, 108, 97, 0}; 
+return 0;
+}
+
+/* Elementos de una cadena */
+/*  - Se referencian con el nombre seguido de un subíndice entre corchetes. */
+/*  - El subíndice representa la posición del elemento dentro de la cadena. */
+/*  - La *primera posición* tiene el *subíndice 0*. */
+/*  - La *última posición* es el carácter nulo =\0=. */
+
+
+#include <stdio.h>
+
+int main()
+{
+  char cadena[5] = "Hola";
+  printf("%c \t %c \t %c \t %c \t %c\n",
+	 cadena[0], cadena[1],
+	 cadena[2], cadena[3],
+	 cadena[4]);
+  return 0;
+}
+
+/* Error */
+
+int main() {
+char cadena[5];
+
+//Error de compilacion
+cadena = "Hola";
+return 0;
+}
+
+/* Solución provisional */
+/* /Mejor con =strcpy= de =string.h=/ */
+
+
+int main() {
+char cadena[5]; 
+cadena[0] = 'H'; 
+cadena[1] = 'o'; 
+cadena[2] = 'l'; 
+cadena[3] = 'a'; 
+cadena[4] = '\0';
+return 0;
+}
+
+/* Lectura y escritura de una cadena */
+
+/* - Usamos el especificador =%s= con =printf= y =scanf=. */
+
+/* - En =scanf= *debemos* especificar el *límite de caracteres* en el especificador de formato. */
+
+/* - En =scanf= *no* ponemos =&= delante del identificador. */
+
+
+#include <stdio.h>
+
+int main()
+{
+  char texto[31];
+
+  printf("Dime algo: \n");
+  // Deja de leer cuando detecta un espacio
+  // Imponemos el límite de caracteres
+  scanf("%30s", texto); 
+  printf("Has dicho %s", texto);
+  return 0;
+}
+
+/* Lectura de una cadena con espacios */
+
+/* - =scanf= con =%s= termina de leer cuando recibe un espacio o salto de línea. */
+/* - Para leer cadenas de caracteres que incluyan espacios se emplea el identificador =%[^\n]= */
+
+#include <stdio.h>
+
+int main()
+{
+  char texto[31];
+
+  printf("Dime algo: \n");
+  // Deja de leer cuando detecta un salto de línea
+  // o al alcanzar el límite de caracteres
+  scanf("%30[^\n]", texto);
+  // En printf seguimos usando %s
+  printf("Has dicho %s\n", texto);
+  return 0;
+}
+
+/* Recorrido por los elementos */
+/* - El bucle =while= es el más indicado, usando el carácter nulo para terminar: */
+
+
+#include <stdio.h>
+
+int main()
+{
+  char cadena[5] = "Hola";
+  int i = 0;
+  printf("Los caracteres son:\n");
+  while (cadena[i] != '\0')
+    {
+      printf("%c \t", cadena[i]);
+      i++;
+    }
+  return 0;
+}
+
+/* Recorrido por los elementos */
+/* - También se puede usar un bucle =for= (equivalencia entre =for= y =while=) */
+
+
+#include <stdio.h>
+
+int main()
+{
+  char cadena[5] = "Hola";
+  int i = 0;
+  printf("Los caracteres son:\n");
+  for(i = 0; cadena[i] != '\0'; i++)
+    {
+      printf("%c \t", cadena[i]);
+    }
+  return 0;
+}
+
+/* Ejemplo: pasar a mayúsculas */
+
+
+#include <stdio.h>
+
+void main()
+{
+  char cadena[5] = "Hola";
+  // Distancia entre A y a
+  int inc = 'A' - 'a';
+  int i = 0;
+  // Recorremos la cadena
+  while(cadena[i] != '\0')
+    { // Si el caracter es letra minuscula
+      if (cadena[i] >= 'a' && cadena[i] <= 'z')
+	//sumamos la distancia para pasar a
+	//mayuscula
+	cadena[i] += inc;
+      i++;
+    }
+  printf("%s\n", cadena);
+}
+
+
+/* La librería =string.h= incluye numerosas funciones dedicadas a cadenas de caracteres: */
+
+
+int main() {
+#include <string.h>
+return 0;
+}
+
+/* Longitud de una cadena :: =strlen= */
+/* - =strlen= devuelve un entero con el número de caracteres. */
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+  char palabra[21];
+  int longitud;
+  printf("Introduce una palabra: ");
+  scanf("%20s", palabra);
+  longitud = strlen(palabra);
+  printf("Esta palabra tiene %d caracteres\n",
+	 longitud);
+}
+
+/* Paso a mayúsculas :: =_strup= */
+
+
+#include <stdio.h>
+#include <string.h>
+
+void main()
+{
+  char nombre[100];
+  printf("Introduce tu nombre: ");
+  scanf("%s",nombre);
+  //¡Sin asignacion!
+  _strupr(nombre); //atencion al guion inicial
+  printf("En mayusculas %s\n", nombre);
+}
+
+/* Copiar cadenas :: =strcpy= */
+
+/* Con =strcpy= tenemos una solución óptima para la *asignación de contenido*. */
+
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+  char s1[50], s2[50];
+  strcpy(s1, "Hello World!");
+  strcpy(s2, s1);
+  printf("%s\n", s2);
+  return 0;
+}
+
+/* Concatenar cadenas :: =strcat= */
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  char nombre_completo[50];
+  char nombre[ ] = "Juana";
+  char apellido[ ] = "de Arco";
+  // Copiamos por tramos:
+  // Primero el nombre
+  strcpy(nombre_completo, nombre);
+  // A continuacion un espacio
+  strcat(nombre_completo, " ");
+  // Finalmente el apellido
+  strcat(nombre_completo, apellido);
+  printf("El nombre completo es: %s.\n",
+	 nombre_completo);
+  return 0;
+}
+
+/* Comparación de cadenas :: =strcmp= */
+/* - *Si las dos cadenas son iguales entrega un 0*. */
+
+
+#include <stdio.h>
+#include <string.h>
+void main()
+{
+  char color[] = "negro";
+  char respuesta[11];
+  do // El bucle se repite mientras
+    {// las cadenas *no* coincidan
+      printf("Adivina un color: ");
+      scanf ("%10s", respuesta);
+    } while (strcmp(color, respuesta) != 0);
+  printf("¡Correcto!\n");
+}
+
+/* Comparación de cadenas :: =strcmp= */
+/* - Si hay diferencias, es positivo si el valor ASCII del primer carácter diferente es mayor en la cadena 1. */
+
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+  char s1[] = "abcdef";
+  char s2[] = "abCdef";
+  char s3[] = "abcdff";
+  int res;
+  res = strcmp(s1, s2);
+  printf("strcmp(s1, s2) = %d\n",
+	 res);
+  res = strcmp(s1, s3);
+  printf("strcmp(s1, s3) = %d\n",
+	 res);
+return 0;
+}
+
+/* Funciones y cadenas */
+/* Una función acepta una cadena como argumento: *paso por referencia* (igual que un vector). */
+
+
+#include <stdio.h>
+void imprime(char cadena[]); 
+
+void main() {
+  char saludo[]="Hola";
+  imprime(saludo);
+}
+
+void imprime(char cadena[]) {
+  int i=0;
+  while(cadena[i]!='\0') {
+      printf("%c", cadena[i]);
+      i++;
+    }
+  printf("\n");
+}
+
 
 /* Una matriz es un conjunto de valores del mismo tipo (=int=, =char=, =float=, etc.), de dos o más dimensiones */
 
@@ -413,293 +742,6 @@ void absMatriz(int M[][2], int f, int c)
 	  M[i][j] = -M[i][j];
 }
 
-/* Código */
-
-int main() {
- char identificador[dimensión];
-return 0;
-}
-
-/* Definición e Inicialización de cadenas */
-
-int main() {
-// Declara una cadena de 10 caracteres 
-//(+1 para el cierre)
-char cadena[11];
-
-// Declara y asigna contenido
-int cadena[5] = "Hola"; // 4 + 1
-
-// Asigna por valores individuales
-int cadena[5] = {'H', 'o', 'l', 'a', '\0'}; // 4 + 1
-
-// Asigna por codigo ASCII
-int cadena[5] = {72, 111, 108, 97, 0}; 
-
-return 0;
-}
-
-/* Definición e Inicialización de cadenas */
-
-
-int main() {
-// Declara una cadena, *no* define dimension 
-// y asigna contenido 
-int cadena[] = "Hola"; 
-
-// Asigna por elementos individuales
-int cadena[] = {'H', 'o', 'l', 'a', '\0'}; // 4 + 1; 
-
-// Asigna mediante codigo ASCII
-int cadena[] = {72, 111, 108, 97, 0}; 
-return 0;
-}
-
-/* Error */
-
-int main() {
-char cadena[5];
-
-//Error de compilacion
-cadena = "Hola";
-return 0;
-}
-
-/* Solución provisional */
-
-int main() {
-char cadena[5]; 
-cadena[0] = 'H'; 
-cadena[1] = 'o'; 
-cadena[2] = 'l'; 
-cadena[3] = 'a'; 
-cadena[4] = '\0';
-return 0;
-}
-
-/* Elementos de una cadena */
-/*  - Se referencian con el nombre seguido de un subíndice entre corchetes. */
-/*  - El subíndice representa la posición del elemento dentro de la cadena. */
-/*  - La *primera posición* tiene el *subíndice 0*. */
-/*  - La *última posición* es el carácter nulo =\0=. */
-
-
-#include <stdio.h>
-
-int main()
-{
-  char cadena[5] = "Hola";
-  printf("%c \t %c \t %c \t %c \n",
-	 cadena[0], cadena[1],
-	 cadena[2], cadena[3],
-	 cadena[4]);
-  return 0;
-}
-
-/* Lectura y escritura de una cadena */
-
-/* - Usamos el especificador =%s= con =printf= y =scanf=. */
-
-/* - En =scanf= indicamos el límite de caracteres en el especificador de formato. */
-
-/* - En =scanf= *no* ponemos =&= delante del identificador. */
-
-
-#include <stdio.h>
-
-int main()
-{
-  char texto[31];
-
-  printf("Dime algo: \n");
-  // Deja de leer cuando detecta un espacio
-  // Imponemos el límite de caracteres
-  scanf("%30s", texto); 
-  printf("Has dicho %s", texto);
-  return 0;
-}
-
-/* Recorrido por los elementos */
-/* - El bucle =while= es el más indicado, usando el carácter nulo para terminar: */
-
-
-#include <stdio.h>
-
-int main()
-{
-  char cadena[5] = "Hola";
-  int i = 0;
-  printf("Los caracteres son:\n");
-  while (cadena[i] != '\0')
-    {
-      printf("%c \t", cadena[i]);
-      i++;
-    }
-  return 0;
-}
-
-/* Recorrido por los elementos */
-/* - También se puede usar un bucle =for= (equivalencia entre =for= y =while=) */
-
-
-#include <stdio.h>
-
-int main()
-{
-  char cadena[5] = "Hola";
-  int i = 0;
-  printf("Los caracteres son:\n");
-  for(i = 0; cadena[i] != '\0'; i++)
-    {
-      printf("%c \t", cadena[i]);
-    }
-  return 0;
-}
-
-/* Ejemplo: pasar a mayúsculas */
-
-
-#include <stdio.h>
-
-int main()
-{
-  char cadena[5] = "Hola";
-  // Distancia entre A y a
-  int inc = 'A' - 'a';
-  int i = 0;
-  // Recorremos la cadena
-  while(cadena[i] != '\0')
-    { // Si el caracter es letra minuscula
-      if (cadena[i] >= 'a' && cadena[i] <= 'z')
-	//sumamos la distancia para pasar a
-	//mayuscula
-	cadena[i] += inc;
-      i++;
-    }
-  printf("%s\n", cadena);
-  return 0;
-}
-
-/* Funciones y cadenas */
-/* Una función acepta una cadena como argumento: *paso por referencia* (igual que un vector). */
-
-
-#include <stdio.h>
-void imprime(char cadena[]); 
-
-void main() {
-  char saludo[]="Hola";
-  imprime(saludo);
-}
-
-void imprime(char cadena[]) {
-  int i=0;
-  while(cadena[i]!='\0') {
-      printf("%c", cadena[i]);
-      i++;
-    }
-  printf("\n");
-}
-
-
-/* La librería =string.h= incluye numerosas funciones dedicadas a cadenas de caracteres: */
-
-
-int main() {
-#include <string.h>
-return 0;
-}
-
-/* Longitud de una cadena :: =strlen= */
-/* - =strlen= devuelve un entero con el número de caracteres. */
-
-#include <stdio.h>
-#include <string.h>
-
-void main()
-{
-  char nombre[100];
-  int longitud;
-  printf("Introduce tu nombre: ");
-  scanf("%s", nombre);
-  longitud = strlen(nombre);
-  printf("Tu nombre tiene %d caracteres\n",
-	 longitud);
-}
-
-/* Paso a mayúsculas :: =_strup= */
-
-
-#include <stdio.h>
-#include <string.h>
-
-void main()
-{
-  char nombre[100];
-  printf("Introduce tu nombre: ");
-  scanf("%s",nombre);
-  //¡Sin asignacion!
-  _strupr(nombre); //atencion al guion inicial
-  printf("En mayusculas %s\n", nombre);
-}
-
-/* Copiar cadenas :: =strcpy= */
-
-/* Con =strcpy= tenemos una solución óptima para la asignación de contenido. */
-
-
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-  char s1[50], s2[50];
-  strcpy(s1, "Hello World!");
-  strcpy(s2, s1);
-  printf("%s\n", s2);
-  return 0;
-}
-
-/* Concatenar cadenas :: =strcat= */
-
-
-#include <stdio.h>
-#include <string.h>
-
-int main()
-{
-  char nombre_completo[50];
-  char nombre[ ] = "Juana";
-  char apellido[ ] = "de Arco";
-  // Copiamos por tramos:
-  // Primero el nombre
-  strcpy(nombre_completo, nombre);
-  // A continuacion un espacio
-  strcat(nombre_completo, " ");
-  // Finalmente el apellido
-  strcat(nombre_completo, apellido);
-  printf("El nombre completo es: %s.\n",
-	 nombre_completo);
-  return 0;
-}
-
-/* Comparación de cadenas :: =strcmp= */
-/* *Si las dos cadenas son iguales entrega un 0*. En caso contrario entrega un valor positivo o negativo según la comparación entre el valor del el primer carácter que no coincide en ambas cadenas. */
-
-
-#include <stdio.h>
-#include <string.h>
-void main()
-{
-  char color[] = "negro";
-  char respuesta[11];
-  do // El bucle se repite mientras
-    {// las cadenas *no* coincidan
-      printf("Adivina un color: ");
-      scanf ("%10s", respuesta);
-    } while (strcmp(color, respuesta) != 0);
-  printf("¡Correcto!\n");
-}
-
 /* Estructuras en C */
 /* Permiten almacenar valores de diferentes tipos bajo un mismo identificador. */
 
@@ -773,7 +815,7 @@ typedef struct {
 
 void main ()
 {
-  ficha alumno1 = {"Yo", "Soy Aquel", 1234}, 
+  ficha alumno1 = {"Yo", "Soy Aquel", 1234};
 }
 
 /* Inicialización de valores en estructuras */
