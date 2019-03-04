@@ -11,7 +11,7 @@
 
 Escribe un programa que genere los 20 primeros términos de la serie de Fibonacci y los almacene en un vector. 
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 #define N 20
 
@@ -40,7 +40,7 @@ Escribe un programa que realice el producto escalar de dos vectores. Use los dos
   float v2[5] = {12, -3, 34, 15, -5};
 #+END_SRC
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 int main()
 {
@@ -66,7 +66,7 @@ int main()
 
 - Escribe un programa que calcule la distancia entre dos puntos del espacio utilizando vectores de dimensión 2 para codificar los puntos. 
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 #include <math.h>
 
@@ -129,7 +129,8 @@ float dist(float p1[], float p2[])
 
 * Números primos
 
-Realiza un programa que calcule los números primos comprendidos entre el 1 y el 300 y los almacene en un vector. 
+Realiza un programa que calcule los números primos comprendidos entre el 1 y el 300 y los almacene en un vector.  
+
 Cuando se complete el cálculo el programa debe mostrar el contenido del vector. 
 
 #+BEGIN_SRC C
@@ -181,10 +182,116 @@ int main()
 }
 #+END_SRC
 
-#+RESULTS:
-: 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 101 103 107 109 113 127 131 137 139 149 151 157 163 167 173 179 181 191 193 197 199 211 223 227 229 233 239 241 251 257 263 269 271 277 281 283 293
+
+* Máximo, mínimo y promedio de una colección de números
+Escribe un programa que calcule y muestre en pantalla el máximo, mínimo y promedio de una colección de 10 valores de tipo entero que se introducen por teclado. 
 
 
+#+BEGIN_SRC C
+#include <stdio.h>
+
+#define N 10
+
+void main()
+{
+
+  int vector[N], i;
+  int min, max;
+  float media;
+
+  printf("Escribe %d números enteros.\n", N);
+  // Rellena los valores del vector
+  for (i = 0; i < N; i++)
+      scanf("%d", &vector[i]);
+
+  // Máximo
+  max = vector[0]; //El maximo inicial es el primer elemento
+  // Busca en el vector algún valor mayor
+  for (i = 1; i < N; i++)
+    if (vector[i] > max) max = vector[i]; // y lo sustituye si lo encuentra
+
+  // Mínimo
+  min = vector[0];
+  for (i = 1; i < N; i++)
+    if (vector[i] < min) min = vector[i];
+
+  // Promedio
+  media = 0.0;
+
+  for (i = 0; i < N; i++)
+    media += vector[i];
+  media =  media / N;
+
+  printf("El máximo es %d, el mínimo es %d, y el promedio es %02f.\n",
+	 max, min, media);
+}
+#+END_SRC
+
+Escribe otra versión de este programa empleando tres funciones de dos argumentos: =x[]= es un vector de dimensión por determinar, y =n= es la dimensión del vector =x[]=, definidas según los siguientes prototipos:
+
+#+BEGIN_SRC C :exports code
+int maximo(int x[], int n);
+int minimo(int x[], int n);
+float promedio(int x[], int n);
+#+END_SRC
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+#define N 10
+
+int maximo(int x[], int n);
+int minimo(int x[], int n);
+float promedio(int x[], int n);
+
+void main()
+{
+
+  int vector[N], i;
+  int min, max;
+  float prom;
+
+  printf("Escribe 10 números enteros.\n");
+  // Rellena los valores del vector
+  for (i = 0; i < N; i++)
+      scanf("%d", &vector[i]);
+  // Calcula el minimo, maximo y promedio usando las funciones
+  min = minimo(vector, N);
+  max = maximo(vector, N);
+  prom = promedio(vector, N);
+
+  printf("El máximo es %d, el mínimo es %d, y el promedio es %02f.\n",
+	 max, min, prom);
+}
+
+int maximo(int x[], int n)
+{
+  int i, mx = x[0]; //El maximo inicial es el primer elemento
+  // Busca en el vector algún valor mayor
+  for (i = 1; i < n; i++)
+    if (x[i] > mx) mx = x[i]; // y lo sustituye si lo encuentra
+  return mx;
+}
+
+int minimo(int x[], int n)
+{
+  int i, mn = x[0];
+
+  for (i = 1; i < n; i++)
+    if (x[i] < mn) mn = x[i];
+  return mn;
+}
+
+float promedio(int x[], int n)
+{
+  int i;
+  float media = 0.0;
+
+  for (i = 0; i < n; i++)
+    media += x[i];
+  return media / n;
+}
+#+END_SRC
 
 * Ordenamiento de vectores
 
@@ -283,73 +390,4 @@ void ordena(int v[], int n)
 
 #+RESULTS:
 : Vector: 1 12 23 45 50
-
-* Máximo, mínimo y promedio de una colección de números
-Escribe un programa que calcule y muestre en pantalla el máximo, mínimo y promedio de una colección de 10 valores de tipo entero que se introducen por teclado. 
-
-*Este programa debe emplear tres funciones* de dos argumentos: =x[]= es un vector de dimensión por determinar, y =n= es la dimensión del vector =x[]=, definidas según los siguientes prototipos:
-
-#+BEGIN_SRC C :exports code
-int maximo(int x[], int n);
-int minimo(int x[], int n);
-float promedio(int x[], int n);
-#+END_SRC
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-#define N 10
-
-int maximo(int x[], int n);
-int minimo(int x[], int n);
-float promedio(int x[], int n);
-
-void main()
-{
-
-  int vector[N], i;
-  int min, max;
-  float prom;
-
-  printf("Escribe 10 números enteros.\n");
-  // Rellena los valores del vector
-  for (i = 0; i < N; i++)
-      scanf("%d", &vector[i]);
-  // Calcula el minimo, maximo y promedio usando las funciones
-  min = minimo(vector, N);
-  max = maximo(vector, N);
-  prom = promedio(vector, N);
-
-  printf("El máximo es %d, el mínimo es %d, y el promedio es %02f.\n",
-	 max, min, prom);
-}
-
-int maximo(int x[], int n)
-{
-  int i, mx = x[0]; //El maximo inicial es el primer elemento
-  // Busca en el vector algún valor mayor
-  for (i = 1; i < n; i++)
-    if (x[i] > mx) mx = x[i]; // y lo sustituye si lo encuentra
-  return mx;
-}
-
-int minimo(int x[], int n)
-{
-  int i, mn = x[0];
-
-  for (i = 1; i < n; i++)
-    if (x[i] < mn) mn = x[i];
-  return mn;
-}
-
-float promedio(int x[], int n)
-{
-  int i;
-  float media = 0.0;
-
-  for (i = 0; i < n; i++)
-    media += x[i];
-  return media / n;
-}
-#+END_SRC
 
