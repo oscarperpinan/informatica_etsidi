@@ -98,7 +98,7 @@ int main()
 
 Escribe un programa que analice la frase del ejercicio anterior representando el *número de vocales* que contiene mediante líneas de asteriscos. 
 
-#+BEGIN_SRC C :exports code
+#+begin_src C :exports code
 #include <stdio.h>
 
 int main()
@@ -118,21 +118,39 @@ int main()
  imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit\
  interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla\
  facilisis mi nisi, vel pulvinar odio auctor posuere.";
-
+  
   char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
-  int i, j; // 
+  int i, j; 
   int nLetra[5] = {0}; //Vector de resultados
 
   // Cuenta las apariciones de cada vocal, y almacena resultados en nLetra
-  for (i = 0; i < 5; i++) // Bucle for para recorrer vector de vocales
+  i = 0;
+  while (frase[i] != '\0') // Recorre la cadena de caracteres
     {
-      j = 0; // Bucle while para recorrer frase
-      while (frase[j] != '\0') 
+      switch(frase[i]) // Compara el caracter con las vocales
 	{
-	  if (frase[j] == vocales[i]) // Ha habido una coincidencia
-	    nLetra[i]++; // Incremento el contador de apariciones 
-	  j++; // Avanzo en la frase
+	case 'a':
+	case 'A':
+	  nLetra[0]++;
+	  break;
+	case 'e':
+	case 'E':
+	  nLetra[1]++;
+	  break;
+	case 'i':
+	case 'I':
+	  nLetra[2]++;
+	  break;
+	case 'o':
+	case 'O':
+	  nLetra[3]++;
+	  break;
+	case 'u':
+	case 'U':
+	  nLetra[4]++;
+	  break;
 	}
+      i++; // Avanzo en la frase
     }
   // Recorre el vector de resultados, y pinta asteriscos
   // correspondientes a cada letra
@@ -145,16 +163,7 @@ int main()
     }
   return 0;
 }
-#+END_SRC
-
-#+RESULTS:
-| a: | ********************************************************                             |
-| e: | *******************************************************************                  |
-| i: | ************************************************************************************ |
-| o: | *****************************************                                            |
-| u: | ****************************************************************                     |
-
-
+#+end_src
 Escribe una versión del programa construida en base a dos funciones, =cuentaLetra= y =pintaAsteriscos=. 
 
 La función =cuentaLetra= tiene un argumento que define la letra a buscar, y devuelve un número entero indicando el número de veces que se ha repetido la letra pasado por el argumento dentro de un texto. El texto está definido como una variable global (fuera de =main=). 
