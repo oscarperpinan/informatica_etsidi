@@ -70,8 +70,6 @@ int main()
 #include <stdio.h>
 #include <math.h>
 
-float dist(float p1[], float p2[]);
-
 int main()
 {
   float p1[2], p2[2];
