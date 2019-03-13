@@ -79,7 +79,7 @@ int main()
   scanf("%f %f", &p1[0], &p1[1]);
         
   printf("Segundo punto\n");
-  scanf("%f %f", &p2, &p2);
+  scanf("%f %f", &p2[0], &p2[1]);
 
   d = sqrt(pow(p1[0] - p2[0], 2) + pow(p1[1] - p2[1], 2));
   
@@ -110,7 +110,7 @@ int main()
   scanf("%f %f", &p1[0], &p1[1]);
         
   printf("Segundo punto\n");
-  scanf("%f %f", &p2, &p2);
+  scanf("%f %f", &p2[0], &p2[1]);
 
   d = dist(p1, p2);
   
