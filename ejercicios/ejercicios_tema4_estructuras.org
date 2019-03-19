@@ -6,87 +6,8 @@
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema4_estructuras.pdf
 
-* Distancia entre dos instantes temporales
+* Distancia entre puntos
 
-Escribe un programa que calcule la distancia temporal entre dos instantes. Este programa debe emplear la estructura =tiempo= (horas, minutos, segundos) para almacenar la información de cada instante. Asimismo debe emplear la función =dTiempo= que admite como argumentos dos estructuras =tiempo= y devuelve una estructura =tiempo=. Por ejemplo, si la estructura =t1= representa el instante =3:45:15= y la estructura =t2= representa el instante =9:44:03=, la función =dTiempo= debe devolver la estructura =5:58:48=. Es importante tener en cuenta la posibilidad de que entre =t1= y =t2= se encuentre la medianoche.
-
-#+BEGIN_SRC C :exports code
-tiempo dTiempo(tiempo t1, tiempo t2);
-#+END_SRC
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-typedef struct
-{
-  int hour, min, sec;
-} tiempo;
-
-tiempo dTiempo(tiempo t1, tiempo t2);
-
-void printTiempo(tiempo t);
-
-int main()
-{
-  tiempo t1, t2, dt;
-  // En esta version se definen los tiempos dentro del codigo.
-  // Se puede mejorar el programa pidiendo los valores al usuario
-  t1 = (tiempo) {3, 45, 15};
-  t2 = (tiempo) {9, 44, 3};
-
-  dt = dTiempo(t1, t2);
-
-  printTiempo(dt);
-
-  return 0;
-}
-
-tiempo dTiempo(tiempo t1, tiempo t2)
-{
-  tiempo dt;
-
-  //Restamos segundos, teniendo en cuenta restas negativas
-  if (t1.sec > t2.sec)
-    {
-      --t2.min;
-      t2.sec += 60;
-    }
-
-  dt.sec = t2.sec - t1.sec;
-
-  //Idem para minutos
-  if (t1.min > t2.min)
-    {
-      --t2.hour;
-      t2.min += 60;
-    }
-  dt.min = t2.min - t1.min;
-
-  //Idem para horas, siendo que ahora t2 puede corresponder al dia
-  //siguiente
-  if (t1.hour > t2.hour)
-    {
-      t2.hour += 24;
-    }
-    dt.hour = t2.hour - t1.hour;
- //Entregamos resultado
-  return dt;
-}
-
-void printTiempo(tiempo t)
-{
-  printf("%d:%d:%d",
-	 t.hour, t.min, t.sec);
-}
-#+END_SRC
-
-#+RESULTS:
-: 5:58:48
-
-
-\clearpage
-
-* Dos puntos
 Escribe un programa que calcule la distancia entre dos puntos introducidos por el usuario, y que decida el cuadrante en el que está localizado cada punto. Este programa debe emplear la estructura =punto= capaz de almacenar dos coordenadas =x= e =y= de tipo =float=, y debe utilizar dos funciones, =cuadrante= y =distancia=. La función =cuadrante= devuelve un número entero indicando el cuadrante del punto, y la función =distancia= devuelve un número real con la distancia entre dos puntos.
 
 #+BEGIN_SRC C :exports code
@@ -147,8 +68,6 @@ float distancia(punto p1, punto p2)
   return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2));
 }
 #+END_SRC
-
-\clearpage 
 
 * Vector de puntos
 
@@ -236,7 +155,83 @@ int cuadrante(punto p)
 #+END_SRC
 
 
-\clearpage
+* Distancia entre dos instantes temporales
+
+Escribe un programa que calcule la distancia temporal entre dos instantes. Este programa debe emplear la estructura =tiempo= (horas, minutos, segundos) para almacenar la información de cada instante. Asimismo debe emplear la función =dTiempo= que admite como argumentos dos estructuras =tiempo= y devuelve una estructura =tiempo=. Por ejemplo, si la estructura =t1= representa el instante =3:45:15= y la estructura =t2= representa el instante =9:44:03=, la función =dTiempo= debe devolver la estructura =5:58:48=. Es importante tener en cuenta la posibilidad de que entre =t1= y =t2= se encuentre la medianoche.
+
+#+BEGIN_SRC C :exports code
+tiempo dTiempo(tiempo t1, tiempo t2);
+#+END_SRC
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+typedef struct
+{
+  int hour, min, sec;
+} tiempo;
+
+tiempo dTiempo(tiempo t1, tiempo t2);
+
+void printTiempo(tiempo t);
+
+int main()
+{
+  tiempo t1, t2, dt;
+  // En esta version se definen los tiempos dentro del codigo.
+  // Se puede mejorar el programa pidiendo los valores al usuario
+  t1 = (tiempo) {3, 45, 15};
+  t2 = (tiempo) {9, 44, 3};
+
+  dt = dTiempo(t1, t2);
+
+  printTiempo(dt);
+
+  return 0;
+}
+
+tiempo dTiempo(tiempo t1, tiempo t2)
+{
+  tiempo dt;
+
+  //Restamos segundos, teniendo en cuenta restas negativas
+  if (t1.sec > t2.sec)
+    {
+      --t2.min;
+      t2.sec += 60;
+    }
+
+  dt.sec = t2.sec - t1.sec;
+
+  //Idem para minutos
+  if (t1.min > t2.min)
+    {
+      --t2.hour;
+      t2.min += 60;
+    }
+  dt.min = t2.min - t1.min;
+
+  //Idem para horas, siendo que ahora t2 puede corresponder al dia
+  //siguiente
+  if (t1.hour > t2.hour)
+    {
+      t2.hour += 24;
+    }
+    dt.hour = t2.hour - t1.hour;
+ //Entregamos resultado
+  return dt;
+}
+
+void printTiempo(tiempo t)
+{
+  printf("%d:%d:%d",
+	 t.hour, t.min, t.sec);
+}
+#+END_SRC
+
+#+RESULTS:
+: 5:58:48
+
 
 * Contacto
 
