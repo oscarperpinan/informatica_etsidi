@@ -95,7 +95,7 @@ int main()
   float dist(float p1[], float p2[]);
   #+END_SRC 
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 #include <math.h>
 
