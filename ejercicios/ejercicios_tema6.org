@@ -15,7 +15,7 @@ float aCuad (float l);
 float aTri (float b, float h);
 #+END_SRC
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 
 #define PI 3.141592
@@ -81,7 +81,7 @@ float aTri (float b, float h)
 * Conversión de temperaturas
 Escribe un programa para realizar la conversión de temperaturas. El programa pide al usuario que introduzca un valor (número real) y una letra. La letra indica la escala en la que se introduce esa temperatura. Si la letra es 'C', la temperatura se convertirá de grados centígrados a Fahrenheit. Si la letra es 'F' la temperatura se convertirá de grados Fahrenheit a grados Centígrados. El programa se repetirá indefinidamente hasta que el usuario introduzca una letra diferente a 'C' o 'F' como escala. Se usarán 2 funciones =cent2fahr= y =fahr2cent= para convertir de una escala a otra. Estas funciones aceptan un parámetro (la temperatura en una escala) y retornan el valor en la otra escala. La relación entre ambas escalas es $T_F = 9/5 * T_C + 32$
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 
 float cent2fahr(float tc);
