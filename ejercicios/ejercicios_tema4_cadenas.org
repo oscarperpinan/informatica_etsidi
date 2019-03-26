@@ -3,14 +3,14 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports none
+#+PROPERTY: header-args :exports code
 #+EXPORT_FILE_NAME: ejercicios_tema4_cadenas.pdf
 
 * Palabra al revés
 
 Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: =casa= se convierte en =asac=).
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C 
 #include <stdio.h>
 #include <string.h>
 
@@ -38,7 +38,7 @@ int main ()
 
 Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
 
-#+begin_src C :exports code
+#+begin_src C 
   char texto[] = //Usamos \ para escribir varias lineas
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
  orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
@@ -56,7 +56,7 @@ Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en 
  facilisis mi nisi, vel pulvinar odio auctor posuere.";
 #+end_src
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C 
 #include <stdio.h>
 
 int main()
@@ -98,7 +98,7 @@ int main()
 
 Escribe un programa que analice la frase del ejercicio anterior representando el *número de vocales* que contiene mediante líneas de asteriscos. 
 
-#+begin_src C :exports code
+#+begin_src C 
 #include <stdio.h>
 
 int main()
@@ -172,7 +172,7 @@ La función =pintaAsteriscos= recibe un número entero, y escribe tantos asteris
 
 Los prototipos son:
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C 
 int cuentaLetra(char x);
 
 void pintaAsteriscos(int n);
