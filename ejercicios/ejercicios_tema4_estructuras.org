@@ -15,7 +15,7 @@ int cuadrante(punto p);
 float distancia(punto p1, punto p2);
 #+END_SRC
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 #include <math.h>
 
@@ -53,14 +53,15 @@ int main()
 
 int cuadrante(punto p)
 {
-  if (p.x >= 0 && p.y >= 0)
+  if (p.x > 0 && p.y > 0)
     return 1;
   else if (p.x < 0 && p.y > 0)
     return 2;
   else if (p.x < 0 && p.y < 0)
     return 3;
-  else 
+  else if (p.x > 0 && p.y < 0)
     return 4;
+  else return 0; // Punto en un eje
 }
 
 float distancia(punto p1, punto p2)
@@ -91,7 +92,7 @@ El total de puntos por cuadrante es:
    Cuadrante 4 = 0
 #+END_EXAMPLE
 
-#+BEGIN_SRC C
+#+BEGIN_SRC C :exports code
 #include <stdio.h>
 
 typedef struct
@@ -106,14 +107,16 @@ int main()
 {
   int i, n;
   int iCuad; // indice auxiliar para cuadrantes
-  int vCuad[4] = {0, 0, 0, 0}; // Vector contador de puntos por cuadrante
+  // Vector contador de puntos por cuadrante. Elemento 5 para
+  // puntos en ejes y origen
+  int vCuad[5] = {0, 0, 0, 0, 0}; 
   punto puntos[100]; //Vector suficientemente grande. Es un vector de
 		     //estructuras, cuyos componentes son de tipo
 		     //punto.
 
 
   printf("Dime el número de puntos (< 100).\t");
-  scanf("%i", n);
+  scanf("%i", &n);
   // Pido datos al usuario
   for (i = 0; i < n; i++)
     {
@@ -133,7 +136,7 @@ int main()
 
   // Finalmente muestro los resultados
   printf("Puntos por cuadrante:\n");
-  for (i = 0; i < 4; i++)
+  for (i = 0; i < 5; i++)
       printf("\t Cuadrante %d: %d \n",
 	     i + 1, vCuad[i]);
   };
@@ -141,14 +144,15 @@ int main()
 
 int cuadrante(punto p)
 {
-  if (p.x >= 0 && p.y >= 0)
+  if (p.x > 0 && p.y > 0)
     return 1;
   else if (p.x < 0 && p.y > 0)
     return 2;
   else if (p.x < 0 && p.y < 0)
     return 3;
-  else 
+  else if (p.x > 0 && p.y < 0)
     return 4;
+  else return 5; // Puntos sobre el eje
 }
 
 
