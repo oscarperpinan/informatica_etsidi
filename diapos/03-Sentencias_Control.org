@@ -416,7 +416,7 @@ endwhile (0)
 stop
 #+END_SRC
 
-#+ATTR_LATEX: :height 0.7\textwidth
+#+ATTR_LATEX: :height 0.8\textheight
 #+RESULTS:
 [[file:figs/for.png]]
 
@@ -544,7 +544,7 @@ endwhile (0)
 stop
 #+END_SRC
 
-#+ATTR_LATEX: :height 0.7\textwidth
+#+ATTR_LATEX: :height 0.8\textheight
 #+RESULTS:
 [[file:figs/while.png]]
 
@@ -605,7 +605,7 @@ repeat while(expresion) is (1)
 stop
 #+END_SRC
 
-#+ATTR_LATEX: :height 0.7\textwidth
+#+ATTR_LATEX: :height 0.8\textheight
 #+RESULTS:
 [[file:figs/do_while.png]]
 
