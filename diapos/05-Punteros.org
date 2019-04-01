@@ -30,22 +30,6 @@
 \end{center}
 #+END_EXPORT
 
-** Bytes por tipo de dato
-
-- Cada tipo de datos necesita un número de bytes determinado.
-
-| Tipo       |                 | Bytes |
-|------------+-----------------+-------|
-| Enteros    | =int=           |     4 |
-|            | =long int=      |     4 |
-|            | =short int=     |     2 |
-| Reales     | =float=         |     4 |
-|            | =double=        |     8 |
-|            | =long double=   |    10 |
-| Caracteres | =char=          |     1 |
-|            | =unsigned char= |     1 |
-
-
 ** Dirección de memoria de una variable
 - Ejemplo: un dato =int= ocupa 4 bytes.
 #+BEGIN_SRC C
@@ -200,9 +184,9 @@ int main()
 #+END_SRC
 
 ** Operaciones con punteros
-- La suma o resta de un entero a un puntero produce una nueva localización de memoria.
-- Se pueden comparar punteros utilizando expresiones lógicas para comprobar si  apuntan a la misma dirección de memoria.
-- La resta de dos punteros da como resultado el número de variables entre las dos direcciones.
+- La *suma o resta de un entero a un puntero* produce una *nueva localización de memoria*.
+- Se pueden *comparar punteros* utilizando expresiones lógicas para *comprobar si  apuntan a la misma dirección de memoria*.
+- La *resta de dos punteros* da como resultado el *número de variables entre las dos direcciones*.
 
 * Punteros a vectores
 
@@ -259,8 +243,7 @@ Podemos modificar un vector a través de su puntero
 
 #+BEGIN_SRC C
 #include <stdio.h> 
-int main()
-{
+int main(){
   int i, vector[3];
   int *p;
   p = vector;
@@ -283,13 +266,11 @@ int main()
 
 
 ** Aritmética de punteros con vectores
-
 #+BEGIN_SRC C
 #include <stdio.h>
 #define N 10
 
-int main()
-{
+int main(){
   int vector[N] = {1};
   int *pVec, *pFin;
   // Puntero apuntando al segundo elemento
@@ -362,8 +343,7 @@ int main()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int main()
-{
+int main(){
   char texto[] = "Hola Mundo";
   char *pChar = texto;
 
@@ -389,7 +369,6 @@ int main()
 ** Punteros a estructuras
 - Un puntero a una estructura se declara igual que un puntero a un tipo simple.
 - Para acceder a un miembro de la estructura se emplea el operador =->=.
-
 #+BEGIN_SRC C
 #include <stdio.h>
 typedef struct 
@@ -397,8 +376,7 @@ typedef struct
   int y, m, d;
 } fecha;
 
-void main()
-{
+void main(){
   fecha f = {2000, 10, 15}, *p;
   // p apunta a la estructura
   p = &f;
@@ -438,9 +416,9 @@ void main()
 * Funciones y punteros
 ** Paso por referencia
 
-- El uso de punteros en funciones permite el paso por referencia. De esta forma la función puede acceder (y modificar) a la variable original (/sin copia/).
+- El uso de punteros en funciones permite el *paso por referencia*. De esta forma la función puede acceder (y *modificar*) a la variable original (/sin copia/).
 
-- Las funciones que emplean vectores y cadenas como argumentos funcionan con paso por referencia (/el identificador de un vector es un puntero/).
+- Las funciones que emplean *vectores y cadenas* como argumentos funcionan con *paso por referencia* (/el identificador de un vector es un puntero/).
 
 ** Ejemplo
 
