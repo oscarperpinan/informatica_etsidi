@@ -3,8 +3,8 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports code
-#+EXPORT_FILE_NAME: ejercicios_tema5_soluciones.pdf
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema5.pdf
 
 
 * Ejercicios resueltos
@@ -252,48 +252,6 @@ int sumaVector(int *vector, int n)
 : La suma es 45.
 
 
-** Asignación dinámica de memoria
-Escribe un programa que permita al usuario rellenar un vector de dimensión variable. En primer lugar, el programa pregunta al usuario el número de elementos que tendrá el vector. A continuación, empleando asignación dinámica de memoria, el programa reservará memoria para este vector, y solicitará al usuario los valores del mismo. Finalmente, el programa mostrará el contenido de este vector.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-#include <stdlib.h>
-
-void main()
-{
-  int i, n;
-  int *p;
-
-  printf("Nº datos? ");
-  scanf("%d", &n);
-  // Reservamos n direcciones de memoria del tamaño de un int. El
-  // resultado de malloc es la dirección inicial, que almacenamos en
-  // un puntero. Este puntero equivale al elemento 0 de un vector de n
-  // elementos.
-  p = malloc(sizeof(int) * n);
-  // Comprobamos que hay memoria disponible, y comunicamos error en su
-  // caso
-  if (p == NULL)
-    {
-      printf("Error de memoria.\n");
-      exit(-1);
-    }
-  // Si todo ha ido bien recorremos el puntero-vector para rellenarlo
-  // de contenido
-  for(i = 0; i < n; i++) 
-    {
-      scanf("%d", p + i);
-    }
-  // Y ahora lo mostramos
-  for(i = 0; i < n; i++) 
-    {
-      printf("%d", *(p + i));
-    }
-  // Una vez terminado, liberamos la memoria
-  free(p);
-}
-#+END_SRC
-
 ** Media, máximo y mínimo de un vector de datos
 
 Escribe un programa que calcule el valor medio, el valor máximo y el valor mínimo de los datos contenidos en un vector de números reales empleando punteros. La función de cálculo debe acomodarse al siguiente prototipo:
@@ -434,3 +392,45 @@ void vertical(punto *xy, int n)
     xy->y += n;
 }
 #+END_SRC
+** Asignación dinámica de memoria
+Escribe un programa que permita al usuario rellenar un vector de dimensión variable. En primer lugar, el programa pregunta al usuario el número de elementos que tendrá el vector. A continuación, empleando asignación dinámica de memoria, el programa reservará memoria para este vector, y solicitará al usuario los valores del mismo. Finalmente, el programa mostrará el contenido de este vector.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <stdlib.h>
+
+void main()
+{
+  int i, n;
+  int *p;
+
+  printf("Nº datos? ");
+  scanf("%d", &n);
+  // Reservamos n direcciones de memoria del tamaño de un int. El
+  // resultado de malloc es la dirección inicial, que almacenamos en
+  // un puntero. Este puntero equivale al elemento 0 de un vector de n
+  // elementos.
+  p = malloc(sizeof(int) * n);
+  // Comprobamos que hay memoria disponible, y comunicamos error en su
+  // caso
+  if (p == NULL)
+    {
+      printf("Error de memoria.\n");
+      exit(-1);
+    }
+  // Si todo ha ido bien recorremos el puntero-vector para rellenarlo
+  // de contenido
+  for(i = 0; i < n; i++) 
+    {
+      scanf("%d", p + i);
+    }
+  // Y ahora lo mostramos
+  for(i = 0; i < n; i++) 
+    {
+      printf("%d", *(p + i));
+    }
+  // Una vez terminado, liberamos la memoria
+  free(p);
+}
+#+END_SRC
+
