@@ -24,6 +24,7 @@ return 0;
 int main ()
 {
   FILE *pf;
+  // Atención a la ruta del fichero, y a las comillas dobles
   pf = fopen("c:\ejemplos\fichero.txt", "r");
   if (pf == NULL)
     {
@@ -52,7 +53,10 @@ int fprintf(FILE *stream, const char *format, ...)
 return 0;
 }
 
-/* Ejemplo */
+/* Ejemplo de =fprintf= */
+/*    :PROPERTIES: */
+/*    :beamer_opt: plain */
+/*    :END: */
 
 #include <stdio.h>
 
@@ -75,16 +79,7 @@ int main(){
     }
 }
 
-/* =stdout= */
-/* Salida estándar del programa (habitualmente la pantalla). */
-
-int main() {
- printf("hello there.\n");
- fprintf(stdout, "hello there.\n");
-return 0;
-}
-
-/* =fscanf= */
+/* Lectura de ficheros: =fscanf= */
 
 
 int main() {
@@ -92,35 +87,30 @@ int fscanf(FILE *stream, const char *format, ...)
 return 0;
 }
 
-/* Ejemplo */
+/* Ejemplo de =fscanf= */
+/*    :PROPERTIES: */
+/*    :beamer_opt: plain */
+/*    :END: */
 
 
 #include <stdio.h>
 
 int main()
 {
-  int i, vals[3];
+  int i, n, vals[3];
   FILE *pf;
   // Abrimos fichero para lectura
   pf = fopen("datos.txt", "r");
   // Leemos datos separados por comas
-  fscanf(pf, "%i, %i, %i",
+  n = fscanf(pf, "%i, %i, %i",
 	 &vals[0], &vals[1], &vals[2]);
+  printf("Se han leído %i argumentos.\n", n);
   fclose(pf);
   // Mostramos en pantalla lo leído
   for (i = 0; i < 3; i++)
     printf("%i\t", vals[i]);
 
   return(0);
-}
-
-/* =stdin= */
-/* Entrada estándar del programa (habitualmente el teclado). */
-
-int main() {
- scanf("%i", &i);
- fscanf(stdin, "%i", &i);
-return 0;
 }
 
 /* =fgetc= y =fgets= */
@@ -140,7 +130,10 @@ int main() {
 return 0;
 }
 
-/* Ejemplo */
+/* Ejemplo de =fgetc= */
+/*    :PROPERTIES: */
+/*    :beamer_opt: plain */
+/*    :END: */
 
 #include <stdio.h>
 
@@ -160,6 +153,22 @@ int main()
   printf("%s", texto);
   fclose(pf);
   return(0);
+}
+
+/* Ejemplo ¡COMPROBAR! */
+/* Sea un fichero con el siguiente contenido: */
+/* #+BEGIN_QUOTE */
+/* Jorge Rodríguez; Profesor; 35; 84.4 */
+
+/* Mercedes Pérez; Estudiante; 21; 56.2 */
+/* #+END_QUOTE */
+
+/* Para leerlo: */
+
+int main() {
+fscanf(pf, "%[^;];%[^;];%d;%f\n",
+       nombre, tipo, &edad, &peso);
+return 0;
 }
 
 /* Comprobación de =EOF= */
@@ -186,6 +195,37 @@ while(fscanf(...) !=EOF )
 return 0;
 }
 
+/* Ejemplo: número de líneas de un fichero */
+
+
+#include <stdio.h>
+
+int main()
+{
+  int i, nLineas = 0;
+  char x; // Variable auxiliar
+  FILE *pf;
+  pf = fopen("lorem_ipsum.txt", "r");
+  // Leemos caracter a caracter
+  while (fscanf(pf, "%c", &x) != EOF)
+    //Si lo leído es un salto de línea
+      if (x == '\n')
+	//incrementamos el contador
+	++nLineas;
+  printf("%i", nLineas);
+  return 0;
+}
+
+/* Ejemplo */
+
+#include <stdio.h>
+
+int main(){
+  printf("hello there.\n");
+  fprintf(stdout, "hello there.\n");
+  return 0;
+}
+
 /* =fseek= */
 
 
@@ -201,7 +241,7 @@ long int ftell(FILE *stream)
 return 0;
 }
 
-/* Ejemplo: longitud de un fichero */
+/* Ejemplo: nº de bytes de un fichero */
 
 
 #include <stdio.h>
@@ -215,7 +255,7 @@ int main()
   fseek(pf, 0, SEEK_END);
   //Almacena la posición
   fsize = ftell(pf);
-  printf("El fichero tiene %li elementos.\n",
+  printf("El fichero tiene %li bytes.\n",
 	 fsize);
   return 0;
 }

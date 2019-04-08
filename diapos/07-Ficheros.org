@@ -11,13 +11,12 @@
 ** Introducción
 
 - Hasta ahora:
-  - Introducción de datos desde el teclado.
-  - Presentación de datos en pantalla.
-  - Los datos se pierden cuando finaliza el programa.
+  - Introducción de datos desde el *teclado*.
+  - Presentación de datos en *pantalla*.
+  - *Los datos se pierden* cuando finaliza el programa.
 - Ahora vamos a ver:
-  - Almacenamiento de datos en ficheros que pueden ser leídos por el programa.
-  - Operaciones con ficheros: apertura, lectura y/o escritura, y cierre.
-  - Funciones de la biblioteca estándar de entrada/salida, =stdio.h=, que permiten manejar ficheros.
+  - *Almacenamiento de datos* en ficheros que pueden ser leídos por el programa.
+  - *Operaciones con ficheros*: apertura, lectura y/o escritura, y cierre.
 
 ** Tipo =FILE=
 
@@ -31,28 +30,25 @@ void main ()
 }
 #+END_SRC
 
-** stdin, stdout, and stderr
-- Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo =FILE=):
-
-  - =stdin=: entrada estándar del programa (habitualmente el teclado).
-
-  - =stdout=: salida estándar del programa (habitualmente la pantalla).
-
-  - =stderr=: fichero estándar de error.
-
-* Apertura y cierre de ficheros
+* Lectura y escritura de ficheros
 ** Abrir un fichero: =fopen=
 
 #+BEGIN_SRC C
 FILE *fopen (const char *nombre, const char *modo);
 #+END_SRC
 
-- Abre un fichero para para leer y/o escribir en él.
+=fopen= abre un fichero para para leer y/o escribir en él.
 
-  - =nombre= es el nombre del fichero (/debe respetar las normas del sistema operativo en el que se ejecute el programa/).
-  - =modo= indica cómo se va a abrir el fichero (lectura =r=, escritura =w=, añadir =a=).
+- =nombre=: nombre del fichero (/debe respetar las normas del sistema operativo en el que se ejecute el programa/).
+- =modo=: indica cómo se va a abrir el fichero:
 
-- La función devuelve un puntero a una estructura de tipo =FILE= o un puntero nulo =NULL= si se ha producido un error.
+  - lectura: =r=
+
+  - escritura: =w=
+
+  - añadir: =a=
+
+- Devuelve un puntero a una estructura de tipo =FILE= o un puntero nulo =NULL= si se ha producido un error.
 
 ** Ejemplo de =fopen=
 
@@ -61,6 +57,7 @@ FILE *fopen (const char *nombre, const char *modo);
 int main ()
 {
   FILE *pf;
+  // Atención a la ruta del fichero, y a las comillas dobles
   pf = fopen("c:\ejemplos\fichero.txt", "r");
   if (pf == NULL)
     {
@@ -78,35 +75,30 @@ int main ()
 #+RESULTS:
 
 
-** Marca de final de fichero =EOF=
-
-- Cuando se crea un fichero nuevo con =fopen= se añade automáticamente al final la marca de fin de fichero =EOF= (/end of file/).
-- Es una marca escrita al final de un fichero que indica que no hay más datos.
-- Cuando se realizan operaciones de lectura o escritura es necesario comprobar si se ha alcanzado esta marca.
-
-
 ** Cerrar un fichero: =fclose=
 #+BEGIN_SRC C
 int fclose (FILE *pf);
 #+END_SRC
 
-- Cierra un fichero.
-- El argumento es el puntero de tipo =FILE= que apunta al fichero.
+=fclose= cierra un fichero previamente abierto con =fopen=
+- El puntero =pf=, de tipo =FILE=, apunta al fichero.
 - La función devuelve 0 si el fichero se cierra correctamente o =EOF= si se ha producido un error.
 
-* Escritura de ficheros
 ** Escritura de ficheros: =fprintf=
 
 #+BEGIN_SRC C
 int fprintf(FILE *stream, const char *format, ...)
 #+END_SRC
 
-- Escribe en un fichero con el formato especificado (igual que =printf=)
+- Escribe en un fichero con el formato especificado (*igual que =printf=*)
 
-- Devuelve el número de caracteres escritos o un valor negativo si ocurre un error.
+- Devuelve el número de caracteres escritos, o un valor negativo si ocurre un error.
 
 
-** Ejemplo
+** Ejemplo de =fprintf=
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -133,40 +125,35 @@ int main(){
 #+RESULTS:
 
 
-** =stdout=
-Salida estándar del programa (habitualmente la pantalla).
-#+BEGIN_SRC C
- printf("hello there.\n");
- fprintf(stdout, "hello there.\n");
-#+END_SRC
-
-
-* Lectura de ficheros
-** =fscanf=
+** Lectura de ficheros: =fscanf=
 
 #+BEGIN_SRC C
 int fscanf(FILE *stream, const char *format, ...)
 #+END_SRC
 
-- Lee desde un fichero con el formato especificado (igual que =scanf=)
+- Lee desde un fichero con el formato especificado (*igual que =scanf=*)
 
-- Devuelve el número de argumentos que han sido leídos y asignados o =EOF= si se detecta el final del fichero.
+- Devuelve el número de argumentos que han sido leídos y asignados o =EOF=[fn:1] si se detecta el final del fichero.
 
 
-** Ejemplo
+** Ejemplo de =fscanf=
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>
 
 int main()
 {
-  int i, vals[3];
+  int i, n, vals[3];
   FILE *pf;
   // Abrimos fichero para lectura
   pf = fopen("datos.txt", "r");
   // Leemos datos separados por comas
-  fscanf(pf, "%i, %i, %i",
+  n = fscanf(pf, "%i, %i, %i",
 	 &vals[0], &vals[1], &vals[2]);
+  printf("Se han leído %i argumentos.\n", n);
   fclose(pf);
   // Mostramos en pantalla lo leído
   for (i = 0; i < 3; i++)
@@ -177,14 +164,9 @@ int main()
 #+END_SRC
 
 #+RESULTS:
-| 1 | 2 | 3 |
+| Se | han | leído | 3 | argumentos. |
+|  1 |   2 |     3 |   |             |
 
-** =stdin=
-Entrada estándar del programa (habitualmente el teclado).
-#+BEGIN_SRC C
- scanf("%i", &i);
- fscanf(stdin, "%i", &i);
-#+END_SRC
 
 
 ** =fgetc= y =fgets=
@@ -198,7 +180,10 @@ Entrada estándar del programa (habitualmente el teclado).
   char *fgets (char *cadena, int n, FILE *pf);
   #+END_SRC
 
-** Ejemplo
+** Ejemplo de =fgetc=
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -222,46 +207,35 @@ int main()
 #+END_SRC
 
 #+RESULTS:
+: Lorem ipsum dolor sit amet
 
-** Especificador de formato =[^]=
+** Lectura de datos con separadores
 
-- =[^;]=
-- =[^\n]=
+Por ejemplo, para leer datos separados por punto y coma empleamos: =[^;]=
+
 
 
 *** Ejemplo ¡COMPROBAR!
-Fichero:
+Sea un fichero con el siguiente contenido:
 #+BEGIN_QUOTE
 Jorge Rodríguez; Profesor; 35; 84.4
 
 Mercedes Pérez; Estudiante; 21; 56.2
 #+END_QUOTE
 
-Lectura:
+Para leerlo:
 #+BEGIN_SRC C
 fscanf(pf, "%[^;];%[^;];%d;%f\n",
        nombre, tipo, &edad, &peso);
 #+END_SRC
 
-** Número de líneas de un fichero
-*** Ejemplo ¡COMPROBAR!
-Fichero:
-#+BEGIN_QUOTE
-Jorge Rodríguez; Profesor; 35; 84.4
+** Marca de final de fichero =EOF=
 
-Mercedes Pérez; Estudiante; 21; 56.2
-#+END_QUOTE
+- Cuando se crea un fichero nuevo con =fopen= se añade automáticamente al final la marca de fin de fichero =EOF= (/end of file/).
+- Es una marca escrita al final de un fichero que indica que no hay más datos.
+- Cuando se realizan operaciones de lectura o escritura es necesario comprobar si se ha alcanzado esta marca.
 
 
-#+BEGIN_SRC C
-// linea es una variable auxiliar, que sobreescribimos en cada pasada
-// de fscanf. No nos importa el contenido del fichero, sólo encontrar
-// los saltos de línea.
-while (fscanf(pf, "%[^n]\n", linea) != EOF)
-  ++nLineas;
-#+END_SRC
-
-* Utilidades
 ** Comprobación de =EOF=
 - =feof= detecta el final del fichero: devuelve un valor distinto de cero después de la primera operación que intente leer después de la marca final del fichero. 
 
@@ -280,29 +254,113 @@ while(fscanf(...) !=EOF )
 }
 #+END_SRC
 
-** =fseek=
+** Ejemplo: número de líneas de un fichero
 
+#+begin_src C
+#include <stdio.h>
+
+int main()
+{
+  int i, nLineas = 0;
+  char x; // Variable auxiliar
+  FILE *pf;
+  pf = fopen("lorem_ipsum.txt", "r");
+  // Leemos caracter a caracter
+  while (fscanf(pf, "%c", &x) != EOF)
+    //Si lo leído es un salto de línea
+      if (x == '\n')
+	//incrementamos el contador
+	++nLineas;
+  printf("%i", nLineas);
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 16
+
+** COMMENT Número de líneas de un fichero
+Para detectar (y avanzar) el salto de línea empleamos =%[^\n]\n=
+#+begin_src C
+#include <stdio.h>
+
+int main()
+{
+  int i, nLineas = 0;
+  char linea[100];
+  FILE *pf;
+  pf = fopen("lorem_ipsum.txt", "r");
+  while (fscanf(pf, "%[^\n]\n", linea) != EOF)
+      ++nLineas;
+  printf("%i", nLineas); 
+  return 0;
+}
+#+end_src
+
+#+RESULTS:
+: 15
+
+* Miscelánea
+** stdin, stdout, and stderr
+- Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo =FILE=):
+
+  - =stdin=: entrada estándar del programa (habitualmente el teclado).
+
+  - =stdout=: salida estándar del programa (habitualmente la pantalla).
+
+  - =stderr=: fichero estándar de error.
+
+*** Ejemplo
+ #+BEGIN_SRC C
+#include <stdio.h>
+
+int main(){
+  printf("hello there.\n");
+  fprintf(stdout, "hello there.\n");
+  return 0;
+}
+ #+END_SRC
+
+ #+RESULTS:
+ | hello | there. |
+ | hello | there. |
+
+
+** COMMENT =stdin=
+Entrada estándar del programa (habitualmente el teclado).
 #+BEGIN_SRC C
+ scanf("%i", &i);
+ fscanf(stdin, "%i", &i);
+#+END_SRC
+
+** Movimiento en un fichero
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
+*** =fseek=
+
+ #+BEGIN_SRC C
 int fseek(FILE *stream, long int offset, int whence)
-#+END_SRC
+ #+END_SRC
 
-- Desplaza a una posición en un fichero
-- =offset= (long): valor (en bytes) a ir desde =whence=
-- =whence=:
-  - =SEEK_SET= Comienzo del fichero
-  - =SEEK_CUR= Posición actual
-  - =SEEK_END= Final del fichero
+ - Desplaza a una posición en un fichero
+ - =offset= (long): valor (en bytes) a ir desde =whence=
+ - =whence=:
+   - =SEEK_SET= Comienzo del fichero
+   - =SEEK_CUR= Posición actual
+   - =SEEK_END= Final del fichero
 
-** =ftell=
-#+BEGIN_SRC C
+*** =ftell=
+ #+BEGIN_SRC C
 long int ftell(FILE *stream)
-#+END_SRC
+ #+END_SRC
 
-- Devuelve la posición actual a partir del inicio del fichero.
-- Las unidades suelen ser bytes.
-- Es una función de tipo =long=
+ - Devuelve la posición actual a partir del inicio del fichero.
+ - Las unidades suelen ser bytes.
+ - Es una función de tipo =long=
 
-** Ejemplo: longitud (bytes) de un fichero
+** Ejemplo: nº de bytes de un fichero
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -316,7 +374,7 @@ int main()
   fseek(pf, 0, SEEK_END);
   //Almacena la posición
   fsize = ftell(pf);
-  printf("El fichero tiene %li elementos.\n",
+  printf("El fichero tiene %li bytes.\n",
 	 fsize);
   return 0;
 }
@@ -324,3 +382,7 @@ int main()
 
 #+RESULTS:
 : El fichero tiene 7 bytes.
+
+* Footnotes
+
+[fn:1]=EOF= (/End Of File/) es la marca de final de fichero.
