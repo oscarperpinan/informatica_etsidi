@@ -169,7 +169,7 @@ int main()
 
 
 
-** =fgetc= y =fgets=
+** COMMENT =fgetc= y =fgets=
 - La función =fgetc= lee un carácter del fichero y lo *devuelve como =int=*:
   #+BEGIN_SRC C
   int fgetc (FILE *pf);
@@ -180,7 +180,7 @@ int main()
   char *fgets (char *cadena, int n, FILE *pf);
   #+END_SRC
 
-** Ejemplo de =fgetc=
+** COMMENT Ejemplo de =fgetc=
    :PROPERTIES:
    :beamer_opt: plain
    :END:
@@ -356,8 +356,8 @@ int fseek(FILE *stream, long int offset, int whence)
 long int ftell(FILE *stream)
  #+END_SRC
 
- - Devuelve la posición actual a partir del inicio del fichero.
- - Las unidades suelen ser bytes.
+ - Devuelve la posición actual respecto del inicio del fichero.
+ - Las unidades suelen ser *bytes*.
  - Es una función de tipo =long=
 
 ** Ejemplo: nº de bytes de un fichero
