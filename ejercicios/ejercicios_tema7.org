@@ -3,8 +3,40 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports code
-#+EXPORT_FILE_NAME: ejercicios_tema7_soluciones.pdf
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema7.pdf
+
+
+* Vectores a columnas
+
+Escribe un programa que almacene 3 vectores de 5 elementos en 3 columnas de un fichero separadas por una tabulación.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#define N 5
+
+void main ()
+{ // Definimos tres vectores cualesquiera
+  int v1[N]={-1, 3, 5, 0, 4};
+  int v2[N]={4, 9, -8, 2, 3};
+  int v3[N]={1, 2, 3, 4, 5};
+
+  int i;
+  FILE *pf;
+  // Abrimos un fichero para escritura: si ya existe su contenido será
+  // borrado
+  pf = fopen("columnas.txt", "w");
+  // Escribimos línea a línea
+  for(i = 0; i < N; i++)
+    // Separando por tabuladores, y añadiendo un salto de línea al
+    // final
+    fprintf(pf, "%d\t%d\t%d\n",
+	    v1[i], v2[i], v3[i]);
+  fclose(pf);
+}
+#+END_SRC
+
+#+RESULTS:
 
 
 * Copia de ficheros
@@ -48,6 +80,51 @@ int main ()
 #+END_SRC
 
 #+RESULTS:
+
+* Número de caracteres, palabras y líneas
+
+Escribe un programa que calcule el número de caracteres, palabras y líneas de un fichero de texto. Comprueba su funcionamiento con el fichero =lorem_ipsum.txt=. 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  FILE *pf;
+  char c;
+  // Contadores
+  int iChar = 0, iWord = 0, iLine = 0;
+  // Abrimos archivo en modo lectura
+  pf = fopen("lorem_ipsum.txt", "r");
+  if (pf == NULL) {
+    printf("Error al abrir el archivo.\n");
+    return -1;
+  } else {
+    // Leemos carácter a carácter hasta encontrar EOF
+    while (fscanf(pf, "%c", &c) != EOF)
+      {// En cada paso incrementamos el contador de caracteres 
+	iChar++;
+	// El espacio y el salto de línea definen una nueva palabra,
+	// luego incrementamos el contador de palabras
+	if (c == ' ' || c == '\n')
+	  iWord++;
+	// Si lo leído es un salto de línea, incrementamos su contador
+	if (c == '\n')
+	  iLine++;
+      }
+    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n",
+	   iChar, iWord, iLine);
+
+    fclose(pf);
+  }
+}
+#+END_SRC
+
+#+RESULTS:
+| Caracteres: 994 | Palabras: 146 | Líneas: 16. |
+
+
+
 
 * Cuenta letras
 
@@ -188,83 +265,6 @@ void pintaAsteriscos(int n)
 #+RESULTS:
 
 
-* Número de caracteres, palabras y líneas
-
-Escribe un programa que calcule el número de caracteres, palabras y líneas de un fichero de texto. Comprueba su funcionamiento con el fichero =lorem_ipsum.txt=. 
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  FILE *pf;
-  char c;
-  // Contadores
-  int iChar = 0, iWord = 0, iLine = 0;
-  // Abrimos archivo en modo lectura
-  pf = fopen("lorem_ipsum.txt", "r");
-  if (pf == NULL) {
-    printf("Error al abrir el archivo.\n");
-    return -1;
-  } else {
-    // Leemos carácter a carácter hasta encontrar EOF
-    while (fscanf(pf, "%c", &c) != EOF)
-      {// En cada paso incrementamos el contador de caracteres 
-	iChar++;
-	// El espacio y el salto de línea definen una nueva palabra,
-	// luego incrementamos el contador de palabras
-	if (c == ' ' || c == '\n')
-	  iWord++;
-	// Si lo leído es un salto de línea, incrementamos su contador
-	if (c == '\n')
-	  iLine++;
-      }
-    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n",
-	   iChar, iWord, iLine);
-
-    fclose(pf);
-  }
-}
-#+END_SRC
-
-#+RESULTS:
-| Caracteres: 994 | Palabras: 146 | Líneas: 16. |
-
-
-
-
-* Vectores a columnas
-
-Escribe un programa que almacene 3 vectores de 5 elementos en 3 columnas de un fichero separadas por una tabulación.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-#define N 5
-
-void main ()
-{ // Definimos tres vectores cualesquiera
-  int v1[N]={-1, 3, 5, 0, 4};
-  int v2[N]={4, 9, -8, 2, 3};
-  int v3[N]={1, 2, 3, 4, 5};
-
-  int i;
-  FILE *pf;
-  // Abrimos un fichero para escritura: si ya existe su contenido será
-  // borrado
-  pf = fopen("columnas.txt", "w");
-  // Escribimos línea a línea
-  for(i = 0; i < N; i++)
-    // Separando por tabuladores, y añadiendo un salto de línea al
-    // final
-    fprintf(pf, "%d\t%d\t%d\n",
-	    v1[i], v2[i], v3[i]);
-  fclose(pf);
-}
-#+END_SRC
-
-#+RESULTS:
-
-
 * Máximo, mínimo y promedio de variables
 
 El fichero =aranjuez.csv= es un fichero que almacena valores numéricos en formato CSV (valores separados por comas). Contiene 4 columnas (variables) y 2898 filas (registros). Cada fila corresponde a un valor diario de una variable meteorológica registrada en la estación localizada en Aranjuez. Estas variables son: temperatura ambiente, humedad, velocidad del viento, radiación solar.
@@ -278,7 +278,7 @@ Escribe un programa que lea este fichero almacenando el contenido de cada column
 | Rad      | XX  | XX  | XX    |
 
 
-Ampliación: escribe una versión de este programa que realice la misma tarea pero sin conocer a priori el número de filas del fichero.
+*Ampliación*: escribe una versión de este programa que realice la misma tarea pero sin conocer a priori el número de filas del fichero.
 
 #+BEGIN_SRC C
 #include <stdio.h>
