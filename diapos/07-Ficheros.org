@@ -57,8 +57,10 @@ FILE *fopen (const char *nombre, const char *modo);
 int main ()
 {
   FILE *pf;
-  // Atención a la ruta del fichero, y a las comillas dobles
-  pf = fopen("c:\ejemplos\fichero.txt", "r");
+  // Atención a los separadores en la ruta del fichero, 
+  //y a las comillas dobles
+  pf = fopen("c:/ejemplos/fichero.txt", "r");
+
   if (pf == NULL)
     {
       printf("Error al abrir el fichero.\n");

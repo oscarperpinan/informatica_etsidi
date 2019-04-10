@@ -24,8 +24,10 @@ return 0;
 int main ()
 {
   FILE *pf;
-  // Atención a la ruta del fichero, y a las comillas dobles
-  pf = fopen("c:\ejemplos\fichero.txt", "r");
+  // Atención a los separadores en la ruta del fichero, 
+  //y a las comillas dobles
+  pf = fopen("c:/ejemplos/fichero.txt", "r");
+
   if (pf == NULL)
     {
       printf("Error al abrir el fichero.\n");
@@ -110,48 +112,6 @@ int main()
   for (i = 0; i < 3; i++)
     printf("%i\t", vals[i]);
 
-  return(0);
-}
-
-/* =fgetc= y =fgets= */
-/* - La función =fgetc= lee un carácter del fichero y lo *devuelve como =int=*: */
-
-int main() {
-  int fgetc (FILE *pf);
-return 0;
-}
-
-
-
-/* - La función =fgets= lee una cadena de caracteres del fichero: */
-
-int main() {
-  char *fgets (char *cadena, int n, FILE *pf);
-return 0;
-}
-
-/* Ejemplo de =fgetc= */
-/*    :PROPERTIES: */
-/*    :beamer_opt: plain */
-/*    :END: */
-
-#include <stdio.h>
-
-int main()
-{
-  int i;
-  char texto[27];
-  FILE *pf;
-  // Abrimos fichero para lectura
-  pf = fopen("lorem_ipsum.txt", "r");
-  // Leemos los 26 primeros caracteres
-  for (i = 0; i < 26; i++)
-    texto[i] = fgetc(pf);
-  // Añadimos caracter nulo
-  texto[26] = '\0';
-  // Mostramos resultado
-  printf("%s", texto);
-  fclose(pf);
   return(0);
 }
 
