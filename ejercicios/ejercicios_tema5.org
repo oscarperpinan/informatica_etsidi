@@ -3,7 +3,7 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports none
+#+PROPERTY: header-args :exports code
 #+EXPORT_FILE_NAME: ejercicios_tema5.pdf
 
 
@@ -134,7 +134,7 @@ Diseñe un programa que calcule la longitud de una cadena de caracteres usando u
 int stringLength(char *string);
 #+END_SRC
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C 
 #include <stdio.h>
 
 int stringLength(char *string);
@@ -177,7 +177,7 @@ Diseñe un programa que copie dos cadenas de caracteres usando una función basa
 void copyString(char *to, char *from);
 #+END_SRC
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C
 #include <stdio.h>
 
 int copyString(char *to, char *from);
@@ -220,7 +220,7 @@ int sumaVector(int *vector, int n);
 
 #+RESULTS:
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C
 #include <stdio.h>
 
 int sumaVector(int *vector, int n);
