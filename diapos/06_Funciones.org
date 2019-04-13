@@ -2,7 +2,6 @@
 #+DATE:
 #+STARTUP: beamer
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :tangle code/06-funciones.c :comments org
 #+OPTIONS: H:2
 
 * Definición de función

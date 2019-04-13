@@ -2,7 +2,6 @@
 #+DATE:
 #+STARTUP: beamer
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :tangle code/03-control.c :comments org
 #+OPTIONS: H:3
 
 * Introducción
