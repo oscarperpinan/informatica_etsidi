@@ -3,7 +3,7 @@
 #+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports code
+#+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema5.pdf
 
 

@@ -15,7 +15,7 @@ int cuadrante(punto p);
 float distancia(punto p1, punto p2);
 #+END_SRC
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C
 #include <stdio.h>
 #include <math.h>
 
@@ -92,7 +92,7 @@ El total de puntos por cuadrante es:
    Cuadrante 4 = 0
 #+END_EXAMPLE
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C
 #include <stdio.h>
 
 typedef struct

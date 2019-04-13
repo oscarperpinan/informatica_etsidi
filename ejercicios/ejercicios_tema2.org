@@ -1,8 +1,8 @@
 #+TITLE: Ejercicios del Tema 2
-#+AUTHOR: Oscar Perpiñán Lamigueiro
+#+AUTHOR: 
 #+DATE: 
 #+SETUPFILE: config.org
-#+PROPERTY: header-args :exports code
+#+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema2.pdf
 
 * Códigos ASCII
