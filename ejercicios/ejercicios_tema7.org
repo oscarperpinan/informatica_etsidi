@@ -271,7 +271,7 @@ El fichero =aranjuez.csv= es un fichero que almacena valores numéricos en forma
 
 Escribe un programa que lea este fichero almacenando el contenido de cada columna en un vector. A continuación, el programa debe calcular el valor máximo, mínimo y promedio de cada vector empleando una función separada para cada cálculo (/revisa el ejercicio "Máximo, mínimo y promedio de una colección de números" del capítulo 4/). Finalmente, el programa mostrará el resultado en pantalla y escribirá estos cálculos en un fichero con un formato similar al siguiente:
 
-| Variable | Max | Min | Media |
+| Variable | Min | Max | Media |
 | Temp     | XX  | XX  | XX    |
 | Humedad  | XX  | XX  | XX    |
 | Viento   | XX  | XX  | XX    |
@@ -334,7 +334,7 @@ int main()
       promR = promedio(Radiation, N);
 
       // Mostramos resultados
-      printf("Variable: \t Max \t Min \t Prom \n");
+      printf("Variable: \t Min \t Max \t Prom \n");
       printf("Temp: \t %lf \t %lf \t %lf \n", 
 	     minTa, maxTa, promTa);
       printf("Humedad: \t %lf \t %lf \t %lf \n", 
@@ -347,7 +347,7 @@ int main()
       // Escribimos fichero
       wf = fopen("resumen.txt", "w");
       
-      fprintf(wf, "Variable: \t Max \t Min \t Prom \n");
+      fprintf(wf, "Variable: \t Min \t Max \t Prom \n");
       fprintf(wf, "Temp: \t %lf \t %lf \t %lf \n", 
 	     minTa, maxTa, promTa);
       fprintf(wf, "Humedad: \t %lf \t %lf \t %lf \n", 
@@ -395,8 +395,8 @@ double promedio(double x[], int n)
 #+END_SRC
 
 #+RESULTS:
-| Variable:  |    Max |   Min |      Prom |
-| Temp:      | -5.309 | 30.68 | 14.398233 |
-| Humedad:   |    0.0 | 100.0 | 61.940756 |
-| Viento:    |    0.0 |  8.26 |  1.169442 |
-| Radiacion: |    0.0 | 32.74 | 16.640402 |
+| Variable:  |    Min |   Max |      Prom |
+| Temp:      | -5.309 | 30.68 | 14.404856 |
+| Humedad:   |  19.89 | 100.0 |  62.16039 |
+| Viento:    |    0.0 |  8.26 |  1.170742 |
+| Radiacion: |    0.0 | 32.74 | 16.666658 |
