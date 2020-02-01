@@ -5,36 +5,26 @@
 
 * ¿Por qué programar?
 
-#+BEGIN_CENTER
-[[file:figs/steve-jobs-quote.jpg]]
-
-VIDEO: [[https://www.youtube.com/watch?v=nKIu9yen5nc][What most schools don't teach]]
-#+END_CENTER
+#+BEGIN_EXPORT latex
+\href{https://www.youtube.com/watch?v=nKIu9yen5nc}{\includegraphics[width=\textwidth]{figs/steve-jobs-quote.jpg}}
+#+END_EXPORT
 
 * ¿Qué hay dentro de un ordenador?
 
-[[file:figs/InsideComputer.png]]
+#+BEGIN_EXPORT latex
+\href{http://www.gcflearnfree.org/computerbasics/inside-a-computer/1/}{\includegraphics[width=\textwidth]{figs/InsideComputer.png}}
+#+END_EXPORT
 
-[[http://www.gcflearnfree.org/computerbasics/inside-a-computer/1/][Inside a Computer]]
+* ¿Cómo funciona un ordenador?
 
-* Introducción
+#+BEGIN_EXPORT latex
+\href{https://youtu.be/DKGZlaPlVLY}{\includegraphics[width=\textwidth]{figs/HowComputersWork.png}}
+#+END_EXPORT
+
+* Programa Informático y Algoritmo
 - Un *programa informático* es una colección de instrucciones expresadas de forma que un ordenador pueda resolver un determinado problema.
 - Un *algoritmo* es un método para resolver un problema. Un programa informático implementa el algoritmo para un determinado sistema informático.
 - Las instrucciones deben estar codificadas en *lenguaje binario* (sucesiones de 0s y 1s).
-
-* Cómo saluda un ordenador
-
-** 
-#+BEGIN_CENTER
-\Large 01001000 01101111 01101100 01100001
-#+END_CENTER
-
-#+BEAMER: \pause
-
-** 
-|       01001000 |       01101111 | 01101100 | 01100001 |
-|             72 |            111 |      108 |       97 |
-| \LARGE       H | \LARGE       o | \LARGE l | \LARGE a |
 
 * Lenguaje máquina: bits
 - *Lenguaje máquina*: los ordenadores utilizan el sistema de numeración binario (dos dígitos, 0 y 1) para almacenar información.
@@ -80,6 +70,17 @@ VIDEO: [[https://www.youtube.com/watch?v=nKIu9yen5nc][What most schools don't te
 # 11111111
 # #+END_CENTER
 
+* No sólo números
+
+- Cualquier información puede representarse con un conjunto de bits.
+
+- ASCII (American Standard Code for Information Interchange): Estándar de 7 bits (128 caracteres), 95 caracteres imprimibles (del 32 al 126).
+
+** 
+|       01001000 |       01101111 | 01101100 | 01100001 |
+|             72 |            111 |      108 |       97 |
+| \LARGE       H | \LARGE       o | \LARGE l | \LARGE a |
+
 * Unidades de almacenamiento
 
 - Byte: 8 bits (2^8 = 256)
@@ -92,17 +93,6 @@ VIDEO: [[https://www.youtube.com/watch?v=nKIu9yen5nc][What most schools don't te
 
 - ...
 
-* No sólo números
-
-- Cualquier información puede representarse con un conjunto de bits.
-
-- ASCII (American Standard Code for Information Interchange): Estándar de 7 bits (128 caracteres), 95 caracteres imprimibles (del 32 al 126).
-
-** 
-|       01001000 |       01101111 | 01101100 | 01100001 |
-|             72 |            111 |      108 |       97 |
-| \LARGE       H | \LARGE       o | \LARGE l | \LARGE a |
-
 
 
 * ¿Qué es un lenguaje de programación?
@@ -111,8 +101,10 @@ Un lenguaje artificial que emplea *expresiones similares al lenguaje humano* y u
   - Lenguaje de *alto nivel*: utiliza signos convencionales cercanos a los de un lenguaje natural.
   - Lenguaje de *bajo nivel*: similar al lenguaje máquina.
 
-** Ejemplo de lenguaje de bajo nivel: ensamblador
-#+BEGIN_EXAMPLE
+* Ejemplo de lenguaje de bajo nivel
+
+** Ensamblador
+ #+BEGIN_EXAMPLE
 STACK	SEGMENT STACK
       	DW 64 DUP (?)
 STACK 	ENDS
@@ -131,16 +123,16 @@ INICIO:
 	INT 21H
 CODE	    ENDS
 	END INICIO
-#+END_EXAMPLE
+ #+END_EXAMPLE
 
 * Lenguajes de alto nivel
 
-#+BEGIN_SRC plantuml :file figs/alto-nivel.png
-scale 3
-:Lenguaje de Alto Nivel; 
-:Traductor (**compilador**);
-:Lenguaje máquina;
-#+END_SRC
+# #+BEGIN_SRC plantuml :file figs/alto-nivel.png
+# scale 3
+# :Lenguaje de Alto Nivel; 
+# :Traductor (**compilador**);
+# :Lenguaje máquina;
+# #+END_SRC
 
 #+ATTR_LATEX: :height 0.7\textheight
 #+RESULTS:
@@ -180,30 +172,30 @@ void main()
 https://es.wikipedia.org/wiki/Anexo:Ejemplos_de_implementaci%C3%B3n_del_%C2%ABHola_mundo%C2%BB
 
 * Desarrollo de programas en C
-#+BEGIN_SRC plantuml :file figs/programaC.png
-scale 2
-repeat 
-       :Editor;
-note right
-Programa fuente (.c)
-end note
-       :Preprocesador;
-note right 
-Cabeceras #include
-end note
-       :Compilador;
-repeatwhile (¿Errores?) is (Si) not (No)
-:Programa objeto (.obj/.o);
-:Enlazador;
-note right
-Librerías
-end note
-:Programa ejecutable (.exe);
-note right
-Depurador
-end note
-end;
-#+END_SRC
+# #+BEGIN_SRC plantuml :file figs/programaC.png
+# scale 2
+# repeat 
+#        :Editor;
+# note right
+# Programa fuente (.c)
+# end note
+#        :Preprocesador;
+# note right 
+# Cabeceras #include
+# end note
+#        :Compilador;
+# repeatwhile (¿Errores?) is (Si) not (No)
+# :Programa objeto (.obj/.o);
+# :Enlazador;
+# note right
+# Librerías
+# end note
+# :Programa ejecutable (.exe);
+# note right
+# Depurador
+# end note
+# end;
+# #+END_SRC
 
 #+ATTR_LATEX: :height 0.9\textheight
 #+RESULTS:
