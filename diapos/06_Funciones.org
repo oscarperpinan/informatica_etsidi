@@ -110,6 +110,10 @@ int main()
 
 
 ** Declaración y definición de funciones
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -134,6 +138,10 @@ void printHello(int n)
 
 
 ** Declaración y definición de funciones
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -160,6 +168,9 @@ float areaTriangulo(float b, float h)
 * Ámbito de una variable
 
 ** Variables globales
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -185,6 +196,9 @@ void foo(void)
 #+END_SRC
 
 ** Variables locales
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -210,6 +224,10 @@ void foo(void)
 * Funciones que llaman a otras funciones
 
 ** Ejemplo
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 #define PI 3.141592
@@ -233,6 +251,10 @@ float eleva3(float x){
 }
 #+END_SRC
 ** Funciones recursivas
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 

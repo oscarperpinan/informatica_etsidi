@@ -50,6 +50,9 @@ FILE *fopen (const char *nombre, const char *modo);
 - Devuelve un puntero a una estructura de tipo =FILE= o un puntero nulo =NULL= si se ha producido un error.
 
 ** Ejemplo de =fopen=
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>

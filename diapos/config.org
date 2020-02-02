@@ -6,7 +6,7 @@
 #+BEAMER_FONT_THEME: serif
 #+LATEX_HEADER: \usepackage[spanish]{babel}
 #+LATEX_HEADER: \usecolortheme{rose}
-#+LATEX_HEADER: \setbeamercolor{alerted text}{fg=Blue}
+#+LATEX_HEADER: \setbeamercolor{alerted text}{fg=DarkBlue}
 #+LATEX_HEADER: \setbeamerfont{alerted text}{series=\bfseries}
 #+LATEX_HEADER: \setbeamerfont{block title}{series=\bfseries}
 #+LATEX_HEADER: \setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
@@ -23,3 +23,4 @@
 
 #+LATEX_HEADER: \setbeamertemplate{footline}[frame number]
 #+PROPERTY: header-args :tangle yes :comments org
+#+AUTHOR: Oscar Perpiñán Lamigueiro
