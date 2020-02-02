@@ -116,6 +116,77 @@ void main()
 | default  | goto   | sizeof   | volatile |
 | do       | if     | static   | while    |
 
+** Almacenamiento de la Información
+
+*** bit
+  - Los ordenadores utilizan el sistema de numeración binario (dos dígitos, 0 y 1) para almacenar información.
+
+  - Un *dígito binario* (0 ó 1) se denomina /bit/ (/binary digit/).
+
+  - Con *N bits* pueden representarse *2^N símbolos o 2^N números*
+
+    - Ejemplo: con N = 8 bits se pueden representar los números positivos desde el 0 al 255 (2^8 - 1).
+
+*** Representación de la información: binario y decimal
+
+**** Ejemplo en decimal: 3452
+
+  | 10^3 | 10^2 | 10^1 | 10^0 |
+  | 1000 |  100 |   10 |    1 |
+  |------+------+------+------|
+  |    3 |    4 |    5 |    2 |
+
+  #+BEGIN_CENTER
+  3452 = 3 \cdot 1000 + 4 \cdot 100 + 5 \cdot 10 + 2 \cdot 1
+  #+END_CENTER
+
+
+**** Ejemplo en binario: 10001111
+
+  | 2^7        | 2^6 | 2^5 | 2^4 | 2^3 | 2^2 | 2^1 | 2^0   |
+  | *128*      |  64 |  32 |  16 | *8* | *4* | *2* | *1*   |
+  |------------+-----+-----+-----+-----+-----+-----+-------|
+  | *1*        |   0 |   0 |   0 | *1* | *1* | *1* | *1*   |
+
+  #+BEGIN_CENTER
+  128 + 8 + 4 + 2 + 1 = 143
+  #+END_CENTER
+
+  # * Representación de la información: binario y decimal
+  # ** ¿Y estos?
+  # #+BEGIN_CENTER
+  # 00000001
+
+  # 01010101
+
+  # 11111111
+  # #+END_CENTER
+
+*** No sólo números
+
+  - Cualquier información puede representarse con un conjunto de bits.
+
+  - ASCII (American Standard Code for Information Interchange): Estándar de 7 bits (128 caracteres), 95 caracteres imprimibles (del 32 al 126).
+
+**** 
+  |       01001000 |       01101111 | 01101100 | 01100001 |
+  |             72 |            111 |      108 |       97 |
+  | \LARGE       H | \LARGE       o | \LARGE l | \LARGE a |
+
+*** Unidades de almacenamiento
+
+  - Byte: 8 bits (2^8 = 256)
+    
+  - Kilobyte (KB): 1024 bytes (2^10 = 1024)
+
+  - Megabyte (MB): 1024 KB (2^20 bytes = 2^10 KB)
+
+  - Gigabyte (GB): 1024 MB (2^30 bytes = 2^10 MB = 2^20 KB)
+
+  - ...
+
+
+
 *** Tipos de datos 
 - =int= :: números enteros
 #+BEGIN_EXAMPLE
@@ -303,7 +374,7 @@ int main()
 
 int main() {
 
-   printf("Un float ocupa %d bytes"
+   printf("Un float ocupa %d bytes",
 	  sizeof(float));
    printf(" y abarca desde %e hasta %e.\n",
 	  FLT_MIN, FLT_MAX);
@@ -584,6 +655,9 @@ int main()
 }
 #+END_SRC
 *** Operaciones de asignación
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>

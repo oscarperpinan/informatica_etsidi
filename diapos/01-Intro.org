@@ -22,84 +22,19 @@
 #+END_EXPORT
 
 * Programa Informático y Algoritmo
-- Un *programa informático* es una colección de instrucciones expresadas de forma que un ordenador pueda resolver un determinado problema.
-- Un *algoritmo* es un método para resolver un problema. Un programa informático implementa el algoritmo para un determinado sistema informático.
-- Las instrucciones deben estar codificadas en *lenguaje binario* (sucesiones de 0s y 1s).
-
-* Lenguaje máquina: bits
+- *Programa informático*: una colección de instrucciones expresadas de forma que un ordenador pueda realizar una tarea.
+- *Algoritmo*: método para resolver un problema. Un programa informático es una implementación del algoritmo para un determinado sistema informático.
 - *Lenguaje máquina*: los ordenadores utilizan el sistema de numeración binario (dos dígitos, 0 y 1) para almacenar información.
-
-- Un *dígito binario* (0 ó 1) se denomina /bit/ (/binary digit/).
-
-- Con *N bits* pueden representarse *2^N símbolos o 2^N números*
-
-  - Ejemplo: con N = 8 bits se pueden representar los números positivos desde el 0 al 255 (2^8 - 1).
-
-* Representación de la información: binario y decimal
-
-** Ejemplo en decimal: 3452
-
-| 10^3 | 10^2 | 10^1 | 10^0 |
-| 1000 |  100 |   10 |    1 |
-|------+------+------+------|
-|    3 |    4 |    5 |    2 |
-
+- Las instrucciones del programa deben estar codificadas como sucesiones de 0s y 1s.
 #+BEGIN_CENTER
-3452 = 3 \cdot 1000 + 4 \cdot 100 + 5 \cdot 10 + 2 \cdot 1
+01001000 01101111 01101100 01100001
 #+END_CENTER
-
-
-** Ejemplo en binario: 10001111
-
-| 2^7        | 2^6 | 2^5 | 2^4 | 2^3 | 2^2 | 2^1 | 2^0   |
-| *128*      |  64 |  32 |  16 | *8* | *4* | *2* | *1*   |
-|------------+-----+-----+-----+-----+-----+-----+-------|
-| *1*        |   0 |   0 |   0 | *1* | *1* | *1* | *1*   |
-
-#+BEGIN_CENTER
-128 + 8 + 4 + 2 + 1 = 143
-#+END_CENTER
-
-# * Representación de la información: binario y decimal
-# ** ¿Y estos?
-# #+BEGIN_CENTER
-# 00000001
-
-# 01010101
-
-# 11111111
-# #+END_CENTER
-
-* No sólo números
-
-- Cualquier información puede representarse con un conjunto de bits.
-
-- ASCII (American Standard Code for Information Interchange): Estándar de 7 bits (128 caracteres), 95 caracteres imprimibles (del 32 al 126).
-
-** 
-|       01001000 |       01101111 | 01101100 | 01100001 |
-|             72 |            111 |      108 |       97 |
-| \LARGE       H | \LARGE       o | \LARGE l | \LARGE a |
-
-* Unidades de almacenamiento
-
-- Byte: 8 bits (2^8 = 256)
-    
-- Kilobyte (KB): 1024 bytes (2^10 = 1024)
-
-- Megabyte (MB): 1024 KB (2^20 bytes = 2^10 KB)
-
-- Gigabyte (GB): 1024 MB (2^30 bytes = 2^10 MB = 2^20 KB)
-
-- ...
-
-
 
 * ¿Qué es un lenguaje de programación?
 
 Un lenguaje artificial que emplea *expresiones similares al lenguaje humano* y un *traductor* para convertir a código binario.
-  - Lenguaje de *alto nivel*: utiliza signos convencionales cercanos a los de un lenguaje natural.
-  - Lenguaje de *bajo nivel*: similar al lenguaje máquina.
+  - Lenguaje de *bajo nivel*: similar al lenguaje máquina, adaptado a un procesador concreto.
+  - Lenguaje de *alto nivel*: similar al lenguaje natural, de uso general.
 
 * Ejemplo de lenguaje de bajo nivel
 
@@ -125,18 +60,20 @@ CODE	    ENDS
 	END INICIO
  #+END_EXAMPLE
 
-* Lenguajes de alto nivel
+* Ejemplo de lenguaje de alto nivel
 
-# #+BEGIN_SRC plantuml :file figs/alto-nivel.png
-# scale 3
-# :Lenguaje de Alto Nivel; 
-# :Traductor (**compilador**);
-# :Lenguaje máquina;
-# #+END_SRC
+** Python
+ #+BEGIN_SRC python
+print "Hola Mundo"
+ #+END_SRC
 
-#+ATTR_LATEX: :height 0.7\textheight
-#+RESULTS:
-[[file:figs/alto-nivel.png]]
+** R
+#+begin_src R
+print("Hola Mundo")
+#+end_src
+
+** Más Ejemplos
+ https://es.wikipedia.org/wiki/Anexo:Ejemplos_de_implementaci%C3%B3n_del_%C2%ABHola_mundo%C2%BB
 
 * Lenguajes de alto nivel
 
@@ -157,20 +94,16 @@ CODE	    ENDS
 - C (Ritchie, 1972. Laboratorios Bell).
 - ANSI C American National Standards Institute C (1989).
 - C99 (ISO/IEC 9899, 1999).
+* Ejemplo de programa en C
 
-* Ejemplo: programa escrito en lenguaje C
-
-#+BEGIN_SRC c
+#+begin_src C
 #include <stdio.h>
 
 void main()
 {
   printf("Hola Mundo\n");
 }
-#+END_SRC
-
-https://es.wikipedia.org/wiki/Anexo:Ejemplos_de_implementaci%C3%B3n_del_%C2%ABHola_mundo%C2%BB
-
+#+end_src
 * Desarrollo de programas en C
 # #+BEGIN_SRC plantuml :file figs/programaC.png
 # scale 2
