@@ -48,7 +48,7 @@ int main()
 
 int main()
 {
-  int letra, Letra;
+  char letra, Letra;
   const int conv = 'A' - 'a'; // Diferencia entre mayuscula y minuscula
   printf("Escriba una letra minuscula:\n");
   scanf("%c", &letra);
@@ -248,7 +248,7 @@ int main()
   x /= 10;
   c = x % 10;
 
-  printf("Unidades %d, Decenas %d, Centenas %d\n",
+  printf("Centenas %d, Decenas %d, Unidades %d\n",
 	 u, d, c);
 
   return 0;
