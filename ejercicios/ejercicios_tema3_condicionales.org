@@ -44,8 +44,10 @@ int main()
 
   printf("Indique dos números enteros.\n");
   scanf("%d %d", &x, &y);
-
-  if (x % y == 0)
+  
+  if (y == 0)
+    printf("No se puede hacer la operacion.\n")
+  else if (x % y == 0)
     printf("El número %d es divisible por %d.\n", x, y);
   else
     printf("El número %d no es divisible por %d.\n", x, y);
