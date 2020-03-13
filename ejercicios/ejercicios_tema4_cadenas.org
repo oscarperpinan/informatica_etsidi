@@ -38,7 +38,7 @@ int main ()
 
 Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
 
-#+begin_src C 
+#+begin_src C  :exports code
   char texto[] = //Usamos \ para escribir varias lineas
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
  orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
