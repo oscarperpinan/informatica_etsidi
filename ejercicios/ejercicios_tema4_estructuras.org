@@ -10,7 +10,7 @@
 
 Escribe un programa que calcule la distancia entre dos puntos introducidos por el usuario, y que decida el cuadrante en el que está localizado cada punto. Este programa debe emplear la estructura =punto= capaz de almacenar dos coordenadas =x= e =y= de tipo =float=, y debe utilizar dos funciones, =cuadrante= y =distancia=. La función =cuadrante= devuelve un número entero indicando el cuadrante del punto, y la función =distancia= devuelve un número real con la distancia entre dos puntos.
 
-#+BEGIN_SRC C :exports code
+#+BEGIN_SRC C :exports code  :exports code
 int cuadrante(punto p);
 float distancia(punto p1, punto p2);
 #+END_SRC
