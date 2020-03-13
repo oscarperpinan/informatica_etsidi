@@ -172,7 +172,7 @@ La función =pintaAsteriscos= recibe un número entero, y escribe tantos asteris
 
 Los prototipos son:
 
-#+BEGIN_SRC C 
+#+BEGIN_SRC C  :exports code
 int cuentaLetra(char x);
 
 void pintaAsteriscos(int n);
