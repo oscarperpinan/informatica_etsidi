@@ -262,6 +262,7 @@ Este programa debe estar construido en base a dos funciones, una para calcular e
 #include <stdio.h>
 
 int factorial(int x);
+int combina(int n, int k);
 
 void main()
 {
@@ -270,7 +271,7 @@ void main()
   printf("Introduzca n y k:\n");
   scanf("%d %d", &n, &k);
 
-  a = factorial(n) / (factorial(n - k) * factorial(k));
+  a = combina(n, k);
 
   printf("El resultado es %d.\n", a);
 }
@@ -283,6 +284,16 @@ int factorial(int x)
     res = 1;
   else
     res = x * factorial(x -1);
+  return res;
+}
+
+int combina (int n, int k)
+{
+  int res;
+  if (n >= k)
+    res = factorial(n) / (factorial(n - k) * factorial(k));
+  else
+    res = 0;
   return res;
 }
 #+END_SRC
