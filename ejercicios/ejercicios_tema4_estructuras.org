@@ -286,11 +286,11 @@ int main()
     {
       printf("Datos del contacto %d:\n", i + 1);
       printf("Nombre: \t");
-      scanf("%s", &contactos[i].nombre);
+      scanf("%s", contactos[i].nombre);
       printf("Primer apellido: \t");
-      scanf("%s", &contactos[i].apellido1);
+      scanf("%s", contactos[i].apellido1);
       printf("Segundo apellido: \t");
-      scanf("%s", &contactos[i].apellido2);
+      scanf("%s", contactos[i].apellido2);
       printf("Fecha de nacimiento (dia/mes/año): \t");
       scanf("%i/%i/%i",
   	    &contactos[i].fechaNac.d,
