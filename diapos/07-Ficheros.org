@@ -219,12 +219,10 @@ Por ejemplo, para leer datos separados por punto y coma empleamos: =[^;]=
 
 
 
-*** Ejemplo ¡COMPROBAR!
+*** Ejemplo
 Sea un fichero con el siguiente contenido:
 #+BEGIN_QUOTE
 Jorge Rodríguez; Profesor; 35; 84.4
-
-Mercedes Pérez; Estudiante; 21; 56.2
 #+END_QUOTE
 
 Para leerlo:
