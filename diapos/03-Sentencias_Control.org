@@ -164,11 +164,13 @@ sentencia_C2;
 
 
 *** Ejemplo =if-else=
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
 
 #+BEGIN_SRC C
 # include <stdio.h>
-void main ()
-{
+int main (){
   int n;
   printf("Escribe un número entero\n");
   scanf("%d", &n);
@@ -183,6 +185,7 @@ void main ()
       printf("El número %d es impar.\n", n);      
     } // Fin de if - else
   printf("Gracias por participar.\n");
+  return 0;
 }
 #+END_SRC
 
@@ -261,11 +264,14 @@ sentencia_D;
 #+END_SRC
 
 *** Ejemplo =if - else - if=
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main()
-{
+int main(){
   int x, signo;
   printf("Escribe un número: ");
   scanf("%i", &x);
@@ -279,6 +285,7 @@ void main()
   else
     // no se cumple ninguna
     printf("El número es positivo.\n");
+  return 0;
 }
 #+END_SRC
 
@@ -304,7 +311,7 @@ void main()
 # stop
 # #+END_SRC
 
-#+ATTR_LATEX: :width 0.9\textwidth
+#+ATTR_LATEX: :height 0.8\textheight
 #+RESULTS:
 [[file:figs/switch.pdf]]
 
@@ -330,10 +337,13 @@ switch (expr)
   }
 #+END_SRC
 *** Ejemplo de =switch - case=
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
-void main ()
-{
+int main () {
   float v1, v2;
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
@@ -349,13 +359,14 @@ void main ()
       printf("No se hacer esa operación.\n");
       break;
     }
+  return 0; 
 }
 #+END_SRC
 
 *** Atención al uso de =break=
 #+BEGIN_SRC C
 #include <stdio.h>
-void main ()
+int main ()
 {
   float v1, v2;
   char op;
@@ -370,12 +381,17 @@ void main ()
       printf("No se hacer esa operación.\n");
       break;
     }
+  return 0;
 }
 #+END_SRC
 *** Uso de llaves con =switch=
+    :PROPERTIES:
+    :beamer_opt: plain
+    :END:
+#+ATTR_LATEX: :options basicstyle=\ttfamily\footnotesize
 #+BEGIN_SRC C
 #include <stdio.h>
-void main (){
+int main (){
   float v1, v2;
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
@@ -393,6 +409,7 @@ void main (){
       printf("No se hacer esa operación.\n");
       break;
     }
+  return 0;
 }
 #+END_SRC
 * Sentencias Repetitivas (Bucles)
@@ -466,16 +483,14 @@ int main()
 int main()
 {
   int i, n = 20;
-  // El factorial alcanza valores grandes
-  // y siempre es positivo.
+  // El factorial alcanza valores grandes y siempre es positivo.
   unsigned long int fact;
   // La expresión de inicio puede ser múltiple,
   // separando por comas.
   // Aquí asigno valor inicial a fact
   for (i = 1, fact = 1; i <= n; i++)
-    {
       fact *= i;
-    }
+
   printf("El factorial de %d es %lu", 
 	 n, fact);
   return 0;
@@ -496,9 +511,7 @@ int main()
   char i;
   // Se pueden usar char en las expresiones 
   for (i = 'a'; i <= 'z'; i++)
-    {
       printf("%c", i);
-    }
   return 0;
 }
 #+END_SRC
@@ -516,7 +529,7 @@ int main()
 {
   int i, j;
   for (i = 1; i <= 10; i++)
-    {
+    {//Atención al uso de las llaves
       printf("Tabla del %d\n", i);
 
       for (j = 1; j <= 10; j++)
@@ -658,9 +671,10 @@ int main()
     :PROPERTIES:
     :beamer_opt: plain
     :END:
+#+ATTR_LATEX: :options basicstyle=\ttfamily\footnotesize
 #+BEGIN_SRC C
 #include <stdio.h>
-void main() {
+int main() {
   int i,n = 10;
   // Bucle for
   for (i = 0; i <= n; i++)
@@ -678,6 +692,7 @@ void main() {
       i++;
     }
   while(i <= n);
+  return 0;
 }
 #+END_SRC
 *** ¿Qué bucle elegir?
@@ -695,7 +710,8 @@ void main() {
 - En un bucle =while= o =do-while= vuelve a =expresion=.
 - En un bucle =for= ejecuta =expr_avance= y a continuación comprueba =expr_final=
 
-* ...
+
+
 # Local Variables:
 # ispell-local-dictionary: "spanish"
 # End:
