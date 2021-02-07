@@ -47,8 +47,7 @@ int miVector[] = {2, 23, 24};
 #+begin_src C
 #include <stdio.h>
 
-int main()
-{
+int main(){
   int miVector[3];
   miVector[0] = 10;
   miVector[1] = 2 * miVector[0];
@@ -57,6 +56,8 @@ int main()
   printf("Posicion 0 = %d\n", miVector[0]);
   printf("Posicion 1 = %d\n", miVector[1]);
   printf("Posicion 2 = %d\n", miVector[2]);
+
+  return 0;
 }
 
  #+end_src
@@ -117,8 +118,7 @@ int main()
 
 #+BEGIN_SRC C
 #include <stdio.h>
-int main()
-{
+int main(){
   float v1[5] = {1, 34, 32, 45, 34};
   float v2[5] = {12, -3, 34, 15, -5};
   float v3[5];
@@ -142,8 +142,7 @@ int main()
 *** Multiplicar un vector por una constante
 #+BEGIN_SRC C
 #include <stdio.h> 
-int main()
-{
+int main(){
   float v1[5] = {1, 34, 32, 45, 34};
   float v2[5];
   float K = 3.0;
@@ -172,19 +171,23 @@ int main()
 La dimensión de un vector es un valor constante: *no puede usarse una variable* para definirla.
 
 #+BEGIN_SRC C
-void main()
+int main()
 {
   int miVector[10];
+
+  return 0;
 }
 #+END_SRC
 
 #+BEGIN_SRC C
 # define N 10
-void main()
+int main()
 {
   // Correcto: el precompilador sustituye N
   // por el valor constante 10
   int miVector[N];
+
+  return 0;
 }
 #+END_SRC
 
@@ -193,12 +196,14 @@ void main()
 La dimensión de un vector es un valor constante: *no puede usarse una variable* para definirla.
 
 #+BEGIN_SRC C
-void main()
+int main()
 {
   int n = 10;
   // Error de sintaxis:
   // n es una variable
   int miVector[n];
+
+  return 0;
 }
 #+END_SRC
 
@@ -206,11 +211,9 @@ void main()
 *Solución provisional*: definir un vector de dimensión suficientemente elevada y emplear sólo un número reducido de elementos.
 #+BEGIN_SRC C
 #include <stdio.h>
-void main()
-{
+int main() {
   int i, n;
-  // Definimos un vector de
-  // dimension muy grande
+  // Definimos un vector de dimension muy grande
   int vect[100];
 
   printf("Nº datos? ");
@@ -221,6 +224,7 @@ void main()
     {
       scanf("%d", &vect[i]);
     }
+  return 0;
 }
 #+END_SRC
 ** Funciones con vectores
@@ -236,10 +240,11 @@ void funcion (int vector[], int dimension);
 
 void imprime(int v[], int n);
 
-void main()
+int main()
 {
   int v1[3] = {10, 20, 30};
   imprime(v1, 3);
+  return 0;
 } 
 
 void imprime(int v[], int n)
@@ -251,6 +256,9 @@ void imprime(int v[], int n)
 #+END_SRC
 
 ** Funciones con vectores: paso por referencia
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 La función *puede modificar* el contenido de los elementos del vector ya que conoce la dirección de memoria donde están almacenados.
 
 #+BEGIN_SRC C
@@ -258,34 +266,37 @@ La función *puede modificar* el contenido de los elementos del vector ya que co
 
 void toy(int vector[]);
 
-void main()
+int main()
 {
   int x[] = {1, 2, 3};
   printf("Antes: %d\n", x[0]);
   toy(x); // ¡Sin asignacion!
   printf("Después: %d\n", x[0]);
+  return 0;
 }
 
-void toy(int vector[])
-{ //Funcion simple que modifica 
-  //el valor del primer elemento
+void toy(int vector[]){ 
+  //Funcion simple que modifica el valor del primer elemento
   vector[0] = 100;
 }
 #+END_SRC
 
 ** Otro ejemplo de funciones con vectores
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 #+BEGIN_SRC C
 #include <stdio.h>
 
 void fAbs(int vector[], int n);
 
-void main(){
-  int datos[5]={-1, 3, -5, 7, -9};
-  int i;
+int main(){
+  int datos[5]={-1, 3, -5, 7, -9}, i;
   fAbs(datos, 5); //¡Sin asignacion!
 
   for(i = 0; i < 5; i++)   // Mostramos el resultado
     printf("%d ",datos[i]);
+  return 0;
 }
 // La funcion recibe la direccion del primer elemento
 void fAbs(int vector[], int n){
@@ -477,12 +488,14 @@ int main()
 
 
 ** Ejemplo: pasar a mayúsculas
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+begin_src C
 #include <stdio.h>
 
-void main()
-{
+int main() {
   char cadena[5] = "Hola";
   // Distancia entre A y a
   int inc = 'A' - 'a';
@@ -491,12 +504,13 @@ void main()
   while(cadena[i] != '\0')
     { // Si el caracter es letra minuscula
       if (cadena[i] >= 'a' && cadena[i] <= 'z')
-	//sumamos la distancia para pasar a
-	//mayuscula
+	//sumamos la distancia para pasar a mayuscula
 	cadena[i] += inc;
       i++;
     }
   printf("%s\n", cadena);
+
+  return 0;
 }
 #+end_src
 
@@ -523,7 +537,7 @@ La librería =string.h= incluye numerosas funciones dedicadas a cadenas de carac
 #include <stdio.h>
 #include <string.h>
 
-void main()
+int main()
 {
   char palabra[21];
   int longitud;
@@ -532,6 +546,7 @@ void main()
   longitud = strlen(palabra);
   printf("Esta palabra tiene %d caracteres\n",
 	 longitud);
+  return 0;
 }
 #+END_SRC
 
@@ -543,7 +558,7 @@ void main()
 #include <stdio.h>
 #include <string.h>
 
-void main()
+int main()
 {
   char nombre[100];
   printf("Introduce tu nombre: ");
@@ -551,6 +566,7 @@ void main()
   //¡Sin asignacion!
   _strupr(nombre); //atencion al guion inicial
   printf("En mayusculas %s\n", nombre);
+  return 0;
 }
 #+END_SRC
 
@@ -583,8 +599,7 @@ La cadena receptora debe tener espacio suficiente: /los caracteres sobrantes ser
 #include <stdio.h>
 #include <string.h>
 
-int main()
-{
+int main() {
   char nombre_completo[50];
   char nombre[ ] = "Juana";
   char apellido[ ] = "de Arco";
@@ -610,7 +625,7 @@ int main()
 #+BEGIN_SRC C
 #include <stdio.h>
 #include <string.h>
-void main()
+int main()
 {
   char color[] = "negro";
   char respuesta[11];
@@ -620,6 +635,7 @@ void main()
       scanf ("%10s", respuesta);
     } while (strcmp(color, respuesta) != 0);
   printf("¡Correcto!\n");
+  return 0;
 }
 #+END_SRC
 
@@ -656,11 +672,11 @@ Una función acepta una cadena como argumento: *paso por referencia* (igual que 
 #include <stdio.h>
 void imprime(char cadena[]); 
 
-void main() {
+int main() {
   char saludo[]="Hola";
   imprime(saludo);
+  return 0;
 }
-
 void imprime(char cadena[]) {
   int i=0;
   while(cadena[i]!='\0') {
@@ -691,10 +707,15 @@ int tabla[3][3];
 #+END_SRC
 
 ** Elementos de una matriz
-- Se referencian con el nombre de la matriz seguido de tantos subíndices, entre corchetes, como dimensiones tenga la matriz.
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
+Se referencian con el nombre de la matriz seguido de tantos subíndices, entre corchetes, como dimensiones tenga la matriz.
+
 #+BEGIN_SRC C
 #include <stdio.h>
-void main (){
+int main (){
   int matriz[2][2]; // Matriz 2 x 2
   int fila, columna;
   // Inicializacion de elementos
@@ -708,16 +729,16 @@ void main (){
 	printf("%d\t", matriz[fila][columna]);
       printf("\n\n");
     }
+  return 0;
 }
 #+END_SRC
 
 
 ** Inicialización de una matriz
-- Los elementos de una matriz pueden iniciarse en el momento de la declaración.
+Los elementos de una matriz pueden iniciarse en el momento de la declaración.
 #+BEGIN_SRC C
 #include <stdio.h>
-void main()
-{
+int main() {
   int matriz[2][3] = // Matriz 2 x 3
     {
       {10, 20, 30}, // 1a fila
@@ -730,12 +751,13 @@ void main()
 	printf("%d\t",matriz[fil][col]);
       printf("\n\n");
     }
+  return 0;
 }
 #+END_SRC
 
 
 ** Inicialización de una matriz
-- Los elementos de una matriz pueden iniciarse en el momento de la declaración.
+Los elementos de una matriz pueden iniciarse en el momento de la declaración.
 #+BEGIN_SRC C
 #include <stdio.h>
 int main()
@@ -761,10 +783,13 @@ return 0;
 
 
 ** Operaciones con matrices: suma
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
-int main()
-{
+int main() {
   int i,j;
   int m1[2][3] = {1, 2, 3, 4, 5, 6};
   int m2[2][3] = {4, 5, 12, 23, -5, 6};
@@ -802,14 +827,19 @@ void funcion (int matriz[][], int nFil, int nCol);
 #+END_SRC
 
 ** Ejemplo de función con matrices
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 void imprime_matriz(int M[][2], int f, int c);
 
-void main()
+int main()
 {
   int tabla[2][2] = {{1,2}, {3,4}};
   imprime_matriz(tabla, 2, 2);
+  return 0;
 }
 
 void imprime_matriz(int M[][2], int f, int c)
@@ -824,20 +854,22 @@ void imprime_matriz(int M[][2], int f, int c)
 #+END_SRC
 
 ** Ejemplo de función con matrices (2)
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 #+BEGIN_SRC C
 #include <stdio.h>
 void absMatriz(int M[][2], int f, int c);
 
-void main()
-{
+int main() {
   int tabla[2][2] = {{-1,2}, {-3,4}};
   printf("Antes: %d\n", tabla[0][0]);
   absMatriz(tabla, 2, 2); // ¡Sin asignacion!
   printf("Después: %d\n", tabla[0][0]);
+  return 0;
 }
 
-void absMatriz(int M[][2], int f, int c)
-{
+void absMatriz(int M[][2], int f, int c) {
   int i, j;
   for(i = 0; i < f; i++) 
       for(j = 0; j < c; j++)
@@ -888,9 +920,11 @@ struct contacto
   int edad;
 };
 
-void main()
+int main()
 {
   struct contacto person1;
+
+  return 0;
 }
 #+END_SRC
 
@@ -904,9 +938,10 @@ typedef struct
   int edad;
 } contacto;
 
-void main()
+int main()
 {
   contacto person1;
+  return 0;
 }
 #+END_SRC
 
@@ -920,9 +955,10 @@ typedef struct {
   int matricula;
 } ficha;
 
-void main ()
+int main ()
 {
   ficha alumno1 = {"Yo", "Soy Aquel", 1234};
+  return 0;
 }
 #+END_SRC
 
@@ -937,11 +973,12 @@ typedef struct {
   int matricula;
 } ficha;
 
-void main ()
+int main ()
 {
   ficha alumno1 = {.apellidos = "Soy Aquel",
 		   .matricula = 1234, 
 		   .nombre = "Yo"};
+  return 0;
 }
 #+END_SRC
 
@@ -954,8 +991,7 @@ typedef struct {
   int year;
 } date;
 
-void main ()
-{
+int main () {
   date d1, d2, d3;
   // Asignacion por componentes
   d1.day = 31;
@@ -965,6 +1001,7 @@ void main ()
   d2 = (date) {1, 1, 2000};
   // Asignacion por copia
   d3 = d1;
+  return 0;
 }
 #+END_SRC
 
@@ -979,13 +1016,14 @@ typedef struct {
   int matricula;
 } ficha;
 
-void main ()
+int main ()
 {
   ficha alumno1, alumno2, alumno3;
   // Para asignar cadenas usamos strcpy
   strcpy(alumno1.nombre, "Yo");
   strcpy(alumno1.apellidos, "Soy Aquel");
   alumno1.matricula = 1234;
+  return 0;
 }
 #+END_SRC
 
@@ -1000,8 +1038,7 @@ typedef struct {
   int matricula;
 } ficha;
 
-void main ()
-{
+int main () {
   ficha alumno;
   printf("Nombre:");
   scanf("%s", alumno.nombre);
@@ -1009,11 +1046,12 @@ void main ()
   scanf("%s", alumno.apellidos);
   printf("Numero de matricula:");
   scanf("%d", &alumno.matricula);
+  return 0;
 }
 #+END_SRC
 
 ** Estructuras dentro de estructuras
-- Una estructura puede contener otras estructuras.
+Una estructura puede contener otras estructuras.
 
 #+BEGIN_SRC C
 typedef struct
@@ -1044,6 +1082,9 @@ alumno2.fNacimiento = (fecha){1, 1, 2000};
 #+END_SRC
 
 ** Vector de estructuras
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 A partir de una estructura previamente definida se pueden generar vectores basados en esa estructura.
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -1055,18 +1096,21 @@ typedef struct
   int year;
 } date;
 
-void main()
-{
- date fechas[3] = {// Vector de 3 fechas
-   {1, 1, 1999},
-   {31, 12, 2000},
-   {15, 5, 1980}
- };
+int main() {
+  date fechas[3] = {// Vector de 3 fechas
+    {1, 1, 1999},
+    {31, 12, 2000},
+    {15, 5, 1980}
+  };
+  return 0;
 }
 #+END_SRC
 
 
 ** Vector de estructuras
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 La asignación de valores sigue las mismas reglas que para vectores de tipos simples (mediante =[]=).
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -1078,17 +1122,20 @@ typedef struct
   int year;
 } date;
 
-void main()
-{
+int main() {
   date fechas[3]; // Vector de 3 fechas
   fechas[1].day = 1;
   fechas[2] = (date) {31, 12, 1999};
   fechas[3] = fechas[2];
+  return 0;
 }
 #+END_SRC
 
 ** Funciones y estructuras
-- Una función acepta estructuras (*paso por valor*).
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+Una función acepta estructuras (*paso por valor*).
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -1100,19 +1147,22 @@ typedef struct {
 //Funcion que acepta una estructura
 float modulo(complejo c);
 
-void main(){
+int main(){
   complejo comp={1, 3};
   printf("El modulo es: %f\n", modulo(comp));
+  return 0;
 }
 //Implementacion de la funcion
 float modulo(complejo c){
-  return sqrt(c.real * c.real + 
-	      c.imaginaria * c.imaginaria);
+  return sqrt(c.real * c.real + c.imaginaria * c.imaginaria);
 }
 #+END_SRC
 
 ** Funciones y estructuras
-- Una función puede devolver una estructura
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+Una función puede devolver una estructura
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -1123,10 +1173,11 @@ typedef struct {
 //Funcion que devuelve estructura
 complejo conjugado(complejo c);
 
-void main(){
+int main(){
   complejo comp1 = {1, 3}, comp2;
   comp2 = conjugado(comp1);
   printf("%f", comp2.imaginaria);
+  return 0;
 }
 
 complejo conjugado(complejo c){
