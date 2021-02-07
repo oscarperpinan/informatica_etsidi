@@ -10,9 +10,11 @@
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main()
+int main()
 {
   printf("Hello World!\n");
+
+  return 0;
 }
 #+END_SRC
 
@@ -21,37 +23,18 @@ void main()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main()
+int main()
 {
   printf("Hello World!\n");
   printf("¡Hola Mundo!\n");
   printf("Bonjour le Monde!\n");
   printf("Hallo Welt!\n");
+
+  return 0;
 }
 #+END_SRC
 
 #+RESULTS:
-
-*** Hello World! (y 3)
-
-#+BEGIN_SRC C 
-#include <stdio.h>
-// void implica que main *no* devuelve nada
-void main()
-{
-  printf("Hello World!\n");
-}
-#+END_SRC
-#+BEGIN_SRC C 
-#include <stdio.h>
-// Definimos la salida de main: int = entero
-int main()
-{
-  printf("Hello World!\n");
-  // Resultado de main
-  return 0;
-}
-#+END_SRC
 
 *** Comentarios
 
@@ -62,14 +45,15 @@ int main()
 
 // Todo programa necesita una función main.
 // Su contenido está delimitado entre llaves
-void main()
+int main()
 {
   //La función printf muestra el mensaje en pantalla
   // Atención: el mensaje debe ir entre comillas
   printf("Hello World!\n");
+  // La función main devuelve un entero con return.
+  return 0;
 } // Aquí acaba main y por tanto el programa
 #+END_SRC
-
 
 * Datos en C
 ** Introducción
@@ -77,8 +61,12 @@ void main()
 - Constantes :: datos cuyo valor no se puede modificar durante la ejecución del programa
 - Variables :: datos cuyo valor se puede modificar mediante el operador /asignación/ (=)
 *** Constantes y Variables
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
+
 #+BEGIN_SRC C
-void main()
+int main()
 {
   // declara una variable con el identificador v1
   int v1;
@@ -95,6 +83,7 @@ void main()
   v2 = c1;
   // error: c1 es una constante
   c1 = 3;
+  return 0;
 }
 #+END_SRC
 *** Nombres de constantes y variables
@@ -209,12 +198,14 @@ void main()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main()
+int main()
 {
   // Usamos %i para números enteros
   printf("Hoy es día %i\n", 6);
   // Y también %d
   printf("Hoy es día %d\n", 6);
+  
+  return 0;
 }
 #+END_SRC
 
@@ -230,6 +221,7 @@ int main()
   // Asignamos un valor a la variable dia
   dia = 6;
   printf("Hoy es día %i\n", dia);
+
   return 0;
 }
 #+END_SRC
@@ -246,6 +238,7 @@ int main()
   // Hacemos la asignación junto con la definición
   int dia = 6;
   printf("Hoy es día %i\n", dia);
+
   return 0;
 }
 #+END_SRC
@@ -254,52 +247,58 @@ int main()
 : Hoy es día 6
 
 *** Rango de variables =int= con signo
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
+
 #+begin_src C
 #include <stdio.h>
 #include <limits.h>
 
-void main() {
+int main() {
   printf("Un int ocupa %d bytes",
 	 sizeof(int));
   printf(" y abarca desde %d hasta %d.\n",
 	 INT_MIN, INT_MAX);
-
   printf("Un long int ocupa %d bytes",
 	 sizeof(long int));
   printf(" y abarca desde %ld hasta %ld.\n",
 	  LONG_MIN, LONG_MAX);
-
   printf("Un long long int ocupa %d bytes",
 	 sizeof(long long int));
   printf(" y abarca desde %lld hasta %lld.\n",
 	 LLONG_MIN, LLONG_MAX);
+  return 0;
 }
 #+end_src
 
 
 *** Rango de variables =int= sin signo
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
 
 #+begin_src C
 #include <stdio.h>
 #include <limits.h>
 
-void main() {
+int main() {
    printf("Un unsigned int ocupa %d bytes",
 	  sizeof(unsigned int));
    printf(" y abarca desde 0 hasta %u.\n",
 	  UINT_MAX);
-
    printf("Un unsigned long int ocupa %d bytes",
 	  sizeof(unsigned long int));
    printf(" y abarca desde 0 hasta %lu.\n",
 	  ULONG_MAX);
-
    printf("Un unsigned long long int ocupa %d bytes",
 	  sizeof(unsigned long long int));
    printf(" y abarca desde 0 hasta %llu.\n",
 	  ULLONG_MAX);
+  return 0;
 }
 #+end_src
+
 
 *** Lectura de números enteros con =scanf=
 #+BEGIN_SRC C
@@ -661,24 +660,21 @@ int main()
 
 #+BEGIN_SRC C
 #include <stdio.h>
-void main() 
-{ 
+int main() { 
      int a, b = 3; 
 
      a = 5; 
      printf("a = %d\n", a); 
-
      a *= 4; // a = a * 4
      printf("a = %d\n", a); 
-
      a += b; // a = a + b
      printf("a = %d\n", a); 
-
      a /= (b + 1); // a = a / (b+1)
      printf("a = %d\n", a); 
-
      a = b = 1; 
      printf("a = %d, b = %d\n", a, b);
+
+     return 0;
 } 
 #+END_SRC
 
@@ -705,7 +701,7 @@ int main()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main() 
+int main() 
 { 
      int a = 0;
      printf("a = %d\n", ++a); 
@@ -714,17 +710,22 @@ void main()
      printf("a = %d\n", --a); 
      printf("a = %d\n", a--);     
      printf("a = %d\n", a);     
+
+     return 0;
 }
 #+END_SRC
 
+
 *** Precedencia y asociatividad
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main() 
-{ 
-     double a = 4, b = 7, c = 3, g = 9;
-     double result; 
+int main() { 
+     double a = 4, b = 7, c = 3, g = 9, result; 
  
      result = a + b * c; 
      printf( "resultado = %f\n", result); 
@@ -737,7 +738,8 @@ void main()
 
      result = (a * b) / (c * g); 
      printf("resultado = %f\n", result); 
-     
+
+     return 0;
 } 
 #+END_SRC
 
@@ -765,7 +767,7 @@ int main()
 *** Operaciones lógicas
 #+BEGIN_SRC C
 #include <stdio.h>
-void main() 
+int main() 
 { 
      int a = 3, b = 2, c = 4, d = 5; 
       
@@ -777,12 +779,18 @@ void main()
 
      printf("resultado = %d\n",
 	    (a != b) && (2 * d < 8)); 
+
+     return 0;	    
 } 
 #+END_SRC
 *** Operaciones lógicas
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
+
 #+BEGIN_SRC C
 #include <stdio.h>
-void main() 
+int main() 
 { 
   int x, resto;
 
@@ -796,6 +804,8 @@ void main()
   // Si el resto es 0, x es par.
   printf("Es un número %s\n",
 	 (resto == 0) ? "par" : "impar");
+
+  return 0;
 } 
 #+END_SRC
 
@@ -806,8 +816,7 @@ void main()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int main()
-{
+int main() {
   float f1 = 3.7, f2;
   int i1 = 2, i2;
   // Real a entero: pierde decimales
@@ -878,7 +887,7 @@ int main()
 | Un entero | 150 | por un entero        | 100: 1 |                 |     |
 
 
-* ...
+
 # Local Variables:
 # ispell-local-dictionary: "spanish"
 # End:
