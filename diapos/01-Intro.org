@@ -4,21 +4,30 @@
 #+SETUPFILE: config.org
 
 * ¿Por qué programar?
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
 
 #+BEGIN_EXPORT latex
-\href{https://www.youtube.com/watch?v=nKIu9yen5nc}{\includegraphics[width=\textwidth]{figs/steve-jobs-quote.jpg}}
+\href{https://www.youtube.com/watch?v=nKIu9yen5nc}{\includegraphics[height=0.9\textheight]{figs/steve-jobs-quote.jpg}}
 #+END_EXPORT
 
 * ¿Qué hay dentro de un ordenador?
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
 
 #+BEGIN_EXPORT latex
-\href{http://www.gcflearnfree.org/computerbasics/inside-a-computer/1/}{\includegraphics[width=\textwidth]{figs/InsideComputer.png}}
+\href{http://www.gcflearnfree.org/computerbasics/inside-a-computer/1/}{\includegraphics[height=0.9\textheight]{figs/InsideComputer.png}}
 #+END_EXPORT
 
 * ¿Cómo funciona un ordenador?
+  :PROPERTIES:
+  :beamer_opt: plain
+  :END:
 
 #+BEGIN_EXPORT latex
-\href{https://youtu.be/DKGZlaPlVLY}{\includegraphics[width=\textwidth]{figs/HowComputersWork.png}}
+\href{https://youtu.be/DKGZlaPlVLY}{\includegraphics[height=0.9\textheight]{figs/HowComputersWork.png}}
 #+END_EXPORT
 
 * Programa Informático y Algoritmo
@@ -99,9 +108,11 @@ print("Hola Mundo")
 #+begin_src C
 #include <stdio.h>
 
-void main()
+int main()
 {
   printf("Hola Mundo\n");
+
+  return 0;
 }
 #+end_src
 * Desarrollo de programas en C
