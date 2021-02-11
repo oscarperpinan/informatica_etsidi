@@ -23,20 +23,23 @@ En C se emplea la estructura de datos de tipo =FILE= (declarada en =stdio.h=):
 
 #+BEGIN_SRC C
 #include <stdio.h>
-void main ()
+
+int main ()
 {
   FILE *pf;
+
+  return 0;
 }
 #+END_SRC
 
 * Lectura y escritura de ficheros
 ** Abrir un fichero: =fopen=
 
+=fopen= abre un fichero para para leer y/o escribir en él.
+
 #+BEGIN_SRC C
 FILE *fopen (const char *nombre, const char *modo);
 #+END_SRC
-
-=fopen= abre un fichero para para leer y/o escribir en él.
 
 - =nombre=: nombre del fichero (/debe respetar las normas del sistema operativo en el que se ejecute el programa/).
 - =modo=: indica cómo se va a abrir el fichero:
@@ -80,11 +83,12 @@ int main ()
 
 
 ** Cerrar un fichero: =fclose=
+=fclose= cierra un fichero previamente abierto con =fopen=
+
 #+BEGIN_SRC C
 int fclose (FILE *pf);
 #+END_SRC
 
-=fclose= cierra un fichero previamente abierto con =fopen=
 - El puntero =pf=, de tipo =FILE=, apunta al fichero.
 - La función devuelve 0 si el fichero se cierra correctamente o =EOF= si se ha producido un error.
 
@@ -111,18 +115,16 @@ int main(){
   int vals[3] = {1, 2, 3};
   // Abrimos fichero para escritura
   pf = fopen("datos.txt", "w");
-  if (pf == NULL) 
-    {// Si el resultado es NULL mensaje de error 
-      printf("Error al abrir el fichero.\n");
-      return -1;
-    }
-  else
-    {// Si ha funcionado, comienza escritura
-      fprintf(pf, "%i, %i, %i",
-	      vals[0], vals[1], vals[2]);
-      fclose(pf); // Cerramos fichero
-      return 0;
-    }
+  if (pf == NULL) {// Si el resultado es NULL mensaje de error 
+    printf("Error al abrir el fichero.\n");
+    return -1;
+  }
+  else {// Si ha funcionado, comienza escritura
+    fprintf(pf, "%i, %i, %i",
+	    vals[0], vals[1], vals[2]);
+    fclose(pf); // Cerramos fichero
+    return 0;
+  }
 }
 #+END_SRC
 
