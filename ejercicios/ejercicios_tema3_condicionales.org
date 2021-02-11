@@ -86,7 +86,7 @@ Realiza un programa en el que el usuario pueda seleccionar la operación matemá
 #include <stdio.h>
 #include <math.h>
 
-void main ()
+int main ()
 {
   float v1, v2;
   char op;
@@ -115,6 +115,7 @@ void main ()
       printf("No se hacer esa operación.\n");
       break;
     }
+  return 0;
 }
 #+END_SRC
 
@@ -123,7 +124,7 @@ Escribe un programa que imprima el nombre del día que corresponde a un número 
 #+BEGIN_SRC C
 #include <stdio.h>
 
-void main()
+int main()
 {
   int n;
   printf("Introduzca número de día: ");
@@ -154,6 +155,7 @@ void main()
     default:
       printf("Número incorrecto\n");
     }
+  return 0;
 } 
 #+END_SRC
 

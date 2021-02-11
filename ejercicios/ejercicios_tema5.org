@@ -399,7 +399,7 @@ Escribe un programa que permita al usuario rellenar un vector de dimensión vari
 #include <stdio.h>
 #include <stdlib.h>
 
-void main()
+int main()
 {
   int i, n;
   int *p;
@@ -431,6 +431,8 @@ void main()
     }
   // Una vez terminado, liberamos la memoria
   free(p);
+
+  return 0;
 }
 #+END_SRC
 

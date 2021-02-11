@@ -216,7 +216,7 @@ int max2(int a, int b);
 int max3(int a, int b, int c);
 
 
-void main()
+int main()
 {
   int x, y, z, max;
 
@@ -226,6 +226,8 @@ void main()
   max = max3(x, y, z);
   
   printf("El mayor es %d.\n", max);
+
+  return 0;
 }
 
 int max2(int a, int b)
@@ -264,7 +266,7 @@ Este programa debe estar construido en base a dos funciones, una para calcular e
 int factorial(int x);
 int combina(int n, int k);
 
-void main()
+int main()
 {
   int n, k, a;
 
@@ -274,6 +276,8 @@ void main()
   a = combina(n, k);
 
   printf("El resultado es %d.\n", a);
+
+  return 0;
 }
 
 int factorial(int x)

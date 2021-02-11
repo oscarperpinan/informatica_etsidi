@@ -15,7 +15,7 @@ Escribe un programa que almacene 3 vectores de 5 elementos en 3 columnas de un f
 #include <stdio.h>
 #define N 5
 
-void main ()
+int main ()
 { // Definimos tres vectores cualesquiera
   int v1[N]={-1, 3, 5, 0, 4};
   int v2[N]={4, 9, -8, 2, 3};
@@ -33,6 +33,8 @@ void main ()
     fprintf(pf, "%d\t%d\t%d\n",
 	    v1[i], v2[i], v3[i]);
   fclose(pf);
+
+  return 0;
 }
 #+END_SRC
 

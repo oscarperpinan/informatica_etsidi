@@ -190,7 +190,7 @@ Escribe un programa que calcule y muestre en pantalla el máximo, mínimo y prom
 
 #define N 10
 
-void main()
+int main()
 {
 
   int vector[N], i;
@@ -222,6 +222,7 @@ void main()
 
   printf("El máximo es %d, el mínimo es %d, y el promedio es %02f.\n",
 	 max, min, media);
+  return 0;
 }
 #+END_SRC
 
@@ -242,7 +243,7 @@ int maximo(int x[], int n);
 int minimo(int x[], int n);
 float promedio(int x[], int n);
 
-void main()
+int main()
 {
 
   int vector[N], i;
@@ -260,6 +261,7 @@ void main()
 
   printf("El máximo es %d, el mínimo es %d, y el promedio es %02f.\n",
 	 max, min, prom);
+  return 0;
 }
 
 int maximo(int x[], int n)
