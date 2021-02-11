@@ -93,20 +93,18 @@ Un puntero se declara:
 - Incluyendo un asterisco =*= antes del identificador. 
 
 #+BEGIN_SRC C
-void main()
+int main()
 {
-  // p1: puntero apuntando a
-  // una variable de tipo entero
+  // p1: puntero apuntando a una variable de tipo entero
   int *p1;
-  // p2: puntero apuntando a
-  // una variable de tipo caracter
+  // p2: puntero apuntando a una variable de tipo caracter
   char *p2;
-  // p3: puntero apuntando a
-  // una variable de tipo real
+  // p3: puntero apuntando a una variable de tipo real
   float *p3;
-  // p4: puntero apuntando a
-  // una variable genérica
+  // p4: puntero apuntando a una variable genérica
   void *p4;
+
+  return 0;
 }
 
 #+END_SRC
@@ -126,8 +124,7 @@ void main()
 int main()
 {
   int x, *p;
-  // sizeof devuelve el numero de bytes
-  // de una variable o tipo de datos
+  // sizeof devuelve el numero de bytes de una variable o tipo de datos
   printf("La variable x ocupa %i bytes.\n", 
 	 sizeof(x));
   printf("El puntero p ocupa %i bytes.\n",
@@ -151,16 +148,17 @@ int main()
 ** Asignación
 
 #+BEGIN_SRC C
-void main()
+int main()
 {
   int x, y;
   // p1 apunta a x
   int *p1 = &x, *p2, *p3;
   // p2 apunta a y
   p2 = &y;
-  // p3 apunta a la misma variable que p1,
-  // es decir, x
+  // p3 apunta a la misma variable que p1, es decir, x
   p3 = p1;
+
+  return 0;
 }
 #+END_SRC
 
@@ -265,6 +263,9 @@ int main(){
 
 
 ** Aritmética de punteros con vectores
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 #+BEGIN_SRC C
 #include <stdio.h>
 #define N 10
@@ -366,6 +367,9 @@ int main(){
 * Punteros a estructuras
 
 ** Punteros a estructuras
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 - Un puntero a una estructura se declara igual que un puntero a un tipo simple.
 - Para acceder a un miembro de la estructura se emplea el operador =->=.
 #+BEGIN_SRC C
@@ -375,13 +379,15 @@ typedef struct
   int y, m, d;
 } fecha;
 
-void main(){
+int main(){
   fecha f = {2000, 10, 15}, *p;
   // p apunta a la estructura
   p = &f;
 
   printf("%i-%i-%i",
 	 p->d, p->m, p->y);
+
+  return 0;
 }
 #+END_SRC
 
@@ -389,6 +395,9 @@ void main(){
 : 15-10-2000
 
 ** Ejemplo
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -397,17 +406,18 @@ typedef struct
   int y, m, d;
 } fecha;
 
-void main()
+int main()
 {
   fecha f, *p = &f;
-  // Rellenamos la estructura
-  // a través de su puntero
+  // Rellenamos la estructura a través de su puntero
   p->d = 15;
   p->m = 10;
   p->y = 2000;
 
   printf("%i-%i-%i",
 	 f.d, f.m, f.y);
+
+  return 0;
 }
 #+END_SRC
 
@@ -420,18 +430,21 @@ void main()
 - Las funciones que emplean *vectores y cadenas* como argumentos funcionan con *paso por referencia* (/el identificador de un vector es un puntero/).
 
 ** Ejemplo
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>
 void operaciones (float x, float y,
 		  float *s, float *p, float *d);
-
-void main(){
+int main(){
   float a = 1.0, b = 2.0; // Datos
   float suma, producto, division; // Resultados
   operaciones(a, b, &suma, &producto, &division);
   printf("S: %f \t P: %f \t D: %f \t",
 	 suma, producto, division);
+  return 0;
 }
 //Funcion con varios resultados
 void operaciones (float x, float y,
@@ -450,7 +463,7 @@ void operaciones (float x, float y,
 
 ** =malloc= y =free=
 
-- La asignación dinámica de memoria permite definir objetos (p.ej. vectores) de dimensión variable.
+- La *asignación dinámica* de memoria permite definir *objetos (p.ej. vectores) de dimensión variable*.
 - La función =malloc= permite asignar, durante la ejecución del programa, un bloque de memoria de n bytes consecutivos para almacenar los datos (devuelve =NULL= si no es posible la asignación)
 - La función =free= permite liberar un bloque de memoria previamente asignado.
 
@@ -476,6 +489,9 @@ free(pInt); // Liberamos memoria al terminar
 #+END_SRC
 
 ** Ejemplo
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
 
 #+BEGIN_SRC C
 #include <stdio.h>
