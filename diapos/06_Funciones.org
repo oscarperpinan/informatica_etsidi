@@ -116,17 +116,15 @@ int main()
 
 #+BEGIN_SRC C
 #include <stdio.h>
-
 // Prototipo de la función (termina en ;)
 void printHello(int n);
 
 // Función main
-void main()
-{
+int main() {
   //Uso de la función en main
   printHello(3);
+  return 0;
 }
-
 // Definición de la función
 void printHello(int n)
 {
@@ -144,17 +142,15 @@ void printHello(int n)
 
 #+BEGIN_SRC C
 #include <stdio.h>
-
 // Prototipo de la función (termina en ;)
 float areaTriangulo(float b, float h);
-
 // Función main
-void main()
-{
+int main(){
   float at;
   //Uso de la función en main
   at = areaTriangulo(1, 2);
   printf("%f", at);
+  return 0;
 }
 // Definición de la función
 float areaTriangulo(float b, float h)
@@ -179,17 +175,15 @@ int gVar = 3; //Variable global
 
 void foo(void);
 
-void main(){
+int main(){
   printf("main (1):\t gVar es %d.\n", gVar);
-
   foo();
-
   gVar *= 2;
   printf("main (2):\t gVar es %d.\n", gVar);
+  return 0;
 }
 
-void foo(void)
-{
+void foo(void){
   gVar = gVar + 1;
   printf("foo:\t gVar es %d.\n", gVar);
 }
@@ -204,14 +198,13 @@ void foo(void)
 
 void foo(void);
 
-void main()
+int main()
 {
   int x = 1; // variable local en main
   printf("main (1):\t x es %d.\n", x);
-
   foo();
-  
   printf("main (2):\t x es %d.\n", x);
+  return 0;
 }
 
 void foo(void)
@@ -235,17 +228,16 @@ void foo(void)
 float eleva3(float x);
 float volEsfera(float r);
 
-void main(){
+int main(){
   float radio, vol;
   scanf("%f", &radio);
   vol = volEsfera(radio);
   printf("El volumen es %f", vol);
+  return 0;
 }
-
 float volEsfera(float r){ //Usa eleva3
   return 4.0/3.0 * PI * eleva3(r);
 }
-
 float eleva3(float x){
   return x * x * x;
 }
@@ -260,13 +252,13 @@ float eleva3(float x){
 
 int fact(int n);
 
-void main(){
+int main(){
   int x;
   printf("Indica un número:\n");
   scanf("%d", &x);
   printf("El factorial de %d es %d\n", x, fact(x));
+  return 0;
 }
-
 int fact(int n){
   int res;
   if (n > 1) // Incluye llamada a si misma
@@ -306,7 +298,6 @@ float volEsfera(float r);
 float volEsfera(float r){
   return 4.0/3.0 * PI * eleva3(r);
 }
-
 float eleva3(float x){
   return x * x * x;
 }
@@ -320,16 +311,17 @@ float eleva3(float x){
 // Directiva para incluir la librería local
 #include "myLib.h" 
 
-void main()
+int main()
 {
   float radio, vol;
   scanf("%f", &radio);
   vol = volEsfera(radio);
   printf("El volumen es %f", vol);
+  return 0;
 }
 #+END_SRC
 
-* ...
+
 # Local Variables:
 # ispell-local-dictionary: "spanish"
 # End:
