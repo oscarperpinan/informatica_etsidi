@@ -30,9 +30,11 @@
 \href{https://youtu.be/DKGZlaPlVLY}{\includegraphics[height=0.9\textheight]{figs/HowComputersWork.png}}
 #+END_EXPORT
 
-* Programa Informático y Algoritmo
-- *Programa informático*: una colección de instrucciones expresadas de forma que un ordenador pueda realizar una tarea.
-- *Algoritmo*: método para resolver un problema. Un programa informático es una implementación del algoritmo para un determinado sistema informático.
+* Algoritmo y Programa Informático 
+- *Algoritmo*: método para resolver un problema. 
+- *Programa informático*:
+  - una colección de instrucciones expresadas de forma que un ordenador pueda realizar una tarea.
+  - es una implementación del algoritmo para un determinado sistema informático.
 - *Lenguaje máquina*: los ordenadores utilizan el sistema de numeración binario (dos dígitos, 0 y 1) para almacenar información.
 - Las instrucciones del programa deben estar codificadas como sucesiones de 0s y 1s.
 #+BEGIN_CENTER
