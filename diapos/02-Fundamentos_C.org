@@ -383,7 +383,7 @@ int main() {
    printf(" y abarca desde %e hasta %e.\n",
 	  DBL_MIN, DBL_MAX);
 
-   return(0);
+   return 0;
 }
 #+end_src
 
@@ -555,6 +555,15 @@ x %= y // x = x % y
 x + y = 1
 #+END_SRC
 
+*** Incrementales
+
+    #+begin_src C :tangle no
+    y = ++x // x = x + 1; y = x (preincremento)
+    y = x++ // y = x; x = x + 1 (postincremento)
+
+    y = --x // x = x - 1; y = x (predecremento)
+    y = x-- // y = x; x = x - 1 (postdecremento)
+    #+end_src
 *** =sizeof=
 
 Proporciona el tamaño de su operando en bytes.
