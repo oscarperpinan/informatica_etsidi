@@ -36,7 +36,7 @@ Realiza un programa que muestre por pantalla los números enteros comprendidos e
 
 int main()
 {
-  int i, a = 0, b = 100, n;
+  int i, a = 1, b = 100, n;
 
   // Con un bucle do-while nos aseguramos de que el número n es mayor
   // que 1
