@@ -82,7 +82,7 @@ int main()
   // para evitar repetir esa operacion 1 millon de veces
   pi = 4 * pi;
   
-  printf("%lf", pi);
+  printf("%f", pi);
 
   return 0;
 }
