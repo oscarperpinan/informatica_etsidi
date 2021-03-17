@@ -67,7 +67,7 @@ int main(){
  | Posicion | 1 | = | 20 |
  | Posicion | 2 | = | 30 |
 
-** Acceso a datos de un vectores
+** Acceso a datos de un vector
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -86,7 +86,7 @@ int main()
 }
 #+END_SRC
 
-** Acceso a datos de un vectores
+** Acceso a datos de un vector
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -471,7 +471,7 @@ int main()
 int main()
 {
   char cadena[5] = "Hola";
-  int i = 0;
+  int i;
   printf("Los caracteres son:\n");
   for(i = 0; cadena[i] != '\0'; i++)
     {
