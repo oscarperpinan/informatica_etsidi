@@ -139,6 +139,8 @@ P = \left[
 
 #+end_export
 
+En el siguiente enlace se describe el cálculo del determinante de una matriz 3x3 mediante el teorema de Laplace: https://es.wikipedia.org/wiki/Teorema_de_Laplace#Matriz_3%C3%973
+
 #+begin_src C
 #include <stdio.h>
 
