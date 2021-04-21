@@ -401,7 +401,8 @@ void vertical(punto *xy, int n)
     xy->y += n;
 }
 #+END_SRC
-** Asignación dinámica de memoria
+
+* Asignación dinámica de memoria
 Escribe un programa que permita al usuario rellenar un vector de dimensión variable. En primer lugar, el programa pregunta al usuario el número de elementos que tendrá el vector. A continuación, empleando asignación dinámica de memoria, el programa reservará memoria para este vector, y solicitará al usuario los valores del mismo. Finalmente, el programa mostrará el contenido de este vector.
 
 #+BEGIN_SRC C
