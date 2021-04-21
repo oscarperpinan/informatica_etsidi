@@ -110,16 +110,16 @@ int raices(float a, float b, float c, float *r1, float *r2)
 	  *r2 = (-b - sqrt(disc)) / 2 * a;
 	  return 0;
 	}
-      else if(disc == 0)//raiz doble
-	{
-	  *r1 = *r2 = -b / 2 * a;
-	  return 1;
-	}
-      else//soluciones complejas
+      else if(disc < 0)//soluciones complejas
 	{
 	  *r1 = -b / 2 * a;
 	  *r2 = sqrt(-disc) / 2 * a;
 	  return 2;
+	}
+      else //raiz doble
+	{
+	  *r1 = *r2 = -b / 2 * a;
+	  return 1;
 	}
     }
   else //ecuacion no cuadrada
