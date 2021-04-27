@@ -421,6 +421,34 @@ int main()
 }
 #+END_SRC
 
+** Ejemplo con scanf
+   :PROPERTIES:
+   :beamer_opt: plain
+   :END:
+
+#+BEGIN_SRC C
+#include <stdio.h>
+typedef struct 
+{
+  int y, m, d;
+} fecha;
+
+int main()
+{
+  fecha f, *p = &f;
+  // Rellenamos la estructura a través de su puntero con
+  // scanf. Atención al uso de &.
+  scanf("%i", &(p->d));
+  scanf("%i", &(p->m));
+  scanf("%i", &(p->y));
+
+  printf("%i-%i-%i",
+	 f.d, f.m, f.y);
+
+  return 0;
+}
+#+END_SRC
+
 
 * Funciones y punteros
 ** Paso por referencia
