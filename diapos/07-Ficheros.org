@@ -217,9 +217,9 @@ int main()
 
 ** Lectura de datos con separadores
 
+Si en un fichero hay datos numéricos junto con cadenas de caracteres, hay que usar =[^X]=, donde =X= es el carácter empleado como separador. 
+
 Por ejemplo, para leer datos separados por punto y coma empleamos: =[^;]=
-
-
 
 *** Ejemplo
 Sea un fichero con el siguiente contenido:
