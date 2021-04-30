@@ -162,8 +162,9 @@ int main()
     fSize = ftell(f);
     fseek(f, 0, SEEK_SET);
     // Reservamos memoria para leer este fichero, y obtenemos un
-    // puntero para almacenar los caracteres
-    texto = malloc(sizeof(char) * fSize);
+    // puntero para almacenar los caracteres. Podemos usar
+    // directamente fSize porque 1 carácter ocupa 1 byte
+    texto = malloc(fSize);
     // Recorremos el fichero leyendo caracter a caracter hasta
     // encontrar EOF
     while (fscanf(f, "%c", &texto[i]) != EOF)
