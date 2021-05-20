@@ -55,6 +55,42 @@ La función =system= (de la librería =stdlib=) permite ejecutar comandos del si
 printf("\x1b[2J");
 #+end_src
 
+* Introducir una pausa de una duración determinada
+
+Ejemplo extraído de https://www.geeksforgeeks.org/time-delay-c/:
+
+  #+begin_src C
+// C function showing how to do time delay
+#include <stdio.h>
+// To use time library of C
+#include <time.h>
+
+void delay(int number_of_seconds)
+{
+	// Converting time into milli_seconds
+	int milli_seconds = 1000 * number_of_seconds;
+
+	// Storing start time
+	clock_t start_time = clock();
+
+	// looping till required time is not achieved
+	while (clock() < start_time + milli_seconds);
+}
+
+// Driver code to test above function
+int main()
+{
+	int i;
+	for (i = 0; i < 10; i++) {
+		// delay of one second
+		delay(1);
+		printf("%d seconds have passed\n", i + 1);
+	}
+	return 0;
+}
+
+  #+end_src
+
 * Vector de cadenas de caracteres
 
 Una cadena de caracteres es un vector de caracteres. Un vector de cadenas de caracteres (por ejemplo, una lista de textos) se puede pensar como una matriz de caracteres o como un puntero a cadenas de caracteres. Sin embargo, es más sencillo implementarlo mediante un vector de estructuras que tienen un único componente, una cadena de caracteres. 
