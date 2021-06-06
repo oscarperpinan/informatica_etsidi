@@ -551,25 +551,6 @@ int main()
 #+END_SRC
 
 
-
-** Paso a mayúsculas :: =_strup=
-
-#+BEGIN_SRC C
-#include <stdio.h>
-#include <string.h>
-
-int main()
-{
-  char nombre[100];
-  printf("Introduce tu nombre: ");
-  scanf("%s",nombre);
-  //¡Sin asignacion!
-  _strupr(nombre); //atencion al guion inicial
-  printf("En mayusculas %s\n", nombre);
-  return 0;
-}
-#+END_SRC
-
 ** Copiar cadenas :: =strcpy=
 
 Con =strcpy= tenemos una solución óptima para la *asignación de contenido*.
