@@ -1,0 +1,584 @@
+% Created 2022-02-02 mié 21:03
+% Intended LaTeX compiler: pdflatex
+\documentclass[xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[spanish]{babel}
+\usecolortheme{rose}
+\setbeamercolor{alerted text}{fg=DarkBlue}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
+\setbeamercolor{block body}{use=block title,bg=block title.bg}
+\setbeamertemplate{navigation symbols}{\insertsectionnavigationsymbol}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
+\AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded]\end{frame}}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={¡}{{\textexclamdown}}1 {á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {í}{{\'i}}1 {ú}{{\'u}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
+\usepackage{mathpazo}
+\usepackage{siunitx}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\setbeamertemplate{footline}[frame number]
+\usetheme{Boadilla}
+\usefonttheme{serif}
+\author{Oscar Perpiñán Lamigueiro}
+\date{}
+\title{Tema 5: Punteros}
+\hypersetup{
+ pdfauthor={Oscar Perpiñán Lamigueiro},
+ pdftitle={Tema 5: Punteros},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+
+\section{Definición}
+\label{sec:orga485964}
+
+\begin{frame}[label={sec:org35a2e3c}]{Datos y Memoria}
+\begin{itemize}
+\item Los datos de un programa se almacenan en la memoria del ordenador.
+
+\item La memoria del ordenador está estructurada en \alert{bytes} (8 bits).
+
+\item Cada byte tiene una posición en la memoria (dirección).
+\end{itemize}
+
+\begin{center}
+  \begin{tabular}{ | c | c}
+    \cline{1-1}
+     & Posición de memoria N \\ \cline{1-1}
+     & \\ \cline{1-1}
+     & \\ \cline{1-1}
+    $\leftarrow$  1 byte $\rightarrow$ & \vdots \\ \cline{1-1}
+     & \\ \cline{1-1}
+     & Posición de memoria 1 \\ \cline{1-1}
+     & Posición de memoria 0 \\ \cline{1-1}
+  \end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:orgc3678ec},fragile]{Dirección de memoria de una variable}
+ \begin{itemize}
+\item Ejemplo: un dato \texttt{int} ocupa 4 bytes.
+\end{itemize}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int x;
+\end{lstlisting}
+
+\begin{center}
+  \begin{tabular}{ | c | c}
+    \cline{1-1}
+     & Dirección\\ \cline{1-1}
+     & \\ \hline
+     $\uparrow$ & 1245051\\ \cline{1-1}
+     & 1245050 \\ \cline{1-1}
+     x     & 1245049\\ \cline{1-1}
+     $\downarrow$     & \textbf{1245048} \\ \hline
+     & \\ \cline{1-1}
+  \end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}[label={sec:org83a456c},fragile]{Operador \&}
+ El operador \texttt{\&} (\emph{ampersand}) aplicado a una variable cualquiera proporciona su dirección de memoria.
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  // No hace falta asignar valor inicial
+  // para que la variable
+  // tenga dirección de memoria
+  int x; 
+
+  printf("La variable x está almacenada en %lli.\n",
+	 &x);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org7b7f629}]{¿Qué es un puntero?}
+\begin{block}{Un puntero apunta a una variable}
+Un \alert{puntero} (\emph{pointer}) es una \alert{variable} (tipo número entero) que contiene la dirección de memoria de una variable: 
+
+\begin{itemize}
+\item El puntero es una referencia de la variable a la que apunta.
+
+\item El valor del puntero es la dirección de memoria de la variable.
+
+\item La variable está apuntada por el puntero.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Uso de punteros}
+\label{sec:orgd74cc24}
+\begin{frame}[label={sec:org4e464a5},fragile]{Declaración de un puntero}
+ Un puntero se declara: 
+\begin{itemize}
+\item Indicando el tipo de datos de la variable a la que apunta.
+\item Incluyendo un asterisco \texttt{*} antes del identificador.
+\end{itemize}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int main()
+{
+  // p1: puntero apuntando a una variable de tipo entero
+  int *p1;
+  // p2: puntero apuntando a una variable de tipo caracter
+  char *p2;
+  // p3: puntero apuntando a una variable de tipo real
+  float *p3;
+  // p4: puntero apuntando a una variable genérica
+  void *p4;
+
+  return 0;
+}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:orgde55108},fragile]{Un puntero es una variable \texttt{int}}
+ \begin{itemize}
+\item El contenido de una variable puntero es la dirección de memoria, un valor de tipo entero.
+\item Su tamaño depende del sistema:
+\begin{itemize}
+\item Sistemas de 32 bits ocupan 4 bytes.
+\item Sistemas de 64 bits ocupan 8 bytes.
+\end{itemize}
+\end{itemize}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  int x, *p;
+  // sizeof devuelve el numero de bytes de una variable o tipo de datos
+  printf("La variable x ocupa %i bytes.\n", 
+	 sizeof(x));
+  printf("El puntero p ocupa %i bytes.\n",
+	 sizeof(p));
+
+  return 0;
+}
+
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org68f25af},fragile]{Asignación}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int main()
+{
+  int x, y;
+  // p1 apunta a x
+  int *p1 = &x, *p2, *p3;
+  // p2 apunta a y
+  p2 = &y;
+  // p3 apunta a la misma variable que p1, es decir, x
+  p3 = p1;
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org2907eca},fragile]{Operador \texttt{*}}
+ El operador \texttt{*} aplicado a un puntero proporciona el valor de la variable apuntada por el puntero.
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  int x = 10, *p;
+  // Operador & para obtener la direccion de x
+  p = &x;
+  // *p y x son lo mismo
+  printf("La variable apuntada vale %i",
+	 *p);
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org001412c}]{Operaciones con punteros}
+\begin{itemize}
+\item La \alert{suma o resta de un entero a un puntero} produce una \alert{nueva localización de memoria}.
+\item Se pueden \alert{comparar punteros} utilizando expresiones lógicas para \alert{comprobar si  apuntan a la misma dirección de memoria}.
+\item La \alert{resta de dos punteros} da como resultado el \alert{número de variables entre las dos direcciones}.
+\end{itemize}
+\end{frame}
+
+\section{Punteros a vectores}
+\label{sec:org50a7a3b}
+
+\begin{frame}[label={sec:org212487f},fragile]{Punteros y vectores}
+ El identificador de un vector es un puntero \emph{constante} que apunta al primer elemento del vector.
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  int vector[3] = {1, 2, 3};
+  int *p;
+  // p apunta al primer elemento del vector
+  p = &vector[0];
+  printf("El primer elemento es %i\n", *p);
+  // De forma mas concisa
+  p = vector;
+  printf("El primer elemento es %i\n", *p);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org8d7c7be},fragile]{Recorrido de un vector}
+ Podemos recorrer un vector a través de su puntero con sumas y restas
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+int main()
+{
+  int i, vector[3] = {1, 2, 3};
+  int *p, *p1;
+  p = vector;
+  // p apunta a vector[0].
+  printf("%i\t", *p);
+  // p + 1 apunta a vector[1]
+  p1 = p + 1;
+  printf("%i\t", *p1);
+  // *(p + 1) es equivalente a v[i + 1]
+  printf("%i\t", *(p + 1));
+  printf("%i\t", vector[1]);
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[label={sec:org42bf517},fragile]{Modificación de un vector}
+ Podemos modificar un vector a través de su puntero
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h> 
+int main(){
+  int i, vector[3];
+  int *p;
+  p = vector;
+  //vector[0] = 1
+  *p = 1;
+  //vector[1] = 2
+  *(p + 1) = 2;
+  //vector[2] = 3
+  *(p + 2) = 3;
+
+  printf("El vector es %i, %i, %i.\n",
+	 vector[0], vector[1], vector[2]);
+  
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[label={sec:org2cf2319},fragile,plain]{Aritmética de punteros con vectores}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+#define N 10
+
+int main(){
+  int vector[N] = {1};
+  int *pVec, *pFin;
+  // Puntero apuntando al segundo elemento
+  pVec = vector + 1;
+  // Puntero apuntando al ultimo elemento
+  pFin = vector + N - 1;
+  // Comparamos los punteros para avanzar
+  while (pVec <=  pFin)
+    { // vector[i] = vector[i - 1] + 1
+      *pVec = *(pVec - 1) + 1; 
+      printf("%i\t", *pVec);
+      ++pVec; // Movemos el puntero por el vector
+    }
+  return 0;
+} 
+\end{lstlisting}
+\end{frame}
+
+\section{Punteros a cadenas de caracteres}
+\label{sec:org834306e}
+
+\begin{frame}[label={sec:org1f0468d},fragile]{Punteros y cadenas}
+ El identificador de una cadena es un puntero \emph{constante} que apunta al primer elemento.
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  char letras[3] = {'a', 'b', 'c'};
+  char *p;
+  // p apunta al primer elemento 
+  p = &letras[0];
+  printf("El primer elemento es %c\n", *p);
+  // De forma mas concisa
+  p = letras;
+  printf("El primer elemento es %c\n", *p);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:orgf2063e0},fragile]{Recorrido de una cadena}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+int main()
+{
+  char mensaje[] = "Hola Mundo";
+  char *p = mensaje;
+  int i = 0;
+  // Movemos el puntero por la cadena
+  while(*p != '\0')
+    {
+      printf("%c", *p);
+      p++; // Incrementa el puntero para 
+    }      // pasar al siguiente caracter
+  printf("\n");
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org6e29f03},fragile]{Aritmética de punteros con cadenas}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+  char texto[] = "Hola Mundo";
+  char *pChar = texto;
+
+  while (*pChar != '\0')
+    ++pChar; // Movemos el puntero por la cadena
+
+  // El identificador "texto" es un puntero que
+  // apunta al primer caracter de la cadena.
+  // Si lo restamos del puntero movil
+  // tenemos el total.
+  printf("La cadena tiene %i caracteres.\n",
+	 pChar - texto);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Punteros a estructuras}
+\label{sec:orgdfd423d}
+
+\begin{frame}[label={sec:orgca53829},fragile,plain]{Punteros a estructuras}
+ \begin{itemize}
+\item Un puntero a una estructura se declara igual que un puntero a un tipo simple.
+\item Para acceder a un miembro de la estructura se emplea el operador \texttt{->}.
+\end{itemize}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+typedef struct 
+{
+  int y, m, d;
+} fecha;
+
+int main(){
+  fecha f = {2000, 10, 15}, *p;
+  // p apunta a la estructura
+  p = &f;
+
+  printf("%i-%i-%i",
+	 p->d, p->m, p->y);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org6ce3372},fragile,plain]{Ejemplo}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+typedef struct 
+{
+  int y, m, d;
+} fecha;
+
+int main()
+{
+  fecha f, *p = &f;
+  // Rellenamos la estructura a través de su puntero
+  p->d = 15;
+  p->m = 10;
+  p->y = 2000;
+
+  printf("%i-%i-%i",
+	 f.d, f.m, f.y);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:orgca950ae},fragile,plain]{Ejemplo con scanf}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+typedef struct 
+{
+  int y, m, d;
+} fecha;
+
+int main()
+{
+  fecha f, *p = &f;
+  // Rellenamos la estructura a través de su puntero con
+  // scanf. Atención al uso de &.
+  scanf("%i", &(p->d));
+  scanf("%i", &(p->m));
+  scanf("%i", &(p->y));
+
+  printf("%i-%i-%i",
+	 f.d, f.m, f.y);
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+
+\section{Funciones y punteros}
+\label{sec:orgc017a4d}
+\begin{frame}[label={sec:orgb07a3f6}]{Paso por referencia}
+\begin{itemize}
+\item El uso de punteros en funciones permite el \alert{paso por referencia}. De esta forma la función puede acceder (y \alert{modificar}) a la variable original (\emph{sin copia}).
+
+\item Las funciones que emplean \alert{vectores y cadenas} como argumentos funcionan con \alert{paso por referencia} (\emph{el identificador de un vector es un puntero}).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org0da62e0},fragile,plain]{Ejemplo}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+void operaciones (float x, float y,
+		  float *s, float *p, float *d);
+int main(){
+  float a = 1.0, b = 2.0; // Datos
+  float suma, producto, division; // Resultados
+  operaciones(a, b, &suma, &producto, &division);
+  printf("S: %f \t P: %f \t D: %f \t",
+	 suma, producto, division);
+  return 0;
+}
+//Funcion con varios resultados
+void operaciones (float x, float y,
+		  float *s, float *p, float *d)
+{// Cada puntero sirve para un resultado
+  *s = x + y;
+  *p = x * y;
+  *d = x / y;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Asignación dinámica de memoria}
+\label{sec:org1f0590b}
+
+\begin{frame}[label={sec:org0069d21},fragile]{\texttt{malloc} y \texttt{free}}
+ \begin{itemize}
+\item La \alert{asignación dinámica} de memoria permite definir \alert{objetos (p.ej. vectores) de dimensión variable}.
+\item La función \texttt{malloc} permite asignar, durante la ejecución del programa, un bloque de memoria de n bytes consecutivos para almacenar los datos (devuelve \texttt{NULL} si no es posible la asignación)
+\item La función \texttt{free} permite liberar un bloque de memoria previamente asignado.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org50f278d},fragile]{Uso de \texttt{malloc} y \texttt{free}}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int *pInt;
+...
+// Reservamos la memoria suficiente para almacenar 
+// un int y asignamos su dirección a pInt
+pInt = malloc(sizeof(int));
+
+// Comprobamos si la asignación 
+// se ha realizado correctamente
+if (pInt  == NULL) {
+      printf("Error: memoria no disponible.\n");
+      exit(-1);
+}
+
+... // Codigo usando el puntero
+
+free(pInt); // Liberamos memoria al terminar
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:org5ed60f1},fragile,plain]{Ejemplo}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+#include <stdlib.h> //Necesaria para malloc y free
+int main () {
+  int *vec, i, N = 100;
+  vec = malloc(sizeof(int) * N);
+  //Comprueba si malloc ha funcionado
+  if (vec == NULL) {
+      printf("Error: memoria no disponible.\n");
+      exit(-1);
+    }
+  // El resultado es un puntero-vector de N elementos
+  for (i = 0; i < N; ++i) 
+    vec[i] = i * i; // Rellenamos el puntero-vector
+  for (i = 0; i < N; ++i) // Mostramos contenido
+    printf("%i \t", *(vec + i));
+  free(vec); // Liberamos el puntero-vector
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+\end{document}

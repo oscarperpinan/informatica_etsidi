@@ -1,0 +1,401 @@
+% Created 2022-02-02 mié 21:03
+% Intended LaTeX compiler: pdflatex
+\documentclass[xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[spanish]{babel}
+\usecolortheme{rose}
+\setbeamercolor{alerted text}{fg=DarkBlue}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
+\setbeamercolor{block body}{use=block title,bg=block title.bg}
+\setbeamertemplate{navigation symbols}{\insertsectionnavigationsymbol}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
+\AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded]\end{frame}}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={¡}{{\textexclamdown}}1 {á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {í}{{\'i}}1 {ú}{{\'u}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
+\usepackage{mathpazo}
+\usepackage{siunitx}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\setbeamertemplate{footline}[frame number]
+\usetheme{Boadilla}
+\usefonttheme{serif}
+\author{Oscar Perpiñán Lamigueiro}
+\date{}
+\title{Tema 6: Funciones}
+\hypersetup{
+ pdfauthor={Oscar Perpiñán Lamigueiro},
+ pdftitle={Tema 6: Funciones},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+
+\section{Definición de función}
+\label{sec:org11397a3}
+\begin{frame}[label={sec:org359f385}]{¿Qué es una función?}
+\begin{block}{}
+Una función es un bloque de código que realiza una tarea determinada a partir de unos datos.
+\end{block}
+\begin{block}{Ventajas}
+\begin{itemize}
+\item Permiten \alert{programación estructurada y abstracta}, sin necesidad de conocer
+el detalle de la implementación de una tarea concreta.
+\item Mejoran la \alert{legibilidad} del código.
+\item Facilitan el \alert{mantenimiento} del programa.
+\item Permiten \alert{reutilizar código} de manera eficiente (\alert{DRY!}).
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org92612dd},fragile]{¿Cómo se declara una función?}
+ \begin{block}{Prototipo de una función:}
+\begin{enumerate}
+\item Tipo de valor que devuelve (\texttt{int}, \texttt{void}, \ldots{})
+\item Nombre de la función (debe ser un identificador válido y \alert{útil}).
+\item Lista de argumentos que emplea, por tipo y nombre (puede estar vacía).
+\end{enumerate}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+tipo nombre_funcion(tipo1 arg1, tipo2 arg2, ...);
+\end{lstlisting}
+\end{block}
+\begin{block}{Ejemplos}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+void printHello(int veces);
+
+float areaTriangulo(float b, float h);
+\end{lstlisting}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orge4a3c88},fragile]{¿Cómo se define una función?}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+// Definicion de la funcion printHello
+
+// No devuelve nada (void)
+
+// Necesita un argumento llamado veces,
+// un entero (int), para funcionar.
+
+void printHello(int veces)
+{
+  int i;
+  for (i = 1; i <= veces; i++)
+    printf("Hello World!\n");
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[label={sec:orged7b549},fragile]{¿Cómo se define una función?}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+// Definicion de la funcion areaTriangulo
+
+// Devuelve un real (float)
+
+// Necesita dos argumentos, b y h, reales.
+
+float areaTriangulo(float b, float h)
+{
+  float area;
+
+  area = b * h / 2.0;
+
+  return area;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Estructura de un programa}
+\label{sec:orgfd8b3e2}
+
+\begin{frame}[label={sec:org49ae446},fragile]{Estructura de un programa}
+ \begin{itemize}
+\item \emph{Puede} incluir directivas de inclusión (\texttt{include}).
+\item \emph{Puede} incluir directivas de sustitución (\texttt{define}).
+\item Declaración de funciones (prototipo).
+\item Todos los programas tienen al menos una función: \texttt{main}.
+\item Definición de las funciones.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgce2e879},fragile]{Directivas de inclusión \texttt{include}}
+ Permiten incluir cabeceras (definiciones) procedentes de otros archivos
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+//Librerias del sistema
+#include <stdio.h>
+#include <math.h>
+//Librerias propias del desarrollador
+#include "myHeader.h"
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[label={sec:org542126c},fragile]{Directivas de sustitución \texttt{define}}
+ \begin{itemize}
+\item \texttt{define} permite definir símbolos que serán sustituidos por su valor.
+\end{itemize}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+//Habitualmente con mayúsculas
+//Atención: SIN signo igual NI punto y coma
+#define PI 3.141592
+
+int main()
+{
+  float r = 2.0;
+  printf("Una circunferencia de radio %f", r);
+  printf(" tiene un area de %f", PI * r * r);
+  return 0;
+}
+\end{lstlisting}
+
+\begin{itemize}
+\item \texttt{undef} elimina la definición del símbolo.
+\end{itemize}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#undef PI
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[label={sec:org5167c5b},fragile,plain]{Declaración y definición de funciones}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+// Prototipo de la función (termina en ;)
+void printHello(int n);
+
+// Función main
+int main() {
+  //Uso de la función en main
+  printHello(3);
+  return 0;
+}
+// Definición de la función
+void printHello(int n)
+{
+  int i;
+  for (i = 1; i <= n; i++)
+    printf("Hello World!\n");
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgf7eaa07},fragile,plain]{Declaración y definición de funciones}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+// Prototipo de la función (termina en ;)
+float areaTriangulo(float b, float h);
+// Función main
+int main(){
+  float at;
+  //Uso de la función en main
+  at = areaTriangulo(1, 2);
+  printf("%f", at);
+  return 0;
+}
+// Definición de la función
+float areaTriangulo(float b, float h)
+{
+  float area;
+  area = b * h / 2.0;
+  return area;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Ámbito de una variable}
+\label{sec:org149900e}
+
+\begin{frame}[label={sec:orgd4529b5},fragile,plain]{Variables globales}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int gVar = 3; //Variable global
+
+void foo(void);
+
+int main(){
+  printf("main (1):\t gVar es %d.\n", gVar);
+  foo();
+  gVar *= 2;
+  printf("main (2):\t gVar es %d.\n", gVar);
+  return 0;
+}
+
+void foo(void){
+  gVar = gVar + 1;
+  printf("foo:\t gVar es %d.\n", gVar);
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:orgc494eea},fragile,plain]{Variables locales}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+void foo(void);
+
+int main()
+{
+  int x = 1; // variable local en main
+  printf("main (1):\t x es %d.\n", x);
+  foo();
+  printf("main (2):\t x es %d.\n", x);
+  return 0;
+}
+
+void foo(void)
+{
+  int x = 2; // variable local en foo
+  printf("foo:\t x es %d.\n", x);
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Funciones que llaman a otras funciones}
+\label{sec:org1ef430d}
+
+\begin{frame}[label={sec:org3ca1f6d},fragile,plain]{Ejemplo}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+#define PI 3.141592
+
+float eleva3(float x);
+float volEsfera(float r);
+
+int main(){
+  float radio, vol;
+  scanf("%f", &radio);
+  vol = volEsfera(radio);
+  printf("El volumen es %f", vol);
+  return 0;
+}
+float volEsfera(float r){ //Usa eleva3
+  return 4.0/3.0 * PI * eleva3(r);
+}
+float eleva3(float x){
+  return x * x * x;
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[label={sec:orgc1f236f},fragile,plain]{Funciones recursivas}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int fact(int n);
+
+int main(){
+  int x;
+  printf("Indica un número:\n");
+  scanf("%d", &x);
+  printf("El factorial de %d es %d\n", x, fact(x));
+  return 0;
+}
+int fact(int n){
+  int res;
+  if (n > 1) // Incluye llamada a si misma
+    res = n * fact(n - 1);
+  else
+    res = 1;
+  return res;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Funciones en ficheros}
+\label{sec:orgb015608}
+\begin{frame}[label={sec:org2b6659c},fragile]{Motivación y uso}
+ \begin{block}{Motivación}
+Para poder reutilizar las funciones definidas es conveniente alojarlas
+en un fichero (o colección de ficheros) que puedan ser incluidos en
+otros proyectos.
+\end{block}
+
+\begin{block}{Uso}
+\begin{itemize}
+\item Debe existir un (o varios) fichero(s) \texttt{.h} (cabecera) y un fichero \texttt{.c} (código fuente, implementación de las funciones).
+\item Se debe usar \texttt{\#include "nombre\_lib.h"} al comienzo del programa.
+\item Hay que compilar conjuntamente (\emph{en un proyecto}).
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org9dc3dd9},fragile]{Ejemplo (1)}
+ \begin{block}{Fichero \texttt{myLib.h} (cabecera)}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#define PI 3.141592
+
+float eleva3(float x);
+float volEsfera(float r);
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Fichero \texttt{myLib.c} (código fuente)}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include "myLib.h"
+
+float volEsfera(float r){
+  return 4.0/3.0 * PI * eleva3(r);
+}
+float eleva3(float x){
+  return x * x * x;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:orgaea0b84},fragile]{Ejemplo (2)}
+ \begin{block}{Programa principal}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+// Directiva para incluir la librería local
+#include "myLib.h" 
+
+int main()
+{
+  float radio, vol;
+  scanf("%f", &radio);
+  vol = volEsfera(radio);
+  printf("El volumen es %f", vol);
+  return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+\end{document}

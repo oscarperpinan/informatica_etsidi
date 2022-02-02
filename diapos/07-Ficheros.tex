@@ -1,0 +1,394 @@
+% Created 2022-02-02 mié 21:03
+% Intended LaTeX compiler: pdflatex
+\documentclass[xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[spanish]{babel}
+\usecolortheme{rose}
+\setbeamercolor{alerted text}{fg=DarkBlue}
+\setbeamerfont{alerted text}{series=\bfseries}
+\setbeamerfont{block title}{series=\bfseries}
+\setbeamercolor{block title}{bg=structure.fg!20!bg!50!bg}
+\setbeamercolor{block body}{use=block title,bg=block title.bg}
+\setbeamertemplate{navigation symbols}{\insertsectionnavigationsymbol}
+\AtBeginSection[]{\begin{frame}[plain]\tableofcontents[currentsection,sectionstyle=show/shaded]\end{frame}}
+\AtBeginSubsection[]{\begin{frame}[plain]\tableofcontents[currentsubsection,sectionstyle=show/shaded,subsectionstyle=show/shaded]\end{frame}}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={¡}{{\textexclamdown}}1 {á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {í}{{\'i}}1 {ú}{{\'u}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
+\usepackage{mathpazo}
+\usepackage{siunitx}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\setbeamertemplate{footline}[frame number]
+\usetheme{Boadilla}
+\usefonttheme{serif}
+\author{Oscar Perpiñán Lamigueiro}
+\date{}
+\title{Tema 7: Ficheros}
+\hypersetup{
+ pdfauthor={Oscar Perpiñán Lamigueiro},
+ pdftitle={Tema 7: Ficheros},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+
+
+\section{Introducción}
+\label{sec:org70941e3}
+
+\begin{frame}[label={sec:orgcec8fb0}]{Introducción}
+\begin{itemize}
+\item Hasta ahora:
+\begin{itemize}
+\item Introducción de datos desde el \alert{teclado}.
+\item Presentación de datos en \alert{pantalla}.
+\item \alert{Los datos se pierden} cuando finaliza el programa.
+\end{itemize}
+\item Ahora vamos a ver:
+\begin{itemize}
+\item \alert{Almacenamiento de datos} en ficheros que pueden ser leídos por el programa.
+\item \alert{Operaciones con ficheros}: apertura, lectura y/o escritura, y cierre.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgdf3e8f1},fragile]{Tipo \texttt{FILE}}
+ En C se emplea la estructura de datos de tipo \texttt{FILE} (declarada en \texttt{stdio.h}):
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main ()
+{
+  FILE *pf;
+
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Lectura y escritura de ficheros}
+\label{sec:org26dfb61}
+\begin{frame}[label={sec:org5a26dd0},fragile]{Abrir un fichero: \texttt{fopen}}
+ \texttt{fopen} abre un fichero para para leer y/o escribir en él.
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+FILE *fopen (const char *nombre, const char *modo);
+\end{lstlisting}
+
+\begin{itemize}
+\item \texttt{nombre}: nombre del fichero (\emph{debe respetar las normas del sistema operativo en el que se ejecute el programa}).
+\item \texttt{modo}: indica cómo se va a abrir el fichero:
+
+\begin{itemize}
+\item lectura: \texttt{r}
+
+\item escritura: \texttt{w}
+
+\item añadir: \texttt{a}
+\end{itemize}
+
+\item Devuelve un puntero a una estructura de tipo \texttt{FILE} o un puntero nulo \texttt{NULL} si se ha producido un error.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org2df2cc2},fragile,plain]{Ejemplo de \texttt{fopen}}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+int main ()
+{
+  FILE *pf;
+  // Atención a los separadores en la ruta del fichero, 
+  //y a las comillas dobles
+  pf = fopen("c:/ejemplos/fichero.txt", "r");
+
+  if (pf == NULL)
+    {
+      printf("Error al abrir el fichero.\n");
+      return -1;
+    }
+  else
+    {
+      printf("Fichero abierto correctamente.\n");
+      return 0;
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[label={sec:org4fa2a26},fragile]{Cerrar un fichero: \texttt{fclose}}
+ \texttt{fclose} cierra un fichero previamente abierto con \texttt{fopen}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int fclose (FILE *pf);
+\end{lstlisting}
+
+\begin{itemize}
+\item El puntero \texttt{pf}, de tipo \texttt{FILE}, apunta al fichero.
+\item La función devuelve 0 si el fichero se cierra correctamente o \texttt{EOF} si se ha producido un error.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org60b289b},fragile]{Escritura de ficheros: \texttt{fprintf}}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int fprintf(FILE *stream, const char *format, ...)
+\end{lstlisting}
+
+\begin{itemize}
+\item Escribe en un fichero con el formato especificado (\alert{igual que \texttt{printf}})
+
+\item Devuelve el número de caracteres escritos, o un valor negativo si ocurre un error.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgc078ed1},fragile,plain]{Ejemplo de \texttt{fprintf}}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+  FILE *pf;
+  int vals[3] = {1, 2, 3};
+  // Abrimos fichero para escritura
+  pf = fopen("datos.txt", "w");
+  if (pf == NULL) {// Si el resultado es NULL mensaje de error 
+    printf("Error al abrir el fichero.\n");
+    return -1;
+  }
+  else {// Si ha funcionado, comienza escritura
+    fprintf(pf, "%i, %i, %i",
+	    vals[0], vals[1], vals[2]);
+    fclose(pf); // Cerramos fichero
+    return 0;
+  }
+}
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[label={sec:org1357c97},fragile]{Lectura de ficheros: \texttt{fscanf}}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int fscanf(FILE *stream, const char *format, ...)
+\end{lstlisting}
+
+\begin{itemize}
+\item Lee desde un fichero con el formato especificado (\alert{igual que \texttt{scanf}})
+
+\item Devuelve el número de argumentos que han sido leídos y asignados o \texttt{EOF}\footnote{\texttt{EOF} (\emph{End Of File}) es la marca de final de fichero.} si se detecta el final del fichero.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgc15ffbe},fragile,plain]{Ejemplo de \texttt{fscanf}}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  int i, n, vals[3];
+  FILE *pf;
+  // Abrimos fichero para lectura
+  pf = fopen("datos.txt", "r");
+  // Leemos datos separados por comas
+  n = fscanf(pf, "%i, %i, %i",
+	 &vals[0], &vals[1], &vals[2]);
+  printf("Se han leído %i argumentos.\n", n);
+  fclose(pf);
+  // Mostramos en pantalla lo leído
+  for (i = 0; i < 3; i++)
+    printf("%i\t", vals[i]);
+
+  return(0);
+}
+\end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[label={sec:orgefc144a},fragile]{Lectura de datos con separadores}
+ Si en un fichero hay datos numéricos junto con cadenas de caracteres, hay que usar \texttt{[\textasciicircum{}X]}, donde \texttt{X} es el carácter empleado como separador. 
+
+Por ejemplo, para leer datos separados por punto y coma empleamos: \texttt{[\textasciicircum{};]}
+
+\begin{block}{Ejemplo}
+Sea un fichero con el siguiente contenido:
+\begin{quote}
+Jorge Rodríguez; Profesor; 35; 84.4
+\end{quote}
+
+Para leerlo:
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+fscanf(pf, "%[^;];%[^;];%d;%f\n",
+       nombre, tipo, &edad, &peso);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:orgadc4b1b},fragile]{Marca de final de fichero \texttt{EOF}}
+ \begin{itemize}
+\item Cuando se crea un fichero nuevo con \texttt{fopen} se añade automáticamente al final la marca de fin de fichero \texttt{EOF} (\emph{end of file}).
+\item Es una marca escrita al final de un fichero que indica que no hay más datos.
+\item Cuando se realizan operaciones de lectura o escritura es necesario comprobar si se ha alcanzado esta marca.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgf206d10},fragile]{Comprobación de \texttt{EOF}}
+ \begin{itemize}
+\item \texttt{feof} detecta el final del fichero: devuelve un valor distinto de cero después de la primera operación que intente leer después de la marca final del fichero.
+\end{itemize}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+while (feof(pf) == 0)
+{
+// Operaciones de L/E
+}
+\end{lstlisting}
+
+\begin{itemize}
+\item \texttt{fscanf} y \texttt{fprintf} devuelven \texttt{EOF} cuando alcanzan la marca. Se puede emplear directamente este resultado (sin necesidad de \texttt{feof})
+\end{itemize}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+while(fscanf(...) !=EOF )
+{
+// Sentencias
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[label={sec:orgbbceb10},fragile]{Ejemplo: número de líneas de un fichero}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  int i, nLineas = 0;
+  char x; // Variable auxiliar
+  FILE *pf;
+  pf = fopen("lorem_ipsum.txt", "r");
+  // Leemos caracter a caracter
+  while (fscanf(pf, "%c", &x) != EOF)
+    //Si lo leído es un salto de línea
+      if (x == '\n')
+	//incrementamos el contador
+	++nLineas;
+  printf("%i", nLineas);
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+
+\section{Miscelánea}
+\label{sec:org9b8ba8a}
+\begin{frame}[label={sec:orgb974ce7},fragile]{stdin, stdout, and stderr}
+ \begin{itemize}
+\item Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo \texttt{FILE}):
+
+\begin{itemize}
+\item \texttt{stdin}: entrada estándar del programa (habitualmente el teclado).
+
+\item \texttt{stdout}: salida estándar del programa (habitualmente la pantalla).
+
+\item \texttt{stderr}: fichero estándar de error.
+\end{itemize}
+\end{itemize}
+
+\begin{block}{Ejemplo}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main(){
+  printf("hello there.\n");
+  fprintf(stdout, "hello there.\n");
+  return 0;
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[label={sec:org9dd02de},fragile,plain]{Movimiento en un fichero}
+ \begin{block}{\texttt{fseek}}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int fseek(FILE *stream, long int offset, int whence)
+\end{lstlisting}
+
+\begin{itemize}
+\item Desplaza a una posición en un fichero
+\item \texttt{offset} (long): valor (en bytes) a ir desde \texttt{whence}
+\item \texttt{whence}:
+\begin{itemize}
+\item \texttt{SEEK\_SET} Comienzo del fichero
+\item \texttt{SEEK\_CUR} Posición actual
+\item \texttt{SEEK\_END} Final del fichero
+\end{itemize}
+\end{itemize}
+\end{block}
+
+\begin{block}{\texttt{ftell}}
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+long int ftell(FILE *stream)
+\end{lstlisting}
+
+\begin{itemize}
+\item Devuelve la posición actual respecto del inicio del fichero.
+\item Las unidades suelen ser \alert{bytes}.
+\item Es una función de tipo \texttt{long}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org49cd459},fragile]{Ejemplo: nº de bytes de un fichero}
+ \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+#include <stdio.h>
+
+int main()
+{
+  long int fsize; // tamaño del fichero
+  FILE *pf;
+  pf = fopen("datos.txt", "r");
+  // Desplaza al final
+  fseek(pf, 0, SEEK_END);
+  //Almacena la posición
+  fsize = ftell(pf);
+  printf("El fichero tiene %li bytes.\n",
+	 fsize);
+  return 0;
+}
+\end{lstlisting}
+\end{frame}
+\end{document}
