@@ -9,7 +9,7 @@
   :END:
 
 #+BEGIN_EXPORT latex
-\href{https://www.youtube.com/watch?v=nKIu9yen5nc}{\includegraphics[height=0.9\textheight]{figs/steve-jobs-quote.jpg}}
+\href{https://www.youtube.com/watch?v=QvyTEx1wyOY}{\includegraphics[height=0.9\textheight]{figs/steve-jobs-quote.jpg}}
 #+END_EXPORT
 
 * ¿Qué hay dentro de un ordenador?
@@ -27,7 +27,7 @@
   :END:
 
 #+BEGIN_EXPORT latex
-\href{https://youtu.be/DKGZlaPlVLY}{\includegraphics[height=0.9\textheight]{figs/HowComputersWork.png}}
+\href{https://youtu.be/DKGZlaPlVLY?t=42}{\includegraphics[height=0.9\textheight]{figs/HowComputersWork.png}}
 #+END_EXPORT
 
 * Algoritmo y Programa Informático 
