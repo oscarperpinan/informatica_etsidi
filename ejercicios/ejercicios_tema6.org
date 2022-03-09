@@ -177,7 +177,7 @@ float dist (float x1, float y1, float x2, float y2);
 #include <stdio.h>
 #include <math.h>
 
-float dist (float x1, float y1, float x2, float y2);
+double dist (float x1, float y1, float x2, float y2);
 
 int main()
 {
@@ -196,9 +196,9 @@ int main()
   return 0;
 }
 
-float dist (float x1, float y1, float x2, float y2)
+double dist (float x1, float y1, float x2, float y2)
 {
-  float dx2, dy2, d;
+  double dx2, dy2, d;
   dx2 = pow(x1 - x2, 2);
   dy2 = pow(y1 - y2, 2);
   d = sqrt(dx2 + dy2);
@@ -311,7 +311,7 @@ En la serie de Fibonacci los dos primeros números son 1, y el resto se obtiene 
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int fib(int n);
+long long int fib(int n);
 
 int main()
 {
@@ -320,14 +320,14 @@ int main()
   scanf("%d", &num);
 
   for (i = 1; i <= num; i++)
-    printf("%d \t %d\n",
+    printf("%d \t %lld\n",
 	   i, fib(i));
   return 0;
 }
 
-int fib(int n)
+long long int fib(int n)
 {
-  int res;
+  long long int res;
   if (n == 1 || n == 2)
     res = 1;
   else
@@ -342,10 +342,10 @@ int fib(int n)
 Escribe un programa que calcule la aproximación de $e ^ {-x}$ mediante el desarrollo de Taylor:
 
 \[
-e^{-x} = 1 + \sum_{i = 1}^\infty \frac{(-x)^n}{n!}
+e^{-x} = 1 + \sum_{i = 1}^N \frac{(-x)^i}{i!}
 \]
 
-El programa estará construido en base a tres funciones: =factorial= calcula el factorial de un número entero =n=; =potencia= calcula la potencia =n= de un número real =x=; =exponencial= calcula la aproximación anterior de un número real =x= usando =n= términos de la serie de Taylor. Sus prototipos son:
+El programa estará construido en base a tres funciones: =factorial= calcula el factorial de un número entero =n=; =potencia= calcula la potencia =n= de un número real =x=; =exponencial= calcula la aproximación anterior de un número real =x= usando =N= términos de la serie de Taylor. Sus prototipos son:
 
 #+BEGIN_SRC C :exports code
 float exponencial(float x, int n);
