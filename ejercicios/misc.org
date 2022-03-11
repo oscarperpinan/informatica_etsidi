@@ -55,6 +55,28 @@ La función =system= (de la librería =stdlib=) permite ejecutar comandos del si
 printf("\x1b[2J");
 #+end_src
 
+* Mostrar caracteres gráficos
+
+  Para mostrar caracteres gráficos sin utilizar ninguna librería, se puede recurrir a los códigos Unicode. La lista completa está [[https://en.wikipedia.org/wiki/Unicode#Standardized_subsets][aquí]].
+
+  Por ejemplo:
+
+  #+begin_src C
+#include <stdio.h>
+
+int main()
+{
+  printf("%s\n", "\u259B\u2594\u259C");
+  printf("%s", "\u2599\u2581\u259F");
+
+  return 0;
+}
+  #+end_src
+
+  #+RESULTS:
+  | ▛▔▜ |
+  | ▙▁▟ |
+
 * Introducir una pausa de una duración determinada
 
 Ejemplo extraído de https://www.geeksforgeeks.org/time-delay-c/:
