@@ -64,7 +64,7 @@ int main()
 
 * Distancia 
 
-- Escribe un programa que calcule la distancia entre dos puntos del espacio utilizando vectores de dimensión 2 para codificar los puntos. 
+- Escribe un programa que calcule la distancia entre dos puntos del plano utilizando vectores de dimensión 2 para codificar los puntos. 
 
 #+BEGIN_SRC C 
 #include <stdio.h>
