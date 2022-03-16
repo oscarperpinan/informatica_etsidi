@@ -378,7 +378,7 @@ float exponencial (float x, int n)
 {
   int i;
   float suma = 1;
-  for (i = 1; i < n; i++)
+  for (i = 1; i <= n; i++)
     {
       suma += potencia(-x, i) / factorial(i);
     }
