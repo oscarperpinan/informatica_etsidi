@@ -113,6 +113,53 @@ int main()
 | El | elemento | 3 | es |  4.3 |
 | El | elemento | 4 | es | 9.01 |
 
+** Asignación de valores
+
+   
+*** No se pueden asignar vectores completos
+    #+begin_src C
+#include <stdio.h>
+int main(){
+  int v1[5];
+  // Error
+  v1 = {1, 2, 3, 4, 5};
+  return 0;
+}
+
+    #+end_src
+
+    #+begin_src C
+#include <stdio.h>
+int main(){
+  int v1[5] = {1, 2, 3, 4, 5}, v2[5];
+  // Error
+  v2 = v1;
+  return 0;
+}
+
+    #+end_src
+
+    #+RESULTS:
+
+
+** Asignación de valores
+    
+*** La asignación debe ser elemento a elemento
+    #+begin_src C
+#include <stdio.h>
+int main(){
+  int v1[5], i;
+
+  for (i = 0; i < 5; i++)
+    v1[i] = 1;
+  
+  return 0;
+}
+
+    #+end_src
+
+    #+RESULTS:
+
 ** Operaciones con vectores
 *** Suma de dos vectores
 
@@ -259,7 +306,8 @@ void imprime(int v[], int n)
    :PROPERTIES:
    :beamer_opt: plain
    :END:
-La función *puede modificar* el contenido de los elementos del vector ya que conoce la dirección de memoria donde están almacenados.
+
+   La función *puede modificar* el contenido de los elementos del vector ya que conoce la dirección de memoria donde están almacenados.
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -274,7 +322,6 @@ int main()
   printf("Después: %d\n", x[0]);
   return 0;
 }
-
 void toy(int vector[]){ 
   //Funcion simple que modifica el valor del primer elemento
   vector[0] = 100;
@@ -516,6 +563,27 @@ int main() {
 
 #+RESULTS:
 : HOLA
+** Funciones y cadenas
+Una función acepta una cadena como argumento: *paso por referencia* (igual que un vector).
+
+#+BEGIN_SRC C
+#include <stdio.h>
+void imprime(char cadena[]); 
+
+int main() {
+  char saludo[]="Hola";
+  imprime(saludo);
+  return 0;
+}
+void imprime(char cadena[]) {
+  int i=0;
+  while(cadena[i]!='\0') {
+      printf("%c", cadena[i]);
+      i++;
+    }
+  printf("\n");
+}
+#+END_SRC
 ** Librería =string.h=
 
 *** 
@@ -646,27 +714,6 @@ return 0;
 | strcmp(s1 | s2) = 32 |
 | strcmp(s1 | s3) = -1 |
 
-** Funciones y cadenas
-Una función acepta una cadena como argumento: *paso por referencia* (igual que un vector).
-
-#+BEGIN_SRC C
-#include <stdio.h>
-void imprime(char cadena[]); 
-
-int main() {
-  char saludo[]="Hola";
-  imprime(saludo);
-  return 0;
-}
-void imprime(char cadena[]) {
-  int i=0;
-  while(cadena[i]!='\0') {
-      printf("%c", cadena[i]);
-      i++;
-    }
-  printf("\n");
-}
-#+END_SRC
 * Matrices
 ** Matrices
 *** 
