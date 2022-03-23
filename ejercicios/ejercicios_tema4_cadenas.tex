@@ -1,0 +1,89 @@
+% Created 2022-03-23 mié 11:29
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[spanish]{babel}
+\usepackage[usenames,svgnames,dvipsnames]{xcolor}
+\usepackage{listings}
+\lstset{keywordstyle=\color{blue}, commentstyle=\color{gray!90}, basicstyle=\ttfamily\small, columns=fullflexible, breaklines=true,linewidth=\textwidth, backgroundcolor=\color{gray!23}, basewidth={0.5em,0.4em}, literate={¡}{{\textexclamdown}}1 {á}{{\'a}}1 {ñ}{{\~n}}1 {é}{{\'e}}1 {ó}{{\'o}}1 {í}{{\'i}}1 {ú}{{\'u}}1 {º}{{\textordmasculine}}1, showstringspaces=false}
+\usepackage{mathpazo}
+\hypersetup{colorlinks=true, linkcolor=Blue, urlcolor=Blue}
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\tiny, formatcom = {\color{black!70}}}
+\date{}
+\title{Ejercicios del Tema 4\\\medskip
+\large Cadenas de caracteres}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={Ejercicios del Tema 4},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+
+\section{Palabra al revés}
+\label{sec:org549883f}
+
+Escribe un programa que imprima al revés una palabra introducida por teclado. (ejemplo: \texttt{casa} se convierte en \texttt{asac}).
+
+\section{Espacios por guiones}
+\label{sec:org4fed0ca}
+
+Escribe	un programa que cambie los espacios en blanco por un guión bajo \texttt{\_} en la frase siguiente:
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+  char texto[] = //Usamos \ para escribir varias lineas
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
+ orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
+ lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
+ pharetra vel erat et ornare. Duis eu lorem non leo dictum\
+ egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie\
+ risus. Vivamus sagittis commodo risus vel finibus. Vestibulum\
+ vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam\
+ orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa\
+ tortor, fermentum pretium lobortis sed, luctus vitae\
+ tortor. Suspendisse sagittis augue sit amet risus molestie, sed\
+ dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget\
+ imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit\
+ interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla\
+ facilisis mi nisi, vel pulvinar odio auctor posuere.";
+\end{lstlisting}
+
+\section{Cuenta letras}
+\label{sec:org6ec4fa1}
+
+\begin{itemize}
+\item Escribe un programa que analice la frase del ejercicio anterior representando el \textbf{número de vocales} que contiene mediante líneas de asteriscos.
+
+\item Escribe una versión del programa construida en base a dos funciones, \texttt{cuentaLetra} y \texttt{pintaAsteriscos}.
+La función \texttt{cuentaLetra} tiene dos argumentos. Uno define la letra a buscar y el otro es el texto en el que hay que buscar. Esta función devuelve un número entero indicando el número de veces que se ha repetido la letra pasado por el argumento dentro de un texto.
+La función \texttt{pintaAsteriscos} recibe un número entero, y escribe tantos asteriscos como se indique en ese número.
+Los prototipos son:
+\end{itemize}
+
+\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
+\begin{lstlisting}
+int cuentaLetra(char x, char texto[]);
+
+void pintaAsteriscos(int n);
+\end{lstlisting}
+\end{document}
