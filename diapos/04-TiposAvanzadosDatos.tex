@@ -1,4 +1,4 @@
-% Created 2022-03-21 lun 20:14
+% Created 2022-03-30 mié 10:34
 % Intended LaTeX compiler: pdflatex
 \documentclass[xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
@@ -50,8 +50,8 @@
 \maketitle
 
 \section{Vectores}
-\label{sec:orga9fa198}
-\begin{frame}[label={sec:orgc1aa3ab},fragile]{Vectores en C}
+\label{sec:org6cace3d}
+\begin{frame}[label={sec:org1cbe749},fragile]{Vectores en C}
  \begin{block}{Definición}
 Conjunto de valores numéricos del mismo tipo
 \end{block}
@@ -70,7 +70,7 @@ Conjunto de valores numéricos del mismo tipo
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org867e2ea},fragile]{Ejemplos}
+\begin{frame}[label={sec:org3d23303},fragile]{Ejemplos}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 // Declara un vector llamado miVector compuesto  por 
@@ -92,7 +92,7 @@ int miVector[] = {2, 23, 24};
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org34ac4f5},fragile]{Elementos de un vector}
+\begin{frame}[label={sec:org8364480},fragile]{Elementos de un vector}
  \begin{itemize}
 \item Se referencian con el nombre del vector seguido de un subíndice entre corchetes.
 \item El subíndice representa la posición del elemento dentro del vector.
@@ -119,7 +119,7 @@ int main(){
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org3f95fe7},fragile]{Acceso a datos de un vector}
+\begin{frame}[label={sec:org38d9080},fragile]{Acceso a datos de un vector}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -140,7 +140,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org679c19b},fragile]{Acceso a datos de un vector}
+\begin{frame}[label={sec:org4b84739},fragile]{Acceso a datos de un vector}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -161,7 +161,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org10fc169},fragile]{Asignación de valores}
+\begin{frame}[label={sec:org20f7960},fragile]{Asignación de valores}
  \begin{block}{No se pueden asignar vectores completos}
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -190,7 +190,7 @@ int main(){
 \end{frame}
 
 
-\begin{frame}[label={sec:orgf3ba38d},fragile]{Asignación de valores}
+\begin{frame}[label={sec:orgdc2eaaa},fragile]{Asignación de valores}
  \begin{block}{La asignación debe ser elemento a elemento}
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -208,7 +208,7 @@ int main(){
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org6057b99},fragile]{Operaciones con vectores}
+\begin{frame}[label={sec:orgb77a67d},fragile]{Operaciones con vectores}
  \begin{block}{Suma de dos vectores}
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -232,7 +232,7 @@ int main(){
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgf891151},fragile]{Operaciones con vectores}
+\begin{frame}[label={sec:orgb2550fe},fragile]{Operaciones con vectores}
  \begin{block}{Multiplicar un vector por una constante}
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -257,7 +257,7 @@ int main(){
 \end{frame}
 
 
-\begin{frame}[label={sec:orgdc8aa2c},fragile]{Vectores de dimensión variable}
+\begin{frame}[label={sec:org9f7a438},fragile]{Vectores de dimensión variable}
  La dimensión de un vector es un valor constante: \alert{no puede usarse una variable} para definirla.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -284,7 +284,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org47c3467},fragile]{Vectores de dimensión variable}
+\begin{frame}[label={sec:org66be14e},fragile]{Vectores de dimensión variable}
  La dimensión de un vector es un valor constante: \alert{no puede usarse una variable} para definirla.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -301,7 +301,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org8bf2929},fragile]{Vectores de Dimensión Variable}
+\begin{frame}[label={sec:orgffeb8ed},fragile]{Vectores de Dimensión Variable}
  \alert{Solución provisional}: definir un vector de dimensión suficientemente elevada y emplear sólo un número reducido de elementos.
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -323,7 +323,7 @@ int main() {
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:org5910cfd},fragile]{Funciones con vectores}
+\begin{frame}[label={sec:orgbdd855d},fragile]{Funciones con vectores}
  \begin{block}{Paso por referencia}
 Cuando un vector se pasa como argumento a una función \alert{no se pasa el vector completo} sino la \alert{dirección de memoria del primer elemento}.
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -333,7 +333,7 @@ void funcion (int vector[], int dimension);
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orge7a8d19},fragile]{Funciones con vectores}
+\begin{frame}[label={sec:org48dec1e},fragile]{Funciones con vectores}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -356,7 +356,7 @@ void imprime(int v[], int n)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org8b0155d},fragile,plain]{Funciones con vectores: paso por referencia}
+\begin{frame}[label={sec:org0163707},fragile,plain]{Funciones con vectores: paso por referencia}
  La función \alert{puede modificar} el contenido de los elementos del vector ya que conoce la dirección de memoria donde están almacenados.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -380,7 +380,7 @@ void toy(int vector[]){
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org25ea962},fragile,plain]{Otro ejemplo de funciones con vectores}
+\begin{frame}[label={sec:org12deda4},fragile,plain]{Otro ejemplo de funciones con vectores}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -406,8 +406,8 @@ void fAbs(int vector[], int n){
 \end{frame}
 
 \section{Cadenas de caracteres}
-\label{sec:org7491091}
-\begin{frame}[label={sec:org21245b6},fragile]{Cadenas de caracteres en C}
+\label{sec:org1222c9b}
+\begin{frame}[label={sec:orgffb4595},fragile]{Cadenas de caracteres en C}
  \begin{block}{Definición}
 Conjunto de caracteres individuales (\texttt{char})
 \end{block}
@@ -425,7 +425,7 @@ Conjunto de caracteres individuales (\texttt{char})
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org6d4d3c2},fragile]{Definición e Inicialización de cadenas}
+\begin{frame}[label={sec:org3124796},fragile]{Definición e Inicialización de cadenas}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 // Declara una cadena de 10 caracteres 
@@ -444,7 +444,7 @@ char cadena[5] = {72, 111, 108, 97, 0};
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org3da9445},fragile]{Definición e Inicialización de cadenas}
+\begin{frame}[label={sec:orgb5c5882},fragile]{Definición e Inicialización de cadenas}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 // Declara una cadena, *no* define dimension 
@@ -459,7 +459,7 @@ char cadena[] = {72, 111, 108, 97, 0};
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org9764f6e},fragile]{Elementos de una cadena}
+\begin{frame}[label={sec:org9310c22},fragile]{Elementos de una cadena}
  \begin{itemize}
 \item Se referencian con el nombre seguido de un subíndice entre corchetes.
 \item El subíndice representa la posición del elemento dentro de la cadena.
@@ -483,7 +483,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org6a15f69},fragile]{Asignación de valores}
+\begin{frame}[label={sec:org64422d5},fragile]{Asignación de valores}
  \begin{block}{Error}
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -509,7 +509,7 @@ cadena[4] = '\0';
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org623a9c8},fragile]{Lectura y escritura de una cadena}
+\begin{frame}[label={sec:org6b6427f},fragile]{Lectura y escritura de una cadena}
  \begin{itemize}
 \item Usamos el especificador \texttt{\%s} con \texttt{printf} y \texttt{scanf}.
 
@@ -536,7 +536,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org884208d},fragile]{Lectura de una cadena con espacios}
+\begin{frame}[label={sec:org5ac4af0},fragile]{Lectura de una cadena con espacios}
  \begin{itemize}
 \item \texttt{scanf} con \texttt{\%s} termina de leer cuando recibe un espacio o salto de línea.
 \item Para leer cadenas de caracteres que incluyan espacios se emplea el identificador \texttt{\%[\textasciicircum{}\textbackslash{}n]}
@@ -559,7 +559,7 @@ int main()
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:orgd1b80fc},fragile]{Recorrido por los elementos}
+\begin{frame}[label={sec:orgc3e6f53},fragile]{Recorrido por los elementos}
  \begin{itemize}
 \item El bucle \texttt{while} es el más indicado, usando el carácter nulo para terminar:
 \end{itemize}
@@ -583,7 +583,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org2e3fe76},fragile]{Recorrido por los elementos}
+\begin{frame}[label={sec:org09b08aa},fragile]{Recorrido por los elementos}
  \begin{itemize}
 \item También se puede usar un bucle \texttt{for} (equivalencia entre \texttt{for} y \texttt{while})
 \end{itemize}
@@ -607,7 +607,7 @@ int main()
 \end{frame}
 
 
-\begin{frame}[label={sec:orgfb4a17a},fragile,plain]{Ejemplo: pasar a mayúsculas}
+\begin{frame}[label={sec:orge1a37f5},fragile,plain]{Ejemplo: pasar a mayúsculas}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -631,7 +631,7 @@ int main() {
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:orgc4c8853},fragile]{Funciones y cadenas}
+\begin{frame}[label={sec:orgbfcc651},fragile]{Funciones y cadenas}
  Una función acepta una cadena como argumento: \alert{paso por referencia} (igual que un vector).
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -654,7 +654,7 @@ void imprime(char cadena[]) {
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:org9ce2296},fragile]{Librería \texttt{string.h}}
+\begin{frame}[label={sec:org6401f99},fragile]{Librería \texttt{string.h}}
  \begin{block}{}
 La librería \texttt{string.h} incluye numerosas funciones dedicadas a cadenas de caracteres:
 
@@ -673,7 +673,7 @@ La librería \texttt{string.h} incluye numerosas funciones dedicadas a cadenas d
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org1aa6238},fragile]{Longitud de una cadena :: \texttt{strlen}}
+\begin{frame}[label={sec:org0aabdc7},fragile]{Longitud de una cadena :: \texttt{strlen}}
  \begin{itemize}
 \item \texttt{strlen} devuelve un entero con el número de caracteres.
 \end{itemize}
@@ -697,7 +697,7 @@ int main()
 \end{frame}
 
 
-\begin{frame}[label={sec:org15318a2},fragile]{Copiar cadenas :: \texttt{strcpy}}
+\begin{frame}[label={sec:orge82e840},fragile]{Copiar cadenas :: \texttt{strcpy}}
  Con \texttt{strcpy} tenemos una solución óptima para la \alert{asignación de contenido}.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -719,7 +719,7 @@ La cadena receptora debe tener espacio suficiente: \emph{los caracteres sobrante
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org214bc49},fragile]{Concatenar cadenas :: \texttt{strcat}}
+\begin{frame}[label={sec:orgdaa07f7},fragile]{Concatenar cadenas :: \texttt{strcat}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -743,7 +743,7 @@ int main() {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orga1f0d73},fragile]{Comparación de cadenas :: \texttt{strcmp}}
+\begin{frame}[label={sec:org5212415},fragile]{Comparación de cadenas :: \texttt{strcmp}}
  \begin{itemize}
 \item \alert{Si las dos cadenas son iguales entrega un 0}.
 \end{itemize}
@@ -767,7 +767,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org75f7de7},fragile]{Comparación de cadenas :: \texttt{strcmp}}
+\begin{frame}[label={sec:org522d868},fragile]{Comparación de cadenas :: \texttt{strcmp}}
  \begin{itemize}
 \item Si hay diferencias, es positivo si el valor ASCII del primer carácter diferente es mayor en la cadena 1.
 \end{itemize}
@@ -794,8 +794,8 @@ return 0;
 \end{frame}
 
 \section{Matrices}
-\label{sec:orgd78a7a2}
-\begin{frame}[label={sec:orgb28aa28},fragile]{Matrices}
+\label{sec:org74c843f}
+\begin{frame}[label={sec:org5cedc79},fragile]{Matrices}
  \begin{block}{}
 Una matriz es un conjunto de valores del mismo tipo (\texttt{int}, \texttt{char}, \texttt{float}, etc.), de dos o más dimensiones
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -820,7 +820,7 @@ int tabla[3][3];
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgec547c8},fragile,plain]{Elementos de una matriz}
+\begin{frame}[label={sec:org49f474b},fragile,plain]{Elementos de una matriz}
  Se referencian con el nombre de la matriz seguido de tantos subíndices, entre corchetes, como dimensiones tenga la matriz.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -846,7 +846,7 @@ int main (){
 \end{frame}
 
 
-\begin{frame}[label={sec:org5200d62},fragile]{Inicialización de una matriz}
+\begin{frame}[label={sec:orga82dd16},fragile]{Inicialización de una matriz}
  Los elementos de una matriz pueden iniciarse en el momento de la declaración.
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -870,7 +870,7 @@ int main() {
 \end{frame}
 
 
-\begin{frame}[label={sec:org4b5d905},fragile]{Inicialización de una matriz}
+\begin{frame}[label={sec:org22f84a9},fragile]{Inicialización de una matriz}
  Los elementos de una matriz pueden iniciarse en el momento de la declaración.
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -893,7 +893,7 @@ return 0;
 \end{frame}
 
 
-\begin{frame}[label={sec:orge92e298},fragile,plain]{Operaciones con matrices: suma}
+\begin{frame}[label={sec:orga6d9e74},fragile,plain]{Operaciones con matrices: suma}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -918,7 +918,7 @@ int main() {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org713ba37},fragile]{Funciones con matrices}
+\begin{frame}[label={sec:orgfd76c08},fragile]{Funciones con matrices}
  \begin{itemize}
 \item Una matriz siempre se pasa por referencia: no se pasa la matriz completa sino la dirección del primer elemento.
 \end{itemize}
@@ -942,7 +942,7 @@ void funcion (int matriz[][], int nFil, int nCol);
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org6eb5c27},fragile,plain]{Ejemplo de función con matrices}
+\begin{frame}[label={sec:orgc3a2336},fragile,plain]{Ejemplo de función con matrices}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -967,7 +967,7 @@ void imprime_matriz(int M[][2], int f, int c)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orga53c454},fragile,plain]{Ejemplo de función con matrices (2)}
+\begin{frame}[label={sec:orgc09792c},fragile,plain]{Ejemplo de función con matrices (2)}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -993,8 +993,8 @@ void absMatriz(int M[][2], int f, int c) {
 
 
 \section{Estructuras}
-\label{sec:org340a79d}
-\begin{frame}[label={sec:org9ca5f4c},fragile]{Estructuras en C}
+\label{sec:orgec97b14}
+\begin{frame}[label={sec:org44c3686},fragile]{Estructuras en C}
  Permiten almacenar valores de diferentes tipos bajo un mismo identificador.
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1013,7 +1013,7 @@ struct identificador
 \end{description}
 \end{frame}
 
-\begin{frame}[label={sec:orgd0734bc},fragile]{Estructuras con \texttt{typedef struct}}
+\begin{frame}[label={sec:org185610c},fragile]{Estructuras con \texttt{typedef struct}}
  Permiten usar estructuras (u otros tipos) sin necesidad de usar la
 palabra clave \texttt{struct}.
 
@@ -1029,7 +1029,7 @@ typedef struct
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org4729837},fragile]{Ejemplo con \texttt{struct}}
+\begin{frame}[label={sec:org0b6c067},fragile]{Ejemplo con \texttt{struct}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 struct contacto
@@ -1048,7 +1048,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org52bb680},fragile]{Ejemplo con \texttt{typedef struct}}
+\begin{frame}[label={sec:orgf893c08},fragile]{Ejemplo con \texttt{typedef struct}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 typedef struct 
@@ -1066,7 +1066,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgf1297f3},fragile]{Inicialización de valores en estructuras}
+\begin{frame}[label={sec:org160b2e4},fragile]{Inicialización de valores en estructuras}
  Si no se especifica el identificador de cada componente la asignación se realiza en orden
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -1086,7 +1086,7 @@ int main ()
 \end{frame}
 
 
-\begin{frame}[label={sec:orga172c0c},fragile]{Inicialización de valores en estructuras}
+\begin{frame}[label={sec:org76e55b5},fragile]{Inicialización de valores en estructuras}
  Con el identificador de cada componente se puede asignar en cualquier orden
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -1107,7 +1107,7 @@ int main ()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgf8d0319},fragile]{Asignación de valores en estructuras}
+\begin{frame}[label={sec:org92e54c9},fragile]{Asignación de valores en estructuras}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 typedef struct {
@@ -1131,7 +1131,7 @@ int main () {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgff7b9be},fragile]{Asignación de cadenas en estructuras}
+\begin{frame}[label={sec:org85fe72b},fragile]{Asignación de cadenas en estructuras}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -1155,7 +1155,7 @@ int main ()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orga5d7dd4},fragile]{Acceso a componentes de una estructura}
+\begin{frame}[label={sec:orgda3c575},fragile]{Acceso a componentes de una estructura}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -1179,7 +1179,7 @@ int main () {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org4e22db0},fragile]{Estructuras dentro de estructuras}
+\begin{frame}[label={sec:org38315a3},fragile]{Estructuras dentro de estructuras}
  Una estructura puede contener otras estructuras.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -1200,7 +1200,7 @@ typedef struct
 \end{frame}
 
 
-\begin{frame}[label={sec:org23ea096},fragile]{Estructuras dentro de estructuras}
+\begin{frame}[label={sec:org8ca18cb},fragile]{Estructuras dentro de estructuras}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 ficha alumno1, alumno2;
@@ -1213,7 +1213,7 @@ alumno2.fNacimiento = (fecha){1, 1, 2000};
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org9a5cf6c},fragile,plain]{Vector de estructuras}
+\begin{frame}[label={sec:orgbd439b0},fragile,plain]{Vector de estructuras}
  A partir de una estructura previamente definida se pueden generar vectores basados en esa estructura.
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1238,7 +1238,7 @@ int main() {
 \end{frame}
 
 
-\begin{frame}[label={sec:orgb254889},fragile,plain]{Vector de estructuras}
+\begin{frame}[label={sec:org0992064},fragile,plain]{Vector de estructuras}
  La asignación de valores sigue las mismas reglas que para vectores de tipos simples (mediante \texttt{[]}).
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -1253,15 +1253,15 @@ typedef struct
 
 int main() {
   date fechas[3]; // Vector de 3 fechas
-  fechas[1].day = 1;
-  fechas[2] = (date) {31, 12, 1999};
-  fechas[3] = fechas[2];
+  fechas[0].day = 1;
+  fechas[1] = (date) {31, 12, 1999};
+  fechas[2] = fechas[1];
   return 0;
 }
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org48fb3f6},fragile,plain]{Funciones y estructuras}
+\begin{frame}[label={sec:org09641a8},fragile,plain]{Funciones y estructuras}
  Una función acepta estructuras (\alert{paso por valor}).
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -1287,7 +1287,7 @@ float modulo(complejo c){
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org0263ad9},fragile,plain]{Funciones y estructuras}
+\begin{frame}[label={sec:org5a32c17},fragile,plain]{Funciones y estructuras}
  Una función puede devolver una estructura
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -1314,8 +1314,8 @@ complejo conjugado(complejo c){
 \end{frame}
 
 \section{Enumeraciones}
-\label{sec:org6102d0d}
-\begin{frame}[label={sec:org78a0a50},fragile]{Enumeraciones en C}
+\label{sec:org63e5ae5}
+\begin{frame}[label={sec:org2b1f69c},fragile]{Enumeraciones en C}
  \begin{block}{Definición}
 Con \texttt{enum} se pueden definir tipos de datos enteros que tengan un rango limitado de valores, y darle un nombre significativo a cada uno de los
 posibles valores.
@@ -1336,7 +1336,7 @@ enum dia{ //valores enteros: 0 al 6
 \end{lstlisting}
 \end{block}
 \end{frame}
-\begin{frame}[label={sec:org1eb529e},fragile]{Ejemplo (1)}
+\begin{frame}[label={sec:org0a56141},fragile]{Ejemplo (1)}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -1356,7 +1356,7 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org6da6dd9},fragile]{Ejemplo (2)}
+\begin{frame}[label={sec:org11972b2},fragile]{Ejemplo (2)}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>

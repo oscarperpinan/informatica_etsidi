@@ -1152,9 +1152,9 @@ typedef struct
 
 int main() {
   date fechas[3]; // Vector de 3 fechas
-  fechas[1].day = 1;
-  fechas[2] = (date) {31, 12, 1999};
-  fechas[3] = fechas[2];
+  fechas[0].day = 1;
+  fechas[1] = (date) {31, 12, 1999};
+  fechas[2] = fechas[1];
   return 0;
 }
 #+END_SRC
