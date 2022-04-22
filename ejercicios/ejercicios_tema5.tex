@@ -1,4 +1,4 @@
-% Created 2022-04-19 mar 23:08
+% Created 2022-04-22 vie 11:43
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper]{article}
 \usepackage[utf8]{inputenc}
@@ -41,7 +41,7 @@
 
 
 \section{Cambio de dos variables}
-\label{sec:org96e3612}
+\label{sec:orgdff0ad7}
 
 Escribe un programa que, con una función que trabaja con el paso por referencia, intercambia el valor de dos variables. Emplea el siguiente prototipo:
 
@@ -52,7 +52,7 @@ void cambio (int *p, int *q);
 
 
 \section{Suma de un vector}
-\label{sec:org50becca}
+\label{sec:orgd517bcd}
 
 Diseña un programa que calcule la suma de un vector usando una función basada en punteros.
 
@@ -62,7 +62,7 @@ int sumaVector(int *vector, int n);
 \end{lstlisting}
 
 \section{Suma minutos}
-\label{sec:orgaa6208b}
+\label{sec:orgb4efba8}
 Construye un programa que añada un incremento en minutos a una hora dada en horas y minutos. Este programa utilizará una función según el siguiente prototipo. 
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -75,7 +75,7 @@ El programa recibirá por teclado los valores de hora, minutos y el incremento, 
 
 
 \section{Ecuación de segundo grado}
-\label{sec:org1c83fa8}
+\label{sec:org28a5534}
 
 Escribe un programa que resuelva una ecuación de segundo grado. En primer lugar, debe solicitar al usuario los coeficientes de la ecuación. A continuación, debe resolver la ecuación indicando el tipo de resultado: dos raíces reales, dos raíces complejas conjugadas, una raíz real doble, ecuación lineal, o error en los coeficientes. Debes usar el siguiente prototipo:
 
@@ -87,7 +87,7 @@ int raices(float a, float b, float c, float *r1, float *r2);
 donde \texttt{r1} y \texttt{r2} son las raíces de la ecuación, y la salida \texttt{int} se emplea para indicar el tipo de ecuación.
 
 \section{Suma, resta, producto y división de dos números}
-\label{sec:orge2c38ab}
+\label{sec:org5360d01}
 Escribe un programa que calcule la suma, la resta, el producto, y la división (entregando 0 en caso de división por cero) de dos números reales, utilizando una función según el siguiente prototipo:
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -99,7 +99,7 @@ El programa recibirá por teclado el valor de x e y, y mostrará en pantalla los
 
 
 \section{Cuadrantes}
-\label{sec:orgef47f72}
+\label{sec:org7fedbe3}
 Realice un programa que calcule la distancia entre dos puntos introducidos por el usuario mediante el teclado, y que decida el cuadrante en el que está localizado cada punto. El programa debe recibir por teclado las coordenadas x e y de cada punto, sin escribir ningún mensaje en pantalla. A continuación debe calcular la distancia entre los puntos, y el cuadrante de cada uno de ellos, con una función según el siguiente prototipo:
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -112,7 +112,7 @@ En esta función, \texttt{p1} es el primer punto, \texttt{p2} el segundo, \textt
 Finalmente, mostrará en pantalla los resultados en ese orden separados por un espacio.
 
 \section{Media, máximo y mínimo de un vector de datos}
-\label{sec:org433e1a2}
+\label{sec:orgb07bbc0}
 
 Escribe un programa que calcule el valor medio, el valor máximo y el valor mínimo de los datos contenidos en un vector de números reales empleando punteros. La función de cálculo debe acomodarse al siguiente prototipo:
 
@@ -126,7 +126,7 @@ Debes escribir dos versiones diferentes. La primera versión trabajará con un v
 \emph{Nota: Este ejercicio es equivalente al ejercicio 6 del capítulo 4 (vectores). En aquel caso se usa notación de vectores, y ahora se debe emplear notación de punteros. Además, allí se usan tres funciones independientes, y ahora se debe usar una única función que entrega los tres resultados.}
 
 \section{Longitud de una cadena de caracteres}
-\label{sec:org3d87f58}
+\label{sec:org09640af}
 
 Diseña un programa que calcule la longitud de una cadena de caracteres usando una función basada en punteros.
 
@@ -136,7 +136,7 @@ int stringLength(char *string);
 \end{lstlisting}
 
 \section{Copia de cadenas de caracteres}
-\label{sec:org5d53a49}
+\label{sec:orgfd59471}
 
 Diseña un programa que copie dos cadenas de caracteres usando una función basada en punteros. Esta función imita el comportamiento de la función \texttt{strcpy} de la librería \texttt{string.h} (véase el capítulo 4, diapositiva 40).
 
@@ -146,7 +146,7 @@ void copyString(char *to, char *from);
 \end{lstlisting}
 
 \section{Movimiento de un punto (estructura)}
-\label{sec:org6710acc}
+\label{sec:orgec2b9d6}
 
 Construye un programa que sirva para mover un punto contenido en el plano (usando un tipo de datos \texttt{punto}) usando funciones basada en punteros a la estructura \texttt{punto}. El programa funciona con la interacción del usuario a partir de las teclas 'w' (arriba), 'a' (izquierda), 'x' (abajo), 'd' (derecha), y sus correspondientes mayúsculas. Por ejemplo, si el usuario aprieta la tecla 'w' el punto se desplaza hacia arriba una unidad, y si aprieta 'W' se desplaza cinco unidades hacia arriba. El programa muestra en pantalla las coordenadas del punto tras cada interacción del usuario.
 El programa termina cuando el usuario pulsa la tecla 'q'.
@@ -161,11 +161,11 @@ void vertical(punto *xy, int n);
 \end{lstlisting}
 
 \section{Asignación dinámica de memoria}
-\label{sec:org44a6b01}
+\label{sec:org65f6432}
 Escribe un programa que permita al usuario rellenar un vector de dimensión variable. En primer lugar, el programa pregunta al usuario el número de elementos que tendrá el vector. A continuación, empleando asignación dinámica de memoria, el programa reservará memoria para este vector, y solicitará al usuario los valores del mismo. Finalmente, el programa mostrará el contenido de este vector.
 
 \section{Estaciones agroclimáticas}
-\label{sec:org9b45b29}
+\label{sec:org527afa1}
 
 Escriba un programa capaz de procesar información básica de unas estaciones agroclimáticas. Aunque lo habitual es que la información esté disponible en un fichero, en este ejercicio la información será introducida por teclado. En primer lugar, el usuario introducirá el número de estaciones disponibles. A continuación introducirá la información de cada estación separando por punto y coma los datos. 
 
