@@ -61,6 +61,7 @@ int sumaVector(int *vector, int n);
 #+RESULTS:
 
 #+BEGIN_SRC C
+// Solución con notación de vectores
 #include <stdio.h>
 
 int sumaVector(int *vector, int n);
@@ -82,7 +83,39 @@ int sumaVector(int *vector, int n)
 {
   int i, suma = 0;
   for (i = 0; i < n; i++)
-    suma += *(vector + i); // equivalente a vector[i]
+    suma += vector[i];
+
+  return suma;
+}
+#+END_SRC
+
+#+RESULTS:
+: La suma es 45.
+
+#+BEGIN_SRC C
+// Solución con notación de punteros
+#include <stdio.h>
+
+int sumaVector(int *vector, int n);
+
+int main()
+{
+  int vals[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+  int suma;
+
+  suma = sumaVector(vals, 9);
+
+  printf("La suma es %i.\n", suma);
+
+  return 0;
+}
+
+
+int sumaVector(int *vector, int n)
+{
+  int i, suma = 0;
+  for (i = 0; i < n; i++)
+    suma += *(vector + i); 
 
   return suma;
 }
@@ -264,6 +297,7 @@ int foo(float x, float y,
   else return 0;
 }
 #+end_src
+
 * Cuadrantes
 Realice un programa que calcule la distancia entre dos puntos introducidos por el usuario mediante el teclado, y que decida el cuadrante en el que está localizado cada punto. El programa debe recibir por teclado las coordenadas x e y de cada punto, sin escribir ningún mensaje en pantalla. A continuación debe calcular la distancia entre los puntos, y el cuadrante de cada uno de ellos, con una función según el siguiente prototipo:
 
@@ -331,6 +365,52 @@ Debes escribir dos versiones diferentes. La primera versión trabajará con un v
 /Nota: Este ejercicio es equivalente al ejercicio 6 del capítulo 4 (vectores). En aquel caso se usa notación de vectores, y ahora se debe emplear notación de punteros. Además, allí se usan tres funciones independientes, y ahora se debe usar una única función que entrega los tres resultados./
 
 #+BEGIN_SRC C
+// Solución con notación de vectores
+#include <stdio.h>
+#define N 5
+
+void stats(float *vector, int n, float *media, float *max, float *min);
+
+int main()
+{
+  float vector[N] = {1.0, 2.0, 3.0, 4.0, 5.0};
+  float media, max, min;
+
+  stats(vector, N, &media, &max, &min);
+
+  printf("Media %f, Máximo %f, Mínimo %f",
+	 media, max, min);
+
+  return 0;
+}
+
+  
+void stats(float *vector, int n, float *media, float *max, float *min)
+{
+  float suma = 0;
+  int i;
+
+  // Media
+  for (i = 0; i < n; i++)
+    suma += vector[i];
+
+  ,*media = suma / n;
+
+  // Maximo
+  ,*max = vector[0]; //El maximo inicial es el primer elemento
+  // Busca en el vector algún valor mayor
+  for (i = 0; i < n; i++)
+    if (vector[i] > *max) *max = vector[i]; // y lo sustituye si lo encuentra
+
+  //Minimo
+  ,*min = vector[0];
+  for (i = 0; i < n; i++)
+    if (vector[i] < *min) *min = vector[i];
+}
+#+END_SRC
+
+#+BEGIN_SRC C
+// Solución con notación de punteros
 #include <stdio.h>
 #define N 5
 
@@ -360,16 +440,16 @@ void stats(float *vector, int n, float *media, float *max, float *min)
   for (p = vector; p < fin; ++p)
     suma += *p;
 
-  *media = suma / n;
+  ,*media = suma / n;
 
   // Maximo
-  *max = vector[0]; //El maximo inicial es el primer elemento
+  ,*max = vector[0]; //El maximo inicial es el primer elemento
   // Busca en el vector algún valor mayor
   for (p = vector; p < fin; ++p)
     if (*p > *max) *max = *p; // y lo sustituye si lo encuentra
 
   //Minimo
-  *min = vector[0];
+  ,*min = vector[0];
   for (p = vector; p < fin; ++p)
     if (*p < *min) *min = *p;
 }
@@ -431,7 +511,7 @@ void copyString(char *to, char *from);
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int copyString(char *to, char *from);
+void copyString(char *to, char *from);
 
 int main()
 {
@@ -445,7 +525,7 @@ int main()
   return 0;
 }
 
-int copyString(char *to, char *from)
+void copyString(char *to, char *from)
 {
   while (*from != '\0')
     {
