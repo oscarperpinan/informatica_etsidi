@@ -90,7 +90,7 @@ int fclose (FILE *pf);
 #+END_SRC
 
 - El puntero =pf=, de tipo =FILE=, apunta al fichero.
-- La función devuelve 0 si el fichero se cierra correctamente o =EOF= si se ha producido un error.
+- La función devuelve 0 si el fichero se cierra correctamente o =EOF=[fn:1] si se ha producido un error.
 
 ** Escritura de ficheros: =fprintf=
 
@@ -139,7 +139,7 @@ int fscanf(FILE *stream, const char *format, ...)
 
 - Lee desde un fichero con el formato especificado (*igual que =scanf=*)
 
-- Devuelve el número de argumentos que han sido leídos y asignados o =EOF=[fn:1] si se detecta el final del fichero.
+- Devuelve el número de argumentos que han sido leídos y asignados o =EOF= si se detecta el final del fichero.
 
 
 ** Ejemplo de =fscanf=
@@ -389,4 +389,4 @@ int main()
 
 * Footnotes
 
-[fn:1]=EOF= (/End Of File/) es la marca de final de fichero.
+[fn:1]=EOF= (/End Of File/) es la marca de final de fichero. Se explica en [[*Marca de final de fichero =EOF=][la diapositiva "Marca de final de fichero"]]

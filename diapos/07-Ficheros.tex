@@ -1,6 +1,6 @@
-% Created 2022-02-02 mié 21:03
+% Created 2022-04-26 mar 18:42
 % Intended LaTeX compiler: pdflatex
-\documentclass[xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]{beamer}
+\documentclass[usenames,svgnames,dvipsnames, aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -51,9 +51,9 @@
 
 
 \section{Introducción}
-\label{sec:org70941e3}
+\label{sec:org3123be3}
 
-\begin{frame}[label={sec:orgcec8fb0}]{Introducción}
+\begin{frame}[label={sec:org1063a63}]{Introducción}
 \begin{itemize}
 \item Hasta ahora:
 \begin{itemize}
@@ -69,7 +69,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgdf3e8f1},fragile]{Tipo \texttt{FILE}}
+\begin{frame}[label={sec:org29725ed},fragile]{Tipo \texttt{FILE}}
  En C se emplea la estructura de datos de tipo \texttt{FILE} (declarada en \texttt{stdio.h}):
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -86,8 +86,8 @@ int main ()
 \end{frame}
 
 \section{Lectura y escritura de ficheros}
-\label{sec:org26dfb61}
-\begin{frame}[label={sec:org5a26dd0},fragile]{Abrir un fichero: \texttt{fopen}}
+\label{sec:orgab38bb6}
+\begin{frame}[label={sec:org5ac2112},fragile]{Abrir un fichero: \texttt{fopen}}
  \texttt{fopen} abre un fichero para para leer y/o escribir en él.
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -111,7 +111,7 @@ FILE *fopen (const char *nombre, const char *modo);
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org2df2cc2},fragile,plain]{Ejemplo de \texttt{fopen}}
+\begin{frame}[label={sec:org619bd47},fragile,plain]{Ejemplo de \texttt{fopen}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -137,7 +137,7 @@ int main ()
 \end{frame}
 
 
-\begin{frame}[label={sec:org4fa2a26},fragile]{Cerrar un fichero: \texttt{fclose}}
+\begin{frame}[label={sec:orgeec8079},fragile]{Cerrar un fichero: \texttt{fclose}}
  \texttt{fclose} cierra un fichero previamente abierto con \texttt{fopen}
 
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
@@ -147,11 +147,11 @@ int fclose (FILE *pf);
 
 \begin{itemize}
 \item El puntero \texttt{pf}, de tipo \texttt{FILE}, apunta al fichero.
-\item La función devuelve 0 si el fichero se cierra correctamente o \texttt{EOF} si se ha producido un error.
+\item La función devuelve 0 si el fichero se cierra correctamente o \texttt{EOF}\footnote{\texttt{EOF} (\emph{End Of File}) es la marca de final de fichero. Se explica en \hyperlink{sec:org48a6f15}{la diapositiva \guillemotleft{}Marca de final de fichero\guillemotright{}}} si se ha producido un error.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org60b289b},fragile]{Escritura de ficheros: \texttt{fprintf}}
+\begin{frame}[label={sec:orgb710bc8},fragile]{Escritura de ficheros: \texttt{fprintf}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 int fprintf(FILE *stream, const char *format, ...)
@@ -165,7 +165,7 @@ int fprintf(FILE *stream, const char *format, ...)
 \end{frame}
 
 
-\begin{frame}[label={sec:orgc078ed1},fragile,plain]{Ejemplo de \texttt{fprintf}}
+\begin{frame}[label={sec:org01437fa},fragile,plain]{Ejemplo de \texttt{fprintf}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -190,7 +190,7 @@ int main(){
 \end{frame}
 
 
-\begin{frame}[label={sec:org1357c97},fragile]{Lectura de ficheros: \texttt{fscanf}}
+\begin{frame}[label={sec:org40d0326},fragile]{Lectura de ficheros: \texttt{fscanf}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 int fscanf(FILE *stream, const char *format, ...)
@@ -199,12 +199,12 @@ int fscanf(FILE *stream, const char *format, ...)
 \begin{itemize}
 \item Lee desde un fichero con el formato especificado (\alert{igual que \texttt{scanf}})
 
-\item Devuelve el número de argumentos que han sido leídos y asignados o \texttt{EOF}\footnote{\texttt{EOF} (\emph{End Of File}) es la marca de final de fichero.} si se detecta el final del fichero.
+\item Devuelve el número de argumentos que han sido leídos y asignados o \texttt{EOF} si se detecta el final del fichero.
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}[label={sec:orgc15ffbe},fragile,plain]{Ejemplo de \texttt{fscanf}}
+\begin{frame}[label={sec:org92414cb},fragile,plain]{Ejemplo de \texttt{fscanf}}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -231,7 +231,7 @@ int main()
 
 
 
-\begin{frame}[label={sec:orgefc144a},fragile]{Lectura de datos con separadores}
+\begin{frame}[label={sec:org5b983e3},fragile]{Lectura de datos con separadores}
  Si en un fichero hay datos numéricos junto con cadenas de caracteres, hay que usar \texttt{[\textasciicircum{}X]}, donde \texttt{X} es el carácter empleado como separador. 
 
 Por ejemplo, para leer datos separados por punto y coma empleamos: \texttt{[\textasciicircum{};]}
@@ -251,7 +251,7 @@ fscanf(pf, "%[^;];%[^;];%d;%f\n",
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgadc4b1b},fragile]{Marca de final de fichero \texttt{EOF}}
+\begin{frame}[label={sec:org48a6f15},fragile]{Marca de final de fichero \texttt{EOF}}
  \begin{itemize}
 \item Cuando se crea un fichero nuevo con \texttt{fopen} se añade automáticamente al final la marca de fin de fichero \texttt{EOF} (\emph{end of file}).
 \item Es una marca escrita al final de un fichero que indica que no hay más datos.
@@ -260,7 +260,7 @@ fscanf(pf, "%[^;];%[^;];%d;%f\n",
 \end{frame}
 
 
-\begin{frame}[label={sec:orgf206d10},fragile]{Comprobación de \texttt{EOF}}
+\begin{frame}[label={sec:org909d046},fragile]{Comprobación de \texttt{EOF}}
  \begin{itemize}
 \item \texttt{feof} detecta el final del fichero: devuelve un valor distinto de cero después de la primera operación que intente leer después de la marca final del fichero.
 \end{itemize}
@@ -285,7 +285,7 @@ while(fscanf(...) !=EOF )
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgbbceb10},fragile]{Ejemplo: número de líneas de un fichero}
+\begin{frame}[label={sec:org4b8f497},fragile]{Ejemplo: número de líneas de un fichero}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
@@ -309,8 +309,8 @@ int main()
 \end{frame}
 
 \section{Miscelánea}
-\label{sec:org9b8ba8a}
-\begin{frame}[label={sec:orgb974ce7},fragile]{stdin, stdout, and stderr}
+\label{sec:orgbed5c56}
+\begin{frame}[label={sec:orgbe6fd7d},fragile]{stdin, stdout, and stderr}
  \begin{itemize}
 \item Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo \texttt{FILE}):
 
@@ -338,7 +338,7 @@ int main(){
 \end{frame}
 
 
-\begin{frame}[label={sec:org9dd02de},fragile,plain]{Movimiento en un fichero}
+\begin{frame}[label={sec:org30e6414},fragile,plain]{Movimiento en un fichero}
  \begin{block}{\texttt{fseek}}
 \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
@@ -371,7 +371,7 @@ long int ftell(FILE *stream)
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org49cd459},fragile]{Ejemplo: nº de bytes de un fichero}
+\begin{frame}[label={sec:org6cc4565},fragile]{Ejemplo: nº de bytes de un fichero}
  \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
 \begin{lstlisting}
 #include <stdio.h>
