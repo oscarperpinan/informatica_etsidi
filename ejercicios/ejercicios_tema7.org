@@ -6,41 +6,6 @@
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema7.pdf
 
-
-* Vectores a columnas
-
-Escribe un programa que almacene 3 vectores de 5 elementos en 3 columnas de un fichero separadas por una tabulación.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-#define N 5
-
-int main ()
-{ // Definimos tres vectores cualesquiera
-  int v1[N]={-1, 3, 5, 0, 4};
-  int v2[N]={4, 9, -8, 2, 3};
-  int v3[N]={1, 2, 3, 4, 5};
-
-  int i;
-  FILE *pf;
-  // Abrimos un fichero para escritura: si ya existe su contenido será
-  // borrado
-  pf = fopen("columnas.txt", "w");
-  // Escribimos línea a línea
-  for(i = 0; i < N; i++)
-    // Separando por tabuladores, y añadiendo un salto de línea al
-    // final
-    fprintf(pf, "%d\t%d\t%d\n",
-	    v1[i], v2[i], v3[i]);
-  fclose(pf);
-
-  return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-
-
 * Copia de ficheros
 Escribe	un programa que copie el contenido de un fichero en otro cambiando los espacios en blanco por un guión bajo =_=. Emplea el fichero =lorem_ipsum.txt= como ejemplo. (Sugerencia: revisa el ejercicio "Espacios por guiones" del capítulo 4).
 
@@ -132,6 +97,62 @@ int main()
 
 Escribe un programa que analice el texto almacenado en un fichero representando el número de vocales que contiene mediante líneas de asteriscos. Este programa debe estar construido de manera similar al ejercicio planteado en el capítulo 4, empleando dos funciones, =cuentaLetra= y =pintaAsteriscos=. Puedes usar el fichero =lorem_ipsum.txt= como ejemplo.
 
+- Versión sin asignación dinámica de memoria (procesando carácter a carácter)
+#+BEGIN_SRC C
+#include <stdio.h>
+
+void pintaAsteriscos(int n);
+
+int main()
+{
+  FILE *f;
+  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
+  char c;
+  int i, nLetra[5] = {0, 0, 0, 0, 0}; //Vector de resultados
+
+  // Abrimos el fichero para leer
+  f = fopen("lorem_ipsum2.txt", "r");
+  if (f == NULL) {
+    printf("Error al abrir el archivo origen.\n");
+    return -1;
+  } else {
+    // Recorremos el fichero hasta encontrar EOF
+    while (fscanf(f, "%c", &c) != EOF)
+      {
+	// Cuenta las apariciones de cada letra, y almacena resultados en un
+	// vector
+	for (i = 0; i < 5; i++)
+	  {
+	    if (c == vocales[i])
+		++nLetra[i];
+	  }
+      }
+    // Cerramos el fichero tras terminar la lectura
+    fclose(f);
+
+  for (i = 0; i < 5; i++)
+    { // Recorre el vector de resultados, y pinta asteriscos
+      // correspondientes a cada letra
+      printf("%c: ", vocales[i]);
+      pintaAsteriscos(nLetra[i]);
+      printf("\n");
+    }
+  return 0;
+  }
+}
+
+void pintaAsteriscos(int n)
+{
+  int i;
+  if (n > 0)
+    for (i = 1; i <= n; i++)
+      printf("*");
+}
+#+END_SRC
+
+#+RESULTS:
+
+
 - Versión con asignación dinámica de memoria
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -211,62 +232,6 @@ void pintaAsteriscos(int n)
 }
 
 #+END_SRC
-
-- Versión sin asignación dinámica de memoria (procesando carácter a carácter)
-#+BEGIN_SRC C
-#include <stdio.h>
-
-void pintaAsteriscos(int n);
-
-int main()
-{
-  FILE *f;
-  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
-  char c;
-  int i, nLetra[5] = {0, 0, 0, 0, 0}; //Vector de resultados
-
-  // Abrimos el fichero para leer
-  f = fopen("lorem_ipsum2.txt", "r");
-  if (f == NULL) {
-    printf("Error al abrir el archivo origen.\n");
-    return -1;
-  } else {
-    // Recorremos el fichero hasta encontrar EOF
-    while (fscanf(f, "%c", &c) != EOF)
-      {
-	// Cuenta las apariciones de cada letra, y almacena resultados en un
-	// vector
-	for (i = 0; i < 5; i++)
-	  {
-	    if (c == vocales[i])
-		++nLetra[i];
-	  }
-      }
-    // Cerramos el fichero tras terminar la lectura
-    fclose(f);
-
-  for (i = 0; i < 5; i++)
-    { // Recorre el vector de resultados, y pinta asteriscos
-      // correspondientes a cada letra
-      printf("%c: ", vocales[i]);
-      pintaAsteriscos(nLetra[i]);
-      printf("\n");
-    }
-  return 0;
-  }
-}
-
-void pintaAsteriscos(int n)
-{
-  int i;
-  if (n > 0)
-    for (i = 1; i <= n; i++)
-      printf("*");
-}
-#+END_SRC
-
-#+RESULTS:
-
 
 * Máximo, mínimo y promedio de variables
 
