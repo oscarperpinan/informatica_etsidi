@@ -1,7 +1,7 @@
 #+LANGUAGE:  es
 #+OPTIONS:   num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+LaTeX_CLASS: beamer
-#+LATEX_CLASS_OPTIONS: [xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]
+#+LATEX_CLASS_OPTIONS: [usenames,svgnames,dvipsnames, aspectratio=169]
 #+BEAMER_THEME: Boadilla
 #+BEAMER_FONT_THEME: serif
 #+LATEX_HEADER: \usepackage[spanish]{babel}
