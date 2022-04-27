@@ -101,44 +101,60 @@ Escribe un programa que analice el texto almacenado en un fichero representando 
 #+BEGIN_SRC C
 #include <stdio.h>
 
+int cuentaLetra(char x, char texto[]);
 void pintaAsteriscos(int n);
 
 int main()
 {
-  FILE *f;
+  FILE *pf;
+  char texto[1000];// Tamaño suficiente para la longitud del fichero
   char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
-  char c;
-  int i, nLetra[5] = {0, 0, 0, 0, 0}; //Vector de resultados
+  int i = 0, nVocales[5] = {0};
+  // Abrimos fichero
+  pf = fopen("lorem_ipsum.txt", "r");
+  if (pf == NULL)
+    {
+      printf("Error en apertura de fichero.\n");
+      return -1;
+    }
+  // Leemos fichero
+  while(fscanf(pf, "%c", &texto[i]) != EOF)
+{
+    printf("%c", texto[i]);
+    ++i;
+}
+  //Cerramos la cadena de caracteres
+  texto[i] = '\0';
+  //printf("%s\n", texto);
 
-  // Abrimos el fichero para leer
-  f = fopen("lorem_ipsum2.txt", "r");
-  if (f == NULL) {
-    printf("Error al abrir el archivo origen.\n");
-    return -1;
-  } else {
-    // Recorremos el fichero hasta encontrar EOF
-    while (fscanf(f, "%c", &c) != EOF)
-      {
-	// Cuenta las apariciones de cada letra, y almacena resultados en un
-	// vector
-	for (i = 0; i < 5; i++)
-	  {
-	    if (c == vocales[i])
-		++nLetra[i];
-	  }
-      }
-    // Cerramos el fichero tras terminar la lectura
-    fclose(f);
-
+  // Recorremos texto contando vocales
+  for (i = 0; i < 5; i++)
+    nVocales[i] = cuentaLetra(vocales[i], texto);
   for (i = 0; i < 5; i++)
     { // Recorre el vector de resultados, y pinta asteriscos
       // correspondientes a cada letra
       printf("%c: ", vocales[i]);
-      pintaAsteriscos(nLetra[i]);
+      pintaAsteriscos(nVocales[i]);
       printf("\n");
     }
+  fclose(pf);
   return 0;
-  }
+}
+
+int cuentaLetra(char x, char texto[])
+{
+  int i, n = 0;
+  int inc = 'A' - 'a';
+
+  i = 0;
+
+  while (texto[i] != '\0')
+    {
+      if (texto[i] == x || texto[i] == x + inc)// Comprueba mayúsculas y minúsculas
+        n++; // Contador de apariciones
+      i++;
+    }
+  return n;
 }
 
 void pintaAsteriscos(int n)
