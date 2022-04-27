@@ -117,15 +117,11 @@ int main()
       printf("Error en apertura de fichero.\n");
       return -1;
     }
-  // Leemos fichero
+  // Leemos fichero y almacenamos en cadena de caracteres
   while(fscanf(pf, "%c", &texto[i]) != EOF)
-{
-    printf("%c", texto[i]);
-    ++i;
-}
+      ++i;
   //Cerramos la cadena de caracteres
   texto[i] = '\0';
-  //printf("%s\n", texto);
 
   // Recorremos texto contando vocales
   for (i = 0; i < 5; i++)
