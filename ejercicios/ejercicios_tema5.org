@@ -466,6 +466,7 @@ int stringLength(char *string);
 #+END_SRC
 
 #+BEGIN_SRC C 
+//Solución con notación de punteros
 #include <stdio.h>
 
 int stringLength(char *string);
@@ -500,6 +501,40 @@ int stringLength(char *string)
 #+RESULTS:
 : Longitud 12
 
+#+begin_src C
+//Solución con notación de vectores
+#include <stdio.h>
+
+int stringLength(char *string);
+
+int main()
+{
+  int len;
+  char mensaje[] = "Hello World!";
+
+  len = stringLength(mensaje);
+  
+  printf("Longitud %i\n", len);
+
+  return 0;
+}
+
+
+int stringLength(char *string)
+{
+  // usamos una variable entera para recorrer la cadena
+  int i = 0;
+  // Nos movemos a lo largo de la cadena hasta llegar al final
+  while (string[i] != '\0')
+    ++i;
+  
+  return (i);
+}
+#+end_src
+
+#+RESULTS:
+: Longitud 12
+
 * Copia de cadenas de caracteres
 
 Diseña un programa que copie dos cadenas de caracteres usando una función basada en punteros. Esta función imita el comportamiento de la función =strcpy= de la librería =string.h= (véase el capítulo 4, diapositiva 40).
@@ -509,6 +544,7 @@ void copyString(char *to, char *from);
 #+END_SRC
 
 #+BEGIN_SRC C
+//Notación de punteros
 #include <stdio.h>
 
 void copyString(char *to, char *from);
@@ -529,17 +565,50 @@ void copyString(char *to, char *from)
 {
   while (*from != '\0')
     {
-      *to = *from;
+      ,*to = *from;
       to++;
       from++;
     }
   // Añadimos el caracter 0 como cierre de la cadena
-  *to = '\0';
+  ,*to = '\0';
 }
 #+END_SRC
 
 #+RESULTS:
 
+#+begin_src C
+//Notación de vectores
+#include <stdio.h>
+
+int copyString(char *to, char *from);
+
+int main()
+{
+  char mensaje1[] = "Hello World!";
+  char mensaje2[20];
+
+  copyString(mensaje2, mensaje1);
+  
+  printf("%s\n", mensaje2);
+
+  return 0;
+}
+
+int copyString(char *to, char *from)
+{
+  int i = 0;
+  while (from[i] != '\0')
+  {
+    to[i] = from[i];
+    i++;
+  } 
+  // Añadimos el caracter 0 como cierre de la cadena
+  to[i] = '\0';
+}
+#+end_src
+
+#+RESULTS:
+: Hello World!
 
 * Movimiento de un punto (estructura)
 
