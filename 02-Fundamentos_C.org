@@ -225,18 +225,18 @@ int main()
 #include <limits.h>
 
 int main() {
-  printf("Un int ocupa %d bytes",
-	 sizeof(int));
-  printf(" y abarca desde %d hasta %d.\n",
-	 INT_MIN, INT_MAX);
-  printf("Un long int ocupa %d bytes",
-	 sizeof(long int));
-  printf(" y abarca desde %ld hasta %ld.\n",
-	  LONG_MIN, LONG_MAX);
-  printf("Un long long int ocupa %d bytes",
-	 sizeof(long long int));
-  printf(" y abarca desde %lld hasta %lld.\n",
-	 LLONG_MIN, LLONG_MAX);
+  printf("Un int ocupa %d bytes", sizeof(int));
+  
+  printf(" y abarca desde %d hasta %d.\n", INT_MIN, INT_MAX);
+
+  printf("Un long int ocupa %d bytes", sizeof(long int));
+
+  printf(" y abarca desde %ld hasta %ld.\n", LONG_MIN, LONG_MAX);
+
+  printf("Un long long int ocupa %d bytes", sizeof(long long int));
+
+  printf(" y abarca desde %lld hasta %lld.\n", LLONG_MIN, LLONG_MAX);
+  
   return 0;
 }
 #+end_src
@@ -252,18 +252,18 @@ int main() {
 #include <limits.h>
 
 int main() {
-   printf("Un unsigned int ocupa %d bytes",
-	  sizeof(unsigned int));
-   printf(" y abarca desde 0 hasta %u.\n",
-	  UINT_MAX);
-   printf("Un unsigned long int ocupa %d bytes",
-	  sizeof(unsigned long int));
-   printf(" y abarca desde 0 hasta %lu.\n",
-	  ULONG_MAX);
-   printf("Un unsigned long long int ocupa %d bytes",
-	  sizeof(unsigned long long int));
-   printf(" y abarca desde 0 hasta %llu.\n",
-	  ULLONG_MAX);
+  printf("Un unsigned int ocupa %d bytes", sizeof(unsigned int));
+   
+  printf(" y abarca desde 0 hasta %u.\n", UINT_MAX);
+   
+  printf("Un unsigned long int ocupa %d bytes", sizeof(unsigned long int));
+   
+  printf(" y abarca desde 0 hasta %lu.\n", ULONG_MAX);
+   
+  printf("Un unsigned long long int ocupa %d bytes", sizeof(unsigned long long int));
+   
+  printf(" y abarca desde 0 hasta %llu.\n", ULLONG_MAX);
+
   return 0;
 }
 #+end_src
@@ -411,6 +411,7 @@ int main()
   printf("Escribe una letra\n");
   scanf("%c", &letra);
   printf("Has escrito letra %c\n", letra);
+
   return 0;
 }
 #+END_SRC
@@ -526,8 +527,8 @@ int main()
   y = 15;
   sum = x + y;
 
-  printf("La suma de %i con %i es %i\n",
-	 x, y, sum);
+  printf("La suma de %i con %i es %i\n", x, y, sum);
+
   return 0;
 }
 #+END_SRC
@@ -670,16 +671,12 @@ int main()
 { 
      int x = 10, y = 3; 
      
-     printf("x igual a y = %d\n", 
-	    (x == y)); 
-     printf("x distinto a y = %d\n",
-	    (x != y));     
-     printf("x mayor que y = %d\n",
-	    (x > y)); 
-     printf("x menor o igual a y = %d\n",
-	    (x <= y)); 
-     printf("x mayor o igual que y = %d\n",
-	    (x >= y)); 
+     printf("x igual a y = %d\n", (x == y)); 
+     printf("x distinto a y = %d\n", (x != y));     
+     printf("x mayor que y = %d\n", (x > y)); 
+     printf("x menor o igual a y = %d\n", (x <= y)); 
+     printf("x mayor o igual que y = %d\n", (x >= y)); 
+
      return 0;   
 }
 #+END_SRC
@@ -691,14 +688,11 @@ int main()
 { 
      int a = 3, b = 2, c = 4, d = 5; 
       
-     printf("resultado = %d\n",
-	    (a > b) && (c < d)); 
+     printf("resultado = %d\n", (a > b) && (c < d)); 
 
-     printf("resultado = %d\n",
-	    (a < 10) || (d != 5)); 
+     printf("resultado = %d\n", (a < 10) || (d != 5)); 
 
-     printf("resultado = %d\n",
-	    (a != b) && (2 * d < 8)); 
+     printf("resultado = %d\n", (a != b) && (2 * d < 8)); 
 
      return 0;	    
 } 
@@ -715,15 +709,13 @@ int main()
   int x, resto;
 
   printf("Escribe un número entero: ");
-
   scanf("%d", &x);
 
   // Calcula el resto de dividir por 2
   resto = x % 2;
 
   // Si el resto es 0, x es par.
-  printf("Es un número %s\n",
-	 (resto == 0) ? "par" : "impar");
+  printf("Es un número %s\n", (resto == 0) ? "par" : "impar");
 
   return 0;
 } 
@@ -741,11 +733,11 @@ int main() {
   int i1 = 2, i2;
   // Real a entero: pierde decimales
   i2 = f1;
-  printf("Un real %f convertido a entero %d\n", 
-	 f1, i2);
+  printf("Un real %f convertido a entero %d\n",  f1, i2);
   // Entero a real: no cambia valor
   f2 = i1;
   printf("Un entero %d convertido a real %f\n",
+
 	 i1, f2);
   return 0;
 }
@@ -768,12 +760,11 @@ int main()
   int i1 = 2, i2;
 
   f2 = (float) i1;
-  printf("Un entero %d convertido a real %f\n",
-	 i1, f2);
+  printf("Un entero %d convertido a real %f\n", i1, f2);
 
   i2 = (int) f1;
-  printf("Un real %f convertido a entero %d\n",
-	 f1, i2);
+  printf("Un real %f convertido a entero %d\n", f1, i2);
+
   return 0;
 }
 #+END_SRC
@@ -792,12 +783,10 @@ int main()
 {
   double f1 = 100;
   int i1 = 150, i2 = 100;
-  printf("Un entero, %d, dividido por un real, %f,",
-	 i1, f1);
-  printf(" produce un real, %f\n",
-	 i1 / f1);
-  printf("Un entero, %d, por un entero, %d: %d\n",
-	 i1, i2, i1 / i2);
+  printf("Un entero, %d, dividido por un real, %f,",  i1, f1);
+  printf(" produce un real, %f\n",	 i1 / f1); 
+  printf("Un entero, %d, por un entero, %d: %d\n",  i1, i2, i1 / i2);
+
   return 0;
 }
 #+END_SRC
