@@ -282,8 +282,8 @@ int main()
 #+END_SRC
 
 
-* Valores absolutos
-Escribir un programa que lea 2 números enteros e imprima un: 1 si uno de los números es igual a 8; un 2 si los 2 números son iguales al 8.
+* Comparaciones
+Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
 
 #+BEGIN_SRC C
 #include <stdio.h>
