@@ -290,7 +290,7 @@ Escribir un programa que lea 2 n√∫meros enteros e imprima: un 1 si uno de los n√
 
 int main(void)
 {
-	int a, b;
+  int a, b;
   printf("Escriba 2 numeros enteros:\n");
   scanf("%i", &a);
   scanf("%i", &b);  
@@ -298,7 +298,7 @@ int main(void)
   int resultado = (a == 8);
   resultado = resultado + (b == 8);
 	
-	printf("%d", resultado);
+  printf("%d", resultado);
 	
   return 0;
 }
