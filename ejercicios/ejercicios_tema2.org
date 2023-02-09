@@ -291,7 +291,7 @@ Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los n�
 int main(void)
 {
 	int a, b;
-	printf("Escriba 2 numeros enteros:\n");
+  printf("Escriba 2 numeros enteros:\n");
   scanf("%i", &a);
   scanf("%i", &b);  
   
@@ -312,23 +312,23 @@ Escribir un programa convierta un número de días dado por el usuario, y lo con
 
 int main()
 {
-    int days, years, weeks;
+  int days, years, weeks;
 
-		printf("Escriba un numeros grande de dias:\n");
-    scanf("%i", &days);
-    
-    years = days/365; 
-    // Nos quedamos con el resto de la division entera
-    // y lo dividimos por 7, para tener semanas
-    weeks = (days % 365)/7;
-    // Dias totales menos los que son años y semanas
-    days = days - ((years*365) + (weeks*7));
+  printf("Escriba un numeros grande de dias:\n");
+  scanf("%i", &days);
+  
+  years = days/365; 
+  // Nos quedamos con el resto de la division entera
+  // y lo dividimos por 7, para tener semanas
+  weeks = (days % 365)/7;
+  // Dias totales menos los que son años y semanas
+  days = days - ((years*365) + (weeks*7));
 
-    printf("Anyos: %d\n", years);
-    printf("Semanas: %d\n", weeks);
-    printf("Dias: %d \n", days);
+  printf("Anyos: %d\n", years);
+  printf("Semanas: %d\n", weeks);
+  printf("Dias: %d \n", days);
 
-    return 0;
+  return 0;
 }
 #+END_SRC
 
