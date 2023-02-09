@@ -1,0 +1,171 @@
+#+TITLE: Ejercicios del Tema 4
+#+SUBTITLE: Matrices
+#+AUTHOR: 
+#+DATE: 
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema4_matrices.pdf
+
+
+
+* Multiplicación de matrices
+
+Escribe un programa que realice la multiplicación matricial entre las siguientes matrices: 
+
+#+begin_export latex
+\[
+P = \left[ 
+\begin{tabular}{rrr}
+1 & 3 & -4\\
+1 & 1 & -2\\
+-1 & -2 & 5\\
+\end{tabular}
+\right]
+\]
+\[
+Q = \left[
+\begin{tabular}{rrr}
+8 & 3 & 0\\
+3 & 10 & 2\\
+0 & 2 & 6\\
+\end{tabular}
+\right]
+\]
+#+end_export
+
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int p[3][3] = {{1, 3, -4}, {1, 1, -2}, {-1, -2, 5}};
+  int q[3][3] = {{8, 3, 0}, {3, 10, 2}, {0, 2, 6}};
+  int r[3][3] = {0}; // Matriz multiplicacion
+
+  int i, j, k; //Indices de las matrices
+  
+  //Multiplica las matrices p y q
+  for(i = 0; i < 3; i++)
+    {
+      for(j = 0; j < 3; j++)
+	{
+	  for(k = 0; k < 3; k++)
+	    r[i][j] += p[i][k] * q[k][j];
+	}
+    }
+  // Imprime el resultado
+  for(i = 0; i < 3; i++)
+    {
+      for(j = 0; j < 3; j++)
+	    printf("%d\t", r[i][j]);
+      printf("\n"); // Un salto de linea tras cada fila
+    }
+}
+#+END_SRC
+
+#+RESULTS:
+|  17 |  25 | -18 |
+|  11 |   9 | -10 |
+| -14 | -13 |  26 |
+
+
+* Transpuesta de una matriz
+
+Escribe un programa que calcule la matriz transpuesta de la siguiente matriz:
+
+#+begin_export latex
+\[
+P = \left[ 
+\begin{tabular}{rrrr}
+1 & 3 & -4 & 6\\
+1 & 1 & -2 & -3\\
+-1 & -2 & 5 & 7\\
+\end{tabular}
+\right]
+\]
+
+#+end_export
+
+#+begin_src C
+#include <stdio.h>
+
+int main()
+{
+  int i, j;
+  int p[3][4] = {{1, 3, -4, 6}, 
+		 {1, 1, -2, -3},
+		 {-1, -2, 5, 7}};
+  int tp[4][3];
+  
+  for (i = 0; i < 3; i++)// Filas
+    for (j = 0; j < 4; j++)// Columnas
+      tp[j][i] = p[i][j]; //Intercambiamos filas por columnas
+
+  //Imprime resultado
+  for (i = 0; i < 4; i++)// Filas
+    {
+      for (j = 0; j < 3; j++)// Columnas
+	printf("%i\t", tp[i][j]);
+      printf("\n");//Salto de línea al acabar una fila
+    }
+  
+  printf("\n");
+}
+#+end_src
+
+#+RESULTS:
+|  1 |  1 | -1 |
+|  3 |  1 | -2 |
+| -4 | -2 |  5 |
+|  6 | -3 |  7 |
+
+
+
+* Determinante de una matriz
+
+Escribe un programa que calcule el determinante de la siguiente matriz:
+
+#+begin_export latex
+\[
+P = \left[ 
+\begin{tabular}{rrr}
+1 & 3 & -4\\
+1 & 1 & -2\\
+-1 & -2 & 5\\
+\end{tabular}
+\right]
+\]
+
+#+end_export
+
+En el siguiente enlace se describe el cálculo del determinante de una matriz 3x3 mediante el teorema de Laplace: https://es.wikipedia.org/wiki/Teorema_de_Laplace#Matriz_3%C3%973
+
+#+begin_src C
+#include <stdio.h>
+
+int main()
+{
+  int i, det, det1, det2, det3;
+  int p[3][3] = {{1, 3, -4}, 
+		 {1, 1, -2},
+		 {-1, -2, 5}};
+  
+  det1 = p[0][0] * (p[1][1] * p[2][2]
+		  - p[2][1] * p[1][2]);
+  
+  det2 = p[0][1] * (p[1][0] * p[2][2] 
+		  - p[2][0] * p[1][2]);
+  
+  det3 = p[0][2] * (p[1][0] * p[2][1] 
+		  - p[2][0] * p[1][1]);
+  
+  det = det1 - det2 + det3;
+  
+  printf("El determinante es: %d\n\n",det);
+}
+#+end_src
+
+#+RESULTS:
+: El determinante es: -4
+

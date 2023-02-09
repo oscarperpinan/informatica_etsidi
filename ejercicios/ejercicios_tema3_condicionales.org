@@ -1,0 +1,243 @@
+#+TITLE: Ejercicios del Tema 3
+#+SUBTITLE: Sentencias Condicionales
+#+AUTHOR: 
+#+DATE: 
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema3_condicionales.pdf
+
+* Años bisiestos
+Escribe un programa que permita comprobar si un año (dado por teclado) es bisiesto o no. Recuerda que son bisiestos los años divisibles por 4, excepto los que son divisibles por 100 pero no por 400.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int year;
+  _Bool isBisiesto;
+
+  printf("Indique el año.\n");
+  scanf("%d", &year);
+ 
+  isBisiesto = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+
+  if (isBisiesto)
+    printf("El año %d es bisiesto.\n", year);
+  else
+    printf("El año %d no es bisiesto.\n", year);
+
+  return 0;
+}
+#+END_SRC
+
+* Números enteros
+
+Escribe un programa que compruebe si, dados dos números enteros tecleados por el usuario, el primero es divisible por el segundo.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int x, y;
+
+  printf("Indique dos números enteros.\n");
+  scanf("%d %d", &x, &y);
+  
+  if (y == 0)
+    printf("No se puede hacer la operacion.\n");
+  else if (x % y == 0)
+    printf("El número %d es divisible por %d.\n", x, y);
+  else
+    printf("El número %d no es divisible por %d.\n", x, y);
+
+  return 0;
+}
+#+END_SRC
+
+* Letras y números
+Elabora un programa que solicite al usuario que apriete una tecla y determine si es una letra, un número, o un carácter especial.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  char tecla;
+
+  printf ("Apriete una tecla cualquiera.\n");
+  scanf  ("%c", &tecla);
+
+  if ((tecla >= 'a' && tecla <= 'z') || (tecla >= 'A' && tecla <= 'Z'))
+    printf("Es una letra.\n");
+  else if (tecla >= '0' && tecla <= '9')
+    printf("Es un número.\n");
+  else
+    printf("Es un caracter especial.\n");
+  return 0;
+}
+#+END_SRC
+
+* Operaciones algebraicas
+Realiza un programa en el que el usuario pueda seleccionar la operación matemática a realizar con dos números que introduce por teclado (suma, resta, multiplicación, división, potencia).
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main ()
+{
+  float v1, v2;
+  char op;
+  scanf("%f %c %f", &v1, &op, &v2);
+  switch(op)
+    {
+    case '+':
+      printf("%.2f\n", v1 + v2);
+      break;
+    case '-':
+      printf("%.2f\n", v1 - v2);
+      break;
+    case '*':
+      printf("%.2f\n", v1 * v2);
+      break;
+    case '/':
+      if (v2 == 0)
+	printf("División por cero.\n");
+      else
+	printf("%.2f\n", v1 / v2);
+      break;
+    case '^':
+      printf("%.2f\n", pow(v1, v2));
+      break;
+    default:
+      printf("No se hacer esa operación.\n");
+      break;
+    }
+  return 0;
+}
+#+END_SRC
+
+* Días de la semana
+Escribe un programa que imprima el nombre del día que corresponde a un número entero introducido por el usuario. Supón que el 1 corresponde al lunes, y así sucesivamente.
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int n;
+  printf("Introduzca número de día: ");
+  scanf("%d", &n);
+  switch(n)
+    {
+    case 1:
+      printf("Lunes\n");
+      break;
+    case 2:
+      printf("Martes\n");
+      break;
+    case 3:
+      printf("Miércoles\n");
+      break;
+    case 4:
+      printf("Jueves\n");
+      break;
+    case 5:
+      printf("Viernes\n");
+      break;
+    case 6:
+      printf("Sábado\n");
+      break;
+    case 7:
+      printf("Domingo\n");
+      break;
+    default:
+      printf("Número incorrecto\n");
+    }
+  return 0;
+} 
+#+END_SRC
+
+* Área de figuras geométricas
+Escribe un programa que pregunte primero si quieres calcular el área de un triángulo o de un círculo. Si el usuario contesta que quiere calcular el área de un triángulo, el programa tiene que pedir entonces la base y la altura y escribir el área. Si contesta que quiere calcular el área de un círculo, el programa tiene que pedir entonces el radio y escribir el área.
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+  char elige;
+  double b, h, r;
+  double area;
+  printf("Elige Triangulo (T) o Circulo (C)\n");
+  scanf("%c", &elige);
+
+  switch(elige)
+    {
+    case 't':
+    case 'T':
+      printf("Base?\n");
+      scanf("%lf", &b);
+      printf("Altura?\n");
+      scanf("%lf", &h);
+      area = (b * h) / 2;
+      break;
+    case 'c':
+    case 'C':
+      printf("Radio?\n");
+      scanf("%lf", &r);
+      area = M_PI * pow(r, 2);
+      break;
+    default:
+      printf("Opcion desconocida\n");
+      area = 0;
+    }
+  printf("Area %f\n", area);
+  return 0;
+}
+#+END_SRC
+
+* Ecuación de segundo  grado
+Escribe un programa que pida los coeficientes de una ecuación de segundo grado ($a \cdot x^2 + b \cdot x + c = 0$) y escriba la solución. Recuerda que una ecuación de segundo grado puede tener dos soluciones reales diferentes, una única solución real, o dos soluciones complejas conjugadas.
+
+#+BEGIN_SRC C
+#include<stdio.h>
+#include<math.h>
+ 
+int main()
+{
+  float a, b, c, disc, x1, x2, xi, xr;
+   printf("Escribe el valor de los tres coeficientes (a, b, c)\n");
+   scanf("%f %f %f", &a, &b, &c);
+   if (a != 0)
+     {
+       disc = pow(b, 2) - 4 * a * c;
+       if(disc > 0)
+	 {
+	   printf("Las dos raices son reales: ");
+	   x1=(-b + sqrt(disc)) / (2 * a);
+	   x2=(-b - sqrt(disc)) / (2 * a);
+	   printf("x1=%.2f \t x2=%.2f",
+		  x1, x2);
+	 }
+       else if(disc == 0){
+	 x1 = -b / (2 * a);
+	 printf("Raíz única %.2f", x1);
+       }
+       else
+	 {
+           xr = -b / (2 * a);
+           xi = sqrt(-disc) / (2 * a);
+           printf("La raiz real es %.2f y la imaginaria es %.2f",
+		  xr, xi);
+	 }
+     } else
+       printf("El coeficiente a no puede ser 0.\n");
+}
+#+END_SRC
+
+
+# Local Variables:
+# ispell-local-dictionary: "spanish"
+# End:
