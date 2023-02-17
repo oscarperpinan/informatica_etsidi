@@ -272,7 +272,7 @@ sentencia_D;
 #include <stdio.h>
 
 int main(){
-  int x, signo;
+  int x;
   printf("Escribe un número: ");
   scanf("%i", &x);
 
