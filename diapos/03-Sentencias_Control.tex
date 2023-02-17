@@ -1,16 +1,14 @@
-% Created 2022-02-02 mié 21:03
+% Created 2023-02-17 vie 11:09
 % Intended LaTeX compiler: pdflatex
-\documentclass[xcolor={usenames,svgnames,dvipsnames}, aspectratio=169]{beamer}
+\documentclass[usenames,svgnames,dvipsnames, aspectratio=169]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage{grffile}
 \usepackage{longtable}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
-\usepackage{textcomp}
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
@@ -43,15 +41,15 @@
  pdftitle={Tema 3: Sentencias de Control},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 27.1 (Org mode 9.4.6)}, 
+ pdfcreator={Emacs 28.2 (Org mode 9.6)}, 
  pdflang={Spanish}}
 \begin{document}
 
 \maketitle
 
 \section{Introducción}
-\label{sec:org68e7009}
-\begin{frame}[label={sec:orge55b534},fragile]{Introducción}
+\label{sec:org068ba66}
+\begin{frame}[label={sec:org5f04e3b},fragile]{Introducción}
  \begin{itemize}
 \item Sin sentencias de control los programas se ejecutan de manera secuencial
 \end{itemize}
@@ -71,22 +69,21 @@
 \end{block}
 \end{frame}
 \section{Sentencias Condicionales}
-\label{sec:org2c76bbb}
+\label{sec:org77dc3df}
 \subsection{\texttt{if - else}}
-\label{sec:org60af960}
-\begin{frame}[label={sec:orgc48a874},fragile]{\texttt{if}}
+\label{sec:org80e75e6}
+\begin{frame}[label={sec:orgec1ee0c},fragile]{\texttt{if}}
  \begin{center}
 \includegraphics[height=0.9\textheight]{figs/if.pdf}
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:org9ceff6c},fragile]{\texttt{if}}
+\begin{frame}[label={sec:orge58f450},fragile]{\texttt{if}}
  \begin{itemize}
 \item Si se cumple \texttt{condicion} (su resultado es \alert{diferente de 0}) se ejecuta la \texttt{sentencia\_A}.
 \item \alert{Siempre} se ejecuta la \texttt{sentencia\_B}.
 \end{itemize}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 if (condicion)
     sentencia_A;
 sentencia_B;
@@ -94,8 +91,7 @@ sentencia_B;
 \begin{itemize}
 \item Para ejecutar un conjunto de sentencias hay que agruparlas \alert{entre llaves}.
 \end{itemize}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 if (condicion)
   {
     sentencia_A1;
@@ -108,9 +104,8 @@ sentencia_B2;
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orga6502db},fragile]{Ejemplo \texttt{if}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgfb44ecf},fragile]{Ejemplo \texttt{if}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 # include <stdio.h>
 int main ()
 {
@@ -128,9 +123,8 @@ int main ()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:orgb610e4f},fragile]{Ejemplo \texttt{if}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orga2b0018},fragile]{Ejemplo \texttt{if}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 # include <stdio.h>
 int main ()
 {
@@ -147,9 +141,8 @@ int main ()
 \end{frame}
 
 
-\begin{frame}[label={sec:org66c4097},fragile]{Ejemplo \texttt{if}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:org5b30bb7},fragile]{Ejemplo \texttt{if}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 # include <stdio.h>
 int main ()
 {
@@ -168,21 +161,20 @@ int main ()
 
 
 
-\begin{frame}[label={sec:orge9b56a6},fragile]{\texttt{if - else}}
+\begin{frame}[label={sec:org719734a},fragile]{\texttt{if - else}}
  \begin{center}
 \includegraphics[height=0.9\textheight]{figs/ifelse.pdf}
 \end{center}
 \end{frame}
 
 
-\begin{frame}[label={sec:orgede5ee1},fragile]{\texttt{if - else}}
+\begin{frame}[label={sec:orgfa018e2},fragile]{\texttt{if - else}}
  \begin{description}
 \item[{\texttt{if}}] Si se cumple \texttt{condicion} (su resultado es \alert{diferente de 0}) se ejecuta la \texttt{sentencia\_A}.
 \item[{\texttt{else}}] En caso contrario se ejecuta la \texttt{sentencia\_B}.
 \item[{Siempre}] se ejecuta la \texttt{sentencia\_C}.
 \end{description}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 if (condicion)
     sentencia_A;
 else
@@ -190,12 +182,11 @@ else
 sentencia_C;
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:org9080e3f},fragile]{\texttt{if - else}}
+\begin{frame}[label={sec:orgf3248c5},fragile]{\texttt{if - else}}
  \begin{itemize}
 \item Para ejecutar un conjunto de sentencias hay que agruparlas \alert{entre llaves}.
 \end{itemize}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 if (condicion)
   {
     sentencia_A1;
@@ -215,9 +206,8 @@ sentencia_C2;
 \end{frame}
 
 
-\begin{frame}[label={sec:org0f321b2},fragile,plain]{Ejemplo \texttt{if-else}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:org7581f8a},fragile,plain]{Ejemplo \texttt{if-else}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 # include <stdio.h>
 int main (){
   int n;
@@ -239,9 +229,8 @@ int main (){
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org12d3148},fragile]{Ejemplo \texttt{if-else}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgb49c50c},fragile]{Ejemplo \texttt{if-else}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 # include <stdio.h>
 int main ()
 {
@@ -259,12 +248,12 @@ int main ()
 \end{frame}
 
 
-\begin{frame}[label={sec:org8cd0f47},fragile]{\texttt{if - else - if}}
+\begin{frame}[label={sec:org3948b31},fragile]{\texttt{if - else - if}}
  \begin{center}
 \includegraphics[height=0.9\textheight]{figs/ifelseif.pdf}
 \end{center}
 \end{frame}
-\begin{frame}[label={sec:orgce2c592},fragile]{\texttt{if - else - if}}
+\begin{frame}[label={sec:org4c9ea69},fragile]{\texttt{if - else - if}}
  \begin{description}
 \item[{\texttt{if}}] Si se cumple \texttt{condicion\_1} se ejecuta la \texttt{sentencia\_A}.
 \item[{\texttt{else}}] En caso contrario \ldots{}
@@ -274,8 +263,7 @@ int main ()
 \end{description}
 \item[{Siempre}] se ejecuta la \texttt{sentencia\_D}.
 \end{description}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 if (condicion_1)
     sentencia_A;
 else
@@ -288,7 +276,7 @@ sentencia_D;
 \end{frame}
 
 
-\begin{frame}[label={sec:orgb349ca2},fragile]{\texttt{if - else - if}}
+\begin{frame}[label={sec:org963a706},fragile]{\texttt{if - else - if}}
  \begin{description}
 \item[{\texttt{if}}] Si se cumple \texttt{condicion\_1} se ejecuta la \texttt{sentencia\_A}.
 \item[{\texttt{else if}}] En caso contrario, si se cumple \texttt{condicion\_2} se ejecuta la \texttt{sentencia\_B}.
@@ -297,8 +285,7 @@ sentencia_D;
 \end{description}
 \item[{Siempre}] se ejecuta la \texttt{sentencia\_D}.
 \end{description}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 if (condicion_1)
     sentencia_A;
 else if (condicion_2)
@@ -309,13 +296,12 @@ sentencia_D;
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org795babe},fragile,plain]{Ejemplo \texttt{if - else - if}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:org4a88002},fragile,plain]{Ejemplo \texttt{if - else - if}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main(){
-  int x, signo;
+  int x;
   printf("Escribe un número: ");
   scanf("%i", &x);
 
@@ -334,9 +320,9 @@ int main(){
 \end{frame}
 
 \subsection{\texttt{switch - case}}
-\label{sec:orgf1452af}
+\label{sec:org22e1169}
 
-\begin{frame}[label={sec:org0883312},fragile]{\texttt{switch-case}}
+\begin{frame}[label={sec:org34e3c5b},fragile]{\texttt{switch-case}}
  \begin{itemize}
 \item Permite tomar una decisión múltiple dependiendo del valor \alert{entero} de una expresión.
 \end{itemize}
@@ -347,12 +333,11 @@ int main(){
 \end{frame}
 
 
-\begin{frame}[label={sec:org78b1dff},fragile]{\texttt{switch-case}}
+\begin{frame}[label={sec:orgc7efee4},fragile]{\texttt{switch-case}}
  \begin{itemize}
 \item Permite tomar una decisión múltiple dependiendo del valor \alert{entero} de una expresión.
 \end{itemize}
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 switch (expr)
   {
   case val1:
@@ -371,9 +356,8 @@ switch (expr)
   }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:org943c7ef},fragile,plain]{Ejemplo de \texttt{switch - case}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgb4ba0fe},fragile,plain]{Ejemplo de \texttt{switch - case}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 int main () {
   float v1, v2;
@@ -396,9 +380,8 @@ int main () {
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org3ed1350},fragile]{Atención al uso de \texttt{break}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgab357c7},fragile]{Atención al uso de \texttt{break}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 int main ()
 {
@@ -419,9 +402,8 @@ int main ()
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:org51ba5eb},fragile,plain]{Uso de llaves con \texttt{switch}}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none,basicstyle=\ttfamily\footnotesize}
-\begin{lstlisting}
+\begin{frame}[label={sec:org8a926ef},fragile,plain]{Uso de llaves con \texttt{switch}}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none,basicstyle=\ttfamily\footnotesize]
 #include <stdio.h>
 int main (){
   float v1, v2;
@@ -446,11 +428,11 @@ int main (){
 \end{lstlisting}
 \end{frame}
 \section{Sentencias Repetitivas (Bucles)}
-\label{sec:org00eb0a6}
+\label{sec:orgdec94f7}
 \subsection{\texttt{for}}
-\label{sec:org203e485}
+\label{sec:org114826c}
 
-\begin{frame}[label={sec:org0a17bf6},fragile]{\texttt{for}: Flujo}
+\begin{frame}[label={sec:org4c5f319},fragile]{\texttt{for}: Flujo}
  Ejecuta una sentencia (simple o compuesta) un número determinado de veces hasta que el resultado de una expresión sea falso.
 
 \begin{center}
@@ -458,11 +440,10 @@ int main (){
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orga113188},fragile]{\texttt{for} : Código}
+\begin{frame}[label={sec:orgdce0706},fragile]{\texttt{for} : Código}
  Ejecuta una sentencia (simple o compuesta) un número determinado de veces hasta que el resultado de una expresión sea falso.
 
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 for (expr_inicio; expr_final; expr_avance)
   {
       sentencia_1;
@@ -477,9 +458,8 @@ for (expr_inicio; expr_final; expr_avance)
 \end{description}
 \end{frame}
 
-\begin{frame}[label={sec:org2ec9b0e},fragile]{Ejemplo: suma de enteros}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:org2f7ac2f},fragile]{Ejemplo: suma de enteros}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main()
@@ -499,9 +479,8 @@ int main()
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org84fdd24},fragile]{Ejemplo: factorial}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgd1ae7b5},fragile]{Ejemplo: factorial}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main()
@@ -523,9 +502,8 @@ int main()
 \end{frame}
 
 
-\begin{frame}[label={sec:orgdd3bbb5},fragile]{Ejemplo: alfabeto}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgbc17d9e},fragile]{Ejemplo: alfabeto}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main()
@@ -540,9 +518,8 @@ int main()
 \end{frame}
 
 
-\begin{frame}[label={sec:orgc950547},fragile]{Ejemplo: bucles anidados}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgeee50d8},fragile]{Ejemplo: bucles anidados}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main()
@@ -562,9 +539,9 @@ int main()
 \end{frame}
 
 \subsection{\texttt{while}}
-\label{sec:orgdcfb5ad}
+\label{sec:orgec69567}
 
-\begin{frame}[label={sec:org5eca7c4},fragile]{\texttt{while}: Flujo}
+\begin{frame}[label={sec:org52cf7fd},fragile]{\texttt{while}: Flujo}
  Ejecuta una sentencia (simple o compuesta) \alert{cero o más veces} dependiendo del resultado booleano de una expresión.
 
 \begin{center}
@@ -572,10 +549,9 @@ int main()
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:org12e4ad2},fragile]{\texttt{while}: Código}
+\begin{frame}[label={sec:org4f23728},fragile]{\texttt{while}: Código}
  Ejecuta una sentencia (simple o compuesta) \alert{cero o más veces} dependiendo del resultado booleano de una expresión.
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 while (expresion)
   {
       sentencia_1;
@@ -586,7 +562,7 @@ while (expresion)
 \end{lstlisting}
 \end{frame}
 
-\begin{frame}[label={sec:org2f55d11},fragile]{\texttt{while}: Atención}
+\begin{frame}[label={sec:org0df5926},fragile]{\texttt{while}: Atención}
  \begin{block}{}
 \begin{itemize}
 \item Si la primera vez que se evalúa la condición es falsa, el bloque de sentencias \alert{no se ejecuta nunca}.
@@ -596,9 +572,8 @@ while (expresion)
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgb03cf7f},fragile]{Ejemplo}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:orgfd92a92},fragile]{Ejemplo}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main()
@@ -618,9 +593,9 @@ int main()
 \end{frame}
 
 \subsection{\texttt{do-while}}
-\label{sec:orgafed845}
+\label{sec:org068b813}
 
-\begin{frame}[label={sec:orgbd0dc36},fragile]{\texttt{do-while}: Flujo}
+\begin{frame}[label={sec:orgfaa87a7},fragile]{\texttt{do-while}: Flujo}
  Ejecuta una sentencia (simple o compuesta) \alert{una o más veces} dependiendo del resultado de una expresión.
 
 \begin{center}
@@ -628,10 +603,9 @@ int main()
 \end{center}
 \end{frame}
 
-\begin{frame}[label={sec:orgda1f961},fragile]{\texttt{do-while}: Código}
+\begin{frame}[label={sec:orgb86f537},fragile]{\texttt{do-while}: Código}
  Ejecuta una sentencia (simple o compuesta) \alert{una o más veces} dependiendo del resultado de una expresión.
-\lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 do
 {
   sentencia_1;
@@ -643,7 +617,7 @@ while (expresion);
 \end{frame}
 
 
-\begin{frame}[label={sec:org7cb8e85},fragile]{\texttt{do-while}: Atención}
+\begin{frame}[label={sec:org198fb06},fragile]{\texttt{do-while}: Atención}
  \begin{block}{}
 \begin{itemize}
 \item Si la primera vez que se evalúa la expresión es falsa, la sentencia se habrá ejecutado al menos una vez.
@@ -653,9 +627,8 @@ while (expresion);
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org4762788},fragile]{Ejemplo: número entero al revés}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none}
-\begin{lstlisting}
+\begin{frame}[label={sec:org236f529},fragile]{Ejemplo: número entero al revés}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none]
 #include <stdio.h>
 
 int main()
@@ -677,11 +650,10 @@ int main()
 
 
 \subsection{Equivalencia}
-\label{sec:orgdcd6df0}
+\label{sec:orgc987b55}
 
-\begin{frame}[label={sec:orgf8c0f5a},fragile,plain]{Equivalencia}
- \lstset{language=C,label= ,caption= ,captionpos=b,numbers=none,basicstyle=\ttfamily\footnotesize}
-\begin{lstlisting}
+\begin{frame}[label={sec:org8ed4561},fragile,plain]{Equivalencia}
+ \begin{lstlisting}[language=C,label= ,caption= ,captionpos=b,numbers=none,basicstyle=\ttfamily\footnotesize]
 #include <stdio.h>
 int main() {
   int i,n = 10;
@@ -705,7 +677,7 @@ int main() {
 }
 \end{lstlisting}
 \end{frame}
-\begin{frame}[label={sec:org7289153},fragile]{¿Qué bucle elegir?}
+\begin{frame}[label={sec:orgfe86a0d},fragile]{¿Qué bucle elegir?}
  \begin{itemize}
 \item Si se conoce el número de veces que debe ejecutarse la tarea es recomendable usar \texttt{for}.
 \item Si el número de veces es desconocido a priori:
@@ -716,8 +688,8 @@ int main() {
 \end{itemize}
 \end{frame}
 \section{Rupturas}
-\label{sec:org013949c}
-\begin{frame}[label={sec:org0bb498c},fragile]{\texttt{break} y \texttt{continue}}
+\label{sec:org61cfebb}
+\begin{frame}[label={sec:orgd4afbfc},fragile]{\texttt{break} y \texttt{continue}}
  \begin{block}{\texttt{break}}
 \begin{itemize}
 \item Finaliza la ejecución de un bucle (si el bucle está anidado sólo finaliza él, pero no los bucles más externos).
