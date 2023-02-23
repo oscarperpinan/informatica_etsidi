@@ -152,8 +152,8 @@ int main()
     for(k = 2; k < n; k++)
     {
 	    // Si es divisible por algun numero deja de ser primo
-	    if (n % k == 0)
-	      esPrimo = 0;
+      if (n % k == 0)
+        esPrimo = 0;
     }
     // Si finalmente es primo, lo muestra en pantalla
     if (esPrimo)

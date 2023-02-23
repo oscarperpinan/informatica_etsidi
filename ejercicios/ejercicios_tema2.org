@@ -13,8 +13,7 @@
 
 int main()
 {
-  printf("El acrónimo es %c%c%c%c%c%c",
-	 101, 116, 115, 105, 100, 105);
+  printf("El acrónimo es %c%c%c%c%c%c", 101, 116, 115, 105, 100, 105);
   return 0;
 }
 #+END_SRC
@@ -91,8 +90,7 @@ int main()
   // de números enteros.
   tempF = (9.0 / 5.0) * tempC + 32;
         
-  printf("%.2f grados centigrados son %.2f grados Fahrenheit\n",
-	 tempC, tempF);
+  printf("%.2f grados centigrados son %.2f grados Fahrenheit\n", tempC, tempF);
   return 0;
         
 }
@@ -113,8 +111,7 @@ int main()
   scanf ("%f", &pts);
   euros = pts * p2e;
   dolar = euros  * e2d;
-  printf ("%.2f pesetas son %.2f euros y %.2f dolares\n",
-	  pts, euros, dolar);
+  printf ("%.2f pesetas son %.2f euros y %.2f dolares\n", pts, euros, dolar);
   return 0;
 } 
 #+END_SRC
@@ -201,8 +198,7 @@ int main()
   scanf("%d", &x);
   // Definimos la condicion de ser bisiesto, y el resultado lo 
   bisiesto = ((x % 4 == 0) && (x % 100 != 0)) || (x % 400 == 0);
-  printf("%d es %s\n",
-	 x, bisiesto ? "bisiesto" : "normal");
+  printf("%d es %s\n", x, bisiesto ? "bisiesto" : "normal");
   return 0;
 } 
 #+END_SRC
@@ -219,8 +215,7 @@ int main()
   printf("Dime un número entero.\n");
   scanf("%d", &x);
   bisiesto = ((x % 4 == 0) && (x % 100 != 0)) || (x % 400 == 0);
-  printf("El mes de febrero de %d tiene %d días\n",
-	 x, bisiesto ? 29 : 28);
+  printf("El mes de febrero de %d tiene %d días\n", x, bisiesto ? 29 : 28);
 
   return 0;
 } 
@@ -248,8 +243,7 @@ int main()
   x /= 10;
   c = x % 10;
 
-  printf("Centenas %d, Decenas %d, Unidades %d\n",
-	 c, d, u);
+  printf("Centenas %d, Decenas %d, Unidades %d\n", c, d, u);
 
   return 0;
 } 
