@@ -119,11 +119,11 @@ int main()
       fib = 1;
     else
     { // el resto de terminos son la suma de los dos anteriores
-	    fib = fib1 + fib2;
+      fib = fib1 + fib2;
 	    // Una vez hecha la suma intercambio los valores para el
 	    // siguiente paso de bucle.
-	    fib1 = fib2;
-	    fib2 = fib;
+      fib1 = fib2;
+      fib2 = fib;
     }
     // El identificador de formato esta adaptado a la clase del dato
     printf("%llu  ", fib);
@@ -146,19 +146,19 @@ int main()
   _Bool esPrimo;
 
   for(n = 2; n <= 300; n++)
+  {
+    // Suponemos que el numero es primo
+    esPrimo = 1;
+    for(k = 2; k < n; k++)
     {
-      // Suponemos que el numero es primo
-      esPrimo = 1;
-      for(k = 2; k < n; k++)
-	{
-	  // Si es divisible por algun numero deja de ser primo
-	  if (n % k == 0)
-	    esPrimo = 0;
-	}
-      // Si finalmente es primo, lo muestra en pantalla
-      if (esPrimo)
-	printf("%d\n", n);
+	    // Si es divisible por algun numero deja de ser primo
+	    if (n % k == 0)
+	      esPrimo = 0;
     }
+    // Si finalmente es primo, lo muestra en pantalla
+    if (esPrimo)
+      printf("%d\n", n);
+  }
   return 0;
 }
 #+END_SRC
@@ -182,15 +182,14 @@ int main()
   scanf("%f", &a);
   
   for (n = 1; n <= 20; ++n)
-    {
-      // Calculamos la distancia en cada intervalo, por tanto no se
-      // incrementa
-      d = v * dt + 0.5 * a * dt * dt;
-      // La velocidad va incrementando
-      v += a  * dt;
-      printf("d = %.2f, v = %.2f (t = %.2f)\n",
-	     d, v, n * dt);
-    }
+  {
+    // Calculamos la distancia en cada intervalo, por tanto no se
+    // incrementa
+    d = v * dt + 0.5 * a * dt * dt;
+    // La velocidad va incrementando
+    v = v + a  * dt;
+    printf("d = %.2f, v = %.2f (t = %.2f)\n", d, v, n * dt);
+  }
 }
 #+END_SRC
 
@@ -207,7 +206,6 @@ Para generar el número aleatorio se emplea el siguiente código:
 
 int main()
 {
-
   int n;
   ...
   //Genera semilla aleatoria
@@ -228,7 +226,6 @@ int main()
 
 int main()
 {
-
   int n, num, intentos = 0;
 
   //Genera semilla aleatoria
@@ -237,16 +234,16 @@ int main()
   n = rand() % 100 + 1;
   printf("Estoy listo. Di un numero:\n");
   do
-    {
-      scanf("%d", &num);
+  {
+    scanf("%d", &num);
 
-      if(num > n)
-	printf("Muy alto\n");
-      else if (num < n)
-	printf("Muy bajo\n");
+    if(num > n)
+      printf("Muy alto\n");
+    else if (num < n)
+      printf("Muy bajo\n");
 
-      ++intentos;
-    }
+    ++intentos;
+  }
   while (num != n);
 
   printf("Bien, era el %d\n", num);
