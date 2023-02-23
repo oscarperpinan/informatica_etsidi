@@ -45,11 +45,11 @@ sentencia_B;
 - Para ejecutar un conjunto de sentencias hay que agruparlas *entre llaves*.
 #+BEGIN_SRC C :tangle no
 if (condicion)
-  {
-    sentencia_A1;
-    sentencia_A2;
+{
+  sentencia_A1;
+  sentencia_A2;
     ...
-  }
+}
 sentencia_B1;
 sentencia_B2;
 ...
@@ -65,10 +65,10 @@ int main ()
   printf("Escribe un número entero\n");
   scanf("%d", &n);
   if (n % 2 == 0) // Condición
-    {// Uso de llaves
-      printf("Se cumple la condición: ");
-      printf("El número %d es par.\n", n);      
-    } // Fin de if
+  {// Uso de llaves
+    printf("Se cumple la condición: ");
+    printf("El número %d es par.\n", n);      
+  } // Fin de if
   printf("Gracias por participar.\n");
   return 0;
 }
@@ -146,22 +146,21 @@ sentencia_C;
 - Para ejecutar un conjunto de sentencias hay que agruparlas *entre llaves*.
 #+BEGIN_SRC C :tangle no
 if (condicion)
-  {
-    sentencia_A1;
-    sentencia_A2;
-    ...
-  }
+{
+  sentencia_A1;
+  sentencia_A2;
+  ...
+}
 else
-  {
-    sentencia_B1;
-    sentencia_B2;
-    ...    
-  }
+{
+  sentencia_B1;
+  sentencia_B2;
+  ...    
+}
 sentencia_C1;
 sentencia_C2;
 ...
 #+END_SRC
-
 
 *** Ejemplo =if-else=
     :PROPERTIES:
@@ -170,20 +169,21 @@ sentencia_C2;
 
 #+BEGIN_SRC C
 # include <stdio.h>
-int main (){
+int main ()
+{
   int n;
   printf("Escribe un número entero\n");
   scanf("%d", &n);
   if (n % 2 == 0) // condicion
-    { // Inicio de if 
-      printf("Se cumple la condición: ");
-      printf("El número %d es par.\n", n);      
-    }
+  { // Inicio de if 
+    printf("Se cumple la condición: ");
+    printf("El número %d es par.\n", n);      
+  }
   else
-    { // Inicio de else
-      printf("No se cumple la condición: ");
-      printf("El número %d es impar.\n", n);      
-    } // Fin de if - else
+  { // Inicio de else
+    printf("No se cumple la condición: ");
+    printf("El número %d es impar.\n", n);      
+  } // Fin de if - else
   printf("Gracias por participar.\n");
   return 0;
 }
@@ -271,7 +271,8 @@ sentencia_D;
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int main(){
+int main()
+{
   int x, signo;
   printf("Escribe un número: ");
   scanf("%i", &x);
@@ -285,6 +286,7 @@ int main(){
   else
     // no se cumple ninguna
     printf("El número es positivo.\n");
+  
   return 0;
 }
 #+END_SRC
@@ -320,7 +322,7 @@ int main(){
 - Permite tomar una decisión múltiple dependiendo del valor *entero* de una expresión.
 #+BEGIN_SRC C :tangle no
 switch (expr)
-  {
+{
   case val1:
     sentencia_1;
     break;
@@ -334,7 +336,7 @@ switch (expr)
   default:
     sentencia_n;
     break;
-  }
+}
 #+END_SRC
 *** Ejemplo de =switch - case=
     :PROPERTIES:
@@ -343,12 +345,13 @@ switch (expr)
 
 #+BEGIN_SRC C
 #include <stdio.h>
-int main () {
+int main () 
+{
   float v1, v2;
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
   switch(op)
-    {
+  {
     case '+':
       printf("%.2f\n", v1 + v2);
       break;
@@ -358,7 +361,7 @@ int main () {
     default:
       printf("No se hacer esa operación.\n");
       break;
-    }
+  }
   return 0; 
 }
 #+END_SRC
@@ -372,7 +375,7 @@ int main ()
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
   switch(op)
-    {
+  {
     case '+':
       printf("%.2f\n", v1 + v2);
     case '-':
@@ -380,7 +383,7 @@ int main ()
     default:
       printf("No se hacer esa operación.\n");
       break;
-    }
+  }
   return 0;
 }
 #+END_SRC
@@ -396,7 +399,7 @@ int main (){
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
   switch(op)
-    {
+  {
     case '+':
       printf("Operación Suma:\n");
       printf("%.2f\n", v1 + v2);
@@ -408,7 +411,7 @@ int main (){
     default:
       printf("No se hacer esa operación.\n");
       break;
-    }
+  }
   return 0;
 }
 #+END_SRC
@@ -441,10 +444,10 @@ Ejecuta una sentencia (simple o compuesta) un número determinado de veces hasta
 
 #+BEGIN_SRC C :tangle no
 for (expr_inicio; expr_final; expr_avance)
-  {
-      sentencia_1;
-      ...
-  }
+{
+  sentencia_1;
+  ...
+}
 #+END_SRC
 
 - =expr_inicio= :: Expresión de inicialización (se ejecuta una sola vez). Sirve para iniciar las variables de control del bucle.
@@ -463,11 +466,10 @@ int main()
   int i, suma = 0, n = 10;
 
   for (i = 1; i <= n; i++)
-    {
-      suma += i;
-    }
-  printf("La suma de los %d primeros enteros es %d",
-	 n, suma);
+  {
+    suma += i;
+  }
+  printf("La suma de los %d primeros enteros es %d",  n, suma);
   return 0;
 }
 #+END_SRC
@@ -491,8 +493,7 @@ int main()
   for (i = 1, fact = 1; i <= n; i++)
       fact *= i;
 
-  printf("El factorial de %d es %lu", 
-	 n, fact);
+  printf("El factorial de %d es %lu", n, fact);
   return 0;
 }
 #+END_SRC
@@ -529,13 +530,12 @@ int main()
 {
   int i, j;
   for (i = 1; i <= 10; i++)
-    {//Atención al uso de las llaves
-      printf("Tabla del %d\n", i);
+  {//Atención al uso de las llaves
+    printf("Tabla del %d\n", i);
 
-      for (j = 1; j <= 10; j++)
-	printf("%d x %d = %d\n",
-	       i, j, i * j);
-    }
+    for (j = 1; j <= 10; j++)
+    	printf("%d x %d = %d\n", i, j, i * j);
+  }
   return 0;
 }
 #+END_SRC
@@ -564,11 +564,11 @@ Ejecuta una sentencia (simple o compuesta) *cero o más veces* dependiendo del r
 Ejecuta una sentencia (simple o compuesta) *cero o más veces* dependiendo del resultado booleano de una expresión.
 #+BEGIN_SRC C :tangle no
 while (expresion)
-  {
-      sentencia_1;
-      sentencia_2;
-      ...
-  }
+{
+  sentencia_1;
+  sentencia_2;
+  ...
+}
 
 #+END_SRC 
 
@@ -589,10 +589,10 @@ int main()
 
   i = 5;
   while (i > 0)
-    {
-      printf("%d...", i);
-      --i;
-    }
+  {
+    printf("%d...", i);
+    --i;
+  }
   printf("Despegue!");
   return 0;
 }
@@ -650,11 +650,11 @@ int main()
   int num = 123456, cifra;
 
   do
-    {
-      cifra = num % 10;
-      printf("%d", cifra);
-      num = num / 10;
-    }
+  {
+    cifra = num % 10;
+    printf("%d", cifra);
+    num = num / 10;
+  }
   while (num > 0);
   printf("\n");
   return 0;
@@ -663,7 +663,6 @@ int main()
 
 #+RESULTS:
 : 654321
-
 
 ** Equivalencia
 
@@ -674,24 +673,25 @@ int main()
 #+ATTR_LATEX: :options basicstyle=\ttfamily\footnotesize
 #+BEGIN_SRC C
 #include <stdio.h>
-int main() {
+int main() 
+{
   int i,n = 10;
   // Bucle for
   for (i = 0; i <= n; i++)
       printf("%d ",i);
   // Bucle while
   i=0;
-  while( i<= n) {
-      printf("%d ",i);
-      i++;
-    }
+  while( i<= n) 
+  {
+    printf("%d ",i);
+    i++;
+  }
   // Bucle do-while
   i=0;
-  do {
+  do{
       printf("%d ",i);
       i++;
-    }
-  while(i <= n);
+  }while(i <= n); 
   return 0;
 }
 #+END_SRC

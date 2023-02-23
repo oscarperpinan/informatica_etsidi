@@ -92,7 +92,7 @@ int main ()
   char op;
   scanf("%f %c %f", &v1, &op, &v2);
   switch(op)
-    {
+  {
     case '+':
       printf("%.2f\n", v1 + v2);
       break;
@@ -104,9 +104,9 @@ int main ()
       break;
     case '/':
       if (v2 == 0)
-	printf("División por cero.\n");
+	      printf("División por cero.\n");
       else
-	printf("%.2f\n", v1 / v2);
+	      printf("%.2f\n", v1 / v2);
       break;
     case '^':
       printf("%.2f\n", pow(v1, v2));
@@ -114,7 +114,7 @@ int main ()
     default:
       printf("No se hacer esa operación.\n");
       break;
-    }
+  }
   return 0;
 }
 #+END_SRC
@@ -130,7 +130,7 @@ int main()
   printf("Introduzca número de día: ");
   scanf("%d", &n);
   switch(n)
-    {
+  {
     case 1:
       printf("Lunes\n");
       break;
@@ -154,7 +154,7 @@ int main()
       break;
     default:
       printf("Número incorrecto\n");
-    }
+  }
   return 0;
 } 
 #+END_SRC
@@ -174,7 +174,7 @@ int main()
   scanf("%c", &elige);
 
   switch(elige)
-    {
+  {
     case 't':
     case 'T':
       printf("Base?\n");
@@ -192,7 +192,7 @@ int main()
     default:
       printf("Opcion desconocida\n");
       area = 0;
-    }
+  }
   printf("Area %f\n", area);
   return 0;
 }
@@ -208,32 +208,31 @@ Escribe un programa que pida los coeficientes de una ecuación de segundo grado 
 int main()
 {
   float a, b, c, disc, x1, x2, xi, xr;
-   printf("Escribe el valor de los tres coeficientes (a, b, c)\n");
-   scanf("%f %f %f", &a, &b, &c);
-   if (a != 0)
-     {
-       disc = pow(b, 2) - 4 * a * c;
-       if(disc > 0)
-	 {
-	   printf("Las dos raices son reales: ");
-	   x1=(-b + sqrt(disc)) / (2 * a);
-	   x2=(-b - sqrt(disc)) / (2 * a);
-	   printf("x1=%.2f \t x2=%.2f",
-		  x1, x2);
-	 }
-       else if(disc == 0){
-	 x1 = -b / (2 * a);
-	 printf("Raíz única %.2f", x1);
-       }
-       else
-	 {
-           xr = -b / (2 * a);
-           xi = sqrt(-disc) / (2 * a);
-           printf("La raiz real es %.2f y la imaginaria es %.2f",
-		  xr, xi);
-	 }
-     } else
-       printf("El coeficiente a no puede ser 0.\n");
+  printf("Escribe el valor de los tres coeficientes (a, b, c)\n");
+  scanf("%f %f %f", &a, &b, &c);
+  if (a != 0)
+  {
+    disc = pow(b, 2) - 4 * a * c;
+    if(disc > 0)
+	  {
+	    printf("Las dos raices son reales: ");
+	    x1=(-b + sqrt(disc)) / (2 * a);
+	    x2=(-b - sqrt(disc)) / (2 * a);
+	    printf("x1=%.2f \t x2=%.2f", x1, x2);
+	  }
+    else if(disc == 0)
+    {
+	    x1 = -b / (2 * a);
+	    printf("Raíz única %.2f", x1);
+    }
+    else
+	  {
+      xr = -b / (2 * a);
+      xi = sqrt(-disc) / (2 * a);
+      printf("La raiz real es %.2f y la imaginaria es %.2f", xr, xi);
+	  }
+  } else
+    printf("El coeficiente a no puede ser 0.\n");
 }
 #+END_SRC
 

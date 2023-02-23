@@ -47,7 +47,8 @@ int miVector[] = {2, 23, 24};
 #+begin_src C
 #include <stdio.h>
 
-int main(){
+int main()
+{
   int miVector[3];
   miVector[0] = 10;
   miVector[1] = 2 * miVector[0];
@@ -99,8 +100,7 @@ int main()
   // recordar que el primer elemento 
   // tiene índice 0.
   for (i = 0; i < 5; i++)
-    printf("El elemento %d es %f\n",
-	   i + 1, temp[i]);
+    printf("El elemento %d es %f\n", i + 1, temp[i]);
   return 0;
 }
 #+END_SRC
@@ -119,7 +119,8 @@ int main()
 *** No se pueden asignar vectores completos
     #+begin_src C
 #include <stdio.h>
-int main(){
+int main()
+{
   int v1[5];
   // Error
   v1 = {1, 2, 3, 4, 5};
@@ -147,11 +148,11 @@ int main(){
 *** La asignación debe ser elemento a elemento
     #+begin_src C
 #include <stdio.h>
-int main(){
+int main()
+{
   int v1[5], i;
-
   for (i = 0; i < 5; i++)
-    v1[i] = 1;
+      v1[i] = 1;
   
   return 0;
 }
@@ -165,7 +166,8 @@ int main(){
 
 #+BEGIN_SRC C
 #include <stdio.h>
-int main(){
+int main()
+{
   float v1[5] = {1, 34, 32, 45, 34};
   float v2[5] = {12, -3, 34, 15, -5};
   float v3[5];
@@ -176,7 +178,7 @@ int main(){
 
   printf("Vector3: ");
   for(i = 0; i < 5; i++)
-    printf("%f ", v3[i]);
+      printf("%f ", v3[i]);
   printf("\n");
   return 0;
 }
@@ -189,7 +191,8 @@ int main(){
 *** Multiplicar un vector por una constante
 #+BEGIN_SRC C
 #include <stdio.h> 
-int main(){
+int main()
+{
   float v1[5] = {1, 34, 32, 45, 34};
   float v2[5];
   float K = 3.0;
@@ -199,8 +202,7 @@ int main(){
       v2[i] = K * v1[i];
 
   for(i = 0; i < 5; i++)
-    printf("V1: %f\t V2: %f\n",
-	   v1[i], v2[i]);
+     printf("V1: %f\t V2: %f\n", v1[i], v2[i]);
 
   return 0;
 }
@@ -258,7 +260,8 @@ int main()
 *Solución provisional*: definir un vector de dimensión suficientemente elevada y emplear sólo un número reducido de elementos.
 #+BEGIN_SRC C
 #include <stdio.h>
-int main() {
+int main() 
+{
   int i, n;
   // Definimos un vector de dimension muy grande
   int vect[100];
@@ -268,9 +271,9 @@ int main() {
   scanf("%d", &n); 
   //Utilizamos solo las n primeras
   for(i = 0; i < n; i++) 
-    {
-      scanf("%d", &vect[i]);
-    }
+  {
+    scanf("%d", &vect[i]);
+  }
   return 0;
 }
 #+END_SRC
@@ -298,7 +301,7 @@ void imprime(int v[], int n)
 {
   int i;
   for(i = 0; i < n; i++)
-    printf("%d\n",v[i]);
+      printf("%d\n",v[i]);
 }
 #+END_SRC
 
@@ -322,7 +325,8 @@ int main()
   printf("Después: %d\n", x[0]);
   return 0;
 }
-void toy(int vector[]){ 
+void toy(int vector[])
+{ 
   //Funcion simple que modifica el valor del primer elemento
   vector[0] = 100;
 }
@@ -337,7 +341,8 @@ void toy(int vector[]){
 
 void fAbs(int vector[], int n);
 
-int main(){
+int main()
+{
   int datos[5]={-1, 3, -5, 7, -9}, i;
   fAbs(datos, 5); //¡Sin asignacion!
 
@@ -346,7 +351,8 @@ int main(){
   return 0;
 }
 // La funcion recibe la direccion del primer elemento
-void fAbs(int vector[], int n){
+void fAbs(int vector[], int n)
+{
   int i;
   for(i = 0; i < n; i++)
       if(vector[i] < 0)
@@ -410,10 +416,9 @@ char cadena[] = {72, 111, 108, 97, 0};
 int main()
 {
   char cadena[5] = "Hola";
-  printf("%c \t %c \t %c \t %c \t %c\n",
-	 cadena[0], cadena[1],
-	 cadena[2], cadena[3],
-	 cadena[4]);
+  printf("%c \t %c \t %c \t %c \t %c\n", cadena[0], cadena[1],
+                                         cadena[2], cadena[3],
+                                         cadena[4]);
   return 0;
 }
 #+end_src
@@ -496,10 +501,10 @@ int main()
   int i = 0;
   printf("Los caracteres son:\n");
   while (cadena[i] != '\0')
-    {
-      printf("%c \t", cadena[i]);
-      i++;
-    }
+  {
+    printf("%c \t", cadena[i]);
+    i++;
+  }
   return 0;
 }
 #+end_src
@@ -521,9 +526,9 @@ int main()
   int i;
   printf("Los caracteres son:\n");
   for(i = 0; cadena[i] != '\0'; i++)
-    {
-      printf("%c \t", cadena[i]);
-    }
+  {
+    printf("%c \t", cadena[i]);
+  }
   return 0;
 }
 #+end_src
@@ -549,12 +554,12 @@ int main() {
   int i = 0;
   // Recorremos la cadena
   while(cadena[i] != '\0')
-    { // Si el caracter es letra minuscula
-      if (cadena[i] >= 'a' && cadena[i] <= 'z')
-	//sumamos la distancia para pasar a mayuscula
-	cadena[i] += inc;
-      i++;
-    }
+  { // Si el caracter es letra minuscula
+    if (cadena[i] >= 'a' && cadena[i] <= 'z')
+	    //sumamos la distancia para pasar a mayuscula
+	    cadena[i] += inc;
+    i++;
+  }
   printf("%s\n", cadena);
 
   return 0;
@@ -570,17 +575,19 @@ Una función acepta una cadena como argumento: *paso por referencia* (igual que 
 #include <stdio.h>
 void imprime(char cadena[]); 
 
-int main() {
+int main() 
+{
   char saludo[]="Hola";
   imprime(saludo);
   return 0;
 }
 void imprime(char cadena[]) {
   int i=0;
-  while(cadena[i]!='\0') {
-      printf("%c", cadena[i]);
-      i++;
-    }
+  while(cadena[i]!='\0') 
+  {
+    printf("%c", cadena[i]);
+    i++;
+  }
   printf("\n");
 }
 #+END_SRC
@@ -612,8 +619,7 @@ int main()
   printf("Introduce una palabra: ");
   scanf("%20s", palabra);
   longitud = strlen(palabra);
-  printf("Esta palabra tiene %d caracteres\n",
-	 longitud);
+  printf("Esta palabra tiene %d caracteres\n", longitud);
   return 0;
 }
 #+END_SRC
@@ -648,7 +654,8 @@ La cadena receptora debe tener espacio suficiente: /los caracteres sobrantes ser
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main() 
+{
   char nombre_completo[50];
   char nombre[ ] = "Juana";
   char apellido[ ] = "de Arco";
@@ -659,8 +666,7 @@ int main() {
   strcat(nombre_completo, " ");
   // Finalmente el apellido
   strcat(nombre_completo, apellido);
-  printf("El nombre completo es: %s.\n",
-	 nombre_completo);
+  printf("El nombre completo es: %s.\n", nombre_completo);
   return 0;
 }
 #+END_SRC
@@ -679,10 +685,10 @@ int main()
   char color[] = "negro";
   char respuesta[11];
   do // El bucle se repite mientras
-    {// las cadenas *no* coincidan
-      printf("Adivina un color: ");
-      scanf ("%10s", respuesta);
-    } while (strcmp(color, respuesta) != 0);
+  {  // las cadenas *no* coincidan
+    printf("Adivina un color: ");
+    scanf ("%10s", respuesta);
+  }while (strcmp(color, respuesta) != 0);
   printf("¡Correcto!\n");
   return 0;
 }
@@ -701,11 +707,9 @@ int main()
   char s3[] = "abcdff";
   int res;
   res = strcmp(s1, s2);
-  printf("strcmp(s1, s2) = %d\n",
-	 res);
+  printf("strcmp(s1, s2) = %d\n", res);
   res = strcmp(s1, s3);
-  printf("strcmp(s1, s3) = %d\n",
-	 res);
+  printf("strcmp(s1, s3) = %d\n", res);
 return 0;
 }
 #+END_SRC
@@ -743,7 +747,8 @@ Se referencian con el nombre de la matriz seguido de tantos subíndices, entre c
 
 #+BEGIN_SRC C
 #include <stdio.h>
-int main (){
+int main ()
+{
   int matriz[2][2]; // Matriz 2 x 2
   int fila, columna;
   // Inicializacion de elementos
@@ -752,11 +757,12 @@ int main (){
   matriz[1][0] = 3;
   matriz[1][1] = 4;
   // Recorre matriz con un bucle for anidado
-  for(fila = 0; fila < 2; fila++) {
+  for(fila = 0; fila < 2; fila++) 
+  {
       for(columna = 0; columna < 2; columna++)
-	printf("%d\t", matriz[fila][columna]);
+	        printf("%d\t", matriz[fila][columna]);
       printf("\n\n");
-    }
+  }
   return 0;
 }
 #+END_SRC
@@ -766,19 +772,20 @@ int main (){
 Los elementos de una matriz pueden iniciarse en el momento de la declaración.
 #+BEGIN_SRC C
 #include <stdio.h>
-int main() {
-  int matriz[2][3] = // Matriz 2 x 3
-    {
+int main() 
+{ // Matriz 2 x 3
+  int matriz[2][3] = {
       {10, 20, 30}, // 1a fila
       {40, 50, 60}  // 2a fila
-    };
+  };
   int fil, col;
   // Recorremos con bucle anidado
-  for(fil = 0; fil < 2; fil++){
-      for(col = 0; col < 3; col++)
-	printf("%d\t",matriz[fil][col]);
-      printf("\n\n");
-    }
+  for(fil = 0; fil < 2; fil++)
+  {
+    for(col = 0; col < 3; col++)
+	    printf("%d\t",matriz[fil][col]);
+    printf("\n\n");
+  }
   return 0;
 }
 #+END_SRC
@@ -795,11 +802,11 @@ int main()
   int fil, col;
   // Recorremos con bucle anidado
   for(fil = 0; fil < 2; fil++)
-    {
-      for(col = 0; col < 3; col++)
-	printf("%d\t",matriz[fil][col]);
-      printf("\n\n");
-    }
+  {
+    for(col = 0; col < 3; col++)
+	    printf("%d\t",matriz[fil][col]);
+    printf("\n\n");
+  }
 return 0;
 }
 #+END_SRC
@@ -817,7 +824,8 @@ return 0;
 
 #+BEGIN_SRC C
 #include <stdio.h>
-int main() {
+int main() 
+{
   int i,j;
   int m1[2][3] = {1, 2, 3, 4, 5, 6};
   int m2[2][3] = {4, 5, 12, 23, -5, 6};
@@ -828,11 +836,11 @@ int main() {
       m3[i][j] = m1[i][j] + m2[i][j];
   // Imprime resultado con bucle anidado
   for(i = 0; i < 2; i++) // Filas
-    {
-      for(j = 0; j < 3; j++) // Columnas
-	  printf("%d\t",m3[i][j]);
-      printf("\n");
-    }
+  {
+    for(j = 0; j < 3; j++) // Columnas
+	    printf("%d\t",m3[i][j]);
+    printf("\n");
+  }
   return 0;
 }
 #+END_SRC
@@ -873,11 +881,12 @@ int main()
 void imprime_matriz(int M[][2], int f, int c)
 {
   int i, j;
-  for(i = 0; i < f; i++) {
-      for(j = 0; j < c; j++)
-	printf("%d ", M[i][j]);
-      printf("\n");
-    }
+  for(i = 0; i < f; i++) 
+  {
+    for(j = 0; j < c; j++)
+	    printf("%d ", M[i][j]);
+    printf("\n");
+  }
 }
 #+END_SRC
 
@@ -889,20 +898,23 @@ void imprime_matriz(int M[][2], int f, int c)
 #include <stdio.h>
 void absMatriz(int M[][2], int f, int c);
 
-int main() {
+int main() 
+{
   int tabla[2][2] = {{-1,2}, {-3,4}};
   printf("Antes: %d\n", tabla[0][0]);
   absMatriz(tabla, 2, 2); // ¡Sin asignacion!
   printf("Después: %d\n", tabla[0][0]);
+
   return 0;
 }
 
-void absMatriz(int M[][2], int f, int c) {
+void absMatriz(int M[][2], int f, int c) 
+{
   int i, j;
   for(i = 0; i < f; i++) 
-      for(j = 0; j < c; j++)
-	if (M[i][j] < 0)
-	  M[i][j] = -M[i][j];
+    for(j = 0; j < c; j++)
+	    if (M[i][j] < 0)
+	      M[i][j] = -M[i][j];
 }
 #+END_SRC
 
@@ -995,7 +1007,8 @@ int main ()
 Con el identificador de cada componente se puede asignar en cualquier orden
 
 #+BEGIN_SRC C
-typedef struct {
+typedef struct 
+{
   char nombre[50];
   char apellidos[50];
   int matricula;
@@ -1013,13 +1026,15 @@ int main ()
 ** Asignación de valores en estructuras
 
 #+BEGIN_SRC C
-typedef struct {
+typedef struct 
+{
   int day;
   int month;
   int year;
 } date;
 
-int main () {
+int main () 
+{
   date d1, d2, d3;
   // Asignacion por componentes
   d1.day = 31;
@@ -1038,7 +1053,8 @@ int main () {
 #include <stdio.h>
 #include <string.h>
 
-typedef struct {
+typedef struct 
+{
   char nombre[50];
   char apellidos[50];
   int matricula;
@@ -1060,13 +1076,15 @@ int main ()
 #+BEGIN_SRC C
 #include <stdio.h>
 
-typedef struct {
+typedef struct 
+{
   char nombre[50];
   char apellidos[50];
   int matricula;
 } ficha;
 
-int main () {
+int main () 
+{
   ficha alumno;
   printf("Nombre:");
   scanf("%s", alumno.nombre);
@@ -1150,7 +1168,8 @@ typedef struct
   int year;
 } date;
 
-int main() {
+int main() 
+{
   date fechas[3]; // Vector de 3 fechas
   fechas[0].day = 1;
   fechas[1] = (date) {31, 12, 1999};
@@ -1169,19 +1188,22 @@ Una función acepta estructuras (*paso por valor*).
 #include <stdio.h>
 #include <math.h>
 //Definicion de estructura
-typedef struct {
+typedef struct 
+{
   float real, imaginaria;
 } complejo;
 //Funcion que acepta una estructura
 float modulo(complejo c);
 
-int main(){
+int main()
+{
   complejo comp={1, 3};
   printf("El modulo es: %f\n", modulo(comp));
   return 0;
 }
 //Implementacion de la funcion
-float modulo(complejo c){
+float modulo(complejo c)
+{
   return sqrt(c.real * c.real + c.imaginaria * c.imaginaria);
 }
 #+END_SRC
@@ -1195,20 +1217,22 @@ Una función puede devolver una estructura
 #+BEGIN_SRC C
 #include <stdio.h>
 
-typedef struct {
+typedef struct 
+{
   float real, imaginaria;
 } complejo;
 //Funcion que devuelve estructura
 complejo conjugado(complejo c);
 
-int main(){
+int main()
+{
   complejo comp1 = {1, 3}, comp2;
   comp2 = conjugado(comp1);
   printf("%f", comp2.imaginaria);
   return 0;
 }
-
-complejo conjugado(complejo c){
+complejo conjugado(complejo c)
+{
   return (complejo) {c.real, -c.imaginaria}; 
 }
 #+END_SRC
@@ -1224,17 +1248,15 @@ enum nombre_enum {lista_de_valores};
 #+END_SRC
 *** Ejemplo
 #+BEGIN_SRC C
-enum dia{ //valores enteros: 0 al 6
-  lunes, martes, miercoles, jueves, viernes, sabado, domingo
-};
+//valores enteros: 0 al 6
+enum dia{ lunes, martes, miercoles, jueves, viernes, sabado, domingo };
 
 #+END_SRC
 ** Ejemplo (1)
 #+BEGIN_SRC C
 #include <stdio.h>
-enum dia{ //valores enteros: 0 al 6
-  lunes, martes, miercoles, jueves, viernes, sabado, domingo
-};
+//valores enteros: 0 al 6
+enum dia{ lunes, martes, miercoles, jueves, viernes, sabado, domingo };
 
 int main()
 {
@@ -1254,9 +1276,8 @@ int main()
 ** Ejemplo (2)
 #+BEGIN_SRC C
 #include <stdio.h>
-enum dia{ //valores enteros: 1 en adelante
-  lunes = 1, martes, miercoles, jueves, viernes, sabado, domingo
-};
+//valores enteros: 1 en adelante
+enum dia{ lunes = 1, martes, miercoles, jueves, viernes, sabado, domingo };
 
 int main()
 {
