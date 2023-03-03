@@ -277,88 +277,6 @@ int main()
   return 0;
 }
 #+END_SRC
-** Funciones con vectores
-*** Paso por referencia
-Cuando un vector se pasa como argumento a una función *no se pasa el vector completo* sino la *dirección de memoria del primer elemento*.
-#+BEGIN_SRC C
-void funcion (int vector[], int dimension);
-#+END_SRC
-
-** Funciones con vectores
-#+BEGIN_SRC C
-#include <stdio.h>
-
-void imprime(int v[], int n);
-
-int main()
-{
-  int v1[3] = {10, 20, 30};
-  imprime(v1, 3);
-  return 0;
-} 
-
-void imprime(int v[], int n)
-{
-  int i;
-  for(i = 0; i < n; i++)
-      printf("%d\n",v[i]);
-}
-#+END_SRC
-
-** Funciones con vectores: paso por referencia
-   :PROPERTIES:
-   :beamer_opt: plain
-   :END:
-
-   La función *puede modificar* el contenido de los elementos del vector ya que conoce la dirección de memoria donde están almacenados.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-void toy(int vector[]);
-
-int main()
-{
-  int x[] = {1, 2, 3};
-  printf("Antes: %d\n", x[0]);
-  toy(x); // ¡Sin asignacion!
-  printf("Después: %d\n", x[0]);
-  return 0;
-}
-void toy(int vector[])
-{ 
-  //Funcion simple que modifica el valor del primer elemento
-  vector[0] = 100;
-}
-#+END_SRC
-
-** Otro ejemplo de funciones con vectores
-   :PROPERTIES:
-   :beamer_opt: plain
-   :END:
-#+BEGIN_SRC C
-#include <stdio.h>
-
-void fAbs(int vector[], int n);
-
-int main()
-{
-  int datos[5]={-1, 3, -5, 7, -9}, i;
-  fAbs(datos, 5); //¡Sin asignacion!
-
-  for(i = 0; i < 5; i++)   // Mostramos el resultado
-    printf("%d ",datos[i]);
-  return 0;
-}
-// La funcion recibe la direccion del primer elemento
-void fAbs(int vector[], int n)
-{
-  int i;
-  for(i = 0; i < n; i++)
-      if(vector[i] < 0)
-	vector[i] = -vector[i];
-}
-#+END_SRC
 
 * Cadenas de caracteres
 ** Cadenas de caracteres en C
@@ -566,31 +484,6 @@ int main() {
 }
 #+end_src
 
-#+RESULTS:
-: HOLA
-** Funciones y cadenas
-Una función acepta una cadena como argumento: *paso por referencia* (igual que un vector).
-
-#+BEGIN_SRC C
-#include <stdio.h>
-void imprime(char cadena[]); 
-
-int main() 
-{
-  char saludo[]="Hola";
-  imprime(saludo);
-  return 0;
-}
-void imprime(char cadena[]) {
-  int i=0;
-  while(cadena[i]!='\0') 
-  {
-    printf("%c", cadena[i]);
-    i++;
-  }
-  printf("\n");
-}
-#+END_SRC
 ** Librería =string.h=
 
 *** 
@@ -844,80 +737,6 @@ int main()
   return 0;
 }
 #+END_SRC
-
-** Funciones con matrices
-
-- Una matriz siempre se pasa por referencia: no se pasa la matriz completa sino la dirección del primer elemento.
-#+BEGIN_SRC C
-void funcion (int matriz[3][3], int nFil, int nCol);
-#+END_SRC
-
-- Se puede omitir el número de filas pero *no* el número de columnas. 
-#+BEGIN_SRC C
-void funcion (int matriz[][3], int nFil, int nCol);
-#+END_SRC
-
-#+BEGIN_SRC C
-//Error de sintaxis
-void funcion (int matriz[][], int nFil, int nCol);
-#+END_SRC
-
-** Ejemplo de función con matrices
-   :PROPERTIES:
-   :beamer_opt: plain
-   :END:
-
-#+BEGIN_SRC C
-#include <stdio.h>
-void imprime_matriz(int M[][2], int f, int c);
-
-int main()
-{
-  int tabla[2][2] = {{1,2}, {3,4}};
-  imprime_matriz(tabla, 2, 2);
-  return 0;
-}
-
-void imprime_matriz(int M[][2], int f, int c)
-{
-  int i, j;
-  for(i = 0; i < f; i++) 
-  {
-    for(j = 0; j < c; j++)
-	    printf("%d ", M[i][j]);
-    printf("\n");
-  }
-}
-#+END_SRC
-
-** Ejemplo de función con matrices (2)
-   :PROPERTIES:
-   :beamer_opt: plain
-   :END:
-#+BEGIN_SRC C
-#include <stdio.h>
-void absMatriz(int M[][2], int f, int c);
-
-int main() 
-{
-  int tabla[2][2] = {{-1,2}, {-3,4}};
-  printf("Antes: %d\n", tabla[0][0]);
-  absMatriz(tabla, 2, 2); // ¡Sin asignacion!
-  printf("Después: %d\n", tabla[0][0]);
-
-  return 0;
-}
-
-void absMatriz(int M[][2], int f, int c) 
-{
-  int i, j;
-  for(i = 0; i < f; i++) 
-    for(j = 0; j < c; j++)
-	    if (M[i][j] < 0)
-	      M[i][j] = -M[i][j];
-}
-#+END_SRC
-
 
 * Estructuras
 ** Estructuras en C
@@ -1175,65 +994,6 @@ int main()
   fechas[1] = (date) {31, 12, 1999};
   fechas[2] = fechas[1];
   return 0;
-}
-#+END_SRC
-
-** Funciones y estructuras
-   :PROPERTIES:
-   :beamer_opt: plain
-   :END:
-Una función acepta estructuras (*paso por valor*).
-
-#+BEGIN_SRC C
-#include <stdio.h>
-#include <math.h>
-//Definicion de estructura
-typedef struct 
-{
-  float real, imaginaria;
-} complejo;
-//Funcion que acepta una estructura
-float modulo(complejo c);
-
-int main()
-{
-  complejo comp={1, 3};
-  printf("El modulo es: %f\n", modulo(comp));
-  return 0;
-}
-//Implementacion de la funcion
-float modulo(complejo c)
-{
-  return sqrt(c.real * c.real + c.imaginaria * c.imaginaria);
-}
-#+END_SRC
-
-** Funciones y estructuras
-   :PROPERTIES:
-   :beamer_opt: plain
-   :END:
-Una función puede devolver una estructura
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-typedef struct 
-{
-  float real, imaginaria;
-} complejo;
-//Funcion que devuelve estructura
-complejo conjugado(complejo c);
-
-int main()
-{
-  complejo comp1 = {1, 3}, comp2;
-  comp2 = conjugado(comp1);
-  printf("%f", comp2.imaginaria);
-  return 0;
-}
-complejo conjugado(complejo c)
-{
-  return (complejo) {c.real, -c.imaginaria}; 
 }
 #+END_SRC
 
