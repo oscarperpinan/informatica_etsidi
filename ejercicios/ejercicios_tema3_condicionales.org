@@ -15,17 +15,21 @@ Escribe un programa que permita comprobar si un año (dado por teclado) es bisie
 int main()
 {
   int year;
-  _Bool isBisiesto;
+  int isBisiesto;
 
   printf("Indique el año.\n");
-  scanf("%d", &year);
+  scanf("%i", &year);
  
   isBisiesto = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 
   if (isBisiesto)
-    printf("El año %d es bisiesto.\n", year);
+  {
+    printf("El año %i es bisiesto.\n", year);    
+  }
   else
-    printf("El año %d no es bisiesto.\n", year);
+  {
+    printf("El año %i no es bisiesto.\n", year);
+  }
 
   return 0;
 }
@@ -43,15 +47,21 @@ int main()
   int x, y;
 
   printf("Indique dos números enteros.\n");
-  scanf("%d %d", &x, &y);
+  scanf("%i %i", &x, &y);
   
   if (y == 0)
+  {
     printf("No se puede hacer la operacion.\n");
+  }
   else if (x % y == 0)
-    printf("El número %d es divisible por %d.\n", x, y);
+  {
+    printf("El número %i es divisible por %i.\n", x, y);
+  }  
   else
-    printf("El número %d no es divisible por %d.\n", x, y);
-
+  {
+    printf("El número %i no es divisible por %i.\n", x, y);
+  }
+    
   return 0;
 }
 #+END_SRC
@@ -70,11 +80,18 @@ int main()
   scanf  ("%c", &tecla);
 
   if ((tecla >= 'a' && tecla <= 'z') || (tecla >= 'A' && tecla <= 'Z'))
+  {
     printf("Es una letra.\n");
+  }
   else if (tecla >= '0' && tecla <= '9')
+  {
     printf("Es un número.\n");
+  }
   else
+  {
     printf("Es un caracter especial.\n");
+  }
+    
   return 0;
 }
 #+END_SRC
@@ -128,7 +145,7 @@ int main()
 {
   int n;
   printf("Introduzca número de día: ");
-  scanf("%d", &n);
+  scanf("%i", &n);
   switch(n)
   {
     case 1:
@@ -231,8 +248,12 @@ int main()
       xi = sqrt(-disc) / (2 * a);
       printf("La raiz real es %.2f y la imaginaria es %.2f", xr, xi);
     }
-  } else
+  } 
+  else
+  {
     printf("El coeficiente a no puede ser 0.\n");
+  }
+    
 }
 #+END_SRC
 

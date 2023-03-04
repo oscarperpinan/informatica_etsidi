@@ -43,14 +43,16 @@ int main()
   do 
   {
     printf("Elige el valor de n: ");
-    scanf("%d", &n);
+    scanf("%i", &n);
   }
   while (n < 1);
 
   // Una vez que tenemos n simplemente imprimimos la secuencia
   // actualizando el indice del bucle for con el valor de n
   for (i = a; i <= b; i += n)
-    printf("%d  ", i);
+  {
+    printf("%i  ", i);
+  }
 
   return 0;
 }
@@ -76,7 +78,7 @@ int main()
 
   for (n = 0; n <= 1e6; ++n)
   {
-    pi += pow(-1, n) / (2 * n + 1);
+    pi = pi + pow(-1, n) / (2 * n + 1);
   }
   // La multiplicacion se realiza fuera del bucle
   // para evitar repetir esa operacion 1 millon de veces
@@ -100,7 +102,7 @@ int main()
 {
   int i, n;
   int fib1 = 1, fib2 = 1;
-  // La serie crece rapidamente, y un int no es suficiente
+  // La serie crece rapidamente, y un int puede no ser suficiente
   unsigned long long int fib;
 
   // Con un bucle do-while nos aseguramos de que el número n es mayor
@@ -108,24 +110,28 @@ int main()
   do 
   {
     printf("Elige el valor de n: ");
-    scanf("%d", &n);
+    scanf("%i", &n);
   }
   while (n < 1);
+
   // Aqui empieza el calculo de la serie
   for (i = 1 ; i <= n ; i++)
   {
     // Los dos primeros terminos son 1
     if (i <= 2)
+    {
       fib = 1;
+    }
     else
-    { // el resto de terminos son la suma de los dos anteriores
+    { 
+      // el resto de terminos son la suma de los dos anteriores
       fib = fib1 + fib2;
 	    // Una vez hecha la suma intercambio los valores para el
 	    // siguiente paso de bucle.
       fib1 = fib2;
       fib2 = fib;
     }
-    // El identificador de formato esta adaptado a la clase del dato
+    // El identificador de formato esta adaptado a la clase unsigned long long int
     printf("%llu  ", fib);
   }
   return 0;
@@ -143,7 +149,7 @@ int main()
 {
   int n, k;
   // variable que controla si es primo o no
-  _Bool esPrimo;
+  int esPrimo;
 
   for(n = 2; n <= 300; n++)
   {
@@ -153,11 +159,15 @@ int main()
     {
 	    // Si es divisible por algun numero deja de ser primo
       if (n % k == 0)
+      {
         esPrimo = 0;
+      }
     }
     // Si finalmente es primo, lo muestra en pantalla
     if (esPrimo)
-      printf("%d\n", n);
+    {
+      printf("%i\n", n);
+    }      
   }
   return 0;
 }
@@ -188,7 +198,7 @@ int main()
     d = v * dt + 0.5 * a * dt * dt;
     // La velocidad va incrementando
     v = v + a  * dt;
-    printf("d = %.2f, v = %.2f (t = %.2f)\n", d, v, n * dt);
+    printf("dist = %.2f, vel = %.2f (t = %.2f)\n", d, v, n * dt);
   }
 }
 #+END_SRC
@@ -233,20 +243,25 @@ int main()
   //Numero aleatorio entre 1 y 100
   n = rand() % 100 + 1;
   printf("Estoy listo. Di un numero:\n");
+  
   do
   {
-    scanf("%d", &num);
+    scanf("%i", &num);
 
     if(num > n)
+    {
       printf("Muy alto\n");
+    }
     else if (num < n)
+    {
       printf("Muy bajo\n");
+    }
 
     ++intentos;
   }
   while (num != n);
 
-  printf("Bien, era el %d\n", num);
-  printf("Has necesitado %d intentos.\n", intentos);
+  printf("Bien, era el %i\n", num);
+  printf("Has necesitado %i intentos.\n", intentos);
 }
 #+END_SRC
