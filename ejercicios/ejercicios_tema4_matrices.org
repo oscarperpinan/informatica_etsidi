@@ -49,19 +49,21 @@ int main()
   for(i = 0; i < 3; i++)
   {
     for(j = 0; j < 3; j++)
-	  {
-	    for(k = 0; k < 3; k++)
+    {
+      for(k = 0; k < 3; k++)
       {
         r[i][j] += p[i][k] * q[k][j];
       }
-	  }
+    }
   }
 
   // Imprime el resultado
   for(i = 0; i < 3; i++)
   {
     for(j = 0; j < 3; j++)
-    printf("%d\t", r[i][j]);
+    {
+      printf("%i\t", r[i][j]);
+    }
     printf("\n"); // Un salto de linea tras cada fila
   }
 }
@@ -116,8 +118,7 @@ int main()
     }
     printf("\n");//Salto de línea al acabar una fila
   }
-  
-  printf("\n");
+  return 0;
 }
 #+end_src
 
@@ -165,6 +166,8 @@ int main()
   det = det1 - det2 + det3;
   
   printf("El determinante es: %d\n\n",det);
+
+  return 0;
 }
 #+end_src
 
