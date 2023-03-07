@@ -144,13 +144,13 @@ int main()
     if (esPrimo)
     { 
       // y por tanto debo almacenar ese numero en el vector
-	    primos[ind_p] = p;
-	    / /y avanzar el indice del vector
-	    ++ind_p;
+	    primos[ind_primo] = p;
+	    //y avanzar el indice del vector
+	    ind_primo = ind_primo + 1;
     }
   }
   // Muestro el resultado en pantalla
-  for (i = 0; i < ind_p; i++)
+  for (i = 0; i < ind_primo; i++)
   {
     printf ("%i ", primos[i]);
   }

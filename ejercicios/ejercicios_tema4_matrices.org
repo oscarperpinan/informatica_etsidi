@@ -52,7 +52,7 @@ int main()
     {
       for(k = 0; k < 3; k++)
       {
-        r[i][j] += p[i][k] * q[k][j];
+        r[i][j] = r[i][j] + p[i][k] * q[k][j];
       }
     }
   }

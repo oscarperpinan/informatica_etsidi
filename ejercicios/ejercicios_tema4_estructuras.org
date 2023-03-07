@@ -39,11 +39,9 @@ int main()
   printf("Escribe las coordenadas del punto 2:\n");
   scanf("%f %f", &b.x, &b.y);
 
-  printf("El punto 1 está en el cuadrante %i.\n",
-	 cuadrante(a));
+  printf("El punto 1 está en el cuadrante %i.\n", cuadrante(a));
 
-  printf("El punto 2 está en el cuadrante %i.\n",
-	 cuadrante(b));
+  printf("El punto 2 está en el cuadrante %i.\n", cuadrante(b));
 
   d = distancia(a, b);
 

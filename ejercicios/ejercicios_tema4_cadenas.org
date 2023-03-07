@@ -26,10 +26,10 @@ int main ()
   // Empezamos por el último caracter (len - 1) y retrocedemos hasta
   // el primero (0)
   for(i = len - 1; i >= 0; i--)
+  {
     printf("%c", palabra[i]);
-
-  printf("\n");  
-
+  }
+    
   return 0;
 }
 #+END_SRC
@@ -39,7 +39,8 @@ int main ()
 Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en la frase siguiente:
 
 #+begin_src C  :exports code
-  char texto[] = //Usamos \ para escribir varias lineas
+//Usamos \ para escribir varias lineas
+  char texto[] = 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
  orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
  lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
@@ -60,8 +61,10 @@ Escribe	un programa que cambie los espacios en blanco por un guión bajo =_= en 
 #include <stdio.h>
 
 int main()
-{//Asignamos el texto a una variable char, sin definir la dimension
-  char texto[] = //Usamos \ para escribir varias lineas
+{
+   //Asignamos el texto a una variable char, sin definir la dimension
+  //Usamos \ para escribir varias lineas
+  char texto[] = 
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod\
  orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis\
  lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed\
@@ -80,11 +83,13 @@ int main()
   int i = 0;
   //Recorremos el texto hasta el final
   while(texto[i] != '\0')
+  {
+    if(texto[i] == ' ') //Si encuentra un espacio
     {
-      if(texto[i] == ' ') //Si encuentra un espacio
-	texto[i] = '_'; //lo sustituye por un guion bajo
-      i++;
+      texto[i] = '_'; //lo sustituye por un guion bajo
     }
+    i++;
+  }
   printf("%s\n", texto); //Imprime el resultado
 
   return 0;    
@@ -121,114 +126,57 @@ int main()
   
   char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
   int i, j; 
-  int nLetra[5] = {0}; //Vector de resultados
+  int nLetra[5] = {0, 0, 0, 0, 0};  //Vector de resultados
 
   // Cuenta las apariciones de cada vocal, y almacena resultados en nLetra
   i = 0;
   while (frase[i] != '\0') // Recorre la cadena de caracteres
+  {
+    switch(frase[i]) // Compara el caracter con las vocales
     {
-      switch(frase[i]) // Compara el caracter con las vocales
-	{
-	case 'a':
-	case 'A':
-	  nLetra[0]++;
-	  break;
-	case 'e':
-	case 'E':
-	  nLetra[1]++;
-	  break;
-	case 'i':
-	case 'I':
-	  nLetra[2]++;
-	  break;
-	case 'o':
-	case 'O':
-	  nLetra[3]++;
-	  break;
-	case 'u':
-	case 'U':
-	  nLetra[4]++;
-	  break;
-	}
-      i++; // Avanzo en la frase
+      case 'a':
+      case 'A':
+        nLetra[0]++;
+      break;
+    
+      case 'e':
+      case 'E':
+        nLetra[1]++;
+      break;
+    
+      case 'i':
+      case 'I':
+        nLetra[2]++;
+      break;
+	
+      case 'o':
+      case 'O':
+        nLetra[3]++;
+      break;
+	
+      case 'u':
+      case 'U':
+        nLetra[4]++;
+      break;
     }
+  // Avanzo en la frase  
+  i++; 
+  }
   // Recorre el vector de resultados, y pinta asteriscos
   // correspondientes a cada letra
   for (i = 0; i < 5; i++)
-    { 
-      printf("%c: ", vocales[i]);
-      for (j = 1; j <= nLetra[i]; j++)
-	  printf("*");
-      printf("\n");
+  { 
+    printf("%c: ", vocales[i]);
+    for (j = 1; j <= nLetra[i]; j++)
+    {
+      printf("*");
     }
+    printf("\n");
+  }
+  
   return 0;
 }
 #+end_src
-- Escribe una versión del programa construida en base a dos funciones, =cuentaLetra= y =pintaAsteriscos=.
-  La función =cuentaLetra= tiene dos argumentos. Uno define la letra a buscar y el otro es el texto en el que hay que buscar. Esta función devuelve un número entero indicando el número de veces que se ha repetido la letra pasado por el argumento dentro de un texto.
-  La función =pintaAsteriscos= recibe un número entero, y escribe tantos asteriscos como se indique en ese número.
-  Los prototipos son:
-
-#+BEGIN_SRC C  :exports code
-int cuentaLetra(char x, char texto[]);
-
-void pintaAsteriscos(int n);
-#+END_SRC
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-
-int cuentaLetra(char x, char texto[]);
-
-void pintaAsteriscos(int n);
-
-int main()
-{
-  char frase[] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras euismod orci ac porttitor finibus. Curabitur sed tincidunt est, nec mollis lorem. Vestibulum facilisis dolor sit amet faucibus ultrices. Sed pharetra vel erat et ornare. Duis eu lorem non leo dictum egestas. Integer diam arcu, volutpat ut elit vitae, finibus molestie risus. Vivamus sagittis commodo risus vel finibus. Vestibulum vehicula tortor ut ante tincidunt, non tincidunt turpis sodales. Nam orci diam, pulvinar in ante a, dignissim pulvinar magna. Mauris massa tortor, fermentum pretium lobortis sed, luctus vitae tortor. Suspendisse sagittis augue sit amet risus molestie, sed dapibus enim vulputate. Sed tempus risus vel dolor ornare, eget imperdiet ligula aliquam. Mauris ac auctor lacus. Quisque suscipit interdum rutrum. Sed placerat sit amet urna in vulputate. Nulla facilisis mi nisi, vel pulvinar odio auctor posuere.";
-
-  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
-  int i, nLetra[5]; //Vector de resultados
-
-  // Cuenta las apariciones de cada letra, y almacena resultados en un
-  // vector
-  for (i = 0; i < 5; i++)
-    nLetra[i] = cuentaLetra(vocales[i], frase);
-  for (i = 0; i < 5; i++)
-    { // Recorre el vector de resultados, y pinta asteriscos
-      // correspondientes a cada letra
-      printf("%c: ", vocales[i]);
-      pintaAsteriscos(nLetra[i]);
-      printf("\n");
-    }
-
-  return 0;
-}
-
-int cuentaLetra(char x, char texto[])
-{
-  int i, n = 0;
-  int inc = 'A' - 'a';
-  
-  i = 0;
-
-  while (texto[i] != '\0')
-    {
-      if (texto[i] == x || texto[i] == x + inc)// Comprueba mayúsculas y minúsculas
-	n++; // Contador de apariciones 
-      i++;
-    }
-  return n;
-}
-
-void pintaAsteriscos(int n)
-{
-  int i;
-  if (n > 0)
-    for (i = 1; i <= n; i++)
-      printf("*");
-}
-#+END_SRC
 
 #+RESULTS:
 | a: | ********************************************************                              |
