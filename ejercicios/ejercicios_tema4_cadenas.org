@@ -101,7 +101,7 @@ int main()
 
 * Cuenta letras
 
-- Escribe un programa que analice la frase del ejercicio anterior representando el *número de vocales* que contiene mediante líneas de asteriscos. 
+- Escribe un programa que analice la frase del ejercicio anterior contando en número de veces que aparece cada vocal. Al final del programa, se debe pintar en el terminal, para cada letra, una línea que contiene el mismo númeor de asteríscos que veces aparece esa vocal.
 
 #+begin_src C 
 #include <stdio.h>
