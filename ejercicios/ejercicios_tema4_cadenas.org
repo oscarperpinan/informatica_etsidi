@@ -12,20 +12,26 @@ Escribe un programa que imprima al revés una palabra introducida por teclado. (
 
 #+BEGIN_SRC C 
 #include <stdio.h>
-#include <string.h>
 
 int main ()
 {
-  char palabra[11];
+  char palabra[12];
   int len, i;
   // Pide la palabra al usuario
-  printf("Escribe una palabra (máximo 10 letras):\n");
-  scanf("%10s", palabra);
-  // Calcula la longitud
-  len = strlen(palabra);
+  printf("Escribe una palabra (máximo 11 letras):\n");
+  scanf("%11s", palabra);
+  
+  // Calcula la longitud de la cadena
+  i = 0;
+	while (palabra[i] != '\0')
+	{
+		i++;
+	}
+  len = i;
+  
   // Empezamos por el último caracter (len - 1) y retrocedemos hasta
   // el primero (0)
-  for(i = len - 1; i >= 0; i--)
+  for(i = len-1; i >= 0; i--)
   {
     printf("%c", palabra[i]);
   }
