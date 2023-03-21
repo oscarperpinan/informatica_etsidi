@@ -179,11 +179,10 @@ int main()
 
 * Distancia entre dos instantes temporales
 
-Escribe un programa que calcule la distancia temporal entre dos instantes. Este programa debe emplear la estructura =tiempo= (horas, minutos, segundos) para almacenar la información de cada instante. Asimismo debe emplear la función =dTiempo= que admite como argumentos dos estructuras =tiempo= y devuelve una estructura =tiempo=. Por ejemplo, si la estructura =t1= representa el instante =3:45:15= y la estructura =t2= representa el instante =9:44:03=, la función =dTiempo= debe devolver la estructura =5:58:48=. Es importante tener en cuenta la posibilidad de que entre =t1= y =t2= se encuentre la medianoche.
+Escribe un programa que calcule la distancia temporal entre dos instantes. Este programa debe emplear la estructura =tiempo= (horas, minutos, segundos) para almacenar la información de cada instante. 
+Por ejemplo, si la estructura =t1= representa el instante =3:45:15= y la estructura =t2= representa el instante =9:44:03=, la distancia temporal debe ser la estructura =5:58:48=. 
+Es importante tener en cuenta la posibilidad de que entre =t1= y =t2= se encuentre la medianoche.
 
-#+BEGIN_SRC C :exports code
-tiempo dTiempo(tiempo t1, tiempo t2);
-#+END_SRC
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -193,9 +192,6 @@ typedef struct
   int hour, min, sec;
 } tiempo;
 
-tiempo dTiempo(tiempo t1, tiempo t2);
-
-void printTiempo(tiempo t);
 
 int main()
 {
@@ -227,7 +223,7 @@ int main()
   }
   dt.hour = t2.hour - t1.hour;
 	
-  printf("%d:%d:%d", dt.hour, dt.min, dt.sec);
+  printf("%i:%i:%i", dt.hour, dt.min, dt.sec);
   
   return 0;
 }
