@@ -1,4 +1,4 @@
-#+TITLE: Ejercicios del Tema 7
+#+TITLE: Ejercicios del Tema 5
 #+SUBTITLE: Ficheros
 #+AUTHOR: 
 #+DATE: 
@@ -22,20 +22,25 @@ int main ()
   if (fOrigen == NULL) {
     printf("Error al abrir el archivo origen.\n");
     return -1;
-  } else {
+  }
+  else 
+  {
     // El destino en modo escritura:
     fDestino = fopen("lorem_ipsum2.txt", "w");
-    if (fDestino == NULL) {
+    if (fDestino == NULL) 
+    {
       printf("Error al abrir el archivo destino.\n");
       return -1;
-    } else { // Los dos ficheros están correctamente abiertos
+    } 
+    else 
+    { // Los dos ficheros están correctamente abiertos
       // Leemos el origen caracter por caracter, parando al encontrar
       // el EOF
       while (fscanf(fOrigen, "%c", &c) != EOF)
-	{
-	  if (c == ' ') c = '_'; // Cambiamos espacios por guiones
-	  fprintf(fDestino, "%c", c); // Escribimos el caracter en el destino
-	}
+      {
+        if (c == ' ') c = '_'; // Cambiamos espacios por guiones
+        fprintf(fDestino, "%c", c); // Escribimos el caracter en el destino
+      }
       // Cerramos ficheros
       fclose(fOrigen);
       fclose(fDestino);
@@ -63,24 +68,30 @@ int main()
   int iChar = 0, iWord = 0, iLine = 0;
   // Abrimos archivo en modo lectura
   pf = fopen("lorem_ipsum.txt", "r");
-  if (pf == NULL) {
+  if (pf == NULL) 
+  {
     printf("Error al abrir el archivo.\n");
     return -1;
-  } else {
+  } 
+  else 
+  {
     // Leemos carácter a carácter hasta encontrar EOF
     while (fscanf(pf, "%c", &c) != EOF)
-      {// En cada paso incrementamos el contador de caracteres 
-	iChar++;
-	// El espacio y el salto de línea definen una nueva palabra,
-	// luego incrementamos el contador de palabras
-	if (c == ' ' || c == '\n')
-	  iWord++;
-	// Si lo leído es un salto de línea, incrementamos su contador
-	if (c == '\n')
-	  iLine++;
+    {// En cada paso incrementamos el contador de caracteres 
+      iChar++;
+      // El espacio y el salto de línea definen una nueva palabra,
+      // luego incrementamos el contador de palabras
+      if (c == ' ' || c == '\n')
+      {
+        iWord++;
+        // Si lo leído es un salto de línea, incrementamos su contador
+        if (c == '\n')
+        {
+          iLine++;
+        }
       }
-    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n",
-	   iChar, iWord, iLine);
+    }
+    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n", iChar, iWord, iLine);
 
     fclose(pf);
   }
