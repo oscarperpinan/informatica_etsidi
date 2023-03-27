@@ -278,11 +278,11 @@ int main()
   while (fscanf(pf, "%c", &x) != EOF)
   {
     //Si lo leído es un salto de línea
-      if (x == '\n')
-      {
-        //incrementamos el contador
-        ++nLineas;
-      }  
+    if (x == '\n')
+    {
+      //incrementamos el contador
+      ++nLineas;
+    }  
   }
   printf("%i", nLineas);
   return 0;
@@ -335,7 +335,7 @@ int main ()
   pf = fopen("columnas.txt", "r");   // Abrimos el fichero para lectura
   // Leemos y comprobamos EOF
   while (fscanf(pf, "%d;%d;%d\n", &v1[i], &v2[i], &v3[i]) != EOF)  
-	{
+  {
     // Mostramos en pantalla
     printf("Línea %d: %d \t %d \t %d \n", i + 1, v1[i], v2[i], v3[i]);
     i++;
@@ -369,37 +369,38 @@ int main()
 : 15
 
 * Otras funciones
-%** stdin, stdout, and stderr
-%- Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo =FILE=):
+#+BEGIN_COMMENT
+** stdin, stdout, and stderr
+- Al ejecutarse un programa de C se abren tres ficheros de forma automática (identificados por tres punteros de tipo =FILE=):
 
-%  - =stdin=: entrada estándar del programa (habitualmente el teclado).
+  - =stdin=: entrada estándar del programa (habitualmente el teclado).
 
-%  - =stdout=: salida estándar del programa (habitualmente la pantalla).
+  - =stdout=: salida estándar del programa (habitualmente la pantalla).
 
-%  - =stderr=: fichero estándar de error.
+  - =stderr=: fichero estándar de error.
 
-%*** Ejemplo
-% #+BEGIN_SRC C
-%#include <stdio.h>
+*** Ejemplo
+ #+BEGIN_SRC C
+#include <stdio.h>
 
-%int main(){
-%  printf("hello there.\n");
-%  fprintf(stdout, "hello there.\n");
-%  return 0;
-%}
-% #+END_SRC
+int main(){
+  printf("hello there.\n");
+  fprintf(stdout, "hello there.\n");
+  return 0;
+}
+ #+END_SRC
 
-% #+RESULTS:
-% | hello | there. |
-% | hello | there. |
+ #+RESULTS:
+ | hello | there. |
+ | hello | there. |
 
-
-%** COMMENT =stdin=
-%Entrada estándar del programa (habitualmente el teclado).
-%#+BEGIN_SRC C
-% scanf("%i", &i);
-% fscanf(stdin, "%i", &i);
-%#+END_SRC
+** COMMENT =stdin=
+Entrada estándar del programa (habitualmente el teclado).
+#+BEGIN_SRC C
+ scanf("%i", &i);
+ fscanf(stdin, "%i", &i);
+#+END_SRC
+#+END_COMMENT
 
 ** Movimiento en un fichero
 
@@ -440,8 +441,7 @@ int main()
   fseek(pf, 0, SEEK_END);
   //Almacena la posición
   fsize = ftell(pf);
-  printf("El fichero tiene %li bytes.\n",
-	 fsize);
+  printf("El fichero tiene %li bytes.\n", fsize);
   return 0;
 }
 #+END_SRC
