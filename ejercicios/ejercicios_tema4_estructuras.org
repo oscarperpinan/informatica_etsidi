@@ -138,29 +138,29 @@ int main()
     scanf("%f %f", &puntos[i].x, &puntos[i].y);      
   }
 
-  // Recorro el vector 
+  // Se recorre el vector 
   for (i = 0; i < n; i++)
   {
-      if (puntos[i].x > 0 && puntos[i].y > 0)
-	  {
-	    iCuad = 1;
-	  }
-	  else if (puntos[i].x < 0 && puntos[i].y > 0)
-	  {
-	    iCuad = 2;
-	  }
-	  else if (puntos[i].x < 0 && puntos[i].y < 0)
-	  {
-	    iCuad = 3;
-	  }
-	  else if (puntos[i].x > 0 && puntos[i].y < 0)
-	  {
-	    iCuad = 4;
-	  }
-	  else 
-	  {
-	    iCuad = 0; // Punto en un eje   
-	  }  
+    if (puntos[i].x > 0 && puntos[i].y > 0)
+    {
+      iCuad = 1;
+    }
+    else if (puntos[i].x < 0 && puntos[i].y > 0)
+    {
+      iCuad = 2;
+    }
+    else if (puntos[i].x < 0 && puntos[i].y < 0)
+    {
+      iCuad = 3;
+    }
+    else if (puntos[i].x > 0 && puntos[i].y < 0)
+    {
+      iCuad = 4;
+    }
+    else 
+    {
+      iCuad = 0; // Punto en un eje   
+    }  
     
     // y actualizo el vector contador
     vCuad[iCuad] = vCuad[iCuad] + 1;
