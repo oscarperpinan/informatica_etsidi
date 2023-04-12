@@ -100,7 +100,7 @@ int main()
 #+END_SRC
 
 #+RESULTS:
-| Caracteres: 994 | Palabras: 146 | Líneas: 16. |
+| Caracteres: 848 | Palabras: 146 | Líneas: 16. |
 
 
 
@@ -314,10 +314,10 @@ int main()
 
       // Al terminar de escribir, cerramos el archivo
       fclose(pescritura);	
-		}		
-	}
+    }		
+  }
 	
-	return 0;	
+  return 0;	
 }
 #+END_SRC
 
