@@ -195,120 +195,137 @@ Escribe un programa que lea este fichero almacenando el contenido de cada column
 #include <stdio.h>
 #define N 2898
 
-double maximo(double x[], int n);
-double minimo(double x[], int n);
-double promedio(double x[], int n);
-
 int main()
 {
-  FILE *pf, *wf;
-  int i;
-  // Defino un vector para cada variable a leer del fichero
-  double TempAvg[N], HumidAvg[N], WindAvg[N],Radiation[N];
-  double minTa, minH, minW, minR;
-  double maxTa, maxH, maxW, maxR;
-  double promTa, promH, promW, promR;
-  
-  pf = fopen("aranjuez.csv", "r");
-  if (pf == NULL)
-    {
-      printf("Error al abrir el fichero");
-      return -1;
-    }
-  else
-    { // Leemos el fichero línea a línea
-      for (i = 0; i < N; i++)
-	{ // El formato es de números separados por comas
-	  fscanf(pf, "%lf,%lf,%lf,%lf",
-		 &TempAvg[i], 
-		 &HumidAvg[i],
-		 &WindAvg[i], 
-		 &Radiation[i]);
+	FILE *plectura;
+	FILE *pescritura;
+  // Defino un vector para cada variable a leer del fichero	
+	float temp[N];
+	float hum[N];
+	float viento[N];
+	float rad[N];
+	int i = 0;
+  // Abrir el archivo de lectura
+	plectura = fopen("aranjuez.csv", "r");
+
+	if (plectura == NULL)
+	{
+		printf("ERROR AL ABRIR EL FICHERO DE LECTURA");
 	}
-      // Cerramos el fichero
-      fclose(pf);
-      // Calcula el minimo, maximo y promedio usando las funciones
-      minTa = minimo(TempAvg, N);
-      maxTa = maximo(TempAvg, N);
-      promTa = promedio(TempAvg, N);
+	else
+	{
 
-      minH = minimo(HumidAvg, N);
-      maxH = maximo(HumidAvg, N);
-      promH = promedio(HumidAvg, N);
+		// Leemos con un FOR porque conocemos el numero de lineas
+		// Si no leeríamos linea a liena hasta el final del archivo
+		for (i = 0; i < N; i++)
+		{
+			fscanf(plectura, "%f,%f,%f,%f", &temp[i], &hum[i], &viento[i], &rad[i]); 
+		}
+		// Se ha terminado de leer, luego se cierra el archivo
+		fclose(plectura);	
 
-      minW = minimo(WindAvg, N);
-      maxW = maximo(WindAvg, N);
-      promW = promedio(WindAvg, N);
+		// Suponemos que el mínimo y máximo valores son el primero
+		// Después iremos sustituyendo al encontrar un nuevo mínimo o máximo
+		float max_temp = temp[0];
+		float min_temp = temp[0];
+		float mean_temp = 0;
+		float max_hum = hum[0];
+		float min_hum = hum[0];
+		float mean_hum = 0;
+		float max_viento = viento[0];
+		float min_viento = viento[0];
+		float mean_viento = 0;
+		float max_rad = rad[0];
+		float min_rad = rad[0];
+		float mean_rad = 0;
+		// recorremos cada vector buscando mínimos y máximos y acumulando para las medias
+		for (i = 0; i < N; i++)
+		{
+			// Temperadura
+		  if(temp[i] > max_temp)
+		  {
+		  	max_temp = temp[i];
+			}	  	
+		  if(temp[i] < min_temp)
+		  {
+				min_temp = temp[i];				  		
+			}
+			mean_temp = mean_temp + temp[i];
+			
+			// Humedad
+			if(hum[i] > max_hum)
+		  {
+		  	max_hum = hum[i];
+			}	  	
+		  if(hum[i] < min_hum)
+		  {
+				min_hum = hum[i];				  		
+			}
+			mean_hum = mean_hum + hum[i];	  	
+		  
+		  // Viento
+		  if(viento[i] > max_viento)
+		  {
+		  	max_viento = viento[i];
+			}	  	
+		  if(viento[i] < min_viento)
+		  {
+				min_viento = viento[i];				  		
+			}
+			mean_viento = mean_viento + viento[i];
+			
+		  // Radiación
+		  if(rad[i] > max_rad)
+		  {
+		  	max_rad = rad[i];
+			}	  	
+		  if(rad[i] < min_rad)
+		  {
+				min_rad = rad[i];				  		
+			}
+			mean_rad = mean_rad + rad[i];				
+		}
+		// Calculamos medias
+		mean_temp = mean_temp/N;
+		mean_hum = mean_hum/N;
+		mean_viento = mean_viento/N;
+		mean_rad = mean_rad/N;
+		
+		// Mostramos resultados
+    printf("Variable: \t Min \t Max \t Prom \n");
+    printf("Temperat: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
+    printf("Humedad: \t %f \t %f \t %f \n", min_hum, max_hum, mean_hum);
+    printf("Viento: \t %f \t %f \t %f \n", min_viento, max_viento, mean_viento);
+    printf("Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
 
-      minR = minimo(Radiation, N);
-      maxR = maximo(Radiation, N);
-      promR = promedio(Radiation, N);
+		// Abrir el archivo de escritura
+		pescritura= fopen("result.csv", "w");
+		if (pescritura == NULL)
+		{
+			printf("ERROR AL ABRIR EL FICHERO DE ESCRITURA");
+		}
+	  else
+		{	
+			fprintf(pescritura, "Variable: \t Min \t Max \t Prom \n");
+      fprintf(pescritura, "Temp: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
+      fprintf(pescritura, "Humedad: \t %f \t %f \t %f \n",min_hum, max_hum, mean_hum);
+      fprintf(pescritura, "Viento: \t %f \t %f \t %f \n", min_viento, max_viento, mean_viento);
+      fprintf(pescritura, "Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
 
-      // Mostramos resultados
-      printf("Variable: \t Min \t Max \t Prom \n");
-      printf("Temp: \t %lf \t %lf \t %lf \n", 
-	     minTa, maxTa, promTa);
-      printf("Humedad: \t %lf \t %lf \t %lf \n", 
-	     minH, maxH, promH);
-      printf("Viento: \t %lf \t %lf \t %lf \n", 
-	     minW, maxW, promW);
-      printf("Radiacion: \t %lf \t %lf \t %lf \n", 
-	     minR, maxR, promR);
-
-      // Escribimos fichero
-      wf = fopen("resumen.txt", "w");
-      
-      fprintf(wf, "Variable: \t Min \t Max \t Prom \n");
-      fprintf(wf, "Temp: \t %lf \t %lf \t %lf \n", 
-	     minTa, maxTa, promTa);
-      fprintf(wf, "Humedad: \t %lf \t %lf \t %lf \n", 
-	     minH, maxH, promH);
-      fprintf(wf, "Viento: \t %lf \t %lf \t %lf \n", 
-	     minW, maxW, promW);
-      fprintf(wf, "Radiacion: \t %lf \t %lf \t %lf \n", 
-	     minR, maxR, promR);
-      fclose(wf);
-      
-      return 0;
-    }
+      // Al terminar de escribir, cerramos el archivo
+      fclose(pescritura);	
+		}
+			
+	}
+	
+	return 0;	
 }
-
-double maximo(double x[], int n)
-{
-  int i;
-  double mx = x[0]; //El maximo inicial es el primer elemento
-  // Busca en el vector algún valor mayor
-  for (i = 1; i < n; i++)
-    if (x[i] > mx) mx = x[i]; // y lo sustituye si lo encuentra
-  return mx;
-}
-
-double minimo(double x[], int n)
-{
-  int i;
-  double mn = x[0];
-
-  for (i = 1; i < n; i++)
-    if (x[i] < mn) mn = x[i];
-  return mn;
-}
-
-double promedio(double x[], int n)
-{
-  int i;
-  double media = 0.0;
-
-  for (i = 0; i < n; i++)
-    media += x[i];
-  return media / n;
-}
-
 #+END_SRC
 
 #+RESULTS:
 | Variable:  |    Min |   Max |      Prom |
-| Temp:      | -5.309 | 30.68 | 14.404856 |
-| Humedad:   |  19.89 | 100.0 |  62.16039 |
-| Viento:    |    0.0 |  8.26 |  1.170742 |
-| Radiacion: |    0.0 | 32.74 | 16.666658 |
+| Temp:      | -5.309 | 30.68 | 14.404857 |
+| Humedad:   |  19.89 | 100.0 |  62.16033 |
+| Viento:    |  0.251 |  8.26 |  1.173880 |
+| Radiacion: |  0.277 | 32.74 | 16.731543 |
 
