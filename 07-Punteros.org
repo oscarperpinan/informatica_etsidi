@@ -1,4 +1,4 @@
-#+TITLE: Tema 5: Punteros
+#+TITLE: Tema 7: Punteros
 #+DATE:
 #+STARTUP: beamer
 #+SETUPFILE: config.org
