@@ -34,7 +34,7 @@ int main()
   scanf("%c", &elige);
 
   switch(elige)
-    {
+  {
     case 't':
     case 'T':
       printf("Base y Altura?\n");
@@ -56,7 +56,7 @@ int main()
     default:
       printf("Opcion desconocida\n");
       area = 0;
-    }
+  }
   printf("Area %.2f\n", area);
   return 0;
 }
@@ -93,25 +93,25 @@ int main()
   char escala;
   
   do
-    {
-      printf("Indique la temperatura y escala (C o F).\n");
-      scanf("%f %c", &t0, &escala);
+  {
+    printf("Indique la temperatura y escala (C o F).\n");
+    scanf("%f %c", &t0, &escala);
       
-      switch(escala)
-	{
-	case 'C':
-	  t1 = cent2fahr(t0);
-	  printf("El resultado es %.2f.\n", t1);
-	  break;
-	case 'F':
-	  t1 = fahr2cent(t0);
-	  printf("El resultado es %.2f.\n", t1);
-	  break;
-	default:
-	  printf("Opcion desconocida.\n");
-	  break;
-	}
+    switch(escala)
+    {
+      case 'C':
+        t1 = cent2fahr(t0);
+        printf("El resultado es %.2f.\n", t1);
+        break;
+      case 'F':
+        t1 = fahr2cent(t0);
+        printf("El resultado es %.2f.\n", t1);
+        break;
+      default:
+        printf("Opcion desconocida.\n");
+        break;
     }
+  }
   // El bucle se repetirá mientras la escala elegida sea
   // uno de los valores válidos
   while (escala == 'C' || escala == 'F');
@@ -119,12 +119,10 @@ int main()
   return 0;
 }
 
-
 float cent2fahr(float tc)
 {
   return (9.0 / 5.0) * tc + 32;  
 }
-
 
 float fahr2cent(float tf)
 {
@@ -145,7 +143,9 @@ int main()
 {
   int i;
   for (i = 1; i <= 10; i++)
+  {
     tabla(i);
+  }
   return 0;
 }
 
@@ -158,11 +158,11 @@ void tabla(int n)
 {
   int i;
   printf("Tabla del %d:\n", n);
-  for (i = 1; i <= 10; i++) 
-    printf("%d x %d = %d\n",
-	   n, i, producto(n, i));
+  for (i = 1; i <= 10; i++)
+  {
+    printf("%d x %d = %d\n", n, i, producto(n, i));
+  }
 }
-
 #+END_SRC
 
 * Distancia entre puntos
@@ -233,9 +233,13 @@ int main()
 int max2(int a, int b)
 {
   if (a >= b)
+  {
     return a;
+  }
   else
+  {
     return b;
+  }
 }
 
 int max3(int a, int b, int c)
@@ -285,9 +289,13 @@ int factorial(int x)
   int res;
 
   if (x <= 1)
+  {
     res = 1;
+  }
   else
+  {
     res = x * factorial(x -1);
+  }
   return res;
 }
 
@@ -295,9 +303,13 @@ int combina (int n, int k)
 {
   int res;
   if (n >= k)
+  {
     res = factorial(n) / (factorial(n - k) * factorial(k));
+  }
   else
+  {
     res = 0;
+  }
   return res;
 }
 #+END_SRC
@@ -320,8 +332,9 @@ int main()
   scanf("%d", &num);
 
   for (i = 1; i <= num; i++)
-    printf("%d \t %lld\n",
-	   i, fib(i));
+  {
+    printf("%d \t %lld\n", i, fib(i));
+  }
   return 0;
 }
 
@@ -329,9 +342,13 @@ long long int fib(int n)
 {
   long long int res;
   if (n == 1 || n == 2)
+  {
     res = 1;
+  }
   else
+  {
     res = fib(n - 1) + fib(n -2);
+  }
   return res;
 }
 #+END_SRC
