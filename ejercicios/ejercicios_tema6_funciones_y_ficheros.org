@@ -7,7 +7,10 @@
 #+EXPORT_FILE_NAME: ejercicios_tema7.pdf
 
 * Copia de ficheros
-Escribe	un programa que copie el contenido de un fichero en otro cambiando los espacios en blanco por un guión bajo =_=. Emplea el fichero =lorem_ipsum.txt= como ejemplo. (Sugerencia: revisa el ejercicio "Espacios por guiones" del capítulo 4).
+Escribe un programa que copie el contenido de un fichero en otro cambiando los espacios en blanco por un guión bajo _. Además, debe contar cuántos cambios se han producido. Emplea el fichero lorem_ipsum.txt como ejemplo. El ejercicio debe resolverse empleando una función con el siguiente prototipo:
+#+BEGIN_SRC C :exports code
+int espacio_por_guion(char texto[]);
+#+END_SRC
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -83,49 +86,84 @@ int espacio_por_guion(char texto[])
 
 #+RESULTS:
 
-* Número de caracteres, palabras y líneas
+* Cuenta letras
 
-Escribe un programa que calcule el número de caracteres, palabras y líneas de un fichero de texto. Comprueba su funcionamiento con el fichero =lorem_ipsum.txt=. 
-Entre los caracteres, no se cuentan espacios ni cambios de linea
+Escribe un programa que analice la frase del ejercicio anterior contando en número de veces que aparece cada vocal, de manera similar al ejercicio del tema 4 de cadenas de caracteres. Al final del programa, se debe pintar en el terminal, para cada vocal, una línea que contiene el mismo número de asteríscos que veces aparece esa vocal. Este programa debe estar programado empleando dos funciones, cuentaLetra y pintaAsteriscos. Puedes usar el fichero lorem_ipsum.txt como ejemplo. 
+
 #+BEGIN_SRC C
 #include <stdio.h>
+
+int cuentaLetra(char x, char texto[]);
+void pintaAsteriscos(int n);
 
 int main()
 {
   FILE *pf;
-  char c;
-  // Contadores
-  int iChar = 0, iWord = 0, iLine = 0;
-  // Abrimos archivo en modo lectura
+  char texto[1000];// Aseguramos tener un tamaño suficiente para la longitud del fichero a leer
+  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
+  int i = 0; 
+  int num_Vocales[5] = {0};
+  
+  // Abrimos fichero para lectura
   pf = fopen("lorem_ipsum.txt", "r");
-  if (pf == NULL) 
+  if (pf == NULL)
   {
-    printf("Error al abrir el archivo.\n");
+    printf("Error en apertura de fichero.\n");
     return -1;
-  } 
-  else 
-  {
-    // Leemos carácter a carácter hasta encontrar EOF
-    while (fscanf(pf, "%c", &c) != EOF)
-    {// En cada paso incrementamos el contador de caracteres 
-      iChar++;
-      // El espacio y el salto de línea definen una nueva palabra,
-      // luego incrementamos el contador de palabras
-      if (c == ' ' || c == '\n')
-      {
-        iChar--;  // descontamos los espacios y saltos de linea
-        iWord++;
-        // Si lo leído es un salto de línea, incrementamos su contador
-        if (c == '\n')
-        {
-          iLine++;
-        }
-      }
-    }
-    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n", iChar, iWord, iLine);
-
-    fclose(pf);
   }
+  
+  // Leemos los caracteres de 1 en 1
+  // los almacenamos en cadena de caracteres
+  // y los contamos
+  while(fscanf(pf, "%c", &texto[i]) != EOF)
+  {
+    ++i;
+  }
+
+  //Cerramos la cadena de caracteres
+  texto[i] = '\0';
+
+  // Recorremos texto contando vocales
+  for (i = 0; i < 5; i++)
+  {
+  	num_Vocales[i] = cuentaLetra(vocales[i], texto);
+  }
+  
+  for (i = 0; i < 5; i++)
+  { 
+  // Recorre el vector de resultados, y pinta asteriscos
+    // correspondientes a cada letra
+    printf("%c: ", vocales[i]);
+    pintaAsteriscos(nVocales[i]);
+    printf("\n");
+  }
+  fclose(pf);
+  
+  return 0;
+}
+
+int cuentaLetra(char x, char texto[])
+{
+  int i, n = 0;
+  int inc = 'A' - 'a';
+
+  i = 0;
+
+  while (texto[i] != '\0')
+    {
+      if (texto[i] == x || texto[i] == x + inc)// Comprueba mayúsculas y minúsculas
+        n++; // Contador de apariciones
+      i++;
+    }
+  return n;
+}
+
+void pintaAsteriscos(int n)
+{
+  int i;
+  if (n > 0)
+    for (i = 1; i <= n; i++)
+      printf("*");
 }
 #+END_SRC
 
@@ -134,85 +172,11 @@ int main()
 
 
 
-
-* Cuenta letras
-
-Escribe un programa que analice el texto almacenado en un fichero representando el número de vocales que contiene mediante líneas de asteriscos. Este programa debe estar construido de manera similar al ejercicio planteado en el capítulo 4, empleando dos funciones, =cuentaLetra= y =pintaAsteriscos=. Puedes usar el fichero =lorem_ipsum.txt= como ejemplo.
-
-- Versión sin asignación dinámica de memoria (procesando carácter a carácter)
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  FILE *pf;
-  char texto[1000];        // Tamaño suficiente para la longitud del fichero
-  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
-  int inc = 'A' - 'a';     // Distancia entre mayúsculas y minúsculas
-  int i = 0, j = 0, nVocales[5] = {0};
-  int n = 0;               // Usado para contar apariciones
-  
-  // Abrimos fichero
-  pf = fopen("lorem_ipsum.txt", "r");
-  if (pf == NULL)
-  {
-    printf("Error en apertura de fichero.\n");
-    return -1;
-  }
-  
-  // Leemos fichero y almacenamos en cadena de caracteres
-  while(fscanf(pf, "%c", &texto[i]) != EOF)
-  {
-    ++i;
-  }
-    
-  //Cerramos la cadena de caracteres, lo usaremos después para buscar el final
-  texto[i] = '\0';
-
-  // Recorremos texto contando vocales
-  // Lo recorremos una vez por cada vocal
-  for (i = 0; i < 5; i++)
-  {
-    j = 0;
-    while (texto[j] != '\0')
-    {
-      // Comprueba mayúsculas y minúsculas
-      if (texto[j] == vocales[i] || texto[j] == vocales[i] + inc)
-      {
-        nVocales[i]++; // Contador de apariciones
-      }
-      j++;
-    }
-  }
-  
-  for (i = 0; i < 5; i++)
-  { 
-    // Recorre el vector de resultados, y pinta asteriscos
-    // correspondientes a cada letra
-    printf("%c: %i ", vocales[i], nVocales[i]);
-    //pintaAsteriscos(nVocales[i]);
-    if (nVocales[i] > 0)
-    {
-      for (j = 1; j <= nVocales[i]; j++)
-      {
-        printf("*");    		
-      }
-    }
-    printf("\n");
-  }
- 
-  fclose(pf);
-  return 0;
-}
-#+END_SRC
-
-#+RESULTS:
-
 * Máximo, mínimo y promedio de variables
 
-El fichero =aranjuez.csv= es un fichero que almacena valores numéricos en formato CSV (valores separados por comas). Contiene 4 columnas (variables) y 2898 filas (registros). Cada fila corresponde a un valor diario de una variable meteorológica registrada en la estación localizada en Aranjuez. Estas variables son: temperatura ambiente, humedad, velocidad del viento, radiación solar.
+El fichero aranjuez.csv es un fichero que almacena valores numéricos en formato CSV (valores separados por comas). Contiene 4 columnas (variables) y 2898 filas (registros). Cada fila corresponde a un valor diario de una variable meteorológica registrada en la estación localizada en Aranjuez. Estas variables son: temperatura ambiente, humedad, velocidad del viento, radiación solar.
 
-Escribe un programa que lea este fichero almacenando el contenido de cada columna en un vector. A continuación, el programa debe calcular el valor máximo, mínimo y promedio de cada vector empleando una función separada para cada cálculo (/revisa el ejercicio "Máximo, mínimo y promedio de una colección de números" del capítulo 4/). Finalmente, el programa mostrará el resultado en pantalla y escribirá estos cálculos en un fichero con un formato similar al siguiente:
+Escribe un programa que lea este fichero almacenando el contenido de cada columna en un vector. A continuación, el programa debe calcular el valor máximo, mínimo y promedio de cada vector, empleando una función separada para cada cálculo. Finalmente, el programa mostrará el resultado en pantalla y escribirá estos cálculos en un fichero con un formato similar al siguiente:
 
 | Variable | Min | Max | Media |
 | Temp     | XX  | XX  | XX    |
@@ -221,133 +185,123 @@ Escribe un programa que lea este fichero almacenando el contenido de cada column
 | Rad      | XX  | XX  | XX    |
 
 
-
 #+BEGIN_SRC C
 #include <stdio.h>
 #define N 2898
 
+double maximo(double x[], int n);
+double minimo(double x[], int n);
+double promedio(double x[], int n);
+
 int main()
 {
-  FILE *plectura;
-  FILE *pescritura;
-  // Defino un vector para cada variable a leer del fichero	
-  float temp[N];
-  float hum[N];
-  float viento[N];
-  float rad[N];
-  int i = 0;
-  // Abrir el archivo de lectura
-  plectura = fopen("aranjuez.csv", "r");
-
-  if (plectura == NULL)
+  FILE *pf, *wf;
+  int i;
+  // Defino un vector para cada variable a leer del fichero
+  double TempAvg[N], HumidAvg[N], WindAvg[N],Radiation[N];
+  double minTa, minH, minW, minR;
+  double maxTa, maxH, maxW, maxR;
+  double promTa, promH, promW, promR;
+  
+  pf = fopen("aranjuez.csv", "r");
+  if (pf == NULL)
   {
-    printf("ERROR AL ABRIR EL FICHERO DE LECTURA");
+    printf("Error al abrir el fichero");
+    return -1;
   }
   else
+  { // Leemos el fichero línea a línea
+    for (i = 0; i < N; i++)
+	{ // El formato es de números separados por comas
+	  fscanf(pf, "%lf,%lf,%lf,%lf", &TempAvg[i],  &HumidAvg[i], &WindAvg[i], &Radiation[i]);
+	}
+      // Cerramos el fichero
+      fclose(pf);
+      
+	  // Calcula el minimo, maximo y promedio usando las funciones
+      minTa = minimo(TempAvg, N);
+      maxTa = maximo(TempAvg, N);
+      promTa = promedio(TempAvg, N);
+
+      minH = minimo(HumidAvg, N);
+      maxH = maximo(HumidAvg, N);
+      promH = promedio(HumidAvg, N);
+
+      minW = minimo(WindAvg, N);
+      maxW = maximo(WindAvg, N);
+      promW = promedio(WindAvg, N);
+
+      minR = minimo(Radiation, N);
+      maxR = maximo(Radiation, N);
+      promR = promedio(Radiation, N);
+
+      // Mostramos resultados
+      printf("Variable: \t Min \t Max \t Prom \n");
+      printf("Temp: \t %lf \t %lf \t %lf \n", minTa, maxTa, promTa);
+      printf("Humedad: \t %lf \t %lf \t %lf \n", minH, maxH, promH);
+      printf("Viento: \t %lf \t %lf \t %lf \n", minW, maxW, promW);
+      printf("Radiacion: \t %lf \t %lf \t %lf \n", minR, maxR, promR);
+
+      // Escribimos fichero
+      wf = fopen("resumen.txt", "w");
+      
+      fprintf(wf, "Variable: \t Min \t Max \t Prom \n");
+      fprintf(wf, "Temp: \t %lf \t %lf \t %lf \n", minTa, maxTa, promTa);
+      fprintf(wf, "Humedad: \t %lf \t %lf \t %lf \n", minH, maxH, promH);
+      fprintf(wf, "Viento: \t %lf \t %lf \t %lf \n", minW, maxW, promW);
+      fprintf(wf, "Radiacion: \t %lf \t %lf \t %lf \n", minR, maxR, promR);
+      
+      // Cerramos el fichero
+      fclose(wf);
+      
+      return 0;
+    }
+}
+
+double maximo(double x[], int n)
+{
+  int i;
+  double mx = x[0]; //El maximo inicial es el primer elemento
+  // Busca en el vector algún valor mayor
+  for (i = 1; i < n; i++)
   {
-    // Leemos con un FOR porque conocemos el numero de lineas
-    // Si no leeríamos linea a liena hasta el final del archivo
-    for (i = 0; i < N; i++)
-    {
-      fscanf(plectura, "%f,%f,%f,%f", &temp[i], &hum[i], &viento[i], &rad[i]); 
+    if (x[i] > mx) 
+	{
+	  mx = x[i]; // y lo sustituye si lo encuentra
     }
-    // Se ha terminado de leer, luego se cierra el archivo
-    fclose(plectura);	
-
-    // Suponemos que el mínimo y máximo valores son el primero
-    // Después iremos sustituyendo al encontrar un nuevo mínimo o máximo
-    float max_temp = temp[0];
-    float min_temp = temp[0];
-    float mean_temp = 0;
-    float max_hum = hum[0];
-    float min_hum = hum[0];
-    float mean_hum = 0;
-    float max_viento = viento[0];
-    float min_viento = viento[0];
-    float mean_viento = 0;
-    float max_rad = rad[0];
-    float min_rad = rad[0];
-    float mean_rad = 0;
-    // recorremos cada vector buscando mínimos y máximos y acumulando para las medias
-    for (i = 0; i < N; i++)
-    {
-      // Temperadura
-      if(temp[i] > max_temp)
-      {
-        max_temp = temp[i];
-      }	  	
-      if(temp[i] < min_temp)
-      {
-        min_temp = temp[i];				  		
-      }
-      mean_temp = mean_temp + temp[i];
-			
-      // Humedad
-      if(hum[i] > max_hum)
-      {
-        max_hum = hum[i];
-      }	  	
-      if(hum[i] < min_hum)
-      {
-        min_hum = hum[i];				  		
-      }
-      mean_hum = mean_hum + hum[i];	  	
-		  
-      // Viento
-      if(viento[i] > max_viento)
-      {
-        max_viento = viento[i];
-      }	  	
-      if(viento[i] < min_viento)
-      {
-        min_viento = viento[i];				  		
-      }
-      mean_viento = mean_viento + viento[i];
-			
-      // Radiación
-      if(rad[i] > max_rad)
-      {
-        max_rad = rad[i];
-      }	  	
-      if(rad[i] < min_rad)
-      {
-        min_rad = rad[i];				  		
-      }
-      mean_rad = mean_rad + rad[i];				
-    }
-    // Calculamos medias
-    mean_temp = mean_temp/N;
-    mean_hum = mean_hum/N;
-    mean_viento = mean_viento/N;
-    mean_rad = mean_rad/N;
-		
-    // Mostramos resultados
-    printf("Variable: \t Min \t Max \t Prom \n");
-    printf("Temperat: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
-    printf("Humedad: \t %f \t %f \t %f \n", min_hum, max_hum, mean_hum);
-    printf("Viento: \t %f \t %f \t %f \n", min_viento, max_viento, mean_viento);
-    printf("Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
-
-    // Abrir el archivo de escritura
-    pescritura= fopen("result.csv", "w");
-    if (pescritura == NULL)
-    {
-      printf("ERROR AL ABRIR EL FICHERO DE ESCRITURA");
-    }
-    else
-    {	
-      fprintf(pescritura, "Variable: \t Min \t Max \t Prom \n");
-      fprintf(pescritura, "Temp: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
-      fprintf(pescritura, "Humedad: \t %f \t %f \t %f \n",min_hum, max_hum, mean_hum);
-      fprintf(pescritura, "Viento: \t %f \t %f \t %f \n", min_viento, max_viento, mean_viento);
-      fprintf(pescritura, "Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
-
-      // Al terminar de escribir, cerramos el archivo
-      fclose(pescritura);	
-    }		
   }
-	
-  return 0;	
+  
+  return mx;
+}
+
+double minimo(double x[], int n)
+{
+  int i;
+  double mn = x[0]; //El minimo inicial es el primer elemento
+
+  // Busca en el vector algún valor menor
+  for (i = 1; i < n; i++)
+  {
+    if (x[i] < mn)
+	{
+	  mn = x[i];		
+	}
+  }
+  
+  return mn;
+}
+
+double promedio(double x[], int n)
+{
+  int i;
+  double media = 0.0;
+
+  for (i = 0; i < n; i++)
+  {
+  	media = media + x[i];
+  }
+  
+  return media / n;
 }
 #+END_SRC
 
