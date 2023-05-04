@@ -1,0 +1,360 @@
+#+TITLE: Ejercicios del Tema 5
+#+SUBTITLE: Ficheros
+#+AUTHOR: 
+#+DATE: 
+#+SETUPFILE: config.org
+#+PROPERTY: header-args :exports none
+#+EXPORT_FILE_NAME: ejercicios_tema7.pdf
+
+* Copia de ficheros
+Escribe	un programa que copie el contenido de un fichero en otro cambiando los espacios en blanco por un guión bajo =_=. Emplea el fichero =lorem_ipsum.txt= como ejemplo. (Sugerencia: revisa el ejercicio "Espacios por guiones" del capítulo 4).
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int espacio_por_guion(char texto[]);
+
+int main ()
+{
+  FILE *fOrigen, *fDestino;
+  char texto[1000];    // Definimos un vector suficientemente largo
+	int cambios; 
+	
+  // Abre ficheros:
+  // El origen en modo lectura:
+  fOrigen = fopen("lorem_ipsum.txt", "r");
+  if (fOrigen == NULL) {
+    printf("Error al abrir el archivo origen.\n");
+    return -1;
+  }
+  else 
+  {
+    // El destino en modo escritura:
+    fDestino = fopen("lorem_ipsum2.txt", "w");
+    if (fDestino == NULL) 
+    {
+      printf("Error al abrir el archivo destino.\n");
+      return -1;
+    } 
+    else 
+    { // Los dos ficheros están correctamente abiertos
+      // Leemos el origen caracter por caracter, parando al encontrar
+      // el EOF
+      int i = 0;
+      while (fscanf(fOrigen, "%c", &texto[i]) != EOF)
+      {
+			  printf("%c", texto[i]); 
+        i++;
+      }
+      fclose(fOrigen);
+      texto[i] = '\0';
+      
+      cambios = espacio_por_guion(texto);
+      // Cerramos ficheros
+      int j = 0;
+      while (j<=i)
+      {
+        fprintf(fDestino, "%c", texto[j]); // Escribimos el caracter en el destino
+        j++;
+      }
+      fclose(fDestino);
+      printf("\nCopia finalizada con exito, se han hecho %d cambios.\n", cambios);
+      return 0;
+    }
+  }
+}
+
+int espacio_por_guion(char texto[])
+{
+  int num_cambio=0;
+  int i = 0;
+  while (texto[i] != '\0')
+  {
+    if (texto[i] == ' ')
+    {
+      texto[i] = '_'; // Cambiamos espacios por guiones
+      num_cambio++;
+    } 
+    i++;
+  }
+  return num_cambio;
+}
+#+END_SRC
+
+#+RESULTS:
+
+* Número de caracteres, palabras y líneas
+
+Escribe un programa que calcule el número de caracteres, palabras y líneas de un fichero de texto. Comprueba su funcionamiento con el fichero =lorem_ipsum.txt=. 
+Entre los caracteres, no se cuentan espacios ni cambios de linea
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  FILE *pf;
+  char c;
+  // Contadores
+  int iChar = 0, iWord = 0, iLine = 0;
+  // Abrimos archivo en modo lectura
+  pf = fopen("lorem_ipsum.txt", "r");
+  if (pf == NULL) 
+  {
+    printf("Error al abrir el archivo.\n");
+    return -1;
+  } 
+  else 
+  {
+    // Leemos carácter a carácter hasta encontrar EOF
+    while (fscanf(pf, "%c", &c) != EOF)
+    {// En cada paso incrementamos el contador de caracteres 
+      iChar++;
+      // El espacio y el salto de línea definen una nueva palabra,
+      // luego incrementamos el contador de palabras
+      if (c == ' ' || c == '\n')
+      {
+        iChar--;  // descontamos los espacios y saltos de linea
+        iWord++;
+        // Si lo leído es un salto de línea, incrementamos su contador
+        if (c == '\n')
+        {
+          iLine++;
+        }
+      }
+    }
+    printf("Caracteres: %d \t Palabras: %d \t Líneas: %d.\n", iChar, iWord, iLine);
+
+    fclose(pf);
+  }
+}
+#+END_SRC
+
+#+RESULTS:
+| Caracteres: 848 | Palabras: 146 | Líneas: 16. |
+
+
+
+
+* Cuenta letras
+
+Escribe un programa que analice el texto almacenado en un fichero representando el número de vocales que contiene mediante líneas de asteriscos. Este programa debe estar construido de manera similar al ejercicio planteado en el capítulo 4, empleando dos funciones, =cuentaLetra= y =pintaAsteriscos=. Puedes usar el fichero =lorem_ipsum.txt= como ejemplo.
+
+- Versión sin asignación dinámica de memoria (procesando carácter a carácter)
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  FILE *pf;
+  char texto[1000];        // Tamaño suficiente para la longitud del fichero
+  char vocales[5] = {'a', 'e', 'i', 'o', 'u'};
+  int inc = 'A' - 'a';     // Distancia entre mayúsculas y minúsculas
+  int i = 0, j = 0, nVocales[5] = {0};
+  int n = 0;               // Usado para contar apariciones
+  
+  // Abrimos fichero
+  pf = fopen("lorem_ipsum.txt", "r");
+  if (pf == NULL)
+  {
+    printf("Error en apertura de fichero.\n");
+    return -1;
+  }
+  
+  // Leemos fichero y almacenamos en cadena de caracteres
+  while(fscanf(pf, "%c", &texto[i]) != EOF)
+  {
+    ++i;
+  }
+    
+  //Cerramos la cadena de caracteres, lo usaremos después para buscar el final
+  texto[i] = '\0';
+
+  // Recorremos texto contando vocales
+  // Lo recorremos una vez por cada vocal
+  for (i = 0; i < 5; i++)
+  {
+    j = 0;
+    while (texto[j] != '\0')
+    {
+      // Comprueba mayúsculas y minúsculas
+      if (texto[j] == vocales[i] || texto[j] == vocales[i] + inc)
+      {
+        nVocales[i]++; // Contador de apariciones
+      }
+      j++;
+    }
+  }
+  
+  for (i = 0; i < 5; i++)
+  { 
+    // Recorre el vector de resultados, y pinta asteriscos
+    // correspondientes a cada letra
+    printf("%c: %i ", vocales[i], nVocales[i]);
+    //pintaAsteriscos(nVocales[i]);
+    if (nVocales[i] > 0)
+    {
+      for (j = 1; j <= nVocales[i]; j++)
+      {
+        printf("*");    		
+      }
+    }
+    printf("\n");
+  }
+ 
+  fclose(pf);
+  return 0;
+}
+#+END_SRC
+
+#+RESULTS:
+
+* Máximo, mínimo y promedio de variables
+
+El fichero =aranjuez.csv= es un fichero que almacena valores numéricos en formato CSV (valores separados por comas). Contiene 4 columnas (variables) y 2898 filas (registros). Cada fila corresponde a un valor diario de una variable meteorológica registrada en la estación localizada en Aranjuez. Estas variables son: temperatura ambiente, humedad, velocidad del viento, radiación solar.
+
+Escribe un programa que lea este fichero almacenando el contenido de cada columna en un vector. A continuación, el programa debe calcular el valor máximo, mínimo y promedio de cada vector empleando una función separada para cada cálculo (/revisa el ejercicio "Máximo, mínimo y promedio de una colección de números" del capítulo 4/). Finalmente, el programa mostrará el resultado en pantalla y escribirá estos cálculos en un fichero con un formato similar al siguiente:
+
+| Variable | Min | Max | Media |
+| Temp     | XX  | XX  | XX    |
+| Humedad  | XX  | XX  | XX    |
+| Viento   | XX  | XX  | XX    |
+| Rad      | XX  | XX  | XX    |
+
+
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#define N 2898
+
+int main()
+{
+  FILE *plectura;
+  FILE *pescritura;
+  // Defino un vector para cada variable a leer del fichero	
+  float temp[N];
+  float hum[N];
+  float viento[N];
+  float rad[N];
+  int i = 0;
+  // Abrir el archivo de lectura
+  plectura = fopen("aranjuez.csv", "r");
+
+  if (plectura == NULL)
+  {
+    printf("ERROR AL ABRIR EL FICHERO DE LECTURA");
+  }
+  else
+  {
+    // Leemos con un FOR porque conocemos el numero de lineas
+    // Si no leeríamos linea a liena hasta el final del archivo
+    for (i = 0; i < N; i++)
+    {
+      fscanf(plectura, "%f,%f,%f,%f", &temp[i], &hum[i], &viento[i], &rad[i]); 
+    }
+    // Se ha terminado de leer, luego se cierra el archivo
+    fclose(plectura);	
+
+    // Suponemos que el mínimo y máximo valores son el primero
+    // Después iremos sustituyendo al encontrar un nuevo mínimo o máximo
+    float max_temp = temp[0];
+    float min_temp = temp[0];
+    float mean_temp = 0;
+    float max_hum = hum[0];
+    float min_hum = hum[0];
+    float mean_hum = 0;
+    float max_viento = viento[0];
+    float min_viento = viento[0];
+    float mean_viento = 0;
+    float max_rad = rad[0];
+    float min_rad = rad[0];
+    float mean_rad = 0;
+    // recorremos cada vector buscando mínimos y máximos y acumulando para las medias
+    for (i = 0; i < N; i++)
+    {
+      // Temperadura
+      if(temp[i] > max_temp)
+      {
+        max_temp = temp[i];
+      }	  	
+      if(temp[i] < min_temp)
+      {
+        min_temp = temp[i];				  		
+      }
+      mean_temp = mean_temp + temp[i];
+			
+      // Humedad
+      if(hum[i] > max_hum)
+      {
+        max_hum = hum[i];
+      }	  	
+      if(hum[i] < min_hum)
+      {
+        min_hum = hum[i];				  		
+      }
+      mean_hum = mean_hum + hum[i];	  	
+		  
+      // Viento
+      if(viento[i] > max_viento)
+      {
+        max_viento = viento[i];
+      }	  	
+      if(viento[i] < min_viento)
+      {
+        min_viento = viento[i];				  		
+      }
+      mean_viento = mean_viento + viento[i];
+			
+      // Radiación
+      if(rad[i] > max_rad)
+      {
+        max_rad = rad[i];
+      }	  	
+      if(rad[i] < min_rad)
+      {
+        min_rad = rad[i];				  		
+      }
+      mean_rad = mean_rad + rad[i];				
+    }
+    // Calculamos medias
+    mean_temp = mean_temp/N;
+    mean_hum = mean_hum/N;
+    mean_viento = mean_viento/N;
+    mean_rad = mean_rad/N;
+		
+    // Mostramos resultados
+    printf("Variable: \t Min \t Max \t Prom \n");
+    printf("Temperat: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
+    printf("Humedad: \t %f \t %f \t %f \n", min_hum, max_hum, mean_hum);
+    printf("Viento: \t %f \t %f \t %f \n", min_viento, max_viento, mean_viento);
+    printf("Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
+
+    // Abrir el archivo de escritura
+    pescritura= fopen("result.csv", "w");
+    if (pescritura == NULL)
+    {
+      printf("ERROR AL ABRIR EL FICHERO DE ESCRITURA");
+    }
+    else
+    {	
+      fprintf(pescritura, "Variable: \t Min \t Max \t Prom \n");
+      fprintf(pescritura, "Temp: \t %f \t %f \t %f \n", min_temp, max_temp, mean_temp);
+      fprintf(pescritura, "Humedad: \t %f \t %f \t %f \n",min_hum, max_hum, mean_hum);
+      fprintf(pescritura, "Viento: \t %f \t %f \t %f \n", min_viento, max_viento, mean_viento);
+      fprintf(pescritura, "Radiacion: \t %f \t %f \t %f \n", min_rad, max_rad, mean_rad);
+
+      // Al terminar de escribir, cerramos el archivo
+      fclose(pescritura);	
+    }		
+  }
+	
+  return 0;	
+}
+#+END_SRC
+
+#+RESULTS:
+| Variable:  |    Min |   Max |      Prom |
+| Temp:      | -5.309 | 30.68 | 14.404857 |
+| Humedad:   |  19.89 | 100.0 |  62.16033 |
+| Viento:    |  0.251 |  8.26 |  1.173880 |
+| Radiacion: |  0.277 | 32.74 | 16.731543 |
+
