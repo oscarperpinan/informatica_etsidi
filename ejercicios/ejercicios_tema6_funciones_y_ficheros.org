@@ -26,7 +26,8 @@ int main ()
   // Abre ficheros:
   // El origen en modo lectura:
   fOrigen = fopen("lorem_ipsum.txt", "r");
-  if (fOrigen == NULL) {
+  if (fOrigen == NULL) 
+  {
     printf("Error al abrir el archivo origen.\n");
     return -1;
   }
@@ -46,22 +47,26 @@ int main ()
       int i = 0;
       while (fscanf(fOrigen, "%c", &texto[i]) != EOF)
       {
-			  printf("%c", texto[i]); 
+        printf("%c", texto[i]); 
         i++;
       }
+      // Cerramos fichero
       fclose(fOrigen);
+      
+      // ponemos la marca de final de cadena
       texto[i] = '\0';
       
       cambios = espacio_por_guion(texto);
-      // Cerramos ficheros
       int j = 0;
       while (j<=i)
       {
         fprintf(fDestino, "%c", texto[j]); // Escribimos el caracter en el destino
         j++;
       }
+      // Cerramos fichero
       fclose(fDestino);
       printf("\nCopia finalizada con exito, se han hecho %d cambios.\n", cambios);
+      
       return 0;
     }
   }
@@ -126,7 +131,7 @@ int main()
   // Recorremos texto contando vocales
   for (i = 0; i < 5; i++)
   {
-  	num_Vocales[i] = cuentaLetra(vocales[i], texto);
+    num_Vocales[i] = cuentaLetra(vocales[i], texto);
   }
   
   for (i = 0; i < 5; i++)
@@ -150,11 +155,15 @@ int cuentaLetra(char x, char texto[])
   i = 0;
 
   while (texto[i] != '\0')
+  {
+    // Comprueba mayúsculas y minúsculas
+    if (texto[i] == x || texto[i] == x + inc)
     {
-      if (texto[i] == x || texto[i] == x + inc)// Comprueba mayúsculas y minúsculas
-        n++; // Contador de apariciones
-      i++;
+      n++; // Contador de apariciones
     }
+    i++;
+  }
+
   return n;
 }
 
@@ -162,8 +171,12 @@ void pintaAsteriscos(int n)
 {
   int i;
   if (n > 0)
+  {
     for (i = 1; i <= n; i++)
+    {
       printf("*");
+    }  
+  }    
 }
 #+END_SRC
 
@@ -212,50 +225,51 @@ int main()
   else
   { // Leemos el fichero línea a línea
     for (i = 0; i < N; i++)
-	{ // El formato es de números separados por comas
-	  fscanf(pf, "%lf,%lf,%lf,%lf", &TempAvg[i],  &HumidAvg[i], &WindAvg[i], &Radiation[i]);
-	}
-      // Cerramos el fichero
-      fclose(pf);
+    { 
+      // El formato es de números separados por comas
+      fscanf(pf, "%lf,%lf,%lf,%lf", &TempAvg[i],  &HumidAvg[i], &WindAvg[i], &Radiation[i]);
+    }
+    // Cerramos el fichero
+    fclose(pf);
       
-	  // Calcula el minimo, maximo y promedio usando las funciones
-      minTa = minimo(TempAvg, N);
-      maxTa = maximo(TempAvg, N);
-      promTa = promedio(TempAvg, N);
+    // Calcula el minimo, maximo y promedio usando las funciones
+    minTa = minimo(TempAvg, N);
+    maxTa = maximo(TempAvg, N);
+    promTa = promedio(TempAvg, N);
 
-      minH = minimo(HumidAvg, N);
-      maxH = maximo(HumidAvg, N);
-      promH = promedio(HumidAvg, N);
+    minH = minimo(HumidAvg, N);
+    maxH = maximo(HumidAvg, N);
+    promH = promedio(HumidAvg, N);
 
-      minW = minimo(WindAvg, N);
-      maxW = maximo(WindAvg, N);
-      promW = promedio(WindAvg, N);
+    minW = minimo(WindAvg, N);
+    maxW = maximo(WindAvg, N);
+    promW = promedio(WindAvg, N);
 
-      minR = minimo(Radiation, N);
-      maxR = maximo(Radiation, N);
-      promR = promedio(Radiation, N);
+    minR = minimo(Radiation, N);
+    maxR = maximo(Radiation, N);
+    promR = promedio(Radiation, N);
 
-      // Mostramos resultados
-      printf("Variable: \t Min \t Max \t Prom \n");
-      printf("Temp: \t %lf \t %lf \t %lf \n", minTa, maxTa, promTa);
-      printf("Humedad: \t %lf \t %lf \t %lf \n", minH, maxH, promH);
-      printf("Viento: \t %lf \t %lf \t %lf \n", minW, maxW, promW);
-      printf("Radiacion: \t %lf \t %lf \t %lf \n", minR, maxR, promR);
+    // Mostramos resultados
+    printf("Variable: \t Min \t Max \t Prom \n");
+    printf("Temp: \t %lf \t %lf \t %lf \n", minTa, maxTa, promTa);
+    printf("Humedad: \t %lf \t %lf \t %lf \n", minH, maxH, promH);
+    printf("Viento: \t %lf \t %lf \t %lf \n", minW, maxW, promW);
+    printf("Radiacion: \t %lf \t %lf \t %lf \n", minR, maxR, promR);
 
-      // Escribimos fichero
-      wf = fopen("resumen.txt", "w");
+    // Escribimos fichero
+    wf = fopen("resumen.txt", "w");
       
-      fprintf(wf, "Variable: \t Min \t Max \t Prom \n");
-      fprintf(wf, "Temp: \t %lf \t %lf \t %lf \n", minTa, maxTa, promTa);
-      fprintf(wf, "Humedad: \t %lf \t %lf \t %lf \n", minH, maxH, promH);
-      fprintf(wf, "Viento: \t %lf \t %lf \t %lf \n", minW, maxW, promW);
-      fprintf(wf, "Radiacion: \t %lf \t %lf \t %lf \n", minR, maxR, promR);
+    fprintf(wf, "Variable: \t Min \t Max \t Prom \n");
+    fprintf(wf, "Temp: \t %lf \t %lf \t %lf \n", minTa, maxTa, promTa);
+    fprintf(wf, "Humedad: \t %lf \t %lf \t %lf \n", minH, maxH, promH);
+    fprintf(wf, "Viento: \t %lf \t %lf \t %lf \n", minW, maxW, promW);
+    fprintf(wf, "Radiacion: \t %lf \t %lf \t %lf \n", minR, maxR, promR);
       
-      // Cerramos el fichero
-      fclose(wf);
+    // Cerramos el fichero
+    fclose(wf);
       
       return 0;
-    }
+  }
 }
 
 double maximo(double x[], int n)
@@ -266,8 +280,8 @@ double maximo(double x[], int n)
   for (i = 1; i < n; i++)
   {
     if (x[i] > mx) 
-	{
-	  mx = x[i]; // y lo sustituye si lo encuentra
+    {
+      mx = x[i]; // y lo sustituye si lo encuentra
     }
   }
   
@@ -283,9 +297,9 @@ double minimo(double x[], int n)
   for (i = 1; i < n; i++)
   {
     if (x[i] < mn)
-	{
-	  mn = x[i];		
-	}
+    {
+      mn = x[i];		
+    }
   }
   
   return mn;
@@ -298,7 +312,7 @@ double promedio(double x[], int n)
 
   for (i = 0; i < n; i++)
   {
-  	media = media + x[i];
+    media = media + x[i];
   }
   
   return media / n;
