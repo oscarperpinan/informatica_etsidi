@@ -1,4 +1,4 @@
-#+TITLE: Ejercicios del Tema 5
+#+TITLE: Ejercicios del Tema 6
 #+SUBTITLE: Ficheros
 #+AUTHOR: 
 #+DATE: 
