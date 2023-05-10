@@ -1,4 +1,4 @@
-#+TITLE: Ejercicios del Tema 7
+#+TITLE: Ejercicios del Tema 7 - Asignación dinámica de memoria
 #+SUBTITLE: Asignación dinámica de memoria
 #+AUTHOR: 
 #+DATE: 
@@ -7,7 +7,7 @@
 #+EXPORT_FILE_NAME: ejercicios_tema7_asig.pdf
 
 
-* Asignación dinámica de memoria
+* Rellenar vector
 Escribe un programa que permita al usuario rellenar un vector de dimensión variable. En primer lugar, el programa pregunta al usuario el número de elementos que tendrá el vector. A continuación, empleando asignación dinámica de memoria, el programa reservará memoria para este vector, y solicitará al usuario los valores del mismo. Finalmente, el programa mostrará el contenido de este vector.
 
 #+BEGIN_SRC C
