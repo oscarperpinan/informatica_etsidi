@@ -1,4 +1,4 @@
-#+TITLE: Ejercicios del Tema 7
+#+TITLE: Ejercicios del Tema 7 - Punteros
 #+SUBTITLE: Punteros
 #+AUTHOR: 
 #+DATE: 
