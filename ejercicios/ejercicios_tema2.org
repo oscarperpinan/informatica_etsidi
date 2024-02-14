@@ -31,11 +31,11 @@ int main()
   printf("Los códigos ASCII de las vocales son:\n");
   // Usando %d se imprime un char como entero.
   // El código \t inserta un tabulador.
-  printf("a: %d\t", 'a');
-  printf("e: %d\t", 'e');
-  printf("i: %d\t", 'i');
-  printf("o: %d\t", 'o');
-  printf("u: %d\n", 'u'); 
+  printf("a: %i\t", 'a');
+  printf("e: %i\t", 'e');
+  printf("i: %i\t", 'i');
+  printf("o: %i\t", 'o');
+  printf("u: %i\n", 'u'); 
   return 0;
 }
 #+END_SRC
@@ -59,6 +59,7 @@ int main()
 #+END_SRC
 * Cálculo del IVA
 Realice un programa para calcular el IVA de un producto cuyo precio es introducido por el usuario. Suponga que el IVA es del 21%. 
+Muestre el resultado con 2 decimales.
 
 #+BEGIN_SRC C
 #include <stdio.h>
