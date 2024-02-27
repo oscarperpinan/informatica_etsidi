@@ -398,7 +398,7 @@ int main()
   printf("\nEl area es: %f\n", cateto_c*cateto_l/2);
 
   return 0;
-}}
+}
 #+END_SRC
 
 
