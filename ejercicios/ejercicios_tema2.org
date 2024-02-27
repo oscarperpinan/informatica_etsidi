@@ -29,13 +29,14 @@ int main()
 int main()
 {
   printf("Los códigos ASCII de las vocales son:\n");
-  // Usando %d se imprime un char como entero.
+  // Usando %i se imprime un char como entero.
   // El código \t inserta un tabulador.
   printf("a: %i\t", 'a');
   printf("e: %i\t", 'e');
   printf("i: %i\t", 'i');
   printf("o: %i\t", 'o');
   printf("u: %i\n", 'u'); 
+  
   return 0;
 }
 #+END_SRC
@@ -47,16 +48,21 @@ int main()
 
 int main()
 {
-  char letra, Letra;
+  char letra_m, Letra_M;
   const int conv = 'A' - 'a'; // Diferencia entre mayuscula y minuscula
+  
   printf("Escriba una letra minuscula:\n");
-  scanf("%c", &letra);
+  scanf("%c", &letra_m);
+  
   // Paso a mayuscula mediante la constante conv
-  Letra = letra + conv;
-  printf("En mayuscula es %c\n", Letra);
+  Letra_M = letra_m + conv;
+  printf("En mayuscula es %c\n", Letra_M);
+  
   return 0;
 }
 #+END_SRC
+
+
 * Cálculo del IVA
 Realice un programa para calcular el IVA de un producto cuyo precio es introducido por el usuario. Suponga que el IVA es del 21%. 
 Muestre el resultado con 2 decimales.
@@ -67,35 +73,17 @@ Muestre el resultado con 2 decimales.
 int main()
 {
   float precio, iva;
+
   printf("Indique el valor del producto en euros:\n");
   scanf("%f", &precio);
   iva = 0.21 * precio;
+
   printf("El IVA del producto es %.2f euros.\n", iva);
+
   return 0;
 }
 #+END_SRC
-* Conversión de temperatura
-Escriba un programa para convertir de grados centígrados a grados Fahrenheit ($T_F = 9/5 * T_C + 32$)
 
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  float tempC, tempF;
-        
-  printf("Escriba una temperatura en grados centigrados\n");
-  scanf("%f", &tempC);
-  // La clave está en usar 9.0 y 5.0 para que la división sea de
-  // números reales. Si escribimos 9/5 estamos indicando una división
-  // de números enteros.
-  tempF = (9.0 / 5.0) * tempC + 32;
-        
-  printf("%.2f grados centigrados son %.2f grados Fahrenheit\n", tempC, tempF);
-  return 0;
-        
-}
-#+END_SRC
 * Conversión de monedas
 Escriba un programa para convertir una cantidad de pesetas introducidas por el usuario en euros y euros en dólares. 
 
@@ -105,198 +93,20 @@ Escriba un programa para convertir una cantidad de pesetas introducidas por el u
 int main()
 {
   float pts, euros, dolar;
+
   // Constantes de conversion
   const float p2e = 1/166.386; //Pesetas a euros
   const float e2d = 1.06105; //Euros a dolares
+
   printf ("Introduce una cantidad en pesetas: \n");
   scanf ("%f", &pts);
+
   euros = pts * p2e;
   dolar = euros  * e2d;
   printf ("%.2f pesetas son %.2f euros y %.2f dolares\n", pts, euros, dolar);
-  return 0;
-} 
-#+END_SRC
-
-* Volumen de una esfera
-El volumen de una esfera se calcula como: $4/3 \cdot \pi \cdot r^3$. Realice un programa que permita calcularlo introduciendo por teclado el radio.
-** Versión sin =math.h=
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  float r, area;
-  // Definimos el valor de pi como una constante de tipo float
-  const float pi = 3.141592;
-  printf("Introduce el radio de la esfera \n");
-  scanf("%f", &r);
-  area = 4.0 / 3.0 * pi * r * r * r;
-  printf("El volumen de la esfera es %f \n", area);
-  return 0;
-}
-#+END_SRC
-** Versión usando =math.h=
-#+BEGIN_SRC C
-#include <stdio.h>
-#include <math.h>
-
-int main()
-{
-  // La funcion pow de math devuelve el resultado como double. Por
-  // tanto, debemos usar variables de este tipo.
-  double r, area;
-  printf("Introduce el radio de la esfera \n");
-  scanf("%lf", &r);
-  // La libreria math define el valor de pi en M_PI.  Ademas, incluye
-  // la funcion pow para calcular la potencia de un numero.
-  area = 4.0 / 3.0 * M_PI * pow(r, 3);
-  printf("El volumen de la esfera es %g \n", area);
-  return 0;
-}
-#+END_SRC
-
-* Distancia entre puntos
-Escriba un programa que pida al usuario las coordenadas de 2 puntos bidimensionales en coordenadas cartesianas, y que imprima por pantalla la distancia entre ambos puntos.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-// La libreria math incluye las funciones pow y sqrt
-#include <math.h>
-
-int main()
-{
-  float x1, x2, y1, y2;
-  double dx2, dy2, d;
-        
-  printf("Primer punto\n");
-  scanf("%lf %lf", &x1, &y1);
-        
-  printf("Segundo punto\n");
-  scanf("%lf %lf", &x2, &y2);
-  
-  // La funcion pow realiza la potencia de un número
-  dx2 = pow(x1 - x2, 2);
-  dy2 = pow(y1 - y2, 2);
-  // La funcion sqrt realiza la raiz cuadrada
-  d = sqrt(dx2 + dy2);
-        
-  printf("La distancia entre dos puntos es %f\n", d);
-  return 0;
-}
-#+END_SRC
-
-* Años bisiestos 
-/Un año es bisiesto si es divisible por 4 pero no por 100, o si es divisible por 400./
-- Escriba un programa que indique si un número es bisiesto a partir de un número introducido por el usuario. 
-#+BEGIN_SRC C
-#include <stdio.h>
-int main() 
-{ 
-  int x;
-  _Bool bisiesto;
-
-  printf("Dime un número entero.\n");
-  scanf("%d", &x);
-  // Definimos la condicion de ser bisiesto, y el resultado lo 
-  bisiesto = ((x % 4 == 0) && (x % 100 != 0)) || (x % 400 == 0);
-  printf("%d es %s\n", x, bisiesto ? "bisiesto" : "normal");
-  return 0;
-} 
-#+END_SRC
-
-- Escriba un programa que muestre en pantalla el número de días del mes de febrero a partir del año introducido por el usuario.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-int main() 
-{ 
-  int x;
-  _Bool bisiesto;
-
-  printf("Dime un número entero.\n");
-  scanf("%d", &x);
-  bisiesto = ((x % 4 == 0) && (x % 100 != 0)) || (x % 400 == 0);
-  printf("El mes de febrero de %d tiene %d días\n", x, bisiesto ? 29 : 28);
 
   return 0;
 } 
-#+END_SRC
-* Cifras de un número entero
-Escriba un programa que, a partir de un número entero introducido por el usuario, muestre en pantalla las centenas, decenas y unidades (en este orden).
-
-#+BEGIN_SRC C
-#include <stdio.h>
-int main() 
-{ 
-  int x, u, d, c;
-
-  printf("Dime un número entero.\n");
-  scanf("%d", &x);
-
-  // Las unidades son el resto de dividir por 10.
-  u = x % 10;
-  // El siguiente paso consiste en eliminar las unidades: hacemos una
-  // división de enteros con 10 (en lugar de 10.0), y por tanto se
-  // pierden los decimales.
-  x /= 10;
-  // Para obtener las decenas y centenas repetimos la rutina
-  d = x % 10;
-  x /= 10;
-  c = x % 10;
-
-  printf("Centenas %d, Decenas %d, Unidades %d\n", c, d, u);
-
-  return 0;
-} 
-#+END_SRC
-
-
-* Valores absolutos
-Escribir un programa que lea 2 números, 1 entero y otro real, e imprima su valor absoluto. Se debe usar la librería math.h y aprender a usar la función de cálculo del valor absoluto.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-#include <math.h>
-
-int main() 
-{ 
-  int a;
-  float b;
-
-  printf("Dime un número entero.\n");
-  scanf("%d", &a);
-  
-  printf("Dime un número real.\n");
-  scanf("%f", &b);
-
-  printf("Entero: %d o también: %d.\n", (a<0) ? -a : a, abs(a));
-  printf("Real: %f o también: %f.\n", (b<0) ? -b : b, fabs(b));
-
-  return 0;
-}
-#+END_SRC
-
-
-* Comparaciones
-Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main(void)
-{
-  int a, b;
-  printf("Escriba 2 numeros enteros:\n");
-  scanf("%i", &a);
-  scanf("%i", &b);  
-  
-  int resultado = (a == 8);
-  resultado = resultado + (b == 8);
-	
-  printf("%d", resultado);
-	
-  return 0;
-}
 #+END_SRC
 
 
@@ -316,14 +126,282 @@ int main()
   // Nos quedamos con el resto de la division entera
   // y lo dividimos por 7, para tener semanas
   weeks = (days % 365)/7;
+  
   // Dias totales menos los que son años y semanas
   days = days - ((years*365) + (weeks*7));
 
-  printf("Anyos: %d\n", years);
-  printf("Semanas: %d\n", weeks);
-  printf("Dias: %d \n", days);
+  printf("Anyos: %i\n", years);
+  printf("Semanas: %i\n", weeks);
+  printf("Dias: %i \n", days);
 
   return 0;
 }
 #+END_SRC
+
+
+* Cifras de un número entero
+Escriba un programa que, a partir de un número entero introducido por el usuario, muestre en pantalla las centenas, decenas y unidades (en este orden).
+
+#+BEGIN_SRC C
+#include <stdio.h>
+int main() 
+{ 
+  int x, u, d, c;
+
+  printf("Dime un número entero.\n");
+  scanf("%i", &x);
+
+  // Las unidades son el resto de dividir por 10.
+  u = x % 10;
+
+  // El siguiente paso consiste en eliminar las unidades: hacemos una
+  // división de enteros con 10 y, por tanto, se pierden los decimales.
+  x = x / 10;
+  // Para obtener las decenas y centenas repetimos la rutina
+  d = x % 10;
+  x = x / 10;
+  c = x % 10;
+
+  printf("Centenas %i, Decenas %i, Unidades %i\n", c, d, u);
+
+  return 0;
+} 
+#+END_SRC
+
+
+* Conversión de temperatura
+Escriba un programa para convertir de grados centígrados a grados Fahrenheit ($T_F = 9/5 * T_C + 32$)
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float tempC, tempF;
+        
+  printf("Escriba una temperatura en grados centigrados\n");
+  scanf("%f", &tempC);
+
+  // La clave está en usar 9.0 y 5.0 para que la división sea de números reales. 
+  // Si escribimos 9/5 estamos indicando una división de números enteros.
+  tempF = (9.0 / 5.0) * tempC + 32;
+        
+  printf("%.2f grados centigrados son %.2f grados Fahrenheit\n", tempC, tempF);
+   
+  return 0;
+}
+#+END_SRC
+
+
+* Comparaciones (sin operador ternario)
+Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main(void)
+{
+  int a, b;
+  printf("Escriba 2 numeros enteros:\n");
+  scanf("%i", &a);
+  scanf("%i", &b);  
+
+  // Como el resultado de una comparación es 1 (true) o 0 (false)
+  // Podemos usar el 1 (true) para sumar el número de ochos.
+  int resultado = (a == 8);
+  resultado = resultado + (b == 8);
+	
+  printf("%i", resultado);
+	
+  return 0;
+}
+#+END_SRC
+
+* Comparaciones (con operador ternario)
+Escribir un programa que lea 2 números enteros e imprima: un 1 si uno de los números es igual a 8; 2 si los 2 números son iguales al 8.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main(void)
+{
+  int a, b;
+  printf("Escriba 2 numeros enteros:\n");
+  scanf("%i", &a);
+  scanf("%i", &b);  
+
+  // Como el resultado de una comparación es 1 (true) o 0 (false)
+  // Podemos usar el 1 (true) para sumar el número de ochos.
+  int resultado = (a == 8);
+  resultado = resultado + (b == 8);
+  	
+  printf("%i", (resultado == 2 ? 2 : 1));
+	
+  return 0;
+}
+#+END_SRC
+
+
+* Años bisiestos (operadores de comparación y ternario)
+/Un año es bisiesto si es divisible por 4 pero no por 100, o si es divisible por 400./
+- Escriba un programa que indique si un número es bisiesto a partir de un número introducido por el usuario. 
+#+BEGIN_SRC C
+#include <stdio.h>
+int main() 
+{ 
+  int x;
+  int bisiesto;
+
+  printf("Dime un número entero.\n");
+  scanf("%i", &x);
+
+  // Definimos la condicion de ser bisiesto
+  // divisible por 4,     pero no por 100     ó     divisible por 400 
+  bisiesto = ((x % 4 == 0) && (x % 100 != 0)) || (x % 400 == 0);
+  
+  printf("En el anho %i febrero tiene %i dias\n", x, (bisiesto ? 29 : 28));
+  return 0;
+} 
+#+END_SRC
+
+
+** En los siguientes ejercicios, use math.h cuando lo necesite
+
+* Volumen de una esfera
+El volumen de una esfera se calcula como: $4/3 \cdot \pi \cdot r^3$. Realice un programa que permita calcularlo introduciendo por teclado el radio.
+** Versión sin =math.h=
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float r, area;
+  // Definimos el valor de pi como una constante de tipo float
+  const float pi = 3.141592;
+  printf("Introduce el radio de la esfera \n");
+  scanf("%f", &r);
+  area = 4.0 / 3.0 * pi * r * r * r;
+  printf("El volumen de la esfera es %f \n", area);
+  
+  return 0;
+}
+#+END_SRC
+
+** Versión usando =math.h=
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+  // La funcion pow de math.h devuelve el resultado como double. Por
+  // tanto, deberíamos usar variables de este tipo.
+  // Si usamos el tipo float, perderá precisión el valor
+  float r, area;
+  printf("Introduce el radio de la esfera \n");
+  scanf("%f", &r);
+  
+  // La libreria math.h define el valor de pi en M_PI. 
+  // La libreria math.h define la función pow para calcular la potencia de un numero.
+  area = 4.0 / 3.0 * M_PI * pow(r, 3);
+  
+  printf("El volumen de la esfera es %f \n", area);
+  return 0;
+}
+#+END_SRC
+
+* Distancia entre puntos
+Escriba un programa que pida al usuario las coordenadas de 2 puntos bidimensionales en coordenadas cartesianas, y que imprima por pantalla la distancia entre ambos puntos.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+// La libreria math incluye las funciones pow y sqrt
+#include <math.h>
+
+int main()
+{
+  float x1, x2, y1, y2;
+  float dx2, dy2, dist;
+        
+  printf("Primer punto\n");
+  scanf("%f %f", &x1, &y1);
+        
+  printf("Segundo punto\n");
+  scanf("%f %f", &x2, &y2);
+  
+  // La funcion pow realiza la potencia de un número
+  dx2 = pow(x1 - x2, 2);
+  dy2 = pow(y1 - y2, 2);
+  
+  // La funcion sqrt realiza la raiz cuadrada
+  dist = sqrt(dx2 + dy2);
+        
+  printf("La distancia entre dos puntos es %f\n", dist);
+  return 0;
+}
+#+END_SRC
+
+
+* Valores absolutos
+Escribir un programa que lea 2 números, 1 entero y otro real, e imprima su valor absoluto. Se debe usar la librería math.h y aprender a usar la función de cálculo del valor absoluto.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main() 
+{ 
+  int a;
+  float b;
+
+  printf("Dime un número entero.\n");
+  scanf("%i", &a);
+  
+  printf("Dime un número real.\n");
+  scanf("%f", &b);
+
+  //La funcion valor absoluto es distinta para números enteros y números reales	
+  printf("Entero: %i.\n", abs(a));
+  printf("Real: %f.\n", fabs(b));
+
+  return 0;
+}
+#+END_SRC
+
+
+* Trigonometría
+Escribe un programa que calcule los valores de los ángulos de un triángulo rectángulo con las siguiente
+caracteríticas. Utiliza la librería matemática math.h si es necesario.
+El cateto corto mide 4,5.
+El cateto largo mide 3,7.
+La hipotenusa mide 5.82.
+Calcule también el área del triángulo.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main() 
+{ 
+  float cateto_c = 4.5;
+  float cateto_l = 3.7;
+  float hipotenusa = 5.82;
+  
+  printf("Primer angulo: %f\n", acos(cateto_c/hipotenusa)*180/3.141592);
+  printf("Segundo angulo: %f\n", acos(cateto_l/hipotenusa)*180/3.141592);
+  
+  printf("O tambien podemos calcularlos como:\n");
+  // El resultado es algo distinto por falta de precisión en la hipotenusa
+  printf("Primer angulo: %f\n", asin(cateto_l/hipotenusa)*180/3.141592);
+  printf("Segundo angulo: %f\n", asin(cateto_c/hipotenusa)*180/3.141592);
+  
+  printf("\nEl area es: %f\n", cateto_c*cateto_l/2);
+
+  return 0;
+}}
+#+END_SRC
+
+
+
+
 
