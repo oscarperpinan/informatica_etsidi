@@ -199,7 +199,7 @@ Escribir un programa que lea 2 n√∫meros enteros e imprima: un 1 si uno de los n√
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int main(void)
+int main()
 {
   int a, b;
   printf("Escriba 2 numeros enteros:\n");
@@ -223,7 +223,7 @@ Escribir un programa que lea 2 n√∫meros enteros e imprima: un 1 si uno de los n√
 #+BEGIN_SRC C
 #include <stdio.h>
 
-int main(void)
+int main()
 {
   int a, b;
   printf("Escriba 2 numeros enteros:\n");
