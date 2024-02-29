@@ -336,33 +336,33 @@ Se pide realizar un programa que calcule el máximo y el mínimo de dos datos te
 int main()
 {
   float a, b;
-
-	printf("Introduce 2 números entre cero y cien: \n");
+  
+  printf("Introduce 2 números entre cero y cien: \n");
   scanf("%f %f", &a, &b);
- 
+  
   if( (a<0) || (a>100) || (b<0) || (b>100))
   {
-		printf("ERROR al introducir lso números \n");	
-	}
+    printf("ERROR al introducir lso números \n");	
+  }
   else
   {
-  	if(a<b)
+    if(a<b)
     {
-		  printf("El mínimo es %f y el máximo es %f.", a, b);
-		}
+      printf("El mínimo es %f y el máximo es %f.", a, b);
+    }
     else
-		{
-			if(a>b)
-			{
-		    printf("El mínimo es %f y el máximo es %f.", b, a);
-			}
-			else
-			{
-				printf("El mínimo y el máximo son el mismo número: %f.", a);      
-			}
-		}
-	}
-	return 0;
+    {
+      if(a>b)
+      {
+        printf("El mínimo es %f y el máximo es %f.", b, a);
+      }
+      else
+      {
+        printf("El mínimo y el máximo son el mismo número: %f.", a);      
+      }
+      }
+  }
+  return 0;
 }
 #+END_SRC
 
@@ -384,89 +384,89 @@ int main()
   fflush(stdin);
   scanf("%c", &j2);
  
- 	// Uso al jugador 1 como referencia y, dentro de cada caso, hago las comparaciones necesarias
- 	switch(j1)
- 	{
-	  case 'I':		// Jugador 1 elige piedra
-	  	if (j1 == j2) // Jugador 2 elige piedra
-	  	{
-	  		printf("I-I Empate.\n");
-			}
-			else
-			{
-				if(j2 == 'P')  // Jugador 2 elige papel
-				{
-					 printf("I-P Papel envuelve a piedra, gana el jugador 2.\n");
-				}
-				else
-				{
-					if(j2 == 'T') // Jugador 2 elige tijera
-					{
-						printf("I-T Piedra rompe a tijera, gana el jugador 1.\n");
-					}
-					else // Jugador 2 elige mal
-					{
-						printf("El jugador 2 ha elegido una opción no válida");
-					}
-				}
-			}	  	
-	  	break;
-
-	  case 'P':		// Jugador 1 elige papel
-	  	if (j1 == j2) // Jugador 2 elige papel
-	  	{
-	  		printf("P-P Empate.\n");
-			}
-			else
-			{
-				if(j2 == 'I')  // Jugador 2 elige piedra
-				{
-					 printf("P-I Papel envuelve a piedra, gana el jugador 1.\n");
-				}
-				else
-				{
-					if(j2 == 'T') // Jugador 2 elige tijera
-					{
-						printf("P-T Tijera corta papel, gana el jugador 2.\n");
-					}
-					else // Jugador 2 elige mal
-					{
-						printf("El jugador 2 ha elegido una opción no válida");
-					}
-				}
-			}	  		  	
-	  	break;
-	  	
-		case 'T':		// Jugador 1 elige tijera
-	  	if (j1 == j2) // Jugador 2 elige tijera
-	  	{
-	  		printf("T-T Empate.\n");
-			}
-			else
-			{
-				if(j2 == 'I')  // Jugador 2 elige piedra
-				{
-					 printf("T-I Piedra rompe a tijera, gana el jugador 2.\n");
-				}
-				else
-				{
-					if(j2 == 'P') // Jugador 2 elige papel
-					{
-						printf("T-P Tijera corta papel, gana el jugador 1.\n");
-					}
-					else // Jugador 2 elige mal
-					{
-						printf("El jugador 2 ha elegido una opción no válida");
-					}
-				}
-			}	  	  	  	
-	  	break;
-	 
-	 	default: 
-	 		printf("El jugador 1 ha elegido una opción no válida");
-	}
- 	
-	return 0;
+  // Uso al jugador 1 como referencia y, dentro de cada caso, hago las comparaciones necesarias
+  switch(j1)
+  {
+    case 'I':		// Jugador 1 elige piedra
+      if (j1 == j2) // Jugador 2 elige piedra
+      {
+        printf("I-I Empate.\n");
+      }
+      else
+      {
+        if(j2 == 'P')  // Jugador 2 elige papel
+        {
+          printf("I-P Papel envuelve a piedra, gana el jugador 2.\n");
+        }
+        else
+        {
+          if(j2 == 'T') // Jugador 2 elige tijera
+          {
+            printf("I-T Piedra rompe a tijera, gana el jugador 1.\n");
+          }
+          else // Jugador 2 elige mal
+          {
+            printf("El jugador 2 ha elegido una opción no válida");
+          }
+        }
+      }	  	
+      break;
+    
+    case 'P':		// Jugador 1 elige papel
+      if (j1 == j2) // Jugador 2 elige papel
+      {
+        printf("P-P Empate.\n");
+      }
+      else
+      {
+        if(j2 == 'I')  // Jugador 2 elige piedra
+        {
+          printf("P-I Papel envuelve a piedra, gana el jugador 1.\n");
+        }
+        else
+        {
+          if(j2 == 'T') // Jugador 2 elige tijera
+          {
+            printf("P-T Tijera corta papel, gana el jugador 2.\n");
+          }
+          else // Jugador 2 elige mal
+          {
+            printf("El jugador 2 ha elegido una opción no válida");
+          }
+        }
+      }	  		  	
+      break;
+    
+    case 'T':		// Jugador 1 elige tijera
+      if (j1 == j2) // Jugador 2 elige tijera
+      {
+        printf("T-T Empate.\n");
+      }
+      else
+      {
+        if(j2 == 'I')  // Jugador 2 elige piedra
+        {
+           printf("T-I Piedra rompe a tijera, gana el jugador 2.\n");
+        }
+        else
+        {
+          if(j2 == 'P') // Jugador 2 elige papel
+          {
+            printf("T-P Tijera corta papel, gana el jugador 1.\n");
+          }
+          else // Jugador 2 elige mal
+          {
+            printf("El jugador 2 ha elegido una opción no válida");
+          }
+        }
+      }	  	  	  	
+      break;
+    
+    default: 
+      printf("El jugador 1 ha elegido una opción no válida");
+  }
+  
+  return 0;
 }
 #+END_SRC
 
