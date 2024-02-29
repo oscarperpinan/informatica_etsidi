@@ -83,15 +83,17 @@ int main()
   {
     printf("Es una letra.\n");
   }
-  else if (tecla >= '0' && tecla <= '9')
+  else 
   {
-    printf("Es un número.\n");
-  }
-  else
-  {
-    printf("Es un caracter especial.\n");
-  }
-    
+    if (tecla >= '0' && tecla <= '9')
+    {
+      printf("Es un número.\n");
+    }
+    else
+    {
+      printf("Es un caracter especial.\n");
+    }
+  }  
   return 0;
 }
 #+END_SRC
@@ -136,6 +138,58 @@ int main ()
 }
 #+END_SRC
 
+
+* Mayor
+
+Realice un programa que solicite tres números enteros e imprima el mayor
+de ellos.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int x, y, z;
+
+  printf("Indique tres números enteros.\n");
+  scanf("%i %i %i", &x, &y, &z);
+		
+	// Usamos mayor igual porque el mayor podría estar repetido
+  if(x>=y)
+  {
+  	if(x>=z)
+  	{
+  		printf("El mayor es %i", x);
+		}
+		else
+		{
+			if(y>=z)
+			{
+				printf("El mayor es %i", y);
+			}
+			else
+			{
+				printf("El mayor es %i", z);
+			}
+		}
+	}
+	else
+	{
+		if(y>=z)
+		{
+			printf("El mayor es %i", y);
+		}
+		else
+		{
+			printf("El mayor es %i", z);
+		}
+	}
+    
+  return 0;
+}
+#+END_SRC
+
+
 * Días de la semana
 Escribe un programa que imprima el nombre del día que corresponde a un número entero introducido por el usuario. Supón que el 1 corresponde al lunes, y así sucesivamente.
 #+BEGIN_SRC C
@@ -146,38 +200,48 @@ int main()
   int n;
   printf("Introduzca número de día: ");
   scanf("%i", &n);
-  switch(n)
-  {
-    case 1:
-      printf("Lunes\n");
-      break;
-    case 2:
-      printf("Martes\n");
-      break;
-    case 3:
-      printf("Miércoles\n");
-      break;
-    case 4:
-      printf("Jueves\n");
-      break;
-    case 5:
-      printf("Viernes\n");
-      break;
-    case 6:
-      printf("Sábado\n");
-      break;
-    case 7:
-      printf("Domingo\n");
-      break;
-    default:
-      printf("Número incorrecto\n");
-  }
+
+	if(n>0)
+	{
+    // Aseguramos que todos los números valen siempre entre 0 y 6.
+    // Cambiamos para que el 0 sean los domingos, esto no afecta al usuario que puede introducir un 7.
+    // Ya que el resto de un múltiplo de 7, entre 7, es cero
+		n = n%7;
+
+	  switch(n)
+	  {
+	    case 1:
+	      printf("Lunes\n");
+	      break;
+	    case 2:
+	      printf("Martes\n");
+	      break;
+	    case 3:
+	      printf("Miércoles\n");
+	      break;
+	    case 4:
+	      printf("Jueves\n");
+	      break;
+	    case 5:
+	      printf("Viernes\n");
+	      break;
+	    case 6:
+	      printf("Sábado\n");
+	      break;
+	    case 0:
+	      printf("Domingo\n");
+	      break;
+	    default:
+	      printf("Número incorrecto\n");
+	  }
+	}
   return 0;
 } 
 #+END_SRC
 
 * Área de figuras geométricas
 Escribe un programa que pregunte primero si quieres calcular el área de un triángulo o de un círculo. Si el usuario contesta que quiere calcular el área de un triángulo, el programa tiene que pedir entonces la base y la altura y escribir el área. Si contesta que quiere calcular el área de un círculo, el programa tiene que pedir entonces el radio y escribir el área.
+
 #+BEGIN_SRC C
 #include <stdio.h>
 #include <math.h>
@@ -185,8 +249,8 @@ Escribe un programa que pregunte primero si quieres calcular el área de un tri�
 int main()
 {
   char elige;
-  double b, h, r;
-  double area;
+  float b, h, r;
+  float area;
   printf("Elige Triangulo (T) o Circulo (C)\n");
   scanf("%c", &elige);
 
@@ -195,15 +259,15 @@ int main()
     case 't':
     case 'T':
       printf("Base?\n");
-      scanf("%lf", &b);
+      scanf("%f", &b);
       printf("Altura?\n");
-      scanf("%lf", &h);
+      scanf("%f", &h);
       area = (b * h) / 2;
       break;
     case 'c':
     case 'C':
       printf("Radio?\n");
-      scanf("%lf", &r);
+      scanf("%f", &r);
       area = M_PI * pow(r, 2);
       break;
     default:
@@ -220,13 +284,15 @@ Escribe un programa que pida los coeficientes de una ecuación de segundo grado 
 
 #+BEGIN_SRC C
 #include<stdio.h>
-#include<math.h>
+#include<math.h>      // Lo usamos para hacer las raíces cuadradas
  
 int main()
 {
   float a, b, c, disc, x1, x2, xi, xr;
   printf("Escribe el valor de los tres coeficientes (a, b, c)\n");
   scanf("%f %f %f", &a, &b, &c);
+
+  // Si a = 0, entonces es una ecuación de primer grado
   if (a != 0)
   {
     disc = pow(b, 2) - 4 * a * c;
@@ -242,18 +308,165 @@ int main()
       x1 = -b / (2 * a);
       printf("Raíz única %.2f", x1);
     }
+    // Si es menor que cero, las soluciones tienen parte real y parte imaginaria
+    // El número imaginario como tal no lo podemos calcular, así que le añadimos la 'i'
     else
     {
       xr = -b / (2 * a);
       xi = sqrt(-disc) / (2 * a);
-      printf("La raiz real es %.2f y la imaginaria es %.2f", xr, xi);
+      printf("La raices son %.2f +- %.2f i", xr, xi);
     }
   } 
   else
   {
     printf("El coeficiente a no puede ser 0.\n");
   }
-    
+
+  return 0;
+}
+#+END_SRC
+
+
+* Mayor menor
+Se pide realizar un programa que calcule el máximo y el mínimo de dos datos tecleados por el usuario y que deben estar en el rango [0.0 100.0]. Si alguno de los datos introducidos estuviera fuera del rango se imprimirá un aviso de ERROR.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float a, b;
+
+	printf("Introduce 2 números entre cero y cien: \n");
+  scanf("%f %f", &a, &b);
+ 
+  if( (a<0) || (a>100) || (b<0) || (b>100))
+  {
+		printf("ERROR al introducir lso números \n");	
+	}
+  else
+  {
+  	if(a<b)
+    {
+		  printf("El mínimo es %f y el máximo es %f.", a, b);
+		}
+    else
+		{
+			if(a>b)
+			{
+		    printf("El mínimo es %f y el máximo es %f.", b, a);
+			}
+			else
+			{
+				printf("El mínimo y el máximo son el mismo número: %f.", a);      
+			}
+		}
+	}
+	return 0;
+}
+#+END_SRC
+
+
+* Piedra, papel o tijera
+En el juego para dos personas llamado "PIEDRA (I), PAPEL (P) O TIJERA (T)" cada jugador escoge ser "T", "I" o "P" respectivamente. El juego se determina así: piedra rompe tijera, tijera corta papel, papel cubre la piedra, el juego es un empate si ambos jugadores eligen la misma opción. Elaborar un programa para que determine qué jugador gana, la salida debe mostrarse de la siguiente forma: "T-I Piedra rompe tijeras gana el jugador 2.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  char j1, j2;
+
+	printf("Introduce elección de jugador 1: \n");
+  scanf("%c", &j1);
+  
+  printf("Introduce elección de jugador 2: \n");
+  fflush(stdin);
+  scanf("%c", &j2);
+ 
+ 	// Uso al jugador 1 como referencia y, dentro de cada caso, hago las comparaciones necesarias
+ 	switch(j1)
+ 	{
+	  case 'I':		// Jugador 1 elige piedra
+	  	if (j1 == j2) // Jugador 2 elige piedra
+	  	{
+	  		printf("I-I Empate.\n");
+			}
+			else
+			{
+				if(j2 == 'P')  // Jugador 2 elige papel
+				{
+					 printf("I-P Papel envuelve a piedra, gana el jugador 2.\n");
+				}
+				else
+				{
+					if(j2 == 'T') // Jugador 2 elige tijera
+					{
+						printf("I-T Piedra rompe a tijera, gana el jugador 1.\n");
+					}
+					else // Jugador 2 elige mal
+					{
+						printf("El jugador 2 ha elegido una opción no válida");
+					}
+				}
+			}	  	
+	  	break;
+
+	  case 'P':		// Jugador 1 elige papel
+	  	if (j1 == j2) // Jugador 2 elige papel
+	  	{
+	  		printf("P-P Empate.\n");
+			}
+			else
+			{
+				if(j2 == 'I')  // Jugador 2 elige piedra
+				{
+					 printf("P-I Papel envuelve a piedra, gana el jugador 1.\n");
+				}
+				else
+				{
+					if(j2 == 'T') // Jugador 2 elige tijera
+					{
+						printf("P-T Tijera corta papel, gana el jugador 2.\n");
+					}
+					else // Jugador 2 elige mal
+					{
+						printf("El jugador 2 ha elegido una opción no válida");
+					}
+				}
+			}	  		  	
+	  	break;
+	  	
+		case 'T':		// Jugador 1 elige tijera
+	  	if (j1 == j2) // Jugador 2 elige tijera
+	  	{
+	  		printf("T-T Empate.\n");
+			}
+			else
+			{
+				if(j2 == 'I')  // Jugador 2 elige piedra
+				{
+					 printf("T-I Piedra rompe a tijera, gana el jugador 2.\n");
+				}
+				else
+				{
+					if(j2 == 'P') // Jugador 2 elige papel
+					{
+						printf("T-P Tijera corta papel, gana el jugador 1.\n");
+					}
+					else // Jugador 2 elige mal
+					{
+						printf("El jugador 2 ha elegido una opción no válida");
+					}
+				}
+			}	  	  	  	
+	  	break;
+	 
+	 	default: 
+	 		printf("El jugador 1 ha elegido una opción no válida");
+	}
+ 	
+	return 0;
 }
 #+END_SRC
 
