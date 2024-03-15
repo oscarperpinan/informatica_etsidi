@@ -139,7 +139,7 @@ int main ()
       }
       else
       {
-				printf("%.2f\n", v1 / v2);
+        printf("%.2f\n", v1 / v2);
       }
       break;
     case '^':
@@ -171,32 +171,32 @@ int main()
   // Usamos mayor igual porque el mayor podría estar repetido
   if(x>=y)
   {
-  	if(x>=z)
-  	{
-			printf("El mayor es %i", x);
-		}
-		else
-		{
-			if(y>=z)
-			{
-				printf("El mayor es %i", y);
-			}
-			else
-			{
+    if(x>=z)
+    {
+      printf("El mayor es %i", x);
+    }
+    else
+    {
+      if(y>=z)
+      {
+        printf("El mayor es %i", y);
+      }
+      else
+      {
         printf("El mayor es %i", z);
-			}
-		}
-  }
+      }
+    }
+  } 
   else
   {
-		if(y>=z)
-		{
-			printf("El mayor es %i", y);
-		}
-		else
-		{
-			printf("El mayor es %i", z);
-		}
+    if(y>=z)
+    {
+      printf("El mayor es %i", y);
+    }
+    else
+    {
+      printf("El mayor es %i", z);
+    }
   }
     
   return 0;
@@ -218,14 +218,14 @@ int main()
 
   // Solo números mayores que cero son válidos
 	if(n>0)
-	{
+	{  
     // Aseguramos que todos los números valen siempre entre 0 y 6.
     // Cambiamos para que el 0 sean los domingos, esto no afecta al usuario que puede introducir un 7.
     // Ya que el resto de un múltiplo de 7, entre 7, es cero
-		n = n%7;
+    n = n%7;
 
-	  switch(n)
-	  {
+    switch(n)
+    {
 	    case 1:
 	      printf("Lunes\n");
 	      break;
@@ -396,7 +396,7 @@ int main()
 
   printf("Cada jugador debe elegir entre PIEDRA (I), PAPEL (P) O TIJERA (T): \n\n");
 
-	printf("Introduce elección de jugador 1: \n");
+  printf("Introduce elección de jugador 1: \n");
   scanf("%c", &j1);
   
   printf("Introduce elección de jugador 2: \n");
