@@ -14,15 +14,18 @@ Escribe un programa que permita comprobar si un año (dado por teclado) es bisie
 
 int main()
 {
+  // Usaremos esta variable para guardar el año que introduce el usuario
   int year;
+  // Usaremos esta variable para guardar la valoración del año
   int isBisiesto;
 
   printf("Indique el año.\n");
   scanf("%i", &year);
- 
-  isBisiesto = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 
-  if (isBisiesto)
+  // Esta ecuación lógica debe resultar verdadero (1) si el año es bisiesto, o falso (0) si no o es
+    isBisiesto = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
+
+  if (isBisiesto == 1)
   {
     printf("El año %i es bisiesto.\n", year);    
   }
@@ -34,6 +37,7 @@ int main()
   return 0;
 }
 #+END_SRC
+
 
 * Números enteros
 
@@ -48,7 +52,8 @@ int main()
 
   printf("Indique dos números enteros.\n");
   scanf("%i %i", &x, &y);
-  
+
+  // Si el segundo número es un 0, no se puede hacer la división. 
   if (y == 0)
   {
     printf("No se puede hacer la operacion.\n");
@@ -66,6 +71,7 @@ int main()
 }
 #+END_SRC
 
+
 * Letras y números
 Elabora un programa que solicite al usuario que apriete una tecla y determine si es una letra, un número, o un carácter especial.
 
@@ -79,6 +85,7 @@ int main()
   printf ("Apriete una tecla cualquiera.\n");
   scanf  ("%c", &tecla);
 
+  // Si es valor está entre las letras minúsculas O las lestas máyusculas
   if ((tecla >= 'a' && tecla <= 'z') || (tecla >= 'A' && tecla <= 'Z'))
   {
     printf("Es una letra.\n");
@@ -98,37 +105,45 @@ int main()
 }
 #+END_SRC
 
+
 * Operaciones algebraicas
 Realiza un programa en el que el usuario pueda seleccionar la operación matemática a realizar con dos números que introduce por teclado (suma, resta, multiplicación, división, potencia).
 
 #+BEGIN_SRC C
 #include <stdio.h>
-#include <math.h>
+#include <math.h>   // Se usa para la operación de potencia
 
 int main ()
 {
   float v1, v2;
   char op;
+  printf("Introduzca dos numeros separados por la operación que quiere realizar: \n");
   scanf("%f %c %f", &v1, &op, &v2);
+
   switch(op)
   {
     case '+':
-      printf("%.2f\n", v1 + v2);
+      printf("%f\n", v1 + v2);
       break;
     case '-':
-      printf("%.2f\n", v1 - v2);
+      printf("%f\n", v1 - v2);
       break;
     case '*':
-      printf("%.2f\n", v1 * v2);
+      printf("%f\n", v1 * v2);
       break;
     case '/':
+      // Evitamos hacer una división por cero
       if (v2 == 0)
-	      printf("División por cero.\n");
+      {
+        printf("División por cero.\n");
+      }
       else
-	      printf("%.2f\n", v1 / v2);
+      {
+				printf("%.2f\n", v1 / v2);
+      }
       break;
     case '^':
-      printf("%.2f\n", pow(v1, v2));
+      printf("%f\n", pow(v1, v2));
       break;
     default:
       printf("No se hacer esa operación.\n");
@@ -141,8 +156,7 @@ int main ()
 
 * Mayor
 
-Realice un programa que solicite tres números enteros e imprima el mayor
-de ellos.
+Realice un programa que solicite tres números enteros e imprima el mayor de ellos.
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -154,12 +168,12 @@ int main()
   printf("Indique tres números enteros.\n");
   scanf("%i %i %i", &x, &y, &z);
 		
-	// Usamos mayor igual porque el mayor podría estar repetido
+  // Usamos mayor igual porque el mayor podría estar repetido
   if(x>=y)
   {
   	if(x>=z)
   	{
-  		printf("El mayor es %i", x);
+			printf("El mayor es %i", x);
 		}
 		else
 		{
@@ -169,12 +183,12 @@ int main()
 			}
 			else
 			{
-				printf("El mayor es %i", z);
+        printf("El mayor es %i", z);
 			}
 		}
-	}
-	else
-	{
+  }
+  else
+  {
 		if(y>=z)
 		{
 			printf("El mayor es %i", y);
@@ -183,7 +197,7 @@ int main()
 		{
 			printf("El mayor es %i", z);
 		}
-	}
+  }
     
   return 0;
 }
@@ -191,7 +205,8 @@ int main()
 
 
 * Días de la semana
-Escribe un programa que imprima el nombre del día que corresponde a un número entero introducido por el usuario. Supón que el 1 corresponde al lunes, y así sucesivamente.
+Escribe un programa que imprima el nombre del día que corresponde a un número entero introducido por el usuario. Supón que el 1 corresponde al lunes, y así sucesivamente. Si el número introducido es mayor que 7, se considerará que el 8 el lunes, 9 martes, etc... Números menores que 1 no son válidos. Se recomienda hacerlo con switch.
+
 #+BEGIN_SRC C
 #include <stdio.h>
 
@@ -201,6 +216,7 @@ int main()
   printf("Introduzca número de día: ");
   scanf("%i", &n);
 
+  // Solo números mayores que cero son válidos
 	if(n>0)
 	{
     // Aseguramos que todos los números valen siempre entre 0 y 6.
@@ -251,6 +267,7 @@ int main()
   char elige;
   float b, h, r;
   float area;
+  //
   printf("Elige Triangulo (T) o Circulo (C)\n");
   scanf("%c", &elige);
 
@@ -342,7 +359,7 @@ int main()
   
   if( (a<0) || (a>100) || (b<0) || (b>100))
   {
-    printf("ERROR al introducir lso números \n");	
+    printf("ERROR al introducir los números \n");	
   }
   else
   {
@@ -360,7 +377,7 @@ int main()
       {
         printf("El mínimo y el máximo son el mismo número: %f.", a);      
       }
-      }
+    }
   }
   return 0;
 }
@@ -377,6 +394,8 @@ int main()
 {
   char j1, j2;
 
+  printf("Cada jugador debe elegir entre PIEDRA (I), PAPEL (P) O TIJERA (T): \n\n");
+
 	printf("Introduce elección de jugador 1: \n");
   scanf("%c", &j1);
   
@@ -384,11 +403,11 @@ int main()
   fflush(stdin);
   scanf("%c", &j2);
  
-  // Uso al jugador 1 como referencia y, dentro de cada caso, hago las comparaciones necesarias
+  // Se usa al jugador 1 como referencia y, dentro de cada caso, hago las comparaciones necesarias
   switch(j1)
   {
     case 'I':		// Jugador 1 elige piedra
-      if (j1 == j2) // Jugador 2 elige piedra
+      if (j1 == j2)     // Jugador 2 elige piedra
       {
         printf("I-I Empate.\n");
       }
