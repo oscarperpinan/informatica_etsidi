@@ -6,6 +6,113 @@
 #+PROPERTY: header-args :exports none
 #+EXPORT_FILE_NAME: ejercicios_tema3_bucles.pdf
 
+* Petición de datos
+Realizar un programa que pida un número de tipo entero por teclado e indique si el número es par o impar. El programa continua pidiendo números hasta que el usuario presione el 0 (cero).
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main()
+{
+  int num;
+
+  printf("Escribe un numero entero y le dire si es par o impar.");
+  printf("\nPulse un cero para acabar: ");
+  fflush(stdin);
+  scanf("%i", &num);
+
+  while (num != 0)
+  {   
+    if( (num%2 == 0))
+    {
+      printf("El numero %i es par.\n\n", num);  
+    }
+    else
+    {
+      printf("El numero %i es impar.\n\n", num);  
+    }
+
+    printf("Escribe un numero entero y le dire si es par o impar.");
+    printf("\nPulse un cero para acabar: ");
+    fflush(stdin);
+    scanf("%i", &num);
+  }
+  
+  return 0;
+}
+#+END_SRC
+
+
+* Números comprendidos entre 1 y 100 en saltos de n
+
+Realiza un programa que muestre por pantalla los números enteros comprendidos entre 1 y 100 contando de =n= en =n=. El valor de =n= será introducido por el usuario desde el teclado. Si el usuario introduce un valor menor que 1 el programa se lo volverá a pedir de forma reiterada hasta que el usuario introduzca un número mayor o igual que 1.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int i, a = 1, b = 100, n;
+
+  // Con un bucle do-while nos aseguramos de que el número introducido es mayor que 1
+  do 
+  {
+    printf("Elige el valor de n: ");
+    scanf("%i", &n);
+  }
+  while (n < 1);
+
+  // Una vez que tenemos n simplemente imprimimos la secuencia
+  // actualizando el indice del bucle for con el valor de n
+  for (i = a; i <= b; i = i + n)
+  {
+    printf("%i  ", i);
+  }
+
+  return 0;
+}
+#+END_SRC
+
+
+* Múltiplos
+Realizar un programa que imprima los múltiplos de 7 entre A y B, ambos inclusive, donde A y B son valores enteros introducidos por el usuario desde el teclado. El programa debe garantizar que A y B son mayores que 0 y que B>A. Si el usuario introduce valores que no cumplen alguna de estas condiciones, el programa se los volverá a pedir (el programa pedirá reiteradamente los números si alguna condición no se cumple).
+
+#+BEGIN_SRC C 
+#include <stdio.h>
+
+int main()
+{
+  int i, a, b;
+
+  // Con un bucle do-while nos aseguramos de que el número introducido es mayor que 1
+  // y que b es mayor que a
+  // El bucle se repite cuando una condición, o la otra, no se cumple
+  do 
+  {
+    printf("Elige el valor de A y B: ");
+    scanf("%i %i", &a, &b);
+  }
+  while ( (b<=a) || (a<0) );
+  
+  printf("A: %i, B: %i.\n\n", a, b);
+  
+  printf("Multiplos de 7: ");  
+  // Comenzamos el bucle en A y termianmos en B
+  // avanzando de 1 en 1
+  for (i = a; i <= b; i++)
+  {
+    // Solo imprimimos los múltiplos de 7
+    if ( i%7 == 0)
+    {
+      printf("%i  ", i);  
+    }
+  }
+
+  return 0;
+}
+#+END_SRC
+
+
 * Mitades sucesivas
 Realiza un programa que pida un número real, y presente por pantalla ese número y sus mitades sucesivas hasta que el valor sea menor que 1.
 
@@ -24,119 +131,93 @@ int main()
     printf("%f\n", num);
     num = num / 2;
   }
-}
-#+END_SRC
-
-* Números comprendidos entre A y B
-
-Realiza un programa que muestre por pantalla los números enteros comprendidos entre 1 y 100 contando de =n= en =n=. El valor de =n= será introducido por el usuario desde el teclado. Si el usuario introduce un valor menor que 1 el programa se lo volverá a pedir de forma reiterada hasta que el usuario introduzca un número mayor o igual que 1.
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  int i, a = 1, b = 100, n;
-
-  // Con un bucle do-while nos aseguramos de que el número n es mayor
-  // que 1
-  do 
-  {
-    printf("Elige el valor de n: ");
-    scanf("%i", &n);
-  }
-  while (n < 1);
-
-  // Una vez que tenemos n simplemente imprimimos la secuencia
-  // actualizando el indice del bucle for con el valor de n
-  for (i = a; i <= b; i += n)
-  {
-    printf("%i  ", i);
-  }
 
   return 0;
 }
 #+END_SRC
 
-* Aproximación a \pi
 
-Realiza un programa que calcule una aproximación al número \pi mediante el sumatorio de la serie:
-#+BEGIN_EXPORT latex
-\[
-  \pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  \frac{(-1)^n}{2n + 1} 
- \]
-#+END_EXPORT
 
-#+BEGIN_SRC C
+* Potencia
+Realizar un programa que permita calcular la potencia de un número entero, donde la base y el exponente son introducidos por el usuario. No se puede usar math.h.
+#+BEGIN_SRC C 
 #include <stdio.h>
-#include <math.h>
 
 int main()
 {
-  double pi = 0;
-  int n;
+  int base, exponente;
+  int potencia=1;
 
-  for (n = 0; n <= 1e6; ++n)
+  printf("Vamos a calcular una potencia. \nEscribe la base y el exponente.\n");
+  scanf("%i %i", &base, &exponente);
+
+  int i;
+  for(i=0; i<exponente; i++)
   {
-    pi = pi + pow(-1, n) / (2 * n + 1);
+    potencia = potencia * base;
   }
-  // La multiplicacion se realiza fuera del bucle
-  // para evitar repetir esa operacion 1 millon de veces
-  pi = 4 * pi;
   
-  printf("%f", pi);
-
-  return 0;
-}
-#+END_SRC 
-
-* Sucesión de Fibonacci
-Escribe un programa que genere los =n= primeros términos de la sucesión de Fibonacci. El número entero =n= deberá ser leído por teclado. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo el programa volverá a pedir que lo introduzca.
-
-En la sucesión de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: $1, 1, 2, 3, 5, 8, 13, 21, \ldots$
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  int i, n;
-  int fib1 = 1, fib2 = 1;
-  // La serie crece rapidamente, y un int puede no ser suficiente
-  unsigned long long int fib;
-
-  // Con un bucle do-while nos aseguramos de que el número n es mayor
-  // que 1
-  do 
+  // Cualquier número elevado a cero, excepto cero, vale uno
+  if ((exponente == 0) && (base != 0))
   {
-    printf("Elige el valor de n: ");
-    scanf("%i", &n);
+    printf("El resultado es: 1.");
   }
-  while (n < 1);
-
-  // Aqui empieza el calculo de la serie
-  for (i = 1 ; i <= n ; i++)
+  else
   {
-    // Los dos primeros terminos son 1
-    if (i <= 2)
+    // Disntinguimos entre exponentes positivos y negativos
+    if (exponente > 0)
     {
-      fib = 1;
+      printf("El resultado es: %i.", potencia);
     }
     else
-    { 
-      // el resto de terminos son la suma de los dos anteriores
-      fib = fib1 + fib2;
-	    // Una vez hecha la suma intercambio los valores para el
-	    // siguiente paso de bucle.
-      fib1 = fib2;
-      fib2 = fib;
+    {
+      if (base == 0)
+      {
+        printf("El resultado es: indeterminado");
+      }
+      else
+      {
+        printf("El resultado es: %i.", 1.0/potencia);  
+      }
     }
-    // El identificador de formato esta adaptado a la clase unsigned long long int
-    printf("%llu  ", fib);
-  }
+  }  
+
   return 0;
 }
 #+END_SRC
+
+
+
+* Velocidad de un objeto
+Escribe un programa que calcule la distancia que recorre un objeto y la velocidad alcanzada cada 0.5 segundos durante los 10 primeros segundos de su movimiento. El objeto se mueve desde la posición cero, con velocidad inicial nula y con una aceleración constante tecleada por el usuario. 
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int n;
+  float d, v = 0, a;
+  // Resolucion temporal
+  float dt = 0.5;
+
+  printf("Indica aceleracion.\n");
+  scanf("%f", &a);
+
+  for (n = 1; n <= 20; ++n)
+  {
+    // Calculamos la distancia en cada intervalo
+    d = v * dt + 0.5 * a * dt * dt;
+    // La velocidad va incrementando
+    v = v + a * dt;
+    printf("dist = %.2f, vel = %.2f (t = %.2f)\n", d, v, n * dt);
+  }
+
+  return 0;
+}
+#+END_SRC
+
+
 
 * Números primos
 
@@ -153,7 +234,7 @@ int main()
 
   for(n = 2; n <= 300; n++)
   {
-    // Suponemos que el numero es primo
+    // Suponemos que el numero es primo, lo inicializamos para cada número a comprobar
     esPrimo = 1;
     for(k = 2; k < n; k++)
     {
@@ -173,95 +254,219 @@ int main()
 }
 #+END_SRC
 
+
+
+* Términos de sucesión
+Realizar un programa que pida al usuario un número entrero positivo (n) para calcular los n primeros términos de la sucesión:
+#+BEGIN_EXPORT latex
+\[
+  a_n = (-1)^n\frac{n^2 - 1}{2n + 1} 
+ \]
+#+END_EXPORT
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+  int n;
+  float termino;
+  
+  printf("Introduzca el numero de terminos a calcular: \n");
+  scanf("%i", &n);
+
+  int i;
+  for (i = 0; i<n; i++)
+  {
+    termino = pow(-1, i) * ((i*i - 1.0) / (2 * i + 1.0));
+    printf("Termino %i vale %.2f.\n", i, termino);
+  }
+ 
+  return 0;
+}
+#+END_SRC
+
+
+
+* Aproximación a \pi
+
+Realiza un programa que calcule una aproximación al número \pi mediante el sumatorio de la serie:
+#+BEGIN_EXPORT latex
+\[
+  \pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  \frac{(-1)^n}{2n + 1} 
+ \]
+#+END_EXPORT
+
+#+BEGIN_SRC C
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+  // se usa double porque es más preciso, podría hacerse con float
+  double pi = 0;
+  int n;
+
+  for (n = 0; n <= 1000000; ++n)
+  {
+    pi = pi + pow(-1, n) / (2 * n + 1);
+  }
+  // La multiplicacion se realiza fuera del bucle
+  // para evitar repetir esa operacion 1 millon de veces
+  pi = 4 * pi;
+  
+  printf("%f", pi);
+
+  return 0;
+}
+#+END_SRC 
+
+
+
+* Sucesión de Fibonacci
+Escribe un programa que genere los =n= primeros términos de la sucesión de Fibonacci. El número entero =n= deberá ser leído por teclado. Este valor debe ser positivo, de forma que si el usuario introduce un valor negativo el programa volverá a pedir que lo introduzca.
+
+En la sucesión de Fibonacci los dos primeros números son 1, y el resto se obtiene sumando los dos anteriores: $1, 1, 2, 3, 5, 8, 13, 21, \ldots$
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  int i, n;
+
+  // se utilizan estas variables para guardar los valores anteriores
+  int fib1 = 1, fib2 = 1;
+  
+  // La serie crece rapidamente, y un int puede no ser suficiente
+  // Si se usa int, solo funciona para valores de n que son pequeños
+  unsigned long long int fib;
+
+  // Con un bucle do-while nos aseguramos de que el número n es mayor que 1
+  do 
+  {
+    printf("Elige el valor de n: ");
+    scanf("%i", &n);
+  }
+  while (n < 1);
+
+  // Aqui empieza el calculo de la serie
+  for (i = 1 ; i <= n ; i++)
+  {
+    // Los dos primeros terminos son 1
+    if (i <= 2)
+    {
+      fib = 1;
+    }
+    else
+    { 
+      // el resto de terminos son la suma de los dos anteriores
+      fib = fib1 + fib2;
+      // Una vez hecha la suma intercambio los valores para el
+      // siguiente paso de bucle.
+      fib1 = fib2;
+      fib2 = fib;
+    }
+    
+    // El identificador de formato esta adaptado a la clase unsigned long long int
+    printf("%llu  ", fib);
+  }
+  return 0;
+}
+#+END_SRC
+
+
+
+* Aproximación a la siguiente ecuación
+Realiza un programa que calcule una aproximación al número PI mediante la siguiente aproximación:
+\[
+  \pi^2 \simeq 6 \cdot \sum_{n = 1}^{\inf} \frac{1}{n^2} 
+\]
+
+Como no se pueden hacer infinitos cálculos, pruebe a limitar el número de veces que se hace el sumatorio 1.000 y 10.000 veces.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float pi_cuadrado = 0;
+  int i;
+
+  for (i=1; i <= 1000; i++)
+  {
+    pi_cuadrado = pi_cuadrado + 1.0/(i*i);
+  }
+  // La multiplicacion se realiza fuera del bucle
+  // para evitar repetir esa operacion 1000 de veces
+  pi_cuadrado = 6 * pi_cuadrado;
+
+  printf("PI: %f\n", pi_cuadrado);
+  
+  pi_cuadrado = 0;
+
+  for (i=1; i <= 10000; i++)
+  {
+    pi_cuadrado = pi_cuadrado + 1.0/(i*i);
+  }
+  // La multiplicacion se realiza fuera del bucle
+  // para evitar repetir esa operacion 1000 de veces
+  pi_cuadrado = 6 * pi_cuadrado;
+
+  printf("PI: %f\n", pi_cuadrado);
+
+  return 0;
+}
+#+END_SRC
+
+
+
+* Aproximación a la siguiente ecuación
+Calcule el valor del número e, sabiendo que verifica la siguiente relación:
+\[
+  \e \simeq 1 + \sum_{n = 1}^{\inf} \frac{1}{!n} 
+\]
+
+Como no se pueden hacer infinitos cálculos, pruebe a limitar el número de veces que se hace el sumatorio 100 y 1.000.
+
+#+BEGIN_SRC C
+#include <stdio.h>
+
+int main()
+{
+  float e = 1;
+  int factorial = 1;
+  
+  int i;
+  // un bucle para los valores de n del sumatorio
+  for (i=1; i <= 10; i++)
+  {
+    factorial = factorial * i;
+    e = e + 1.0/(factorial);
+  }
+  // La multiplicacion se realiza fuera del bucle
+  // para evitar repetir esa operacion 1000 de veces
+  printf("PI: %f\n", e);
+  
+  e = 1;
+  factorial = 1;
+  for (i=1; i <= 15; i++)
+  {
+    factorial = factorial * i;
+    e = e + 1.0/(factorial);
+  }
+  // La multiplicacion se realiza fuera del bucle
+  // para evitar repetir esa operacion 1000 de veces
+  printf("PI: %f\n", e);
+
+  return 0;
+}
+#+END_SRC
+
+
+
 #+RESULTS:
 
-* Velocidad de un objeto
-Escribe un programa que calcule la distancia que recorre un objeto y la velocidad alcanzada cada 0.5 segundos durante los 10 primeros segundos de su movimiento. El objeto se mueve desde la posición cero, con velocidad inicial nula y con una aceleración constante tecleada por el usuario. 
-
-#+BEGIN_SRC C
-#include <stdio.h>
-
-int main()
-{
-  int n;
-  float d, v = 0, a;
-  // Resolucion temporal
-  float dt = 0.5;
-
-  printf("Indica aceleracion.\n");
-  scanf("%f", &a);
-  
-  for (n = 1; n <= 20; ++n)
-  {
-    // Calculamos la distancia en cada intervalo, por tanto no se
-    // incrementa
-    d = v * dt + 0.5 * a * dt * dt;
-    // La velocidad va incrementando
-    v = v + a  * dt;
-    printf("dist = %.2f, vel = %.2f (t = %.2f)\n", d, v, n * dt);
-  }
-}
-#+END_SRC
-
-* Números aleatorios
-
-Escribe un programa que sirva para jugar a adivinar un número. El ordenador genera un número aleatorio comprendido entre 1 y 100. El usuario debe adivinarlo y tras cada intento recibe una indicación si el número introducido es mayor, menor o igual al número a adivinar.
-
-Para generar el número aleatorio se emplea el siguiente código:
-
-#+BEGIN_SRC C :exports code
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-
-int main()
-{
-  int n;
-  ...
-  //Genera semilla aleatoria
-  srand(time(NULL));
-  //Numero aleatorio entre 1 y 100
-  n = rand() % 100 + 1;
-  ...
-}
-#+END_SRC
 
 
-#+BEGIN_SRC C
-#include <stdio.h>
-//Para srand y rand
-#include <stdlib.h>
-//Para time
-#include <time.h>
-
-int main()
-{
-  int n, num, intentos = 0;
-
-  //Genera semilla aleatoria
-  srand(time(NULL));
-  //Numero aleatorio entre 1 y 100
-  n = rand() % 100 + 1;
-  printf("Estoy listo. Di un numero:\n");
-  
-  do
-  {
-    scanf("%i", &num);
-
-    if(num > n)
-    {
-      printf("Muy alto\n");
-    }
-    else if (num < n)
-    {
-      printf("Muy bajo\n");
-    }
-
-    ++intentos;
-  }
-  while (num != n);
-
-  printf("Bien, era el %i\n", num);
-  printf("Has necesitado %i intentos.\n", intentos);
-}
-#+END_SRC
