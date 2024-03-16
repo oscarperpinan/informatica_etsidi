@@ -294,8 +294,8 @@ int main()
 Realiza un programa que calcule una aproximación al número \pi mediante el sumatorio de la serie:
 #+BEGIN_EXPORT latex
 \[
-  \pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  \frac{(-1)^n}{2n + 1} 
- \]
+\pi \simeq 4 \cdot \sum_{n = 0}^{10^6}  \frac{(-1)^n}{2n + 1} 
+\]
 #+END_EXPORT
 
 #+BEGIN_SRC C
@@ -380,9 +380,11 @@ int main()
 
 * Aproximación a la siguiente ecuación
 Realiza un programa que calcule una aproximación al número PI mediante la siguiente aproximación:
+#+BEGIN_EXPORT latex
 \[
-  \pi^2 \simeq 6 \cdot \sum_{n = 1}^{\inf} \frac{1}{n^2} 
+\pi^2 \simeq 6 \cdot \sum_{n = 1}^{\inf} \frac{1}{n^2} 
 \]
+#+END_EXPORT
 
 Como no se pueden hacer infinitos cálculos, pruebe a limitar el número de veces que se hace el sumatorio 1.000 y 10.000 veces.
 
@@ -424,11 +426,14 @@ int main()
 
 * Aproximación a la siguiente ecuación
 Calcule el valor del número e, sabiendo que verifica la siguiente relación:
-\[
-  \e \simeq 1 + \sum_{n = 1}^{\inf} \frac{1}{!n} 
-\]
 
-Como no se pueden hacer infinitos cálculos, pruebe a limitar el número de veces que se hace el sumatorio 100 y 1.000.
+#+BEGIN_EXPORT latex
+\[
+\e \simeq 1 + \sum_{n = 1}^{\inf} \frac{1}{!n}
+\]
+#+END_EXPORT
+
+Como no se pueden hacer infinitos cálculos, pruebe a limitar el número de veces que se hace el sumatorio 10 y 15.
 
 #+BEGIN_SRC C
 #include <stdio.h>
@@ -447,7 +452,7 @@ int main()
   }
   // La multiplicacion se realiza fuera del bucle
   // para evitar repetir esa operacion 1000 de veces
-  printf("PI: %f\n", e);
+  printf("e: %f\n", e);
   
   e = 1;
   factorial = 1;
@@ -458,7 +463,7 @@ int main()
   }
   // La multiplicacion se realiza fuera del bucle
   // para evitar repetir esa operacion 1000 de veces
-  printf("PI: %f\n", e);
+  printf("e: %f\n", e);
 
   return 0;
 }
